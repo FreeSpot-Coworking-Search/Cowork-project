@@ -138,6 +138,109 @@ async function main() {
           );
           `);
 
+    console.log('Creando espacios');
+    const espacios = 700;
+    for (let i = 0; i < espacios * 0.3; i++) {
+      const tipo = 'Mesa Flex';
+      const descripcion = faker.lorem.words(25);
+      const capacidadMaxima = 1;
+      const precio = faker.commerce.price(3, 15);
+      const idCentro = random(1, 30);
+
+      await connection.query(
+        `INSERT INTO espacios(
+          tipo,
+          descripcion,
+          capacidad_maxima,
+          precio,
+          id_centro
+          )
+          VALUES(
+            "${tipo}",
+            "${descripcion}",
+            "${capacidadMaxima}",
+            "${precio}",
+            "${idCentro}"
+            )
+            `
+      );
+    }
+    for (let i = 0; i < espacios * 0.3; i++) {
+      const tipo = 'Mesa Fija';
+      const descripcion = faker.lorem.words(25);
+      const capacidadMaxima = 1;
+      const precio = faker.commerce.price(5, 15);
+      const idCentro = random(1, 30);
+
+      await connection.query(
+        `INSERT INTO espacios(
+                tipo,
+                descripcion,
+                capacidad_maxima,
+                precio,
+                id_centro
+                )
+                VALUES(
+                  "${tipo}",
+                  "${descripcion}",
+                  "${capacidadMaxima}",
+                  "${precio}",
+                  "${idCentro}"
+                  )
+                  `
+      );
+    }
+    for (let i = 0; i < espacios * 0.2; i++) {
+      const tipo = 'Despacho';
+      const descripcion = faker.lorem.words(25);
+      const capacidadMaxima = random(1, 4);
+      const precio = faker.commerce.price(10, 20);
+      const idCentro = random(1, 30);
+
+      await connection.query(
+        `INSERT INTO espacios(
+                      tipo,
+                      descripcion,
+                      capacidad_maxima,
+                      precio,
+                      id_centro
+                      )
+                      VALUES(
+                        "${tipo}",
+                        "${descripcion}",
+                        "${capacidadMaxima}",
+                        "${precio}",
+                        "${idCentro}"
+                        )
+                        `
+      );
+    }
+    for (let i = 0; i < espacios * 0.1; i++) {
+      const tipo = 'Sala de reuniones';
+      const descripcion = faker.lorem.words(25);
+      const capacidadMaxima = random(5, 20);
+      const precio = faker.commerce.price(15, 30);
+      const idCentro = random(1, 30);
+
+      await connection.query(
+        `INSERT INTO espacios(
+                            tipo,
+                            descripcion,
+                            capacidad_maxima,
+                            precio,
+                            id_centro
+                              )
+                              VALUES(
+                              "${tipo}",
+                              "${descripcion}",
+                              "${capacidadMaxima}",
+                              "${precio}",
+                              "${idCentro}"
+                               )
+                              `
+      );
+    }
+
     //creamos tabla de espacios_servicios
     console.log('Creando tabla de espacios_servicios');
     await connection.query(`
@@ -228,7 +331,7 @@ async function main() {
 
     console.log('Creando centros');
 
-    const centros = 200;
+    const centros = 30;
     for (let i = 0; i < centros; i++) {
       const nombre = faker.company.companyName();
       const nombreFiscal = nombre + ' S.L.';
@@ -291,7 +394,7 @@ async function main() {
 
     const administradores = 175;
     for (let i = 0; i < administradores; i++) {
-      const login = faker.internet.email();
+      const correo = faker.internet.email();
       const contrasena = faker.internet.password();
       const nombre = faker.name.firstName();
       const apellidos = faker.name.lastName();
@@ -300,7 +403,7 @@ async function main() {
 
       await connection.query(
         `INSERT INTO administradores(
-          login,
+          correo,
           contrasena,
           nombre,
           apellidos,
@@ -308,7 +411,7 @@ async function main() {
           foto
             )
             VALUES(
-            "${login}",
+            "${correo}",
             "${contrasena}",
             "${nombre}",
             "${apellidos}",
