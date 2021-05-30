@@ -1,13 +1,51 @@
 require('dotenv').config();
 
+// TODOSSS!!!
+// - Afinar fecha de reserva.
+// - Afinar fechas de nacimientos.
+
 //MODULOS CON LOS QUE VAMOS A TRABAJAR
 // PARA POBLAR LA BASE DE DATOS
 const faker = require('faker/locale/es');
 const { getConnection } = require('./db');
 const { random } = require('lodash');
 const { formatDateToDB } = require('./helpers');
-
 let connection;
+
+const espacios = 100;
+const usuarios = 100;
+const centros = 10;
+const administradores = 100;
+const servicios = [
+  'Acceso 24/7',
+  'Aire acondicionado / calefacción',
+  'Alarma',
+  'Café de cortesía',
+  'Catering',
+  'Cocina',
+  'Coworking Visa',
+  'Domicilación fiscal',
+  'Domiciliación social',
+  'Equipo de sonido',
+  'Fotocopiadora',
+  'Gestión de agendas (secretaria virtual)',
+  'Gestión de eventos',
+  'Impresora / escaner',
+  'Internet + wifi',
+  'Oficina virtual',
+  'Parking',
+  'Pizarra / Flipchart',
+  'Proyector',
+  'Prueba gratuita',
+  'Recepción',
+  'Recepción de emails',
+  'Recepción de llamadas',
+  'Recepción paquetería',
+  'Sala de reuniones',
+  'Secretaría',
+  'TV',
+  'Uso de dirección',
+];
 
 async function main() {
   try {
@@ -49,7 +87,6 @@ async function main() {
 
     console.log('Creando usuarios');
 
-    const usuarios = 100;
     for (let i = 0; i < usuarios; i++) {
       const correo = faker.internet.email();
       const password = faker.internet.password();
@@ -106,6 +143,50 @@ async function main() {
       );
       `);
 
+    console.log('Creando reservas');
+
+    for (let i = 0; i < espacios; i++) {
+      const randomDate = faker.date.past(0.5);
+      const numeroReservas = random(1, 10);
+
+      for (let j = 0; j < numeroReservas; j++) {
+        const fechaInicio = formatDateToDB(randomDate);
+        randomDate.setDate(randomDate.getDate() + random(1, 30));
+        const fechaFin = formatDateToDB(randomDate);
+        randomDate.setDate(randomDate.getDate() + random(1, 15));
+
+        const precio = faker.commerce.price(200, 300);
+        const puntuacionUsuario = random(0, 5);
+        const comentarioUsuario = faker.lorem.words(13);
+        const idUsuario = random(0, usuarios);
+        const idEspacio = i;
+
+        await connection.query(
+          `INSERT INTO reservas(
+          fecha_reserva,
+          fecha_inicio,
+          fecha_fin,
+          precio,
+          puntuacion_usuario,
+          comentario_usuario,
+          id_usuario,
+          id_espacio
+              )
+              VALUES(
+              "${fechaInicio}",
+              "${fechaInicio}",
+              "${fechaFin}",
+              "${precio}",
+              "${puntuacionUsuario}",
+              "${comentarioUsuario}",
+              "${idUsuario}",
+              "${idEspacio}"
+               )
+              `
+        );
+      }
+    }
+
     //creamos tabla de incidencias
     console.log('Creando tabla incidencias');
     await connection.query(`
@@ -139,7 +220,6 @@ async function main() {
           `);
 
     console.log('Creando espacios');
-    const espacios = 700;
     for (let i = 0; i < espacios * 0.3; i++) {
       const tipo = 'Mesa Flex';
       const descripcion = faker.lorem.words(25);
@@ -253,6 +333,27 @@ async function main() {
             PRIMARY KEY(id_espacio, id_servicio)
             );
             `);
+
+    for (let i = 0; i < espacios; i++) {
+      for (let j = 0; j < servicios.length; j++) {
+        if (random(0, 1)) {
+          const precio = faker.commerce.price(1, 2, 2);
+          await connection.query(
+            `INSERT INTO espacios_servicios(
+            precio,
+            id_espacio,
+            id_servicio
+                      )
+                      VALUES(
+                      "${precio}",
+                      "${i}",
+                      "${j}"
+                       )
+                      `
+          );
+        }
+      }
+    }
     //creamos tabla de servicios
     console.log('Creando tabla de servicios');
     await connection.query(`
@@ -264,36 +365,6 @@ async function main() {
 
     console.log('Creando servicios');
 
-    const servicios = [
-      'Acceso 24/7',
-      'Aire acondicionado / calefacción',
-      'Alarma',
-      'Café de cortesía',
-      'Catering',
-      'Cocina',
-      'Coworking Visa',
-      'Domicilación fiscal',
-      'Domiciliación social',
-      'Equipo de sonido',
-      'Fotocopiadora',
-      'Gestión de agendas (secretaria virtual)',
-      'Gestión de eventos',
-      'Impresora / escaner',
-      'Internet + wifi',
-      'Oficina virtual',
-      'Parking',
-      'Pizarra / Flipchart',
-      'Proyector',
-      'Prueba gratuita',
-      'Recepción',
-      'Recepción de emails',
-      'Recepción de llamadas',
-      'Recepción paquetería',
-      'Sala de reuniones',
-      'Secretaría',
-      'TV',
-      'Uso de dirección',
-    ];
     for (let i = 0; i < servicios.length; i++) {
       await connection.query(
         `INSERT INTO servicios(
@@ -331,7 +402,6 @@ async function main() {
 
     console.log('Creando centros');
 
-    const centros = 30;
     for (let i = 0; i < centros; i++) {
       const nombre = faker.company.companyName();
       const nombreFiscal = nombre + ' S.L.';
@@ -392,7 +462,6 @@ async function main() {
 
     console.log('Creando administradores');
 
-    const administradores = 175;
     for (let i = 0; i < administradores; i++) {
       const correo = faker.internet.email();
       const contrasena = faker.internet.password();
