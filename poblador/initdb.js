@@ -55,6 +55,7 @@ async function main() {
 
     // Borrar las tablas si existen (diary, diary_votes)
     console.log('Borrando tablas');
+    await connection.query('DROP TABLE IF EXISTS reservas_servicios CASCADE');
     await connection.query('DROP TABLE IF EXISTS espacios_servicios CASCADE');
     await connection.query('DROP TABLE IF EXISTS servicios CASCADE');
     await connection.query('DROP TABLE IF EXISTS imagenes CASCADE');
@@ -89,7 +90,8 @@ async function main() {
       fecha_nacimiento DATE NOT NULL,
       telefono VARCHAR(20),
       bio TEXT,
-      foto VARCHAR(512)
+      foto VARCHAR(512),
+      borrado BOOLEAN NOT NULL DEFAULT 0
       );
       `);
 
@@ -145,7 +147,8 @@ async function main() {
             reserva_minima INT UNSIGNED DEFAULT 1 NOT NULL,
             precio DECIMAL(6,2) NOT NULL,
             id_centro INT UNSIGNED,
-            FOREIGN KEY (id_centro) REFERENCES centros (id)
+            FOREIGN KEY (id_centro) REFERENCES centros (id),
+            borrado BOOLEAN NOT NULL DEFAULT 0
             );
             `);
 
@@ -155,12 +158,26 @@ async function main() {
 
     await connection.query(`
             CREATE TABLE espacios_servicios(
-              precio DECIMAL(6,2),
               id_espacio INT UNSIGNED,
               FOREIGN KEY (id_espacio) REFERENCES espacios(id),
               id_servicio INT UNSIGNED,
               FOREIGN KEY (id_servicio) REFERENCES servicios(id),
               PRIMARY KEY(id_espacio, id_servicio)
+              );
+              `);
+
+    // ********************** CREANDO TABLA RESERVAS_SERVICIOS *********************
+
+    console.log('Creando tabla de reservas_servicios');
+
+    await connection.query(`
+            CREATE TABLE reservas_servicios(
+              precio DECIMAL(6,2),
+              id_reserva INT UNSIGNED,
+              FOREIGN KEY (id_reserva) REFERENCES reservas(id),
+              id_servicio INT UNSIGNED,
+              FOREIGN KEY (id_servicio) REFERENCES servicios(id),
+              PRIMARY KEY(id_reserva, id_servicio)
               );
               `);
 
@@ -184,7 +201,8 @@ async function main() {
                 equipamiento VARCHAR(1000),
                 descripcion TEXT,
                 id_administrador INT UNSIGNED,
-                FOREIGN KEY (id_administrador) REFERENCES administradores(id)
+                FOREIGN KEY (id_administrador) REFERENCES administradores(id),
+                borrado BOOLEAN NOT NULL DEFAULT 0
                 );
                 `);
 
@@ -279,7 +297,7 @@ async function main() {
 
     //  ********************** CREANDO CONTENIDO RESERVAS E INCIDENCIAS ****************************
 
-    console.log('Creando reservas e incidencias');
+    console.log('Creando reservas, reservas_servicios e incidencias');
 
     let idReserva = 0;
 
@@ -353,6 +371,25 @@ async function main() {
               "${idReserva}"
               )
               `
+          );
+        }
+        // ********************** CREANDO CONTENIDO RESERVAS_SERVICIOS *********************
+
+        if (random(1, 5) === 1) {
+          const idServicio = random(1, servicios.length);
+          const precio = faker.commerce.price(1, 2);
+          await connection.query(
+            `INSERT INTO reservas_servicios(
+                  id_reserva,
+                  id_servicio,
+                  precio
+                  )
+                  VALUES(
+                    "${idReserva}",
+                    "${idServicio}",
+                    "${precio}"
+                    )
+                    `
           );
         }
         idReserva++;
@@ -471,15 +508,12 @@ async function main() {
     for (let i = 0; i < espacios; i++) {
       for (let j = 0; j < servicios.length; j++) {
         if (random(0, 1)) {
-          const precio = faker.commerce.price(1, 2, 2);
           await connection.query(
             `INSERT INTO espacios_servicios(
-              precio,
               id_espacio,
               id_servicio
               )
               VALUES(
-                "${precio}",
                 "${i}",
                 "${j}"
                 )
