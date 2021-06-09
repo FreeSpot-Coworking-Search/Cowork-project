@@ -1,55 +1,55 @@
 require('dotenv').config();
-
-// TODOSSS!!!
-// - Afinar fecha de reserva.
-// - Afinar fechas de nacimientos.
-// - Crear CIF centros.
-
-//MODULOS CON LOS QUE VAMOS A TRABAJAR
-// PARA POBLAR LA BASE DE DATOS
 const faker = require('faker/locale/es');
-const { getConnection } = require('./db');
+const { getConnection } = require('./dbhelpers');
 const { random } = require('lodash');
-const { formatDateToDB } = require('./helpers');
-let connection;
+const { formatDateToDB } = require('./datehelpers');
 
-const espacios = 100;
-const usuarios = 100;
-const centros = 10;
-const administradores = 100;
-const servicios = [
-  'Acceso 24/7',
-  'Aire acondicionado / calefacción',
-  'Alarma',
-  'Café de cortesía',
-  'Catering',
-  'Cocina',
-  'Coworking Visa',
-  'Domicilación fiscal',
-  'Domiciliación social',
-  'Equipo de sonido',
-  'Fotocopiadora',
-  'Gestión de agendas (secretaria virtual)',
-  'Gestión de eventos',
-  'Impresora / escaner',
-  'Internet + wifi',
-  'Oficina virtual',
-  'Parking',
-  'Pizarra / Flipchart',
-  'Proyector',
-  'Prueba gratuita',
-  'Recepción',
-  'Recepción de emails',
-  'Recepción de llamadas',
-  'Recepción paquetería',
-  'Sala de reuniones',
-  'Secretaría',
-  'TV',
-  'Uso de dirección',
-];
+async function resetDB() {
+  let connection;
 
-async function main() {
   try {
+    // TODOSSS!!!
+    // - Afinar fecha de reserva.
+    // - Afinar fechas de nacimientos.
+    // - Crear CIF centros.
+
+    //MODULOS CON LOS QUE VAMOS A TRABAJAR
+    // PARA POBLAR LA BASE DE DATOS
+
+    const espacios = 100;
+    const usuarios = 100;
+    const centros = 10;
+    const administradores = 100;
+    const servicios = [
+      'Acceso 24/7',
+      'Aire acondicionado / calefacción',
+      'Alarma',
+      'Café de cortesía',
+      'Catering',
+      'Cocina',
+      'Coworking Visa',
+      'Domicilación fiscal',
+      'Domiciliación social',
+      'Equipo de sonido',
+      'Fotocopiadora',
+      'Gestión de agendas (secretaria virtual)',
+      'Gestión de eventos',
+      'Impresora / escaner',
+      'Internet + wifi',
+      'Oficina virtual',
+      'Parking',
+      'Pizarra / Flipchart',
+      'Proyector',
+      'Prueba gratuita',
+      'Recepción',
+      'Recepción de emails',
+      'Recepción de llamadas',
+      'Recepción paquetería',
+      'Sala de reuniones',
+      'Secretaría',
+      'TV',
+      'Uso de dirección',
+    ];
     // Conseguir conexión a la base de datos
     connection = await getConnection();
 
@@ -671,9 +671,11 @@ async function main() {
   } catch (error) {
     console.error(error);
   } finally {
-    console.log('Todo hecho, liberando conexión');
     if (connection) connection.release();
-    process.exit();
+    console.log('Todo hecho, liberando conexión');
+    return true;
   }
 }
-main();
+module.exports = {
+  resetDB,
+};
