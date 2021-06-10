@@ -6,24 +6,24 @@ const { MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE } = process.env;
 let pool;
 
 async function getConnection() {
-  if (!pool) {
-    pool = mysql.createPool({
-      connectionLimit: 10,
-      host: MYSQL_HOST,
-      user: MYSQL_USER,
-      password: MYSQL_PASSWORD,
-      database: MYSQL_DATABASE,
-      timezone: 'Z',
-    });
-  }
+	if (!pool) {
+		pool = mysql.createPool({
+			connectionLimit: 10,
+			host: MYSQL_HOST,
+			user: MYSQL_USER,
+			password: MYSQL_PASSWORD,
+			database: MYSQL_DATABASE,
+			timezone: 'Z',
+		});
+	}
 
-  return await pool.getConnection();
+	return await pool.getConnection();
 }
 
 const insertNewUser = async (user) => {
-  connection = await getConnection();
-  await connection.query(
-    `INSERT INTO usuarios(
+	const connection = await getConnection();
+	await connection.query(
+		`INSERT INTO usuarios(
           correo,
           password,
           nombre_usuario,
@@ -46,10 +46,18 @@ const insertNewUser = async (user) => {
             "${user.avatar}"
             )
             `
-  );
+	);
+};
+const takeUser = async (id) => {
+	const connection = await getConnection();
+	const [rows] = await connection.execute(
+		`SELECT * FROM usuarios WHERE id = ${id} AND borrado<>1`
+	);
+	return rows;
 };
 
 module.exports = {
-  getConnection,
-  insertNewUser,
+	getConnection,
+	insertNewUser,
+	takeUser,
 };
