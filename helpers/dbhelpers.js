@@ -20,44 +20,83 @@ async function getConnection() {
 	return await pool.getConnection();
 }
 
-const insertNewUser = async (user) => {
-	const connection = await getConnection();
-	await connection.query(
-		`INSERT INTO usuarios(
-          correo,
-          password,
-          nombre_usuario,
-          nombre,
-          apellidos,
-          fecha_nacimiento,
-          telefono,
-          bio,
-          foto
-          )
-          VALUES(
-            "${user.mail}",
-            "${user.password}",
-            "${user.userName}",
-            "${user.name}",
-            "${user.lastName}",
-            "${user.birthDay}",
-            "${user.phone}",
-            "${user.bio}",
-            "${user.avatar}"
-            )
-            `
-	);
+const insertRegistration = async (table, newRegistration) => {
+	let connection;
+	try {
+		connection = await getConnection();
+		await connection.query(createInsertQuerry(table, newRegistration));
+	} catch (error) {
+		return error;
+	} finally {
+		if (connection) connection.release();
+	}
 };
-const takeUser = async (id) => {
-	const connection = await getConnection();
-	const [rows] = await connection.execute(
-		`SELECT * FROM usuarios WHERE id = ${id} AND borrado<>1`
-	);
-	return rows;
+const getRegistrations = async (table, searchObject) => {
+	let connection;
+	try {
+		connection = await getConnection();
+		const [results] = await connection.query(
+			createSelectAllWhereQuerry(table, searchObject)
+		);
+		return results;
+	} catch (error) {
+		return error;
+	} finally {
+		if (connection) connection.release();
+	}
+};
+const updateRegistration = async (table, id, updateObject) => {
+	let connection;
+	try {
+		connection = await getConnection();
+		await connection.query(createUpdateQuerry(table, id, updateObject));
+		return true;
+	} catch (error) {
+		return error;
+	} finally {
+		if (connection) connection.release();
+	}
+};
+
+// ***********************
+// ** QUERY GENERATORS **
+// ***********************
+
+const createSelectAllWhereQuerry = (table, searchObject) => {
+	let query = `SELECT * FROM ${table} WHERE `;
+	const keyWhereString = [];
+	for (const key in searchObject) {
+		keyWhereString.push(` ${key} = "${searchObject[key]}"`);
+	}
+	query += keyWhereString.join(' AND ');
+	query += ' AND borrado <> 1;';
+	return query;
+};
+
+const createInsertQuerry = (table, updateObject) => {
+	let query = `INSERT INTO ${table} SET`;
+	const keyUpdateString = [];
+	for (const key in updateObject) {
+		keyUpdateString.push(` ${key} = "${updateObject[key]}"`);
+	}
+	query += keyUpdateString.join(',');
+	return query;
+};
+const createUpdateQuerry = (table, id, updateObject) => {
+	let query = `UPDATE ${table} SET`;
+	const keyUpdateString = [];
+	for (const key in updateObject) {
+		keyUpdateString.push(` ${key} = "${updateObject[key]}"`);
+	}
+	query += keyUpdateString.join(',');
+	query += ` WHERE id = ${id};`;
+	return query;
 };
 
 module.exports = {
 	getConnection,
-	insertNewUser,
-	takeUser,
+	getRegistrations,
+	insertRegistration,
+	updateRegistration,
+	createSelectAllWhereQuerry,
 };

@@ -1,14 +1,28 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
-const { resetDB } = require('./helpers/initdbhelpers');
-
-const getUser = require('./controlers/getUser');
-const postUser = require('./controlers/postUser');
+const { resetDB } = require('./helpers/initDbHelpers');
+const { SERVER_HOST, SERVER_PORT } = process.env;
 
 const morgan = require('morgan');
 
-// TODO - pasar a variables de entorno!!!
-const PORT = 3000;
+const getReset = require('./controlers/getReset');
+
+const userExists = require('./middlewares/users/userExists');
+const userIsLogin = require('./middlewares/users/userIsLogin');
+
+const getUser = require('./controlers/users/getUser');
+const postUser = require('./controlers/users/postUser');
+const putUser = require('./controlers/users/putUser');
+const deleteUser = require('./controlers/users/deleteUser');
+const loginUser = require('./controlers/users/loginUser');
+
+const getSpace = require('./controlers/spaces/getSpace');
+const postSpace = require('./controlers/spaces/postSpace');
+const putSpace = require('./controlers/spaces/putSpace');
+const deleteSpace = require('./controlers/spaces/deleteSpace');
+const spaceExists = require('./middlewares/spaces/spaceExist');
+const userIsOwner = require('./middlewares/users/userIsOwner');
 
 app.use(express.json());
 app.use(morgan('dev'));
@@ -17,24 +31,52 @@ app.use(morgan('dev'));
 // ** /API/RESET **
 // ****************
 
-app.get('/api/reset', (req, res) => {
-	resetDB();
-	res.send('Eres una petición de reseteo de la BD!');
-});
+app.get('/api/reset/', getReset);
+
+// ***********************
+// ** /API/USERS/LOGIN/ **
+// ***********************
+
+app.post('/api/users/login', loginUser);
 
 // ****************
 // ** /API/USERS **
 // ****************
-app.get('/api/users/', getUser);
-app.post('/api/users/', postUser);
 
-// app.put('/api/users', (req, res) =>
-//   res.send('Eres una modificación de usuarios!')
-// );
+app.get('/api/users/', getUser);
+app.post('/api/users/', postUser, getUser);
+app.put('/api/users/', userIsLogin, userIsOwner, userExists, putUser, getUser);
+app.delete('/api/users/', userIsLogin, userExists, deleteUser);
 
 // *****************
 // ** /API/ADMINS **
 // *****************
+
+// TODO - Ricardo
+
+// ******************
+// ** /API/CENTERS **
+// ******************
+
+// TODO - Ricardo
+
+// *****************
+// ** /API/SPACES **
+// *****************
+
+app.get('/api/spaces/', getSpace);
+app.post('/api/spaces/', postSpace);
+app.put('/api/spaces/', spaceExists, putSpace, getSpace);
+app.delete('/api/spaces/', spaceExists, deleteSpace);
+
+// ************************
+// ** /API/RESSERVATIONS **
+// ************************
+
+// app.get('/api/reservations/', getReservation);
+// app.post('/api/reservations/', postReservation);
+// app.put('/api/reservations/', reservationExists, putReservation, getReservation);
+// app.delete('/api/reservations/', reservationExists, deleteReservation);
 
 // ************
 // ** ERRORS **
@@ -54,6 +96,6 @@ app.use((req, res) => {
 	});
 });
 
-app.listen(PORT, () =>
-	console.log(`Server listening at http://localhost:${PORT}`)
+app.listen(SERVER_PORT, SERVER_HOST, () =>
+	console.log(`Server listening at http://${SERVER_HOST}:${SERVER_PORT}`)
 );

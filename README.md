@@ -1,42 +1,51 @@
 # coworking_HAB
-Hack a Boss Final Project
+
+## HELPERS
+
+### dbHelpers
 
 
+-   **getConnection** - Conecta con la base de datos.
+-   **insertRegistration** - Ejecuta una sentencia SQL de busqueda sencilla.
+        Recibe ( nombre de la tabla en formato string , objectSearch objeto con las propiedades que han de ser iguales )
+-   **getRegistrations** - Ejecuta una sentencia SQL de inserción sencilla.
+        Recibe ( nombre de la tabla en formato string , objectUpdate objeto con las propiedades a insertar )
+-   **updateRegistration** - Ejecuta una sentencia SQL de modificacion sencilla.
+        Recibe ( nombre de la tabla en formato string , id del registo a modificar, objectUpdate objeto con las propiedades a modificar ) 
 
 
-# ENDPOINTS
+-   **createSelectAllWhereQuerry** - Crea una sentencia SQL de busqueda sencilla.
+        Recibe ( nombre de la tabla en formato string , objectSearch objeto con las propiedades que han de ser iguales )
+-   **createInsertQuerry** - Crea una sentencia SQL de inserción sencilla.
+        Recibe ( nombre de la tabla en formato string , objectUpdate objeto con las propiedades a insertar )
+-   **createUpdateQuerry** - Crea una sentencia SQL de modificacion sencilla.
+        Recibe ( nombre de la tabla en formato string , id del registo a modificar, objectUpdate objeto con las propiedades a modificar ) 
 
-## Application
+## ENDPOINTS
 
-```
-{
-    id,
-    title,
-    description
-    idUser,
-}
-```
+### Login
 
--   **GET** - [/stories] - Obtener la lista de relatos. ✅
--   **GET** - [/stories/:idStory] - Obtener la info de un relato concreto. ✅
--   **POST** - [/stories] - Insertar un nuevo relato. ✅
--   **PUT** - [/stories/:idStory] - Editar un relato. ✅
--   **DELETE** - [/stories/:idStory] - Eliminar un relato. ✅
+-   POST - [api/users/login] - Logea a un usuario retornando un token. ✅
 
-## Users
+### Users
 
-```
-{
-    id,
-    email,
-    password,
-    deleted
-}
-```
+-   GET - [api/users/] - Retorna información de un usuario concreto. ✅
+-   POST - [api/users] - Crea un usuario.✅
+-   PUT - [api/users/] - Edita un usuario. ✅
+-   DELETE - [api/users/] - Borra un usuario. ✅
 
--   **GET** - [/users/:idUser] - Obtener info de un usuario.
--   **POST** - [/users] - Crear un usuario.
--   **POST** - [/users/login] - Login de usuario.
--   **PUT** - [/users/:idUser] - Editar datos de usuario.
--   **PUT** - [/users/:idUser/password] - Editar contraseña.
--   **DELETE** - [/users/:idUser] - Desactivar usuario.
+##### -    Middlewares:
+        - userExists - Comprueba la existencia de un usuario. ✅
+        - userIsLogin - Comprueba si el usuario tiene token valido. ✅
+        - userIsOwner - Comprueba si el usuario accede a sus datos propios. ✅
+
+### Spaces
+
+-   GET - [api/users/] - Retorna información de un espacio concreto. ✅
+-   POST - [api/users] - Crea un espacio.✅
+-   PUT - [api/users/] - Edita un espacio. ✅
+-   DELETE - [api/users/] - Borra un espacio. ✅
+
+##### -   Middlewares:
+        - spaceExists - Comprueba la existencia de un usuario. ✅
+        
