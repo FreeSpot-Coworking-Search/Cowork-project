@@ -11,7 +11,7 @@ const spaceExists = async (req, res, next) => {
 			error.httpStatus = 400;
 			throw error;
 		}
-		const user = await getRegistrations(objectSearch);
+		const user = await getRegistrations('espacios', objectSearch);
 		if (user.length === 0) {
 			const error = new Error('El espacio no existe');
 			error.httpStatus = 400;

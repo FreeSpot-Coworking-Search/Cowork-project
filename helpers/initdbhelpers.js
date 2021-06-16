@@ -270,7 +270,6 @@ async function resetDB() {
 			const fechaNacimiento = formatDateToDB(faker.date.past());
 			const telefono = faker.phone.phoneNumber();
 			const bio = faker.lorem.words(25);
-			const foto = faker.image.avatar();
 
 			await connection.query(
 				`INSERT INTO usuarios(
@@ -281,8 +280,7 @@ async function resetDB() {
           apellidos,
           fecha_nacimiento,
           telefono,
-          bio,
-          foto
+          bio
           )
           VALUES(
             "${correo}",
@@ -292,8 +290,7 @@ async function resetDB() {
             "${apellidos}",
             "${fechaNacimiento}",
             "${telefono}",
-            "${bio}",
-            "${foto}"
+            "${bio}"
             )
             `
 			);

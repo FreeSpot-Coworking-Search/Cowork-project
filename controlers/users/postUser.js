@@ -3,7 +3,8 @@ const { insertRegistration } = require('../../helpers/dbHelpers');
 const postUser = async (req, res, next) => {
 	try {
 		const newUser = req.body;
-		await insertRegistration('usuarios', newUser);
+		const { insertId } = await insertRegistration('usuarios', newUser);
+		req.query.id = insertId;
 		next();
 	} catch (error) {
 		next(error);

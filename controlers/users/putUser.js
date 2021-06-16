@@ -14,6 +14,7 @@ const putUser = async (req, res, next) => {
 			error.httpStatus = 400;
 			throw error;
 		}
+		console.log('hola');
 		await updateRegistration('usuarios', id, updateObject);
 		next();
 	} catch (error) {

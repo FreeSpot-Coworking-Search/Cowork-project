@@ -14,14 +14,17 @@ const getUser = async (req, res, next) => {
 				correo: `${correo}`,
 			};
 		}
-		const user = await getRegistrations('usuarios', objectSearch);
-		if (user.length === 0) {
+		const results = await getRegistrations('usuarios', objectSearch);
+		if (results.length === 0) {
 			const error = new Error('El usuario no existe');
 			error.httpStatus = 401;
 			throw error;
 		}
 		res.status(200);
-		res.send(user[0]);
+		res.send({
+			status: 'ok',
+			data: results[0],
+		});
 	} catch (error) {
 		next(error);
 	}

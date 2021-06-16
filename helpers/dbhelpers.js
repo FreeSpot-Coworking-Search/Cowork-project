@@ -24,20 +24,26 @@ const insertRegistration = async (table, newRegistration) => {
 	let connection;
 	try {
 		connection = await getConnection();
-		await connection.query(createInsertQuerry(table, newRegistration));
+		const [result] = await connection.query(
+			createInsertQuerry(table, newRegistration)
+		);
+		return result;
 	} catch (error) {
 		return error;
 	} finally {
 		if (connection) connection.release();
 	}
 };
-const getRegistrations = async (table, searchObject) => {
+const getRegistrations = async (tableOrQuery, searchObject) => {
 	let connection;
 	try {
 		connection = await getConnection();
-		const [results] = await connection.query(
-			createSelectAllWhereQuerry(table, searchObject)
-		);
+		if (searchObject)
+			tableOrQuery = createSelectAllWhereQuerry(
+				tableOrQuery,
+				searchObject
+			);
+		const [results] = await connection.query(tableOrQuery);
 		return results;
 	} catch (error) {
 		return error;
@@ -49,7 +55,9 @@ const updateRegistration = async (table, id, updateObject) => {
 	let connection;
 	try {
 		connection = await getConnection();
-		await connection.query(createUpdateQuerry(table, id, updateObject));
+		const query = createUpdateQuerry(table, id, updateObject);
+		console.log(query);
+		await connection.query(query);
 		return true;
 	} catch (error) {
 		return error;

@@ -15,6 +15,7 @@ const putSpace = async (req, res, next) => {
 			throw error;
 		}
 		await updateRegistration('espacios', id, updateObject);
+		console.log('hola');
 		next();
 	} catch (error) {
 		next(error);

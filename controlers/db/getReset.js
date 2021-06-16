@@ -1,4 +1,4 @@
-const { resetDB } = require('../helpers/initDbHelpers');
+const { resetDB } = require('../../helpers/initDbHelpers');
 
 const deleteUser = async (req, res, next) => {
 	try {
