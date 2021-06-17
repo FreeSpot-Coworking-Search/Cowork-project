@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { getRegistrations } = require('../../helpers/dbhelpers');
+const { getRegistrations } = require('../../helpers/dbHelpers');
 
 const loginUser = async (req, res, next) => {
 	try {
@@ -23,7 +23,7 @@ const loginUser = async (req, res, next) => {
 		}
 
 		const tokenInfo = {
-			id: user.id,
+			idUser: user.id,
 			correo: user.correo,
 		};
 

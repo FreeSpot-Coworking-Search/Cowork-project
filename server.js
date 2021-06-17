@@ -43,7 +43,7 @@ app.get('/api/reset/', getReset);
 // ** /API/USERS **
 // ****************
 
-app.post('/api/users/login', loginUser);
+app.post('/api/users/login/', loginUser);
 
 app.get('/api/users/', getUser);
 app.post('/api/users/', postUser, getUser);

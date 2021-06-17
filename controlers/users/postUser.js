@@ -1,9 +1,9 @@
 const crypto = require('crypto');
-const { formatDateToDB } = require('../../helpers/datehelpers');
+const { formatDateToDB } = require('../../helpers/dateHelpers');
 const {
 	insertRegistration,
 	getRegistrations,
-} = require('../../helpers/dbhelpers');
+} = require('../../helpers/dbHelpers');
 const { sendMail } = require('../../helpers/mailHelpers');
 
 const postUser = async (req, res, next) => {
