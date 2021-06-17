@@ -1,6 +1,6 @@
 require('dotenv').config();
 const faker = require('faker/locale/es');
-const { getConnection } = require('./dbHelpers');
+const { getConnection, insertRegistration } = require('./dbHelpers');
 const { random } = require('lodash');
 const { formatDateToDB } = require('./dateHelpers');
 
@@ -95,7 +95,13 @@ async function resetDB() {
       telefono VARCHAR(20),
       bio TEXT,
       foto VARCHAR(512),
-      borrado BOOLEAN NOT NULL DEFAULT 0
+      borrado BOOLEAN NOT NULL DEFAULT 0,
+      activo BOOLEAN NOT NULL DEFAULT 0,
+	  roll ENUM("admin", "normal") DEFAULT "normal" NOT NULL,
+	  codigo_registro VARCHAR(100),
+	  fecha_creacion DATETIME NOT NULL,
+	  fecha_modificacion DATETIME,
+	  codigo_recuperacion VARCHAR(100)
       );
       `);
 
@@ -261,6 +267,64 @@ async function resetDB() {
 
 		console.log('Creando usuarios');
 
+		const now = formatDateToDB(new Date());
+
+		await connection.query(
+			`INSERT INTO usuarios(
+	  correo,
+	  password,
+	  nombre_usuario,
+	  nombre,
+	  apellidos,
+	  fecha_nacimiento,
+	  telefono,
+	  bio,
+	  fecha_creacion,
+	  roll
+	  )
+	  VALUES(
+		"jcoastmail@gmail.com",
+		"Dani",
+		"jCoast",
+		"Dani",
+		"Martinez",
+		"1982-10-04",
+		"666666666",
+		"Hola soy Dani",
+		"${now}",
+		"admin"
+		)
+		`
+		);
+
+		await connection.query(
+			`INSERT INTO usuarios(
+	  correo,
+	  password,
+	  nombre_usuario,
+	  nombre,
+	  apellidos,
+	  fecha_nacimiento,
+	  telefono,
+	  bio,
+	  fecha_creacion,
+	  roll
+	  )
+	  VALUES(
+		"ricardozarroca@gmail.com",
+		"Ricardo",
+		"ricardoZarroca",
+		"Ricardo",
+		"Zarroca",
+		"1982-10-04",
+		"666666666",
+		"Hola soy Ricardo",
+		"${now}",
+		"admin"
+		)
+		`
+		);
+
 		for (let i = 0; i < usuarios; i++) {
 			const correo = faker.internet.email();
 			const password = faker.internet.password();
@@ -270,29 +334,32 @@ async function resetDB() {
 			const fechaNacimiento = formatDateToDB(faker.date.past());
 			const telefono = faker.phone.phoneNumber();
 			const bio = faker.lorem.words(25);
+			const fechaCreacion = now;
 
 			await connection.query(
 				`INSERT INTO usuarios(
-          correo,
-          password,
-          nombre_usuario,
-          nombre,
-          apellidos,
-          fecha_nacimiento,
-          telefono,
-          bio
-          )
-          VALUES(
-            "${correo}",
-            "${password}",
-            "${nombre_usuario}",
-            "${nombre}",
-            "${apellidos}",
-            "${fechaNacimiento}",
-            "${telefono}",
-            "${bio}"
-            )
-            `
+		  correo,
+		  password,
+		  nombre_usuario,
+		  nombre,
+		  apellidos,
+		  fecha_nacimiento,
+		  telefono,
+		  bio,
+		  fecha_creacion
+		  )
+		  VALUES(
+		    "${correo}",
+		    "${password}",
+		    "${nombre_usuario}",
+		    "${nombre}",
+		    "${apellidos}",
+		    "${fechaNacimiento}",
+		    "${telefono}",
+		    "${bio}",
+			"${fechaCreacion}"
+		    )
+		    `
 			);
 		}
 
