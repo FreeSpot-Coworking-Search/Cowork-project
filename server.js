@@ -24,7 +24,10 @@ const getSpace = require('./controlers/spaces/getSpace');
 const postSpace = require('./controlers/spaces/postSpace');
 const putSpace = require('./controlers/spaces/putSpace');
 const deleteSpace = require('./controlers/spaces/deleteSpace');
+
 const postPhotoUser = require('./controlers/photos/postPhotoUser');
+const postPhotoSpace = require('./controlers/photos/postPhotoSpace');
+const deletePhotoSpace = require('./controlers/photos/deletePhotoSpace');
 
 app.use(express.json());
 app.use(morgan('dev'));
@@ -36,15 +39,11 @@ app.use(fileUpload());
 
 app.get('/api/reset/', getReset);
 
-// ***********************
-// ** /API/USERS/LOGIN/ **
-// ***********************
-
-app.post('/api/users/login', loginUser);
-
 // ****************
 // ** /API/USERS **
 // ****************
+
+app.post('/api/users/login', loginUser);
 
 app.get('/api/users/', getUser);
 app.post('/api/users/', postUser, getUser);
@@ -74,6 +73,9 @@ app.post('/api/spaces/', postSpace, getSpace);
 app.put('/api/spaces/', spaceExists, putSpace, getSpace);
 app.delete('/api/spaces/', spaceExists, deleteSpace);
 
+app.post('/api/spaces/photo/', spaceExists, postPhotoSpace, getSpace);
+app.delete('/api/spaces/photo/', deletePhotoSpace, getSpace);
+
 // ************************
 // ** /API/RESSERVATIONS **
 // ************************
@@ -82,6 +84,10 @@ app.delete('/api/spaces/', spaceExists, deleteSpace);
 // app.post('/api/reservations/', postReservation);
 // app.put('/api/reservations/', reservationExists, putReservation, getReservation);
 // app.delete('/api/reservations/', reservationExists, deleteReservation);
+
+// ********************
+// ** /API/INCIDENTS **
+// ********************
 
 // ************
 // ** ERRORS **

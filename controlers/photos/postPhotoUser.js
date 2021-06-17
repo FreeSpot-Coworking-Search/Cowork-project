@@ -1,9 +1,11 @@
-const { database } = require('faker/lib/locales/en');
 const {
 	updateRegistration,
 	getRegistrations,
 } = require('../../helpers/dbHelpers');
-const { savePhoto, removePhoto } = require('../../helpers/photoHelpers');
+const {
+	saveUserPhoto,
+	removeUserPhoto,
+} = require('../../helpers/photoHelpers');
 
 const postPhotoUser = async (req, res, next) => {
 	try {
@@ -14,8 +16,8 @@ const postPhotoUser = async (req, res, next) => {
 		let savedPhoto;
 
 		if (req.files.photo) {
-			savedPhoto = await savePhoto(req.files.photo);
-			removePhoto(user[0].foto);
+			savedPhoto = await saveUserPhoto(req.files.photo);
+			removeUserPhoto(user[0].foto);
 			await updateRegistration('usuarios', id, {
 				foto: `${savedPhoto}`,
 			});

@@ -13,6 +13,9 @@ const searchObject = {
 		centros: ['nombre', 'telefono'],
 	},
 };
+
+console.log(__dirname);
+
 // const createSelectQuerry = (searchObject) => {
 // 	let query = '';
 
@@ -60,66 +63,66 @@ const searchObject = {
 // 	return query;
 // };
 
-const createWhereQuery = (whereObject) => {
-	let query = '';
-	let whereQuery = [];
-	for (const key in whereObject) {
-		if (key === 'operand1' || key === 'operand2' || key === 'operator') {
-			if (typeof whereObject[key] === 'object') {
-				whereQuery.push(createWhereQuery(whereObject[key]));
-			} else whereQuery.push(whereObject[key]);
-		} else whereQuery.push(`${key}.${whereObject[key]}`);
-	}
-	query += `( ${whereQuery.join(' ')} )`;
-	return query;
-};
+// const createWhereQuery = (whereObject) => {
+// 	let query = '';
+// 	let whereQuery = [];
+// 	for (const key in whereObject) {
+// 		if (key === 'operand1' || key === 'operand2' || key === 'operator') {
+// 			if (typeof whereObject[key] === 'object') {
+// 				whereQuery.push(createWhereQuery(whereObject[key]));
+// 			} else whereQuery.push(whereObject[key]);
+// 		} else whereQuery.push(`${key}.${whereObject[key]}`);
+// 	}
+// 	query += `( ${whereQuery.join(' ')} )`;
+// 	return query;
+// };
 
-const createSelectQuerry = (searchObject) => {
-	let query = '';
+// const createSelectQuerry = (searchObject) => {
+// 	let query = '';
 
-	if (Object.hasOwnProperty.call(searchObject, 'select')) {
-		query += 'SELECT ';
-		let selectValues = [];
-		let selectFrom = [];
-		for (const table in searchObject.select) {
-			if (
-				typeof searchObject.select[table] === 'string' &&
-				searchObject.select[table] === 'all'
-			) {
-				selectValues = [`${table}.*`];
-			} else
-				for (const value of searchObject.select[table]) {
-					if (typeof value === 'object') {
-						for (const key in value) {
-							selectValues.push(
-								`${key.toUpperCase()} (${table}.${value[key]})`
-							);
-						}
-					} else {
-						selectValues.push(`${table}.${value}`);
-					}
-				}
-			selectFrom.push(`${table}`);
-		}
-		query += `${selectValues.join(' , ')} FROM ${selectFrom.join(' , ')}`;
-	}
+// 	if (Object.hasOwnProperty.call(searchObject, 'select')) {
+// 		query += 'SELECT ';
+// 		let selectValues = [];
+// 		let selectFrom = [];
+// 		for (const table in searchObject.select) {
+// 			if (
+// 				typeof searchObject.select[table] === 'string' &&
+// 				searchObject.select[table] === 'all'
+// 			) {
+// 				selectValues = [`${table}.*`];
+// 			} else
+// 				for (const value of searchObject.select[table]) {
+// 					if (typeof value === 'object') {
+// 						for (const key in value) {
+// 							selectValues.push(
+// 								`${key.toUpperCase()} (${table}.${value[key]})`
+// 							);
+// 						}
+// 					} else {
+// 						selectValues.push(`${table}.${value}`);
+// 					}
+// 				}
+// 			selectFrom.push(`${table}`);
+// 		}
+// 		query += `${selectValues.join(' , ')} FROM ${selectFrom.join(' , ')}`;
+// 	}
 
-	if (Object.hasOwnProperty.call(searchObject, 'where')) {
-		query += ` WHERE ${createWhereQuery(searchObject.where)}`;
-	}
+// 	if (Object.hasOwnProperty.call(searchObject, 'where')) {
+// 		query += ` WHERE ${createWhereQuery(searchObject.where)}`;
+// 	}
 
-	if (Object.hasOwnProperty.call(searchObject, 'orderBy')) {
-		query += ' ORDER BY ';
-		let orderByValues = [];
-		for (const table in searchObject.orderBy) {
-			for (const value of searchObject.orderBy[table]) {
-				orderByValues.push(`${table}.${value}`);
-			}
-		}
-		query += `${orderByValues.join(' , ')}`;
-	}
-	return query;
-};
+// 	if (Object.hasOwnProperty.call(searchObject, 'orderBy')) {
+// 		query += ' ORDER BY ';
+// 		let orderByValues = [];
+// 		for (const table in searchObject.orderBy) {
+// 			for (const value of searchObject.orderBy[table]) {
+// 				orderByValues.push(`${table}.${value}`);
+// 			}
+// 		}
+// 		query += `${orderByValues.join(' , ')}`;
+// 	}
+// 	return query;
+// };
 
 // console.log(createSelectQuerry(searchObject));
 

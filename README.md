@@ -23,29 +23,40 @@
 
 ## ENDPOINTS
 
-### Login
-
--   POST - [api/users/login] - Logea a un usuario retornando un token. ✅
-
 ### Users
+-   **POST - [api/users/login]** - Logea a un usuario retornando un token. 
+        **Requiere:** ✅
+-   **GET - [api/users/] -** Retorna información de un usuario concreto y listado de sus fotos.
+        **Requiere:** userIsLogin / userExist / userIsOwner ✅
+-   **POST - [api/users] -** Crea un usuario.
+        **Requiere:** ✅
+-   **PUT - [api/users/] -** Edita un usuario.
+        **Requiere:** userIsLogin/userExist/userIsOwner ✅
+-   **DELETE - [api/users/] -** Borra un usuario.
+        **Requiere:** userIsLogin /userExist / userIsOwner ✅
 
--   GET - [api/users/] - Retorna información de un usuario concreto. ✅
--   POST - [api/users] - Crea un usuario.✅
--   PUT - [api/users/] - Edita un usuario. ✅
--   DELETE - [api/users/] - Borra un usuario. ✅
+-   **POST - [api/users/photo/]** - Cambia la foto usuario.
+        **Requiere:** userIsLogin / userExist / userIsOwner ✅
 
-##### -    Middlewares:
+####     Middlewares:
         - userExists - Comprueba la existencia de un usuario. ✅
         - userIsLogin - Comprueba si el usuario tiene token valido. ✅
         - userIsOwner - Comprueba si el usuario accede a sus datos propios. ✅
 
 ### Spaces
 
--   GET - [api/users/] - Retorna información de un espacio concreto. ✅
--   POST - [api/users] - Crea un espacio.✅
--   PUT - [api/users/] - Edita un espacio. ✅
--   DELETE - [api/users/] - Borra un espacio. ✅
+-   **GET - [api/users/] -** Retorna información de un espacio concreto.✅
+        **Requiere:** spaceExists ✅
+-   **POST - [api/users] -** Crea un espacio.✅
+        **Requiere:** adminIsLogin  ❌
+-   **PUT - [api/users/] -** Edita un espacio. ✅
+        **Requiere:** spaceExists / adminIsLogin / adminIsOwner ❌
+-   **DELETE - [api/users/] -** Borra un espacio. ✅
+        **Requiere:** spaceExists ✅
 
-##### -   Middlewares:
-        - spaceExists - Comprueba la existencia de un usuario. ✅
+####    Middlewares:
+        - adminIsLogin - Comprueba que se trate de un administrador logueado. ❌
+        - adminIsOwner - Comprueba que el administrador sea propietario. ❌
+        - spaceExists - Comprueba la existencia del espacio. ✅
         
+

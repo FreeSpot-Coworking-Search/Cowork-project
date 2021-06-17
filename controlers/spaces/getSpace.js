@@ -3,10 +3,8 @@ const { getRegistrations, getConnection } = require('../../helpers/dbHelpers');
 const getSpace = async (req, res, next) => {
 	try {
 		const { id } = req.query;
-		const objectSearch = {
-			id: `${id}`,
-		};
-		const results = await getRegistrations('espacios', objectSearch);
+
+		const results = await getRegistrations('espacios', { id: `${id}` });
 		if (results.length === 0) {
 			const error = new Error('El espacio no existe');
 			error.httpStatus = 401;
@@ -17,9 +15,14 @@ const getSpace = async (req, res, next) => {
 			 espacios_servicios ON servicios.id = espacios_servicios.id_servicio
 			 AND espacios_servicios.id_espacio = ${id};`
 		);
+		const photos = await getRegistrations('imagenes', {
+			id_espacio: `${id}`,
+		});
+
 		results[0] = {
 			...results[0],
 			servicios: services,
+			imagenes: photos,
 		};
 
 		res.status(200);

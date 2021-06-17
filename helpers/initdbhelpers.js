@@ -622,47 +622,47 @@ async function resetDB() {
 		}
 		// ********************** CREANDO CONTENIDO IMAGENES *********************
 
-		console.log('Creando imagenes');
+		// console.log('Creando imagenes');
 
-		for (let i = 0; i < centros; i++) {
-			const idCentro = i;
-			const descripcion = faker.lorem.words(5);
-			const URL = faker.image.imageUrl();
+		// for (let i = 0; i < centros; i++) {
+		// 	const idCentro = i;
+		// 	const descripcion = faker.lorem.words(5);
+		// 	const URL = faker.image.imageUrl();
 
-			await connection.query(
-				`INSERT INTO imagenes(
-          URL,
-          descripcion,
-          id_centro
-          )
-          VALUES(
-            "${URL}",
-            "${descripcion}",
-            "${idCentro}"
-            )
-            `
-			);
-		}
+		// 	await connection.query(
+		// 		`INSERT INTO imagenes(
+		//       URL,
+		//       descripcion,
+		//       id_centro
+		//       )
+		//       VALUES(
+		//         "${URL}",
+		//         "${descripcion}",
+		//         "${idCentro}"
+		//         )
+		//         `
+		// 	);
+		// }
 
-		for (let i = 0; i < espacios; i++) {
-			const idEspacio = i;
-			const descripcion = faker.lorem.words(5);
-			const URL = faker.image.imageUrl();
+		// for (let i = 0; i < espacios; i++) {
+		// 	const idEspacio = i;
+		// 	const descripcion = faker.lorem.words(5);
+		// 	const URL = faker.image.imageUrl();
 
-			await connection.query(
-				`INSERT INTO imagenes(
-          URL,
-          descripcion,
-          id_espacio
-          )
-          VALUES(
-            "${URL}",
-            "${descripcion}",
-            "${idEspacio}"
-            )
-            `
-			);
-		}
+		// 	await connection.query(
+		// 		`INSERT INTO imagenes(
+		//       URL,
+		//       descripcion,
+		//       id_espacio
+		//       )
+		//       VALUES(
+		//         "${URL}",
+		//         "${descripcion}",
+		//         "${idEspacio}"
+		//         )
+		//         `
+		// 	);
+		// }
 
 		// ********************** FIN DE LA CREACIÓN *********************
 

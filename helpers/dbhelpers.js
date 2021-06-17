@@ -55,9 +55,7 @@ const updateRegistration = async (table, id, updateObject) => {
 	let connection;
 	try {
 		connection = await getConnection();
-		const query = createUpdateQuerry(table, id, updateObject);
-		console.log(query);
-		await connection.query(query);
+		await connection.query(createUpdateQuerry(table, id, updateObject));
 		return true;
 	} catch (error) {
 		return error;
@@ -77,7 +75,9 @@ const createSelectAllWhereQuerry = (table, searchObject) => {
 		keyWhereString.push(` ${key} = "${searchObject[key]}"`);
 	}
 	query += keyWhereString.join(' AND ');
-	query += ' AND borrado <> 1;';
+	if (table === 'usuarios' || table === 'espacios' || table === 'centros') {
+		query += ' AND borrado <> 1;';
+	} else query += ';';
 	return query;
 };
 
