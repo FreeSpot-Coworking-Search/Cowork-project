@@ -1,8 +1,8 @@
 require('dotenv').config();
 const faker = require('faker/locale/es');
-const { getConnection } = require('./dbhelpers');
+const { getConnection } = require('./dbHelpers');
 const { random } = require('lodash');
-const { formatDateToDB } = require('./datehelpers');
+const { formatDateToDB } = require('./dateHelpers');
 
 async function resetDB() {
 	let connection;
