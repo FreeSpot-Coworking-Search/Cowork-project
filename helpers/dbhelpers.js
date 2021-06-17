@@ -75,7 +75,12 @@ const createSelectAllWhereQuerry = (table, searchObject) => {
 		keyWhereString.push(` ${key} = "${searchObject[key]}"`);
 	}
 	query += keyWhereString.join(' AND ');
-	if (table === 'usuarios' || table === 'espacios' || table === 'centros') {
+	if (
+		table === 'usuarios' ||
+		table === 'espacios' ||
+		table === 'centros' ||
+		table === 'administradores'
+	) {
 		query += ' AND borrado <> 1;';
 	} else query += ';';
 	return query;
