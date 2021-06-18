@@ -58,7 +58,14 @@ app.post('/api/users/photo/', postPhotoUser, getUser);
 // ** /API/ADMINS **
 // *****************
 
-// TODO - Ricardo
+app.use('/api/admins/', require('./controlers/admins/'));
+/* otra forma de hacerlo:
+
+	const admins = require('./controlers/admins/');
+	app.use('/api/admins/', admins); 
+
+	Podemos obviar el nombre del archivo en la ruta require SOLO si el archivo se llama index.js
+*/
 
 // ******************
 // ** /API/CENTERS **
