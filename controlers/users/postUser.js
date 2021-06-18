@@ -5,16 +5,15 @@ const {
 	getRegistrations,
 } = require('../../helpers/dbHelpers');
 const { sendMail } = require('../../helpers/mailHelpers');
+const { validation } = require('../../helpers/schemaHelpers');
+const postUserSchema = require('../../schemas/postUserSchema');
 
 const postUser = async (req, res, next) => {
 	try {
 		let newUser = req.body;
 
-		if (!newUser.password || !newUser.correo) {
-			const error = new Error('Faltan datos clave.');
-			error.httpStatus = 400;
-			throw error;
-		}
+		await validation(postUserSchema, newUser);
+
 		const user = await getRegistrations('usuarios', {
 			correo: `${newUser.correo}`,
 		});
@@ -31,7 +30,8 @@ const postUser = async (req, res, next) => {
 
 		const emailBody = `
             Bienvenido a Coworking Proyect <Hack a Boss>.
-            Estas a punto de terminar: <a href="http://${process.env.SERVER_HOST}:${process.env.SERVER_PORT}/api/users/validate/?code=${codigo_registro}">Haz click aquí parea finalizar tu registro</a>
+            Estas a punto de terminar: <a href="http://${process.env.SERVER_HOST}:${process.env.SERVER_PORT}/api/users/validate/?code=${codigo_registro}">
+			Haz click aquí para finalizar tu registro</a>
         `;
 
 		await sendMail({
@@ -47,7 +47,7 @@ const postUser = async (req, res, next) => {
 		};
 
 		const { insertId } = await insertRegistration('usuarios', newUser);
-		req.query.id = insertId;
+		req.query.idUser = insertId;
 
 		next();
 	} catch (error) {

@@ -15,7 +15,6 @@ const loginUser = async (req, res, next) => {
 			correo: `${correo}`,
 			password: `${password}`,
 		});
-		console.log(user);
 		if (user.length === 0) {
 			const error = new Error('Email o contraseña incorrectos');
 			error.httpStatus = 401;
@@ -24,7 +23,7 @@ const loginUser = async (req, res, next) => {
 
 		const tokenInfo = {
 			idUser: user.id,
-			correo: user.correo,
+			roll: user.roll,
 		};
 
 		// Creamos el token.

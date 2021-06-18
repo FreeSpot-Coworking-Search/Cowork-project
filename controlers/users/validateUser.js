@@ -27,7 +27,10 @@ const validateUser = async (req, res, next) => {
 			error.httpStatus = 401;
 			throw error;
 		} else {
-			await updateRegistration('usuarios', results[0].id, { activo: 1 });
+			await updateRegistration('usuarios', results[0].id, {
+				activo: 1,
+				codigo_registro: null,
+			});
 		}
 		res.status(200);
 		res.send({

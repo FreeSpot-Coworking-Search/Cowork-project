@@ -2,9 +2,9 @@ const { updateRegistration } = require('../../helpers/dbHelpers');
 
 const putUser = async (req, res, next) => {
 	try {
-		const { id } = req.query;
+		const { idUser } = req.query;
 		const updateObject = req.body;
-		if (!id) {
+		if (!idUser) {
 			const error = new Error('Falta id usuario');
 			error.httpStatus = 400;
 			throw error;
@@ -14,8 +14,8 @@ const putUser = async (req, res, next) => {
 			error.httpStatus = 400;
 			throw error;
 		}
-		console.log('hola');
-		await updateRegistration('usuarios', id, updateObject);
+
+		await updateRegistration('usuarios', idUser, updateObject);
 		next();
 	} catch (error) {
 		next(error);

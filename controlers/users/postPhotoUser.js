@@ -9,16 +9,16 @@ const {
 
 const postPhotoUser = async (req, res, next) => {
 	try {
-		const { id } = req.query;
+		const { idUser } = req.query;
 
-		const user = await getRegistrations('usuarios', { id: `${id}` });
+		const user = await getRegistrations('usuarios', { id: `${idUser}` });
 
 		let savedPhoto;
 
 		if (req.files.photo) {
 			savedPhoto = await saveUserPhoto(req.files.photo);
 			removeUserPhoto(user[0].foto);
-			await updateRegistration('usuarios', id, {
+			await updateRegistration('usuarios', idUser, {
 				foto: `${savedPhoto}`,
 			});
 		}
