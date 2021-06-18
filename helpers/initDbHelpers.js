@@ -227,7 +227,7 @@ async function resetDB() {
                   );
                   `);
 
-		// ********************** CREANDO TABLA ADMINISTRSADORES *********************
+		// ********************** CREANDO TABLA ADMINISTRADORES *********************
 
 		console.log('Creando tabla administradores');
 
@@ -235,11 +235,18 @@ async function resetDB() {
                   CREATE TABLE administradores(
                     id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
                     correo VARCHAR(50) NOT NULL UNIQUE,
-                    contrasena VARCHAR(50) NOT NULL,
+                    password VARCHAR(50) NOT NULL,
                     nombre VARCHAR(20) NOT NULL,
                     apellidos VARCHAR(50) NOT NULL,
                     fecha_nacimiento DATE NOT NULL,
-                    foto VARCHAR(512)
+                    foto VARCHAR(512),
+					borrado BOOLEAN NOT NULL DEFAULT 0,
+					activo BOOLEAN NOT NULL DEFAULT 0,
+					roll ENUM("admin", "normal") DEFAULT "normal" NOT NULL,
+					codigo_registro VARCHAR(100),
+					fecha_creacion DATETIME NOT NULL,
+					fecha_modificacion DATETIME,
+					codigo_recuperacion VARCHAR(100)
                     );
                     `);
 
@@ -280,7 +287,8 @@ async function resetDB() {
 	  telefono,
 	  bio,
 	  fecha_creacion,
-	  roll
+	  roll,
+	  activo
 	  )
 	  VALUES(
 		"jcoastmail@gmail.com",
@@ -292,7 +300,8 @@ async function resetDB() {
 		"666666666",
 		"Hola soy Dani",
 		"${now}",
-		"admin"
+		"admin",
+		"1"
 		)
 		`
 		);
@@ -308,19 +317,21 @@ async function resetDB() {
 	  telefono,
 	  bio,
 	  fecha_creacion,
-	  roll
+	  roll,
+	  activo
 	  )
 	  VALUES(
 		"ricardozarroca@gmail.com",
-		"Ricardo",
-		"ricardoZarroca",
+		"user123456",
+		"rzarroca",
 		"Ricardo",
 		"Zarroca",
-		"1982-10-04",
-		"666666666",
+		"1990-06-13",
+		"+34123456",
 		"Hola soy Ricardo",
 		"${now}",
-		"admin"
+		"admin",
+		"1"
 		)
 		`
 		);
@@ -346,7 +357,8 @@ async function resetDB() {
 		  fecha_nacimiento,
 		  telefono,
 		  bio,
-		  fecha_creacion
+		  fecha_creacion,
+		  activo
 		  )
 		  VALUES(
 		    "${correo}",
@@ -357,7 +369,8 @@ async function resetDB() {
 		    "${fechaNacimiento}",
 		    "${telefono}",
 		    "${bio}",
-			"${fechaCreacion}"
+			"${fechaCreacion}",
+			"1"
 		    )
 		    `
 			);
@@ -659,9 +672,57 @@ async function resetDB() {
 
 		console.log('Creando administradores');
 
+		await connection.query(
+			`INSERT INTO administradores(
+	  correo,
+	  password,
+	  nombre,
+	  apellidos,
+	  fecha_nacimiento,
+	  activo,
+	  fecha_creacion,
+	  roll
+	  )
+	  VALUES(
+		"jcoastmail@gmail.com",
+		"Dani",
+		"Dani",
+		"Martinez",
+		"1982-10-04",
+		"1",
+		"${now}",
+		"admin"
+		)
+		`
+		);
+
+		await connection.query(
+			`INSERT INTO administradores(
+	  correo,
+	  password,
+	  nombre,
+	  apellidos,
+	  fecha_nacimiento,
+	  activo,
+	  fecha_creacion,
+	  roll
+	  )
+	  VALUES(
+		"ricardozarroca@gmail.com",
+		"admin123456",
+		"Ricardo",
+		"Zarroca",
+		"1990-06-13",
+		"1",
+		"${now}",
+		"admin"
+		)
+		`
+		);
+
 		for (let i = 0; i < administradores; i++) {
 			const correo = faker.internet.email();
-			const contrasena = faker.internet.password();
+			const password = faker.internet.password();
 			const nombre = faker.name.firstName();
 			const apellidos = faker.name.lastName();
 			const fechaNacimiento = formatDateToDB(faker.date.past());
@@ -670,19 +731,23 @@ async function resetDB() {
 			await connection.query(
 				`INSERT INTO administradores(
           correo,
-          contrasena,
+          password,
           nombre,
           apellidos,
           fecha_nacimiento,
-          foto
+          foto,
+		  activo,
+		  fecha_creacion
           )
           VALUES(
             "${correo}",
-            "${contrasena}",
+            "${password}",
             "${nombre}",
             "${apellidos}",
             "${fechaNacimiento}",
-            "${foto}"
+            "${foto}",
+			"1",
+			"${now}"
             )
             `
 			);
