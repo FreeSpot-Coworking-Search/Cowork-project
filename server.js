@@ -28,6 +28,7 @@ const deleteSpace = require('./controlers/spaces/deleteSpace');
 const postPhotoUser = require('./controlers/photos/postPhotoUser');
 const postPhotoSpace = require('./controlers/photos/postPhotoSpace');
 const deletePhotoSpace = require('./controlers/photos/deletePhotoSpace');
+const validateUser = require('./controlers/users/validateUser');
 
 app.use(express.json());
 app.use(morgan('dev'));
@@ -44,6 +45,7 @@ app.get('/api/reset/', getReset);
 // ****************
 
 app.post('/api/users/login/', loginUser);
+app.get('/api/users/validate/', validateUser);
 
 app.get('/api/users/', getUser);
 app.post('/api/users/', postUser, getUser);

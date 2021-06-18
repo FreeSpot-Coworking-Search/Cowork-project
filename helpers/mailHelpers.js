@@ -1,4 +1,5 @@
 const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(process.env.SENDGRID_KEY);
 
 const sendMail = async ({ to, subject, body }) => {
 	try {
@@ -8,7 +9,7 @@ const sendMail = async ({ to, subject, body }) => {
 			subject,
 			text: body,
 			html: `
-                <div>t
+                <div>
                     <h1>${subject}</h1>
                     <p>${body}</p>
                 </div>

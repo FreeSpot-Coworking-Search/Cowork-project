@@ -9,8 +9,6 @@ const { sendMail } = require('../../helpers/mailHelpers');
 const postUser = async (req, res, next) => {
 	try {
 		let newUser = req.body;
-		console.log(newUser.password);
-		console.log(newUser.correo);
 
 		if (!newUser.password || !newUser.correo) {
 			const error = new Error('Faltan datos clave.');
@@ -32,13 +30,13 @@ const postUser = async (req, res, next) => {
 		const codigo_registro = crypto.randomBytes(16).toString('hex');
 
 		const emailBody = `
-            Te acabas de registrar en Diario de Viajes.
-            Pulsa en este link para verificar tu cuenta: ${process.env.SERVER_HOST}/users/validate/${codigo_registro}
+            Bienvenido a Coworking Proyect <Hack a Boss>.
+            Estas a punto de terminar: <a href="http://${process.env.SERVER_HOST}:${process.env.SERVER_PORT}/api/users/validate/?code=${codigo_registro}">Haz click aquí parea finalizar tu registro</a>
         `;
 
 		await sendMail({
 			to: newUser.correo,
-			subject: 'Activa tu usuario de Diario de Viajes',
+			subject: 'Activa tu usuario de Coworking Proyect <Hack a Boss>',
 			body: emailBody,
 		});
 
