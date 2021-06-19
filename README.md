@@ -56,7 +56,7 @@
 -   **DELETE - [api/admins/] -** Borra un administrador.
     **Requiere:** adminIsLogged /adminExist / adminIsOwner ✅
 -   **PUT - [api/admins/] -** Edita un administrador.
-    **Requiere:** adminIsLogged/adminExist/adminIsOwner ❌
+    **Requiere:** adminIsLogged/adminExist/adminIsOwner ✅
 -   **POST - [api/admins/photo/]** - Cambia la foto administrador.
     **Requiere:** adminIsLogged / adminExist / adminIsOwner ❌
 
@@ -84,8 +84,8 @@
 
 #### Middlewares:
 
-        - adminIsLogged - Comprueba que se trate de un administrador logueado. ❌
-        - adminIsOwner - Comprueba que el administrador sea propietario. ❌
+        - adminIsLogged - Comprueba que se trate de un administrador logueado. ✅
+        - adminIsOwner - Comprueba que el administrador sea propietario. ✅
         - spaceExists - Comprueba la existencia del espacio. ✅
 
 ### Centers
@@ -106,6 +106,6 @@
 
 #### Middlewares:
 
-        - adminIsLogged - Comprueba que se trate de un administrador logueado. ❌
-        - adminIsOwner - Comprueba que el administrador sea propietario. ❌
+        - adminIsLogged - Comprueba que se trate de un administrador logueado. ✅
+        - adminIsOwner - Comprueba que el administrador sea propietario. ✅
         - centerExists - Comprueba la existencia del espacio. ❌

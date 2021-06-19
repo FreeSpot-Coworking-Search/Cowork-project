@@ -1,35 +1,31 @@
 const { updateRegistration } = require('../../helpers/dbHelpers');
 const { validation } = require('../../helpers/schemaHelpers');
-const postUserSchema = require('../../schemas/postUserSchema');
+const postAdminSchema = require('../../schemas/postAdminSchema');
 const { formatDateToDB } = require('../../helpers/dateHelpers');
 
-const putUser = async (req, res, next) => {
+const putAdmin = async (req, res, next) => {
 	try {
-		const { idUser } = req.query;
+		const { idAdmin } = req.query;
 		let updateObject = req.body;
-		if (!idUser) {
-			const error = new Error('Falta id usuario');
-			error.httpStatus = 400;
-			throw error;
-		}
+
 		if (!updateObject) {
-			const error = new Error('Falta update');
+			const error = new Error('Falta Update');
 			error.httpStatus = 400;
 			throw error;
 		}
 
-		await validation(postUserSchema, updateObject);
+		await validation(postAdminSchema, updateObject);
 
 		updateObject = {
 			...updateObject,
 			fecha_creacion: formatDateToDB(new Date()),
 		};
 
-		await updateRegistration('usuarios', idUser, updateObject);
+		await updateRegistration('administradores', idAdmin, updateObject);
 		next();
 	} catch (error) {
 		next(error);
 	}
 };
 
-module.exports = putUser;
+module.exports = putAdmin;
