@@ -9,6 +9,7 @@ const postUserSchema = Joi.object().keys({
 	fecha_nacimiento: Joi.date().required(),
 	telefono: Joi.string(),
 	bio: Joi.string(),
+	foto: Joi.string(),
 });
 
 module.exports = postUserSchema;

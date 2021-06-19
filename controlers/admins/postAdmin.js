@@ -5,16 +5,14 @@ const {
 	getRegistrations,
 } = require('../../helpers/dbHelpers');
 const { sendMail } = require('../../helpers/mailHelpers');
+const { validation } = require('../../helpers/schemaHelpers');
+const postAdminSchema = require('../../schemas/postAdminSchema');
 
 const postAdmin = async (req, res, next) => {
 	try {
 		let newAdmin = req.body;
 
-		if (!newAdmin.password || !newAdmin.correo) {
-			const error = new Error('Faltan datos clave.');
-			error.httpStatus = 400;
-			throw error;
-		}
+		await validation(postAdminSchema, newAdmin);
 
 		const admin = await getRegistrations('administradores', {
 			correo: `${newAdmin.correo}`,
@@ -59,8 +57,6 @@ const postAdmin = async (req, res, next) => {
 			error.httpStatus = 409;
 			throw error;
 		}
-
-		console.log(insertId);
 
 		req.query.id = insertId.inserId;
 		next();
