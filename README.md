@@ -45,14 +45,14 @@
 
 ### Admins
 
+-   **GET - [api/admins/] -** Retorna información de un administrador concreto y avatar.
+    **Requiere:** adminIsLogin / adminExist / adminIsOwner ❌
 -   **POST - [api/admins/] -** Crea un administrador.
     **Requiere:** ✅
 -   **PUT - [api/admins/validate/] -** Activa un administrador recién creado.
     **Requiere:** ✅
 -   **POST - [api/admins/login/]** - Logea a un administrador retornando un token.
-    **Requiere:** ❌
--   **GET - [api/admins/] -** Retorna información de un administrador concreto y avatar.
-    **Requiere:** adminIsLogin / adminExist / adminIsOwner ❌
+    **Requiere:** ✅
 -   **PUT - [api/admins/] -** Edita un administrador.
     **Requiere:** adminIsLogin/adminExist/adminIsOwner ❌
 -   **DELETE - [api/admins/] -** Borra un administrador.

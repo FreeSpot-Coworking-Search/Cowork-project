@@ -10,11 +10,12 @@ const loginUser = async (req, res, next) => {
 			error.httpStatus = 400;
 			throw error;
 		}
-
+		//atento al manejo de errores... HAY QUE CAMBIAR [user] por user
 		const [user] = await getRegistrations('usuarios', {
 			correo: `${correo}`,
 			password: `${password}`,
 		});
+		//cuando el getRegistration no encuentra el no funciona correctamente este error ya que user === undefined
 		if (user.length === 0) {
 			const error = new Error('Email o contraseña incorrectos');
 			error.httpStatus = 401;
@@ -22,6 +23,7 @@ const loginUser = async (req, res, next) => {
 		}
 
 		const tokenInfo = {
+			//y aquí hay que cambiar  user.id por user[0].id y user.roll por user[0].roll
 			idUser: user.id,
 			roll: user.roll,
 		};
