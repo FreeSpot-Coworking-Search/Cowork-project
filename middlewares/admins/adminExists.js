@@ -1,19 +1,22 @@
 const { getRegistrations } = require('../../helpers/dbHelpers');
 
-const userExists = async (req, res, next) => {
+const adminExists = async (req, res, next) => {
 	try {
-		const { idUser } = req.query;
-		const objectSearch = {
-			id: `${idUser}`,
-		};
-		if (!idUser) {
-			const error = new Error('Falta id usuario');
+		const { idAdmin } = req.query;
+
+		if (!idAdmin) {
+			const error = new Error('Falta id administrador');
 			error.httpStatus = 400;
 			throw error;
 		}
-		const user = await getRegistrations('usuarios', objectSearch);
-		if (user.length === 0) {
-			const error = new Error('El usuario no existe');
+
+		const objectSearch = {
+			id: `${idAdmin}`,
+		};
+		const admin = await getRegistrations('administradores', objectSearch);
+
+		if (admin.length === 0) {
+			const error = new Error('El administrador no existe');
 			error.httpStatus = 400;
 			throw error;
 		}
@@ -23,4 +26,4 @@ const userExists = async (req, res, next) => {
 	}
 };
 
-module.exports = userExists;
+module.exports = adminExists;

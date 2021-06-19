@@ -22,20 +22,20 @@ const logAdmin = async (req, res, next) => {
 			throw error;
 		}
 
-		const infoAdmin = {
-			idAdmin: admin[0].id,
+		const tokenInfo = {
+			idAuth: admin[0].id,
 			roll: admin[0].roll,
 		};
 
-		const token = jwt.sign(infoAdmin, process.env.TOKEN_SECRET, {
+		const authorization = jwt.sign(tokenInfo, process.env.TOKEN_SECRET, {
 			expiresIn: '7d',
 		});
-		console.log(infoAdmin);
+
 		res.send({
 			status: 'ok',
 			data: {
-				token,
-				infoAdmin,
+				authorization,
+				tokenInfo,
 			},
 		});
 	} catch (error) {

@@ -46,7 +46,7 @@
 ### Admins
 
 -   **GET - [api/admins/] -** Retorna información de un administrador concreto y avatar.
-    **Requiere:** adminIsLogin / adminExist / adminIsOwner ❌
+    **Requiere:** adminIsLogged / adminExist / adminIsOwner ✅
 -   **POST - [api/admins/] -** Crea un administrador.
     **Requiere:** ✅
 -   **PUT - [api/admins/validate/] -** Activa un administrador recién creado.
@@ -54,38 +54,38 @@
 -   **POST - [api/admins/login/]** - Logea a un administrador retornando un token.
     **Requiere:** ✅
 -   **PUT - [api/admins/] -** Edita un administrador.
-    **Requiere:** adminIsLogin/adminExist/adminIsOwner ❌
+    **Requiere:** adminIsLogged/adminExist/adminIsOwner ❌
 -   **DELETE - [api/admins/] -** Borra un administrador.
-    **Requiere:** adminIsLogin /adminExist / adminIsOwner ❌
+    **Requiere:** adminIsLogged /adminExist / adminIsOwner ❌
 
 -   **POST - [api/admins/photo/]** - Cambia la foto administrador.
-    **Requiere:** adminIsLogin / adminExist / adminIsOwner ❌
+    **Requiere:** adminIsLogged / adminExist / adminIsOwner ❌
 
 #### Middlewares:
 
-        - adminExists - Comprueba la existencia de un administrador. ❌
-        - adminIsLogin - Comprueba si el administrador tiene token valido. ❌
-        - adminIsOwner - Comprueba si el administrador accede a sus datos propios. ❌
+        - adminExists - Comprueba la existencia de un administrador. ✅
+        - adminIsLogged - Comprueba si el administrador tiene token valido. ✅
+        - adminIsOwner - Comprueba si el administrador accede a sus datos propios. ✅
 
 ### Spaces
 
 -   **GET - [api/spaces/] -** Retorna información de un espacio concreto, sus servicios e imagenes.✅
     **Requiere:** spaceExists ✅
 -   **POST - [api/spaces] -** Crea un espacio.✅
-    **Requiere:** adminIsLogin ❌
+    **Requiere:** adminIsLogged ❌
 -   **PUT - [api/spaces/] -** Edita un espacio y sus servicios. ✅
-    **Requiere:** spaceExists / adminIsLogin / adminIsOwner ❌
+    **Requiere:** spaceExists / adminIsLogged / adminIsOwner ❌
 -   **DELETE - [api/spaces/] -** Borra un espacio. ✅
-    **Requiere:** spaceExists / adminIsLogin / adminIsOwner ❌
+    **Requiere:** spaceExists / adminIsLogged / adminIsOwner ❌
 
 -   **POST - [api/spaces/photo/]** - Añade una foto del espacio.✅
-    **Requiere:** adminIsLogin / spaceExists / adminExist / adminIsOwner ❌
+    **Requiere:** adminIsLogged / spaceExists / adminExist / adminIsOwner ❌
 -   **DELETE - [api/spaces/photo/]** - Borra una foto del espacio.✅
-    **Requiere:** adminIsLogin / photoExists / spaceExist / adminExist / adminIsOwner ❌
+    **Requiere:** adminIsLogged / photoExists / spaceExist / adminExist / adminIsOwner ❌
 
 #### Middlewares:
 
-        - adminIsLogin - Comprueba que se trate de un administrador logueado. ❌
+        - adminIsLogged - Comprueba que se trate de un administrador logueado. ❌
         - adminIsOwner - Comprueba que el administrador sea propietario. ❌
         - spaceExists - Comprueba la existencia del espacio. ✅
 
@@ -94,19 +94,19 @@
 -   **GET - [api/centers/] -** Retorna información de un centro concreto y sus imagenes.❌
     **Requiere:** centerExists ❌
 -   **POST - [api/centers] -** Crea un centro.❌
-    **Requiere:** adminIsLogin ❌
+    **Requiere:** adminIsLogged ❌
 -   **PUT - [api/centers/] -** Edita un centro. ❌
-    **Requiere:** centerExists / adminIsLogin / adminIsOwner ❌
+    **Requiere:** centerExists / adminIsLogged / adminIsOwner ❌
 -   **DELETE - [api/centers/] -** Borra un centro. ❌
-    **Requiere:** centerExists / adminIsLogin / adminIsOwner ❌
+    **Requiere:** centerExists / adminIsLogged / adminIsOwner ❌
 
 -   **POST - [api/centers/photo/]** - Añade una foto del centro.❌
-    **Requiere:** adminIsLogin / centerExists / adminExist / adminIsOwner ❌
+    **Requiere:** adminIsLogged / centerExists / adminExist / adminIsOwner ❌
 -   **DELETE - [api/centers/photo/]** - Borra una foto del centro.❌
-    **Requiere:** adminIsLogin / photoExists / centerExist / adminExist / adminIsOwner ❌
+    **Requiere:** adminIsLogged / photoExists / centerExist / adminExist / adminIsOwner ❌
 
 #### Middlewares:
 
-        - adminIsLogin - Comprueba que se trate de un administrador logueado. ❌
+        - adminIsLogged - Comprueba que se trate de un administrador logueado. ❌
         - adminIsOwner - Comprueba que el administrador sea propietario. ❌
         - centerExists - Comprueba la existencia del espacio. ❌

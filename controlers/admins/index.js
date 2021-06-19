@@ -6,7 +6,11 @@ const postAdmin = require('./postAdmin');
 const validateAdmin = require('./validateAdmin');
 const logAdmin = require('./logAdmin');
 
-router.get('/', getAdmin);
+const adminExists = require('../../middlewares/admins/adminExists');
+const adminIsLogged = require('../../middlewares/admins/adminIsLogged');
+const adminIsOwner = require('../../middlewares/admins/adminIsOwner');
+
+router.get('/', adminIsLogged, adminExists, adminIsOwner, getAdmin);
 router.post('/', postAdmin, getAdmin);
 router.get('/validate', validateAdmin);
 router.post('/login', logAdmin);
