@@ -35,7 +35,8 @@ const postAdmin = async (req, res, next) => {
 
 		await sendMail({
 			to: newAdmin.correo,
-			subject: 'Activa tu usuario de Coworking Proyect <Hack a Boss>',
+			subject:
+				'Activa tu administrador de Coworking Proyect <Hack a Boss>',
 			body: emailBody,
 		});
 
