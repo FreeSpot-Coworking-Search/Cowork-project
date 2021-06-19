@@ -3,19 +3,20 @@ const { getRegistrations } = require('../../helpers/dbHelpers');
 const getAdmin = async (req, res, next) => {
 	try {
 		const { idAdmin } = req.query;
+		/* 		
 		const { correo } = req.body; // verificar si sirve
-
-		let objectSearch = { correo: `${correo}` };
-		if (idAdmin) objectSearch = { id: `${idAdmin}` };
-
-		const result = await getRegistrations('administradores', objectSearch);
-		//ver si se puede omitir este if o anexarlo a middleware adminExist
+				let objectSearch = { correo: `${correo}` }; 
+		*/
+		const result = await getRegistrations('administradores', {
+			id: `${idAdmin}`,
+		});
+		/*
 		if (result.length === 0) {
-			const error = new Error('El administrador no existe.');
-			error.httpStatus = 404;
-			throw error;
+		const error = new Error('El administrador no existe.');
+		error.httpStatus = 404;
+		throw error;
 		}
-
+ 		*/
 		res.status(200);
 		res.send({
 			status: 'ok',

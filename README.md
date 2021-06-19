@@ -53,11 +53,10 @@
     **Requiere:** ✅
 -   **POST - [api/admins/login/]** - Logea a un administrador retornando un token.
     **Requiere:** ✅
+-   **DELETE - [api/admins/] -** Borra un administrador.
+    **Requiere:** adminIsLogged /adminExist / adminIsOwner ✅
 -   **PUT - [api/admins/] -** Edita un administrador.
     **Requiere:** adminIsLogged/adminExist/adminIsOwner ❌
--   **DELETE - [api/admins/] -** Borra un administrador.
-    **Requiere:** adminIsLogged /adminExist / adminIsOwner ❌
-
 -   **POST - [api/admins/photo/]** - Cambia la foto administrador.
     **Requiere:** adminIsLogged / adminExist / adminIsOwner ❌
 
