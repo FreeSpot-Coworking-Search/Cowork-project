@@ -4,7 +4,6 @@ const getCenter = async (req, res, next) => {
 	try {
 		const { id } = req.query;
 		const result = await getRegistrations('centros', { id: `${id}` });
-
 		// Ya chequeado en el entityExist
 		/* 		
 if (result.length === 0) {
@@ -33,7 +32,7 @@ if (result.length === 0) {
 			imagenes: photos,
 			espacios: infoSpaces,
 		};
-
+		console.log(result[0]);
 		res.status(200);
 		res.send({
 			status: 'ok',
