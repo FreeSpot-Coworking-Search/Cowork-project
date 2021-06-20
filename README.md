@@ -46,7 +46,7 @@
 ### Admins
 
 -   **GET - [api/admins/] -** Retorna información de un administrador concreto y avatar.
-    **Requiere:** adminIsLogged / adminExist / adminIsOwner ✅
+    **Requiere:** adminExist / adminIsLogged / adminIsOwner ✅
 -   **POST - [api/admins/] -** Crea un administrador.
     **Requiere:** ✅
 -   **PUT - [api/admins/validate/] -** Activa un administrador recién creado.
@@ -54,11 +54,11 @@
 -   **POST - [api/admins/login/]** - Logea a un administrador retornando un token.
     **Requiere:** ✅
 -   **DELETE - [api/admins/] -** Borra un administrador.
-    **Requiere:** adminIsLogged /adminExist / adminIsOwner ✅
+    **Requiere:** adminExist / adminIsLogged / adminIsOwner ✅
 -   **PUT - [api/admins/] -** Edita un administrador.
-    **Requiere:** adminIsLogged/adminExist/adminIsOwner ✅
+    **Requiere:** adminExist / adminIsLogged / adminIsOwner ✅
 -   **POST - [api/admins/photo/]** - Cambia la foto administrador.
-    **Requiere:** adminIsLogged / adminExist / adminIsOwner ❌
+    **Requiere:** adminExist / adminIsLogged / adminIsOwner ✅
 
 #### Middlewares:
 

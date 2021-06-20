@@ -7,6 +7,7 @@ const validateAdmin = require('./validateAdmin');
 const logAdmin = require('./logAdmin');
 const deleteAdmin = require('./deleteAdmin');
 const putAdmin = require('./putAdmin');
+const postPhotoAdmin = require('./postPhotoAdmin');
 
 const adminExists = require('../../middlewares/admins/adminExists');
 const adminIsLogged = require('../../middlewares/admins/adminIsLogged');
@@ -18,6 +19,13 @@ router.get('/validate', validateAdmin);
 router.post('/login', logAdmin);
 router.delete('/', adminExists, adminIsLogged, adminIsOwner, deleteAdmin);
 router.put('/', adminExists, adminIsLogged, adminIsOwner, putAdmin, getAdmin);
-//router.post('/photo', postPhotoAdmin);
+router.post(
+	'/photo',
+	adminExists,
+	adminIsLogged,
+	adminIsOwner,
+	postPhotoAdmin,
+	getAdmin
+);
 
 module.exports = router;
