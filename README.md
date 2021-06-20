@@ -90,8 +90,8 @@
 
 ### Centers
 
--   **GET - [api/centers/] -** Retorna información de un centro concreto y sus imagenes.❌
-    **Requiere:** centerExists ❌
+-   **GET - [api/centers/] -** Retorna información de un centro concreto, sus imagenes y los espacios que contiene.
+    **Requiere:** centerExists ✅
 -   **POST - [api/centers] -** Crea un centro.❌
     **Requiere:** adminIsLogged ❌
 -   **PUT - [api/centers/] -** Edita un centro. ❌
@@ -108,4 +108,4 @@
 
         - adminIsLogged - Comprueba que se trate de un administrador logueado. ✅
         - adminIsOwner - Comprueba que el administrador sea propietario. ✅
-        - centerExists - Comprueba la existencia del espacio. ❌
+        - centerExists - Comprueba la existencia del espacio. ✅
