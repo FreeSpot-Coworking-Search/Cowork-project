@@ -22,7 +22,7 @@ const putUser = async (req, res, next) => {
 
 		updateObject = {
 			...updateObject,
-			fecha_creacion: formatDateToDB(new Date()),
+			fecha_modificacion: formatDateToDB(new Date()),
 		};
 
 		await updateRegistration('usuarios', idUser, updateObject);

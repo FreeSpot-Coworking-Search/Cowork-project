@@ -18,7 +18,7 @@ const putAdmin = async (req, res, next) => {
 
 		updateObject = {
 			...updateObject,
-			fecha_creacion: formatDateToDB(new Date()),
+			fecha_fechamodificacion: formatDateToDB(new Date()),
 		};
 
 		await updateRegistration('administradores', id, updateObject);

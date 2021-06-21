@@ -95,17 +95,17 @@
 -   **POST - [api/centers] -** Crea un centro.
     **Requiere:** adminIsLogged ✅
 -   **PUT - [api/centers/] -** Edita un centro.
-    **Requiere:** centerExists / adminIsLogged / adminIsOwner ✅
+    **Requiere:** centerExists / adminIsLogged / adminOwnsCenter ✅
 -   **DELETE - [api/centers/] -** Borra un centro. ❌
-    **Requiere:** centerExists / adminIsLogged / adminIsOwner ❌
+    **Requiere:** centerExists / adminIsLogged / adminOwnsCenter ❌
 
 -   **POST - [api/centers/photo/]** - Añade una foto del centro.❌
-    **Requiere:** adminIsLogged / centerExists / adminExist / adminIsOwner ❌
+    **Requiere:** adminIsLogged / centerExists / adminExist / adminOwnsCenter ❌
 -   **DELETE - [api/centers/photo/]** - Borra una foto del centro.❌
-    **Requiere:** adminIsLogged / photoExists / centerExist / adminExist / adminIsOwner ❌
+    **Requiere:** adminIsLogged / photoExists / centerExist / adminExist / adminOwnsCenter ❌
 
 #### Middlewares:
 
         - adminIsLogged - Comprueba que se trate de un administrador logueado. ✅
-        - adminIsOwner - Comprueba que el administrador sea propietario. ✅
+        - adminOwnsCenter - Comprueba que el administrador sea propietario del centro. ✅
         - centerExists - Comprueba la existencia del espacio. ✅
