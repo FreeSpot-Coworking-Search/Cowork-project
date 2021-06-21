@@ -9,7 +9,16 @@ const postAdminSchema = Joi.object().keys({
 	foto: Joi.string(),
 });
 
-module.exports = postAdminSchema;
+const putAdminSchema = Joi.object().keys({
+	correo: Joi.string().email(),
+	password: Joi.string().min(8).max(100),
+	nombre: Joi.string().min(1).max(20),
+	apellidos: Joi.string().min(1).max(50),
+	fecha_nacimiento: Joi.date(),
+	foto: Joi.string(),
+});
+
+module.exports = { postAdminSchema, putAdminSchema };
 
 /*
 	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,

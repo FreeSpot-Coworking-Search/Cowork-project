@@ -1,6 +1,6 @@
 const { updateRegistration } = require('../../helpers/dbHelpers');
 const { validation } = require('../../helpers/schemaHelpers');
-const postAdminSchema = require('../../schemas/postAdminSchema');
+const { putAdminSchema } = require('../../schemas/adminSchema');
 const { formatDateToDB } = require('../../helpers/dateHelpers');
 
 const putAdmin = async (req, res, next) => {
@@ -14,7 +14,7 @@ const putAdmin = async (req, res, next) => {
 			throw error;
 		}
 
-		await validation(postAdminSchema, updateObject);
+		await validation(putAdminSchema, updateObject);
 
 		updateObject = {
 			...updateObject,
