@@ -93,9 +93,9 @@
 -   **GET - [api/centers/] -** Retorna información de un centro concreto, sus imagenes y los espacios que contiene.
     **Requiere:** centerExists ✅
 -   **POST - [api/centers] -** Crea un centro.
-    **Requiere:** adminIsLogged ❌
--   **PUT - [api/centers/] -** Edita un centro. ❌
-    **Requiere:** centerExists / adminIsLogged / adminIsOwner ❌
+    **Requiere:** adminIsLogged ✅
+-   **PUT - [api/centers/] -** Edita un centro.
+    **Requiere:** centerExists / adminIsLogged / adminIsOwner ✅
 -   **DELETE - [api/centers/] -** Borra un centro. ❌
     **Requiere:** centerExists / adminIsLogged / adminIsOwner ❌
 

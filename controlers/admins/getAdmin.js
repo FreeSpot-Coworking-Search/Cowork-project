@@ -2,13 +2,13 @@ const { getRegistrations } = require('../../helpers/dbHelpers');
 
 const getAdmin = async (req, res, next) => {
 	try {
-		const { idAdmin } = req.query;
+		const { id } = req.query;
 		/* 		
 		const { correo } = req.body; // verificar si sirve
 				let objectSearch = { correo: `${correo}` }; 
 		*/
 		const result = await getRegistrations('administradores', {
-			id: `${idAdmin}`,
+			id: `${id}`,
 		});
 		/*
 		if (result.length === 0) {

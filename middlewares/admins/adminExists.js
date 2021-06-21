@@ -2,16 +2,16 @@ const { getRegistrations } = require('../../helpers/dbHelpers');
 
 const adminExists = async (req, res, next) => {
 	try {
-		const { idAdmin } = req.query;
+		const { id } = req.query;
 
-		if (!idAdmin) {
+		if (!id) {
 			const error = new Error('Falta id administrador');
 			error.httpStatus = 400;
 			throw error;
 		}
 
 		const objectSearch = {
-			id: `${idAdmin}`,
+			id: `${id}`,
 		};
 		const admin = await getRegistrations('administradores', objectSearch);
 

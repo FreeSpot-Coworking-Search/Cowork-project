@@ -2,9 +2,9 @@ const { updateRegistration } = require('../../helpers/dbHelpers');
 
 const deleteAdmin = async (req, res, next) => {
 	try {
-		const { idAdmin } = req.query;
+		const { id } = req.query;
 
-		await updateRegistration('administradores', idAdmin, {
+		await updateRegistration('administradores', id, {
 			borrado: 1,
 		});
 		res.status(200);

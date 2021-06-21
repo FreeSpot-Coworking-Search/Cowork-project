@@ -3,6 +3,7 @@ const router = express.Router();
 
 const getCenter = require('./getCenter');
 const postCenter = require('./postCenter');
+const putCenter = require('./putCenter');
 
 const entityExists = require('../../middlewares/centers/entityExists');
 const adminIsLogged = require('../../middlewares/admins/adminIsLogged');
@@ -22,5 +23,6 @@ router.delete('/photo/', deletePhotoSpace, getSpace);
 */
 router.get('/', entityExists, getCenter);
 router.post('/', adminIsLogged, postCenter, getCenter);
+router.put('/', entityExists, adminIsLogged, adminIsOwner, putCenter);
 
 module.exports = router;

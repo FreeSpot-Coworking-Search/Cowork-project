@@ -15,9 +15,9 @@ const postPhotoAdmin = async (req, res, next) => {
 			throw error;
 		}
 
-		const { idAdmin } = req.query;
+		const { id } = req.query;
 		const admin = await getRegistrations('administradores', {
-			id: `${idAdmin}`,
+			id: `${id}`,
 		});
 		/* 
 		if (req.files.photo) {
@@ -33,7 +33,7 @@ const postPhotoAdmin = async (req, res, next) => {
  */
 		let savedPhoto = await saveAdminPhoto(req.files.photo);
 		removeAdminPhoto(admin[0].foto);
-		await updateRegistration('administradores', idAdmin, {
+		await updateRegistration('administradores', id, {
 			foto: `${savedPhoto}`,
 		});
 

@@ -5,7 +5,7 @@ const { formatDateToDB } = require('../../helpers/dateHelpers');
 
 const putAdmin = async (req, res, next) => {
 	try {
-		const { idAdmin } = req.query;
+		const { id } = req.query;
 		let updateObject = req.body;
 
 		if (!updateObject) {
@@ -21,7 +21,7 @@ const putAdmin = async (req, res, next) => {
 			fecha_creacion: formatDateToDB(new Date()),
 		};
 
-		await updateRegistration('administradores', idAdmin, updateObject);
+		await updateRegistration('administradores', id, updateObject);
 		next();
 	} catch (error) {
 		next(error);
