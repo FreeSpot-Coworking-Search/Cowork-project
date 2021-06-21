@@ -3,20 +3,17 @@ const { getRegistrations } = require('../../helpers/dbHelpers');
 const entityExists = async (req, res, next) => {
 	try {
 		const { id } = req.query;
-		const route = req.originalUrl;
+		const url = req.originalUrl;
 
-		let table;
-		if (route.includes('users')) table = 'usuarios';
-		if (route.includes('spaces')) table = 'espacios';
-		if (route.includes('admins')) table = 'administradores';
-		if (route.includes('centers')) table = 'centros';
-
-		if (table === undefined) {
-			//Todas las rutas ya han sido chequeadas en server.js, creo que se puede eliminar esta comprobación.
-			const error = new Error('Ruta no encontrada');
-			error.httpStatus = 404;
-			throw error;
-		}
+		const route = url.slice(url.indexOf('/', 1) + 1, url.indexOf('/', 5));
+		const options = {
+			users: 'usuarios',
+			spaces: 'espacios',
+			admins: 'administradores',
+			centers: 'centros',
+			reservations: 'reservas',
+		};
+		const table = options[`${route}`];
 
 		if (!id) {
 			const error = new Error(`Falta id de ${table}`);
