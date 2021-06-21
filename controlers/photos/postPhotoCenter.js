@@ -3,24 +3,36 @@ const {
 	getRegistrations,
 } = require('../../helpers/dbHelpers');
 const { saveSpacesCentersPhoto } = require('../../helpers/photoHelpers');
-const { MAX_CENTER_PHOTOS } = process.env;
+const { MAX_CENTER_PHOTOS, MAX_SPACE_PHOTOS } = process.env;
 
 const postPhotoCenter = async (req, res, next) => {
 	try {
+		const { id, description } = req.query;
+
 		if (!req.files || Object.keys(req.files).length === 0) {
 			const error = new Error('No se han subido archivos');
 			error.httpStatus = 400;
 			throw error;
 		}
 
-		const { id, description } = req.query;
+		const url = req.originalUrl;
+		const route = url.slice(url.indexOf('/', 1) + 1, url.indexOf('/', 5));
 
-		const query = `SELECT * FROM imagenes WHERE id_centro = ${id}`;
+		const idOptions = {
+			spaces: 'id_espacio',
+			centers: 'id_centro',
+		};
+		const choosedId = idOptions[`${route}`];
+
+		const maxPhotos =
+			route === 'spaces' ? MAX_SPACE_PHOTOS : MAX_CENTER_PHOTOS;
+
+		const query = `SELECT * FROM imagenes WHERE ${choosedId} = ${id}`;
 		const photos = await getRegistrations(query);
 
-		if (photos.length > Number(MAX_CENTER_PHOTOS)) {
+		if (photos.length >= Number(maxPhotos)) {
 			const error = new Error(
-				'Se han superado el máximo de fotos permitidas para este centro.'
+				`Se han superado el máximo de ${maxPhotos} fotos permitidas.`
 			);
 			error.httpStatus = 406;
 			throw error;
@@ -31,11 +43,11 @@ const postPhotoCenter = async (req, res, next) => {
 		const insertObject = {
 			URL: photoName,
 			descripcion: description,
-			id_centro: id,
+			[choosedId]: id,
 		};
 		const { insertId } = await insertRegistration('imagenes', insertObject);
 
-		console.log(`Foto subida, id centro: ${id}, id foto: ${insertId}`);
+		console.log(`Foto subida, ${choosedId}: ${id}, id foto: ${insertId}`);
 		next();
 	} catch (error) {
 		next(error);
@@ -43,13 +55,3 @@ const postPhotoCenter = async (req, res, next) => {
 };
 
 module.exports = postPhotoCenter;
-
-/* 
-id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-URL VARCHAR(512) NOT NULL,
-descripcion VARCHAR(200),
-id_centro INT UNSIGNED,
-FOREIGN KEY (id_centro) REFERENCES centros(id),
-id_espacio INT UNSIGNED,
-FOREIGN KEY (id_espacio) REFERENCES espacios(id)
-*/
