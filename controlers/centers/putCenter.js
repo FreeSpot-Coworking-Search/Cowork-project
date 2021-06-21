@@ -6,7 +6,7 @@ const putCenter = async (req, res, next) => {
 	try {
 		const { id } = req.query;
 		const updateCenter = req.body;
-
+		console.log('req.body:', updateCenter);
 		if (!updateCenter) {
 			const error = new Error('Falta update');
 			error.httpStatus = 400;
@@ -15,8 +15,8 @@ const putCenter = async (req, res, next) => {
 
 		await validation(postCenterSchema, updateCenter);
 
-		await updateRegistration('centros', updateCenter);
-
+		const update = await updateRegistration('centros', id, updateCenter);
+		console.log('respuesta update:', update);
 		console.log('Centro modificado, Id:', id);
 		next();
 	} catch (error) {
