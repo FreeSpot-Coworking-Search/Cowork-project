@@ -18,14 +18,7 @@ router.post('/login/', loginUser);
 router.get('/validate/', validateUser);
 router.get('/', getUser);
 router.post('/', postUser, getUser);
-router.put(
-	'/api/users/',
-	userIsLogin,
-	userIsOwner,
-	userExists,
-	putUser,
-	getUser
-);
+router.put('/', userIsLogin, userIsOwner, userExists, putUser, getUser);
 router.delete('/', userIsLogin, userExists, deleteUser);
 router.post('/photo/', postPhotoUser, getUser);
 

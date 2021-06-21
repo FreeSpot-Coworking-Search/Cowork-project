@@ -2,11 +2,11 @@ const { getRegistrations } = require('../../helpers/dbHelpers');
 
 const userExists = async (req, res, next) => {
 	try {
-		const { idUser } = req.query;
+		const { id } = req.query;
 		const objectSearch = {
-			id: `${idUser}`,
+			id: `${id}`,
 		};
-		if (!idUser) {
+		if (!id) {
 			const error = new Error('Falta id usuario');
 			error.httpStatus = 400;
 			throw error;

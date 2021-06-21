@@ -2,12 +2,12 @@ const { getRegistrations } = require('../../helpers/dbHelpers');
 
 const getUser = async (req, res, next) => {
 	try {
-		const { idUser } = req.query;
+		const { id } = req.query;
 		const { correo } = req.body;
 		let objectSearch;
-		if (idUser) {
+		if (id) {
 			objectSearch = {
-				id: `${idUser}`,
+				id: `${id}`,
 			};
 		} else {
 			objectSearch = {
