@@ -52,7 +52,6 @@ async function saveAdminPhoto(imageBuffer) {
 }
 
 async function saveSpacesCentersPhoto(imageBuffer) {
-	console.log(uploadsSpacesCentersDir);
 	await ensureDir(uploadsSpacesCentersDir);
 	const image = sharp(imageBuffer.data);
 	const imageInfo = await image.metadata();

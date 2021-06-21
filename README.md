@@ -91,16 +91,16 @@
 ### Centers
 
 -   **GET - [api/centers/] -** Retorna información de un centro concreto, sus imagenes y los espacios que contiene.
-    **Requiere:** centerExists ✅
+    **Requiere:** entityExists ✅
 -   **POST - [api/centers] -** Crea un centro.
     **Requiere:** adminIsLogged ✅
 -   **PUT - [api/centers/] -** Edita un centro.
-    **Requiere:** centerExists / adminIsLogged / adminOwnsCenter ✅
--   **DELETE - [api/centers/] -** Borra un centro. ❌
-    **Requiere:** centerExists / adminIsLogged / adminOwnsCenter ❌
+    **Requiere:** entityExists / adminIsLogged / adminOwnsCenter ✅
+-   **DELETE - [api/centers/] -** Borra un centro.
+    **Requiere:** entityExists / adminIsLogged / adminOwnsCenter ✅
 
--   **POST - [api/centers/photo/]** - Añade una foto del centro.❌
-    **Requiere:** adminIsLogged / centerExists / adminExist / adminOwnsCenter ❌
+-   **POST - [api/centers/photo/]** - Añade una foto del centro.
+    **Requiere:** entityExists / adminIsLogged / adminOwnsCenter ✅
 -   **DELETE - [api/centers/photo/]** - Borra una foto del centro.❌
     **Requiere:** adminIsLogged / photoExists / centerExist / adminExist / adminOwnsCenter ❌
 
@@ -108,4 +108,4 @@
 
         - adminIsLogged - Comprueba que se trate de un administrador logueado. ✅
         - adminOwnsCenter - Comprueba que el administrador sea propietario del centro. ✅
-        - centerExists - Comprueba la existencia del espacio. ✅
+        - entityExists - Comprueba la existencia del espacio. ✅

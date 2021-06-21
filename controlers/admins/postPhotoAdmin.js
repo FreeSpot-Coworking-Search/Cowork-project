@@ -19,18 +19,7 @@ const postPhotoAdmin = async (req, res, next) => {
 		const admin = await getRegistrations('administradores', {
 			id: `${id}`,
 		});
-		/* 
-		if (req.files.photo) {
-			savedPhoto = await saveUserPhoto(
-				req.files.photo,
-				req.route.stack[0].name
-			);
-			removeUserPhoto(user[0].foto);
-			await updateRegistration('usuarios', idUser, {
-				foto: `${savedPhoto}`,
-			});
-		}
- */
+
 		let savedPhoto = await saveAdminPhoto(req.files.photo);
 		removeAdminPhoto(admin[0].foto);
 		await updateRegistration('administradores', id, {

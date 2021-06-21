@@ -7,6 +7,7 @@ const putCenter = async (req, res, next) => {
 	try {
 		const { id } = req.query;
 		let updateCenter = req.body;
+
 		if (!updateCenter) {
 			const error = new Error('Falta update');
 			error.httpStatus = 400;
