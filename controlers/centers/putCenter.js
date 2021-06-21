@@ -1,12 +1,12 @@
 const { updateRegistration } = require('../../helpers/dbHelpers');
 const { validation } = require('../../helpers/schemaHelpers');
 const { putCenterSchema } = require('../../schemas/centerSchema');
+const { formatDateToDB } = require('../../helpers/dateHelpers');
 
 const putCenter = async (req, res, next) => {
 	try {
 		const { id } = req.query;
-		const updateCenter = req.body;
-		console.log('req.body:', updateCenter);
+		let updateCenter = req.body;
 		if (!updateCenter) {
 			const error = new Error('Falta update');
 			error.httpStatus = 400;
@@ -15,8 +15,13 @@ const putCenter = async (req, res, next) => {
 
 		await validation(putCenterSchema, updateCenter);
 
-		const update = await updateRegistration('centros', id, updateCenter);
-		console.log('respuesta update:', update);
+		updateCenter = {
+			...updateCenter,
+			fecha_modificacion: formatDateToDB(new Date()),
+		};
+
+		await updateRegistration('centros', id, updateCenter);
+
 		console.log('Centro modificado, Id:', id);
 		next();
 	} catch (error) {

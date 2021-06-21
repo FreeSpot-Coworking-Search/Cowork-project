@@ -1,6 +1,7 @@
 const { insertRegistration } = require('../../helpers/dbHelpers');
 const { validation } = require('../../helpers/schemaHelpers');
 const { postCenterSchema } = require('../../schemas/centerSchema');
+const { formatDateToDB } = require('../../helpers/dateHelpers');
 
 const postCenter = async (req, res, next) => {
 	try {
@@ -12,6 +13,7 @@ const postCenter = async (req, res, next) => {
 		newCenter = {
 			...newCenter,
 			id_administrador: idAuth,
+			fecha_creacion: formatDateToDB(new Date()),
 		};
 
 		const { insertId } = await insertRegistration('centros', newCenter);

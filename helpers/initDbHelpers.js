@@ -212,7 +212,9 @@ async function resetDB() {
                 descripcion TEXT,
                 id_administrador INT UNSIGNED,
                 FOREIGN KEY (id_administrador) REFERENCES administradores(id),
-                borrado BOOLEAN NOT NULL DEFAULT 0
+                borrado BOOLEAN NOT NULL DEFAULT 0,
+				fecha_creacion DATETIME NOT NULL,
+				fecha_modificacion DATETIME
                 );
                 `);
 
@@ -649,7 +651,8 @@ async function resetDB() {
                       email,
                       descripcion,
                       equipamiento,
-                      id_administrador
+                      id_administrador,
+					  fecha_creacion
                       )
                       VALUES(
                         "${nombre}",
@@ -662,7 +665,8 @@ async function resetDB() {
                         "${email}",
                         "${descripcion}",
                         "${equipamiento}",
-                        "${idAdministrador}"
+                        "${idAdministrador}",
+						"${now}"
                         )
                         `
 			);

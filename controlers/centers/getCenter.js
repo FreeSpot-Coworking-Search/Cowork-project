@@ -4,14 +4,6 @@ const getCenter = async (req, res, next) => {
 	try {
 		const { id } = req.query;
 		const result = await getRegistrations('centros', { id: `${id}` });
-		// Ya chequeado en el entityExist
-		/* 		
-if (result.length === 0) {
-			const error = new Error('El centro buscado no existe.');
-			error.httpStatus = 406;
-			throw error; 
-}
-*/
 
 		const photos = await getRegistrations('imagenes', {
 			id_centro: `${id}`,
@@ -32,7 +24,8 @@ if (result.length === 0) {
 			imagenes: photos,
 			espacios: infoSpaces,
 		};
-		console.log(result[0]);
+
+		console.log('Mostrando centro requerido, Id:', id);
 		res.status(200);
 		res.send({
 			status: 'ok',
