@@ -13,7 +13,20 @@ const postCenterSchema = Joi.object().keys({
 	descripcion: Joi.any(),
 });
 
-module.exports = postCenterSchema;
+const putCenterSchema = Joi.object().keys({
+	nombre: Joi.string().min(1).max(50),
+	nombre_fiscal: Joi.string().min(1).max(50),
+	direccion: Joi.string().min(1).max(50),
+	localidad: Joi.string().min(1).max(70),
+	codigo_postal: Joi.string().min(1).max(10),
+	iban: Joi.string().min(1).max(34),
+	telefono: Joi.string().max(15),
+	email: Joi.string().email().max(50),
+	equipamiento: Joi.string().max(1000),
+	descripcion: Joi.any(),
+});
+
+module.exports = { postCenterSchema, putCenterSchema };
 
 /* 
     id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,

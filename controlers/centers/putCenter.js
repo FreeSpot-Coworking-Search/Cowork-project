@@ -1,6 +1,6 @@
 const { updateRegistration } = require('../../helpers/dbHelpers');
 const { validation } = require('../../helpers/schemaHelpers');
-const postCenterSchema = require('../../schemas/postCenterSchema');
+const { putCenterSchema } = require('../../schemas/centerSchema');
 
 const putCenter = async (req, res, next) => {
 	try {
@@ -13,7 +13,7 @@ const putCenter = async (req, res, next) => {
 			throw error;
 		}
 
-		await validation(postCenterSchema, updateCenter);
+		await validation(putCenterSchema, updateCenter);
 
 		const update = await updateRegistration('centros', id, updateCenter);
 		console.log('respuesta update:', update);

@@ -1,6 +1,6 @@
 const { insertRegistration } = require('../../helpers/dbHelpers');
 const { validation } = require('../../helpers/schemaHelpers');
-const postCenterSchema = require('../../schemas/postCenterSchema');
+const { postCenterSchema } = require('../../schemas/centerSchema');
 
 const postCenter = async (req, res, next) => {
 	try {
