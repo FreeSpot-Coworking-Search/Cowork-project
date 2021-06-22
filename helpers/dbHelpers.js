@@ -75,6 +75,20 @@ const deleteRegistrations = async (table, searchObject) => {
 		if (connection) connection.release();
 	}
 };
+const getSearchCenters = async (searchObject) => {
+	let connection;
+	try {
+		connection = await getConnection();
+		const [result] = await connection.query(
+			createSearchCentersQuerry(searchObject)
+		);
+		return result;
+	} catch (error) {
+		return error;
+	} finally {
+		if (connection) connection.release();
+	}
+};
 
 // ***********************
 // ** QUERY GENERATORS **
@@ -127,6 +141,40 @@ const createDeleteQuerry = (table, searchObject) => {
 	query += ';';
 	return query;
 };
+const createSearchCentersQuerry = (searchObject) => {
+	let query = `SELECT  centros.*, MIN(espacios.precio) , MAX(espacios.precio) , AVG(reservas.puntuacion_usuario)   
+	FROM centros 
+	INNER JOIN espacios ON centros.id = espacios.id_centro
+	INNER JOIN reservas ON reservas.id_espacio = espacios.id WHERE `;
+	const whereString = [];
+
+	if (searchObject['texto']) {
+		whereString.push(
+			`(centros.localidad LIKE '%${searchObject['texto']}%' OR centros.direccion LIKE '%${searchObject['texto']}%' OR centros.nombre LIKE '%${searchObject['texto']}%' )`
+		);
+	}
+	if (searchObject['aforo']) {
+		whereString.push(
+			`(espacios.capacidad_maxima >= ${searchObject['aforo']})`
+		);
+	}
+
+	if (searchObject['fecha_entrada'] && searchObject['fecha_salida']) {
+		whereString.push(
+			`(reservas.id NOT IN 
+				(SELECT reservas.id 
+				FROM reservas
+				WHERE (reservas.fecha_inicio < ${searchObject['fecha_entrada']} AND reservas.fecha_fin > ${searchObject['fecha_entrada']})
+				OR (reservas.fecha_inicio < ${searchObject['fecha_salida']} AND reservas.fecha_fin > ${searchObject['fecha_salida']})
+				OR (${searchObject['fecha_entrada']} between reservas.fecha_inicio AND reservas.fecha_fin AND ${searchObject['fecha_salida']} between reservas.fecha_inicio AND reservas.fecha_fin)
+				OR (reservas.fecha_inicio < ${searchObject['fecha_entrada']} AND reservas.fecha_fin > ${searchObject['fecha_salida']})))`
+		);
+	}
+	query += whereString.join(' AND ');
+	query += ' GROUP BY centros.id;';
+	console.log(query);
+	return query;
+};
 
 module.exports = {
 	getConnection,
@@ -134,5 +182,6 @@ module.exports = {
 	insertRegistration,
 	updateRegistration,
 	deleteRegistrations,
+	getSearchCenters,
 	createSelectAllWhereQuerry,
 };
