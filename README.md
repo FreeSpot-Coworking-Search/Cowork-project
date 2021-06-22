@@ -8,9 +8,11 @@
 -   **insertRegistration** - Ejecuta una sentencia SQL de busqueda sencilla.
     Recibe ( nombre de la tabla en formato string , objectSearch objeto con las propiedades que han de ser iguales )
 -   **getRegistrations** - Ejecuta una sentencia SQL de inserción sencilla.
-    Recibe ( nombre de la tabla en formato string , objectUpdate objeto con las propiedades a insertar )
+    Recibe ( nombre de la tabla en formato string , objectUpdate objeto con las propiedades a buscar )
 -   **updateRegistration** - Ejecuta una sentencia SQL de modificacion sencilla.
     Recibe ( nombre de la tabla en formato string , id del registo a modificar, objectUpdate objeto con las propiedades a modificar )
+-   **deleteRegistrations** - Ejecuta una sentencia SQL de borrado sencilla.
+    Recibe ( nombre de la tabla en formato string , objectSearch objeto con las propiedades que se han de cumplir para borrar )
 
 -   **createSelectAllWhereQuerry** - Crea una sentencia SQL de busqueda sencilla.
     Recibe ( nombre de la tabla en formato string , objectSearch objeto con las propiedades que han de ser iguales )
@@ -18,6 +20,8 @@
     Recibe ( nombre de la tabla en formato string , objectUpdate objeto con las propiedades a insertar )
 -   **createUpdateQuerry** - Crea una sentencia SQL de modificacion sencilla.
     Recibe ( nombre de la tabla en formato string , id del registo a modificar, objectUpdate objeto con las propiedades a modificar )
+-   **createDeleteQuerry** - Crea una sentencia SQL de borrao sencilla.
+    Recibe ( nombre de la tabla en formato string , objectSearch objeto con las propiedades que se han de cumplir para borrar )
 
 ## ENDPOINTS
 
@@ -70,17 +74,17 @@
 
 -   **GET - [api/spaces/] -** Retorna información de un espacio concreto, sus servicios e imagenes.✅
     **Requiere:** spaceExists ✅
--   **POST - [api/spaces] -** Crea un espacio.✅
-    **Requiere:** adminIsLogged ❌
--   **PUT - [api/spaces/] -** Edita un espacio y sus servicios. ✅
-    **Requiere:** spaceExists / adminIsLogged / adminIsOwner ❌
--   **DELETE - [api/spaces/] -** Borra un espacio. ✅
-    **Requiere:** spaceExists / adminIsLogged / adminIsOwner ❌
+-   **POST - [api/spaces] -** Crea un espacio, servicios y servicios extra. ✅
+    **Requiere:**  adminIsLogged / adminOwnsSpaceCenter ✅
+-   **PUT - [api/spaces/] -** Edita un espacio, servicios y servicios extra. ✅
+    **Requiere:** spaceExists / adminIsLogged / adminOwnsSpace ✅
+-   **DELETE - [api/spaces/] -** Borra un espacio, servicios y servicios extra. ✅
+    **Requiere:** spaceExists / adminIsLogged / adminOwnsSpace ✅
 
 -   **POST - [api/spaces/photo/]** - Añade una foto del espacio.✅
-    **Requiere:** adminIsLogged / spaceExists / adminExist / adminIsOwner ❌
+    **Requiere:** spaceExists / adminIsLogged / adminOwnsSpace ✅ 
 -   **DELETE - [api/spaces/photo/]** - Borra una foto del espacio.✅
-    **Requiere:** adminIsLogged / photoExists / spaceExist / adminExist / adminIsOwner ❌
+    **Requiere:** adminIsLogged / photoExists / adminIsOwner ❌
 
 #### Middlewares:
 

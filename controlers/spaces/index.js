@@ -14,7 +14,7 @@ const postPhotoSpace = require('../photos/postPhotoSpace');
 const deletePhotoSpace = require('../photos/deletePhotoSpace');
 const adminOwnsSpaceCenter = require('../../middlewares/spaces/adminOwnsSpaceCenter');
 
-router.get('/', getSpace);
+router.get('/', spaceExists, getSpace);
 router.post('/', adminIsLogged, adminOwnsSpaceCenter, postSpace, getSpace);
 router.put('/', spaceExists, adminIsLogged, adminOwnsSpace, putSpace, getSpace);
 router.delete('/', spaceExists, adminIsLogged, adminOwnsSpace, deleteSpace);

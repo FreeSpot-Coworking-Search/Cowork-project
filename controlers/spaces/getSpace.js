@@ -9,7 +9,12 @@ const getSpace = async (req, res, next) => {
 		const services = await getRegistrations(
 			`SELECT servicios.nombre, servicios.id FROM servicios INNER JOIN
 			 espacios_servicios ON servicios.id = espacios_servicios.id_servicio
-			 AND espacios_servicios.id_espacio = ${id};`
+			 AND espacios_servicios.id_espacio = ${id} AND espacios_servicios.precio IS NULL;`
+		);
+		const extraServices = await getRegistrations(
+			`SELECT servicios.nombre, servicios.id, espacios_servicios.precio FROM servicios INNER JOIN
+			 espacios_servicios ON servicios.id = espacios_servicios.id_servicio
+			 AND espacios_servicios.id_espacio = ${id} AND espacios_servicios.precio IS NOT NULL;`
 		);
 		const photos = await getRegistrations('imagenes', {
 			id_espacio: `${id}`,
@@ -18,6 +23,7 @@ const getSpace = async (req, res, next) => {
 		results[0] = {
 			...results[0],
 			servicios: services,
+			servicios_estra: extraServices,
 			imagenes: photos,
 		};
 

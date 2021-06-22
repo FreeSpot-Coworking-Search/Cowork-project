@@ -1,13 +1,14 @@
-const { updateRegistration } = require('../../helpers/dbHelpers');
+const {
+	updateRegistration,
+	deleteRegistrations,
+} = require('../../helpers/dbHelpers');
 
 const deleteSpace = async (req, res, next) => {
 	try {
 		const { id } = req.query;
-		if (!id) {
-			const error = new Error('Falta id del espacio');
-			error.httpStatus = 400;
-			throw error;
-		}
+		await deleteRegistrations('espacios_servicios', {
+			id_espacio: `${id}`,
+		});
 		await updateRegistration('espacios', id, { borrado: 1 });
 		res.status(200);
 		res.send('Espacio eliminado');
