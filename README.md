@@ -101,8 +101,8 @@
 
 -   **POST - [api/centers/photo/]** - Añade una foto del centro.
     **Requiere:** entityExists / adminIsLogged / adminOwnsCenter ✅
--   **DELETE - [api/centers/photo/]** - Borra una foto del centro.❌
-    **Requiere:** adminIsLogged / photoExists / centerExist / adminExist / adminOwnsCenter ❌
+-   **DELETE - [api/centers/photo/]** - Borra una foto del centro.
+    **Requiere:** adminIsLogged ✅
 
 #### Middlewares:
 

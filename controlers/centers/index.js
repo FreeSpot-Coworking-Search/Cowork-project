@@ -6,6 +6,7 @@ const postCenter = require('./postCenter');
 const putCenter = require('./putCenter');
 const deleteCenter = require('./deleteCenter');
 const postPhotoCenter = require('../photos/postPhotoCenter');
+const deletePhotoCenter = require('../photos/deletePhotoCenter');
 
 const entityExists = require('../../middlewares/centers/entityExists');
 const adminIsLogged = require('../../middlewares/admins/adminIsLogged');
@@ -31,5 +32,7 @@ router.post(
 	postPhotoCenter,
 	getCenter
 );
+
+router.delete('/photo/', adminIsLogged, deletePhotoCenter);
 
 module.exports = router;
