@@ -6,7 +6,7 @@ const {
 } = require('../../helpers/dbHelpers');
 const { sendMail } = require('../../helpers/mailHelpers');
 const { validation } = require('../../helpers/schemaHelpers');
-const postUserSchema = require('../../schemas/postUserSchema');
+const { postUserSchema } = require('../../schemas/userSchema');
 
 const postUser = async (req, res, next) => {
 	try {

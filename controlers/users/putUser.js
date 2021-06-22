@@ -1,6 +1,6 @@
 const { updateRegistration } = require('../../helpers/dbHelpers');
 const { validation } = require('../../helpers/schemaHelpers');
-const pullUserSchema = require('../../schemas/postUserSchema');
+const { pullUserSchema } = require('../../schemas/userSchema');
 const { formatDateToDB } = require('../../helpers/dateHelpers');
 
 const putUser = async (req, res, next) => {

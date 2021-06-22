@@ -1,4 +1,6 @@
 const { updateRegistration } = require('../../helpers/dbHelpers');
+const { validation } = require('../../helpers/schemaHelpers');
+const { putSpaceSchema } = require('../../schemas/spaceSchema');
 
 const putSpace = async (req, res, next) => {
 	try {
@@ -14,8 +16,9 @@ const putSpace = async (req, res, next) => {
 			error.httpStatus = 400;
 			throw error;
 		}
+		console.log(updateObject);
+		await validation(putSpaceSchema, updateObject);
 		await updateRegistration('espacios', id, updateObject);
-		console.log('hola');
 		next();
 	} catch (error) {
 		next(error);
