@@ -1,13 +1,13 @@
 const jwt = require('jsonwebtoken');
 const { getRegistrations } = require('../../helpers/dbHelpers');
-const loginUserSchema = require('../../schemas/loginUserSchema');
+const { pullUserSchema } = require('../../schemas/userSchema');
 const { validation } = require('../../helpers/schemaHelpers');
 
 const loginUser = async (req, res, next) => {
 	try {
 		const { correo, password } = req.body;
 
-		await validation(loginUserSchema, { correo, password });
+		await validation(pullUserSchema, { correo, password });
 
 		const user = await getRegistrations('usuarios', {
 			correo: `${correo}`,
