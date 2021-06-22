@@ -63,6 +63,18 @@ const updateRegistration = async (table, id, updateObject) => {
 		if (connection) connection.release();
 	}
 };
+const deleteRegistrations = async (table, searchObject) => {
+	let connection;
+	try {
+		connection = await getConnection();
+		await connection.query(createDeleteQuerry(table, searchObject));
+		return true;
+	} catch (error) {
+		return error;
+	} finally {
+		if (connection) connection.release();
+	}
+};
 
 // ***********************
 // ** QUERY GENERATORS **
@@ -105,11 +117,22 @@ const createUpdateQuerry = (table, id, updateObject) => {
 	query += ` WHERE id = ${id};`;
 	return query;
 };
+const createDeleteQuerry = (table, searchObject) => {
+	let query = `DELETE FROM ${table} WHERE `;
+	const keyUpdateString = [];
+	for (const key in searchObject) {
+		keyUpdateString.push(` ${key} = "${searchObject[key]}"`);
+	}
+	query += keyUpdateString.join(' AND ');
+	query += ';';
+	return query;
+};
 
 module.exports = {
 	getConnection,
 	getRegistrations,
 	insertRegistration,
 	updateRegistration,
+	deleteRegistrations,
 	createSelectAllWhereQuerry,
 };

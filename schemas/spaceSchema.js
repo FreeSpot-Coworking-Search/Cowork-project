@@ -14,6 +14,8 @@ const postSpaceSchema = Joi.object().keys({
 	reserva_minima: Joi.number().required().max(365),
 	precio: Joi.number().required().precision(2),
 	id_centro: Joi.number().required().integer(),
+	servicios: Joi.array(),
+	servicios_extra: Joi.array(),
 });
 
 const putSpaceSchema = Joi.object().keys({
@@ -25,6 +27,8 @@ const putSpaceSchema = Joi.object().keys({
 	reserva_minima: Joi.number().max(365),
 	precio: Joi.number().precision(2),
 	id_centro: Joi.number().integer(),
+	servicios: Joi.array(),
+	servicios_extra: Joi.array(),
 });
 
 module.exports = { postSpaceSchema, putSpaceSchema };

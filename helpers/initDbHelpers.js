@@ -168,6 +168,7 @@ async function resetDB() {
 
 		await connection.query(`
             CREATE TABLE espacios_servicios(
+			precio DECIMAL(6,2),
               id_espacio INT UNSIGNED,
               FOREIGN KEY (id_espacio) REFERENCES espacios(id),
               id_servicio INT UNSIGNED,
@@ -558,7 +559,7 @@ async function resetDB() {
                                     `
 			);
 		}
-		for (let i = 0; i < espacios * 0.1; i++) {
+		for (let i = 0; i < espacios * 0.2; i++) {
 			const tipo = 'Sala de reuniones';
 			const descripcion = faker.lorem.words(25);
 			const capacidadMaxima = random(5, 20);
@@ -588,15 +589,32 @@ async function resetDB() {
 
 		console.log('Creando espacios_servicios');
 
-		for (let i = 0; i < espacios; i++) {
-			for (let j = 0; j < servicios.length; j++) {
+		for (let i = 1; i <= espacios; i++) {
+			for (let j = 1; j <= servicios.length; j++) {
 				if (random(0, 1)) {
 					await connection.query(
 						`INSERT INTO espacios_servicios(
+			precio,
               id_espacio,
               id_servicio
               )
               VALUES(
+				  null,
+                "${i}",
+                "${j}"
+                )
+                `
+					);
+				} else if (random(0, 1)) {
+					const precio = faker.commerce.price(1, 2);
+					await connection.query(
+						`INSERT INTO espacios_servicios(
+			precio,
+              id_espacio,
+              id_servicio
+              )
+              VALUES(
+                "${precio}",
                 "${i}",
                 "${j}"
                 )
