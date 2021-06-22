@@ -29,7 +29,7 @@ const insertRegistration = async (table, newRegistration) => {
 		);
 		return result;
 	} catch (error) {
-		return error;
+		throw error;
 	} finally {
 		if (connection) connection.release();
 	}
@@ -46,7 +46,7 @@ const getRegistrations = async (tableOrQuery, searchObject) => {
 		const [results] = await connection.query(tableOrQuery);
 		return results;
 	} catch (error) {
-		return error;
+		throw error;
 	} finally {
 		if (connection) connection.release();
 	}
@@ -58,7 +58,7 @@ const updateRegistration = async (table, id, updateObject) => {
 		await connection.query(createUpdateQuerry(table, id, updateObject));
 		return true;
 	} catch (error) {
-		return error;
+		throw error;
 	} finally {
 		if (connection) connection.release();
 	}
@@ -70,7 +70,7 @@ const deleteRegistrations = async (table, searchObject) => {
 		await connection.query(createDeleteQuerry(table, searchObject));
 		return true;
 	} catch (error) {
-		return error;
+		throw error;
 	} finally {
 		if (connection) connection.release();
 	}
