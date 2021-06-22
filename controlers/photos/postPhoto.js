@@ -5,7 +5,7 @@ const {
 const { saveSpacesCentersPhoto } = require('../../helpers/photoHelpers');
 const { MAX_CENTER_PHOTOS, MAX_SPACE_PHOTOS } = process.env;
 
-const postPhotoCenter = async (req, res, next) => {
+const postPhoto = async (req, res, next) => {
 	try {
 		const { id, description } = req.query;
 
@@ -18,11 +18,7 @@ const postPhotoCenter = async (req, res, next) => {
 		const url = req.originalUrl;
 		const route = url.slice(url.indexOf('/', 1) + 1, url.indexOf('/', 5));
 
-		const idOptions = {
-			spaces: 'id_espacio',
-			centers: 'id_centro',
-		};
-		const choosedId = idOptions[`${route}`];
+		const choosedId = route === 'spaces' ? 'id_espacio' : 'id_centro';
 
 		const maxPhotos =
 			route === 'spaces' ? MAX_SPACE_PHOTOS : MAX_CENTER_PHOTOS;
@@ -54,4 +50,4 @@ const postPhotoCenter = async (req, res, next) => {
 	}
 };
 
-module.exports = postPhotoCenter;
+module.exports = postPhoto;

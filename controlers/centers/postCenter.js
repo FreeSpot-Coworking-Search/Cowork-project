@@ -5,7 +5,7 @@ const { formatDateToDB } = require('../../helpers/dateHelpers');
 
 const postCenter = async (req, res, next) => {
 	try {
-		const { idAuth } = req.adminAuth;
+		const { idAuth } = req.auth;
 		let newCenter = req.body;
 
 		await validation(postCenterSchema, newCenter);

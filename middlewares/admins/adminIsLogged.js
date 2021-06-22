@@ -19,7 +19,7 @@ const adminIsLogged = (req, res, next) => {
 			throw err;
 		}
 
-		req.adminAuth = tokenInfo;
+		req.auth = tokenInfo;
 		next();
 	} catch (error) {
 		next(error);

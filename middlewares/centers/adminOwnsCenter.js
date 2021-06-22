@@ -2,7 +2,7 @@ const { getRegistrations } = require('../../helpers/dbHelpers');
 
 const adminOwnsCenter = async (req, res, next) => {
 	try {
-		const { idAuth, tipo } = req.adminAuth;
+		const { idAuth, tipo } = req.auth;
 		const { id } = req.query;
 
 		if (tipo !== 'administrador') {
