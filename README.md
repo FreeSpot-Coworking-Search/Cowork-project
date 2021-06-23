@@ -119,9 +119,9 @@
 -   **GET - [api/reserves/myreserves] -** Retorna información con las reservas vinculadas a un usuario.
     **Requiere:** userIsLogin. ✅
 -   **GET - [api/reserves/] -** Retorna información de una reserva específica.
-    **Requiere:** entityExists / userIsLogin / userOwnReservation. ❌
+    **Requiere:** entityExists / userIsLogin / userOwnReservation. ✅
 -   **POST - [api/reserves/] -** Crea una nueva reserva por parte de un usuario logeado.
-    **Requiere:** userIsLogin. ❌
+    **Requiere:** userIsLogin. ✅ FALTA VERIFICAR FECHAS
 -   **PUT - [api/reserves/rate] -** El usuario puntua una reserva previamente creada.
     **Requiere:** entityExists / userIsLogin / userOwnReservation. ❌
 -   **POST - [api/reserves/payment] -** El usuario paga una reserva previamente creada.
@@ -132,4 +132,4 @@
 
     - entityExists - Comprueba la existencia de la reserva. ✅
     - userIsLogin - Comprueba que se trate de un usuario logueado. ✅
-    - userOwnReservation - Comprueba que el usuario sea el propietario de la reserva ❌
+    - userOwnReservation - Comprueba que el usuario sea el propietario de la reserva ✅
