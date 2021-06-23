@@ -1,12 +1,21 @@
 const { getRegistrations } = require('../../helpers/dbHelpers');
 
-const getAllReserves = async (req, res, next) => {
+const getReservation = async (req, res, next) => {
 	try {
+		const { id } = req.query;
 		const tokenInfo = req.userAuth;
+		const url = req.originalUrl;
 
-		const searchObject = {
-			id_usuario: tokenInfo.idUser,
-		};
+		let searchObject = {};
+		if (url.includes('allreserves')) {
+			searchObject = {
+				id_usuario: tokenInfo.idUser,
+			};
+		} else {
+			searchObject = {
+				id,
+			};
+		}
 
 		const reserves = await getRegistrations('reservas', searchObject);
 
@@ -33,4 +42,4 @@ const getAllReserves = async (req, res, next) => {
 	}
 };
 
-module.exports = getAllReserves;
+module.exports = getReservation;

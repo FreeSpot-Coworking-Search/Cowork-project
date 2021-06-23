@@ -11,7 +11,7 @@ const entityExists = async (req, res, next) => {
 			spaces: 'espacios',
 			admins: 'administradores',
 			centers: 'centros',
-			reservations: 'reservas',
+			reserves: 'reservas',
 		};
 		const table = options[`${route}`];
 
@@ -27,7 +27,7 @@ const entityExists = async (req, res, next) => {
 
 		const entity = await getRegistrations(`${table}`, objectSearch);
 		if (entity.length === 0) {
-			const error = new Error(`El ${table} no existe`);
+			const error = new Error(`${table} no existe`);
 			error.httpStatus = 406;
 			throw error;
 		}
