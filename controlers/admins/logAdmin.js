@@ -25,7 +25,7 @@ const logAdmin = async (req, res, next) => {
 		const tokenInfo = {
 			idAuth: admin[0].id,
 			roll: admin[0].roll,
-			tipo: `administrador`,
+			tipo: 'administrador',
 		};
 
 		const authorization = jwt.sign(tokenInfo, process.env.TOKEN_SECRET, {

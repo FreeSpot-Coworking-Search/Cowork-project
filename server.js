@@ -17,6 +17,7 @@ app.use('/api/users', require('./controlers/users'));
 app.use('/api/spaces', require('./controlers/spaces'));
 app.use('/api/admins', require('./controlers/admins'));
 app.use('/api/centers', require('./controlers/centers'));
+app.use('/api/reserves', require('./controlers/reserves'));
 
 // ************
 // ** ERRORS **

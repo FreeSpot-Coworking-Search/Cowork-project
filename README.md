@@ -64,7 +64,7 @@
 -   **POST - [api/admins/photo/]** - Cambia la foto administrador.
     **Requiere:** adminExist / adminIsLogged / adminIsOwner ✅
 
-#### Middlewares:
+#### Middlewares utilizados:
 
         - adminExists - Comprueba la existencia de un administrador. ✅
         - adminIsLogged - Comprueba si el administrador tiene token valido. ✅
@@ -75,16 +75,16 @@
 -   **GET - [api/spaces/] -** Retorna información de un espacio concreto, sus servicios e imagenes.✅
     **Requiere:** spaceExists ✅
 -   **POST - [api/spaces] -** Crea un espacio, servicios y servicios extra. ✅
-    **Requiere:**  adminIsLogged / adminOwnsSpaceCenter ✅
+    **Requiere:** adminIsLogged / adminOwnsSpaceCenter ✅
 -   **PUT - [api/spaces/] -** Edita un espacio, servicios y servicios extra. ✅
     **Requiere:** spaceExists / adminIsLogged / adminOwnsSpace ✅
 -   **DELETE - [api/spaces/] -** Borra un espacio, servicios y servicios extra. ✅
     **Requiere:** spaceExists / adminIsLogged / adminOwnsSpace ✅
 
 -   **POST - [api/spaces/photo/]** - Añade una foto del espacio.✅
-    **Requiere:** spaceExists / adminIsLogged / adminOwnsSpace ✅ 
+    **Requiere:** spaceExists / adminIsLogged / adminOwnsSpace ✅
 -   **DELETE - [api/spaces/photo/]** - Borra una foto del espacio.✅
-    **Requiere:** adminIsLogged / photoExists / adminIsOwner ❌
+    **Requiere:** adminIsLogged / photoExists / adminIsOwner ✅
 
 #### Middlewares:
 
@@ -108,8 +108,28 @@
 -   **DELETE - [api/centers/photo/]** - Borra una foto del centro.
     **Requiere:** adminIsLogged ✅
 
-#### Middlewares:
+#### Middlewares utilizados:
 
         - adminIsLogged - Comprueba que se trate de un administrador logueado. ✅
         - adminOwnsCenter - Comprueba que el administrador sea propietario del centro. ✅
         - entityExists - Comprueba la existencia del espacio. ✅
+
+### Reserves
+
+-   **GET - [api/reserves/myreserves] -** Retorna información con las reservas vinculadas a un usuario.
+    **Requiere:** userIsLogin. ✅
+-   **GET - [api/reserves/] -** Retorna información de una reserva específica.
+    **Requiere:** entityExists / userIsLogin / userOwnReservation. ❌
+-   **POST - [api/reserves/] -** Crea una nueva reserva por parte de un usuario logeado.
+    **Requiere:** userIsLogin. ❌
+-   **PUT - [api/reserves/rate] -** El usuario puntua una reserva previamente creada.
+    **Requiere:** entityExists / userIsLogin / userOwnReservation. ❌
+-   **POST - [api/reserves/payment] -** El usuario paga una reserva previamente creada.
+    **Requiere:** entityExists / userIsLogin / userOwnReservation. ❌
+    ❌
+
+#### Middlewares utilizados:
+
+    - entityExists - Comprueba la existencia de la reserva. ✅
+    - userIsLogin - Comprueba que se trate de un usuario logueado. ✅
+    - userOwnReservation - Comprueba que el usuario sea el propietario de la reserva ❌
