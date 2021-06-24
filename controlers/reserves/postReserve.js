@@ -30,7 +30,12 @@ const postReserve = async (req, res, next) => {
 
 		const { insertId } = await insertRegistration('reservas', newReserve);
 
-		console.log('Nueva reserva creada, Id:', insertId);
+		console.log(
+			'Nueva reserva creada, Id:',
+			insertId,
+			'usuario id:',
+			id_usuario
+		);
 		req.query.id = insertId;
 		next();
 	} catch (error) {

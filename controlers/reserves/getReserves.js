@@ -3,13 +3,13 @@ const { getRegistrations } = require('../../helpers/dbHelpers');
 const getReservation = async (req, res, next) => {
 	try {
 		const { id } = req.query;
-		const tokenInfo = req.userAuth;
+		const { idUser: id_usuario } = req.userAuth;
 		const url = req.originalUrl;
 
 		let searchObject = {};
 		if (url.includes('allreserves')) {
 			searchObject = {
-				id_usuario: tokenInfo.idUser,
+				id_usuario,
 			};
 		} else {
 			searchObject = {

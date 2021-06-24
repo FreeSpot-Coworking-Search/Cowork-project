@@ -118,6 +118,8 @@ async function resetDB() {
         precio DECIMAL(6,2) NOT NULL,
         puntuacion_usuario TINYINT UNSIGNED,
         comentario_usuario VARCHAR(1000),
+		pagado BOOLEAN NOT NULL DEFAULT 0,
+		codigo_pago VARCHAR(100),
         id_usuario INT UNSIGNED,
         FOREIGN KEY (id_usuario) REFERENCES usuarios (id),
         id_espacio INT UNSIGNED,
@@ -410,7 +412,8 @@ async function resetDB() {
                   puntuacion_usuario,
                   comentario_usuario,
                   id_usuario,
-                  id_espacio
+                  id_espacio,
+				  pagado
                   )
                   VALUES(
                     "${fechaInicio}",
@@ -420,7 +423,8 @@ async function resetDB() {
                     "${puntuacionUsuario}",
                     "${comentarioUsuario}",
                     "${idUsuario}",
-                    "${idEspacio}"
+                    "${idEspacio}",
+					"1"
                     )
                     `
 				);

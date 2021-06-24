@@ -21,10 +21,9 @@ const userOwnsReserve = async (req, res, next) => {
 		}
 		const infoReserve = {
 			fecha_reserva: result[0].fecha_reserva,
-			fecha_inicio: result[0].fecha_inicio, // comprobar si sirve
 			fecha_fin: result[0].fecha_fin,
-			id_espacio: result[0].id_espacio, //comprobar si sirve
 			puntuacion_usuario: result[0].puntuacion_usuario,
+			pagado: result[0].pagado,
 		};
 
 		req.infoReserve = infoReserve;
