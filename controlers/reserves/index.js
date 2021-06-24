@@ -3,13 +3,22 @@ const router = express.Router();
 
 const getReserves = require('./getReserves');
 const postReserve = require('./postReserve');
+const putRate = require('./putRate');
 
 const entityExists = require('../../middlewares/centers/entityExists');
 const userIsLogin = require('../../middlewares/users/userIsLogin');
 const userOwnsReserve = require('../../middlewares/reserves/userOwnsReserve');
 
-router.get('/allreserves', userIsLogin, getReserves);
+router.get('/allreserves/', userIsLogin, getReserves);
 router.get('/', entityExists, userIsLogin, userOwnsReserve, getReserves);
 router.post('/', userIsLogin, postReserve, getReserves);
+router.put(
+	'/rate/',
+	entityExists,
+	userIsLogin,
+	userOwnsReserve,
+	putRate,
+	getReserves
+);
 
 module.exports = router;

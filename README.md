@@ -123,8 +123,8 @@
 -   **POST - [api/reserves/] -** Crea una nueva reserva por parte de un usuario logeado.
     **Requiere:** userIsLogin. ✅ FALTA VERIFICAR FECHAS
 -   **PUT - [api/reserves/rate] -** El usuario puntua una reserva previamente creada.
-    **Requiere:** entityExists / userIsLogin / userOwnReservation. ❌
--   **POST - [api/reserves/payment] -** El usuario paga una reserva previamente creada.
+    **Requiere:** entityExists / userIsLogin / userOwnReservation. ✅
+-   **PUT - [api/reserves/pay/] -** El usuario paga una reserva previamente creada.
     **Requiere:** entityExists / userIsLogin / userOwnReservation. ❌
     ❌
 

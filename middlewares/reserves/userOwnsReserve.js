@@ -19,7 +19,15 @@ const userOwnsReserve = async (req, res, next) => {
 			error.httpStatus = 401;
 			throw error;
 		}
+		const infoReserve = {
+			fecha_reserva: result[0].fecha_reserva,
+			fecha_inicio: result[0].fecha_inicio, // comprobar si sirve
+			fecha_fin: result[0].fecha_fin,
+			id_espacio: result[0].id_espacio, //comprobar si sirve
+			puntuacion_usuario: result[0].puntuacion_usuario,
+		};
 
+		req.infoReserve = infoReserve;
 		next();
 	} catch (error) {
 		next(error);

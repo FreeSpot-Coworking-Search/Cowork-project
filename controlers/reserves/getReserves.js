@@ -35,6 +35,7 @@ const getReservation = async (req, res, next) => {
 			});
 		}
 
+		console.log('Mostrando reservas requeridas:', searchObject);
 		res.httpStatus = 200;
 		res.send(result);
 	} catch (error) {
