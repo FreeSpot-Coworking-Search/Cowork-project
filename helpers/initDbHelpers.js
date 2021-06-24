@@ -489,13 +489,15 @@ async function resetDB() {
 			const descripcion = faker.lorem.words(25);
 			const capacidadMaxima = 1;
 			const precio = faker.commerce.price(3, 15);
-			const idCentro = random(1, 30);
+			const idCentro = random(1, centros);
+			const reservaMinima = random(1, 15);
 
 			await connection.query(
 				`INSERT INTO espacios(
                       tipo,
                       descripcion,
                       capacidad_maxima,
+					  reserva_minima,
                       precio,
                       id_centro
                       )
@@ -503,6 +505,7 @@ async function resetDB() {
                         "${tipo}",
                         "${descripcion}",
                         "${capacidadMaxima}",
+                        "${reservaMinima}",
                         "${precio}",
                         "${idCentro}"
                         )
@@ -514,24 +517,27 @@ async function resetDB() {
 			const descripcion = faker.lorem.words(25);
 			const capacidadMaxima = 1;
 			const precio = faker.commerce.price(5, 15);
-			const idCentro = random(1, 30);
+			const idCentro = random(1, centros);
+			const reservaMinima = random(1, 15);
 
 			await connection.query(
 				`INSERT INTO espacios(
-                            tipo,
-                            descripcion,
-                            capacidad_maxima,
-                            precio,
-                            id_centro
-                            )
-                            VALUES(
-                              "${tipo}",
-                              "${descripcion}",
-                              "${capacidadMaxima}",
-                              "${precio}",
-                              "${idCentro}"
-                              )
-                              `
+                      tipo,
+                      descripcion,
+                      capacidad_maxima,
+					  reserva_minima,
+                      precio,
+                      id_centro
+                      )
+                      VALUES(
+                        "${tipo}",
+                        "${descripcion}",
+                        "${capacidadMaxima}",
+                        "${reservaMinima}",
+                        "${precio}",
+                        "${idCentro}"
+                        )
+                        `
 			);
 		}
 		for (let i = 0; i < espacios * 0.2; i++) {
@@ -539,24 +545,27 @@ async function resetDB() {
 			const descripcion = faker.lorem.words(25);
 			const capacidadMaxima = random(1, 4);
 			const precio = faker.commerce.price(10, 20);
-			const idCentro = random(1, 30);
+			const idCentro = random(1, centros);
+			const reservaMinima = random(1, 15);
 
 			await connection.query(
 				`INSERT INTO espacios(
-                                  tipo,
-                                  descripcion,
-                                  capacidad_maxima,
-                                  precio,
-                                  id_centro
-                                  )
-                                  VALUES(
-                                    "${tipo}",
-                                    "${descripcion}",
-                                    "${capacidadMaxima}",
-                                    "${precio}",
-                                    "${idCentro}"
-                                    )
-                                    `
+                      tipo,
+                      descripcion,
+                      capacidad_maxima,
+					  reserva_minima,
+                      precio,
+                      id_centro
+                      )
+                      VALUES(
+                        "${tipo}",
+                        "${descripcion}",
+                        "${capacidadMaxima}",
+                        "${reservaMinima}",
+                        "${precio}",
+                        "${idCentro}"
+                        )
+                        `
 			);
 		}
 		for (let i = 0; i < espacios * 0.2; i++) {
@@ -564,7 +573,7 @@ async function resetDB() {
 			const descripcion = faker.lorem.words(25);
 			const capacidadMaxima = random(5, 20);
 			const precio = faker.commerce.price(15, 30);
-			const idCentro = random(1, 30);
+			const idCentro = random(1, centros);
 
 			await connection.query(
 				`INSERT INTO espacios(
