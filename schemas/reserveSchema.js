@@ -1,12 +1,22 @@
 const Joi = require('joi');
 
 const postReserveSchema = Joi.object().keys({
-	fecha_inicio: Joi.date().required(),
-	fecha_fin: Joi.date().required(),
+	fecha_inicio: Joi.date().min('now').required(),
+	fecha_fin: Joi.date().min(Joi.ref('fecha_inicio')).required(),
 	id_espacio: Joi.number().integer().required(),
 });
 
-module.exports = postReserveSchema;
+const putRateSchema = Joi.object().keys({
+	puntuacion_usuario: Joi.number()
+		.integer()
+		.positive()
+		.min(1)
+		.max(5)
+		.required(),
+	comentario_usuario: Joi.string().max(1000),
+});
+
+module.exports = { postReserveSchema, putRateSchema };
 
 /* 
 CREATE TABLE reservas(

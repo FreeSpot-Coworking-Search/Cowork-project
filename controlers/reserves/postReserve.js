@@ -2,7 +2,7 @@ const { insertRegistration } = require('../../helpers/dbHelpers');
 const { getRegistrations } = require('../../helpers/dbHelpers');
 const { formatDateToDB } = require('../../helpers/dateHelpers');
 const { validation } = require('../../helpers/schemaHelpers');
-const postReserveSchema = require('../../schemas/reserveSchema');
+const { postReserveSchema } = require('../../schemas/reserveSchema');
 
 const postReserve = async (req, res, next) => {
 	try {
@@ -30,7 +30,12 @@ const postReserve = async (req, res, next) => {
 
 		const { insertId } = await insertRegistration('reservas', newReserve);
 
-		console.log('Nueva reserva creada, Id:', insertId);
+		console.log(
+			'Nueva reserva creada, Id:',
+			insertId,
+			'usuario id:',
+			id_usuario
+		);
 		req.query.id = insertId;
 		next();
 	} catch (error) {
@@ -47,3 +52,11 @@ module.exports = postReserve;
         precio DECIMAL(6,2) NOT NULL,
         id_espacio INT UNSIGNED
 */
+
+/* reservas.id NOT IN
+                (SELECT reservas.id
+                FROM reservas
+                WHERE (reservas.fecha_inicio < ${searchObject['fecha_entrada']} AND reservas.fecha_fin > ${searchObject['fecha_entrada']})
+                OR (reservas.fecha_inicio < ${searchObject['fecha_salida']} AND reservas.fecha_fin > ${searchObject['fecha_salida']})
+                OR (${searchObject['fecha_entrada']} between reservas.fecha_inicio AND reservas.fecha_fin AND ${searchObject['fecha_salida']} between reservas.fecha_inicio AND reservas.fecha_fin)
+                OR (reservas.fecha_inicio < ${searchObject['fecha_entrada']} AND reservas.fecha_fin > ${searchObject['fecha_salida']}))) */
