@@ -16,6 +16,11 @@ const getSpace = async (req, res, next) => {
 			 espacios_servicios ON servicios.id = espacios_servicios.id_servicio
 			 AND espacios_servicios.id_espacio = ${id} AND espacios_servicios.precio IS NOT NULL;`
 		);
+		const incidencias = await getRegistrations(`SELECT incidencias.*
+		FROM incidencias
+		INNER JOIN 	reservas ON reservas.id = incidencias.id_reserva
+		WHERE reservas.id_espacio = ${id};`);
+
 		const photos = await getRegistrations('imagenes', {
 			id_espacio: `${id}`,
 		});
@@ -25,8 +30,9 @@ const getSpace = async (req, res, next) => {
 			servicios: services,
 			servicios_estra: extraServices,
 			imagenes: photos,
+			incidencias,
 		};
-
+		console.log('Mostadro espacio requerido, Id:', id);
 		res.status(200);
 		res.send({
 			status: 'ok',

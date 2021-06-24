@@ -10,6 +10,7 @@ const deleteSpace = async (req, res, next) => {
 			id_espacio: `${id}`,
 		});
 		await updateRegistration('espacios', id, { borrado: 1 });
+		console.log('Borrado espacio, Id:', id);
 		res.status(200);
 		res.send('Espacio eliminado');
 	} catch (error) {

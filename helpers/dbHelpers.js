@@ -169,9 +169,12 @@ const createSearchCentersQuerry = (searchObject) => {
 	whereString.push('( espacios.borrado = 0 )');
 	whereString.push('( centros.borrado = 0 )');
 
+	if (searchObject['tipo']) {
+		whereString.push(`(espacios.tipo = "${searchObject['tipo']}")`);
+	}
 	if (searchObject['texto']) {
 		whereString.push(
-			`(centros.localidad LIKE '%${searchObject['texto']}%' OR centros.direccion LIKE '%${searchObject['texto']}%' OR centros.nombre LIKE '%${searchObject['texto']}%' )`
+			`(centros.localidad LIKE "%${searchObject['texto']}%" OR centros.direccion LIKE "%${searchObject['texto']}%" OR centros.nombre LIKE "%${searchObject['texto']}%" )`
 		);
 	}
 	if (searchObject['aforo']) {
@@ -270,6 +273,9 @@ const createSearchSpacesQuerry = (searchObject) => {
 			`(espacios.id_centro = ${searchObject['id_centro']} )`
 		);
 	}
+	if (searchObject['tipo']) {
+		whereString.push(`(espacios.tipo = "${searchObject['tipo']}")`);
+	}
 	if (searchObject['aforo']) {
 		whereString.push(
 			`(espacios.capacidad_maxima >= ${searchObject['aforo']})`
@@ -326,17 +332,6 @@ const createSearchSpacesQuerry = (searchObject) => {
 	}
 
 	query += ' GROUP BY espacios.id';
-
-	// if (searchObject['puntuacion_minima']) {
-	// 	havingString.push(
-	// 		`(puntuacion_media >= ${searchObject['puntuacion_minima']})`
-	// 	);
-	// }
-
-	// if (havingString.length > 0) {
-	// 	query += ' HAVING ';
-	// 	query += havingString.join(' AND ');
-	// }
 
 	if (searchObject['ordenado_por']) {
 		query += ` ORDER BY ${searchObject['ordenado_por']} `;

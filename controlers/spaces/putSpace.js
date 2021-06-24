@@ -43,6 +43,7 @@ const putSpace = async (req, res, next) => {
 		await validation(putSpaceSchema, updateObject);
 		await updateRegistration('espacios', id, updateObject);
 
+		console.log('Modificado espacio, Id:', id);
 		next();
 	} catch (error) {
 		next(error);

@@ -383,13 +383,13 @@ async function resetDB() {
 
 		console.log('Creando reservas, reservas_servicios e incidencias');
 
-		let idReserva = 0;
+		let idReserva = 1;
 
-		for (let i = 0; i < espacios; i++) {
+		for (let i = 1; i <= espacios; i++) {
 			const randomDate = faker.date.past(0.5);
 			const numeroReservas = random(1, 10);
 
-			for (let j = 0; j < numeroReservas; j++) {
+			for (let j = 1; j <= numeroReservas; j++) {
 				const fechaInicio = formatDateToDB(randomDate);
 				randomDate.setDate(randomDate.getDate() + random(1, 30));
 				const fechaFin = formatDateToDB(randomDate);

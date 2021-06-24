@@ -27,7 +27,7 @@ const postSpace = async (req, res, next) => {
 			};
 			await insertRegistration('espacios_servicios', insertService);
 		}
-
+		console.log('Insertado espacio, Id:', insertId);
 		req.query.id = insertId;
 		next();
 	} catch (error) {
