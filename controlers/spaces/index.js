@@ -10,6 +10,8 @@ const postSpace = require('./postSpace');
 const putSpace = require('./putSpace');
 const deleteSpace = require('./deleteSpace');
 
+const searchSpaces = require('../searchs/searchSpaces');
+
 const postPhoto = require('../photos/postPhoto');
 const deletePhoto = require('../photos/deletePhoto');
 const adminOwnsSpaceCenter = require('../../middlewares/spaces/adminOwnsSpaceCenter');
@@ -28,5 +30,7 @@ router.post(
 	getSpace
 );
 router.delete('/photo/', adminIsLogged, deletePhoto);
+
+router.post('/search/', searchSpaces);
 
 module.exports = router;

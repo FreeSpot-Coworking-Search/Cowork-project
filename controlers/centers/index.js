@@ -8,6 +8,8 @@ const deleteCenter = require('./deleteCenter');
 const postPhoto = require('../photos/postPhoto');
 const deletePhoto = require('../photos/deletePhoto');
 
+const searchCenters = require('../searchs/searchCenters');
+
 const entityExists = require('../../middlewares/centers/entityExists');
 const adminIsLogged = require('../../middlewares/admins/adminIsLogged');
 const adminOwnsCenter = require('../../middlewares/centers/adminOwnsCenter');
@@ -34,5 +36,7 @@ router.post(
 );
 
 router.delete('/photo/', adminIsLogged, deletePhoto);
+
+router.post('/search/', searchCenters);
 
 module.exports = router;
