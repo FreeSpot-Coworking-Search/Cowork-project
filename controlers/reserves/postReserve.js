@@ -17,10 +17,26 @@ const postReserve = async (req, res, next) => {
 
 		await validation(postReserveSchema, newReserve);
 
+		const { fecha_inicio, fecha_fin } = newReserve;
+		const datesValidation = await getRegistrations(`
+			SELECT reservas.id
+			FROM reservas
+			WHERE "${fecha_inicio}" between reservas.fecha_inicio AND reservas.fecha_fin 
+			OR "${fecha_fin}" between reservas.fecha_inicio AND reservas.fecha_fin
+			OR (reservas.fecha_inicio >= "${fecha_inicio}" AND reservas.fecha_fin <= "${fecha_fin}");`);
+
+		if (datesValidation.length !== 0) {
+			const error = new Error(
+				'El espacio ya ha sido seleccionado en alguna de las fechas seleccionadas.'
+			);
+			error.httpStatus = 400;
+			throw error;
+		}
+
 		const infoEspacio = await getRegistrations('espacios', {
 			id: newReserve.id_espacio,
 		});
-		//TODO: VERIFICAR CONCORDANCIA DE FECHAS!!!
+
 		newReserve = {
 			...newReserve,
 			fecha_reserva: formatDateToDB(new Date()),
