@@ -1,5 +1,6 @@
 require('dotenv').config();
 const mysql = require('mysql2/promise');
+const { formatDateToDB } = require('./dateHelpers');
 
 const { MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE } = process.env;
 
@@ -211,14 +212,16 @@ const createSearchCentersQuerry = (searchObject) => {
 	}
 
 	if (searchObject['fecha_entrada'] && searchObject['fecha_salida']) {
+		const fechaEntrada = formatDateToDB(searchObject['fecha_entrada']);
+		const fechaSalida = formatDateToDB(searchObject['fecha_salida']);
+
 		whereString.push(
-			`(reservas.id NOT IN
-				(SELECT reservas.id
-				FROM reservas
-				WHERE (reservas.fecha_inicio < ${searchObject['fecha_entrada']} AND reservas.fecha_fin > ${searchObject['fecha_entrada']})
-				OR (reservas.fecha_inicio < ${searchObject['fecha_salida']} AND reservas.fecha_fin > ${searchObject['fecha_salida']})
-				OR (${searchObject['fecha_entrada']} between reservas.fecha_inicio AND reservas.fecha_fin AND ${searchObject['fecha_salida']} between reservas.fecha_inicio AND reservas.fecha_fin)
-				OR (reservas.fecha_inicio < ${searchObject['fecha_entrada']} AND reservas.fecha_fin > ${searchObject['fecha_salida']})))`
+			`(espacios.id NOT IN
+				(SELECT reservas.id_espacio
+					FROM reservas
+					WHERE "${fechaEntrada}" between reservas.fecha_inicio AND reservas.fecha_fin 
+					OR "${fechaSalida}" between reservas.fecha_inicio AND reservas.fecha_fin
+					OR (reservas.fecha_inicio >= "${fechaEntrada}" AND reservas.fecha_fin <= "${fechaSalida}") ))`
 		);
 	}
 	if (whereString.length > 0) {
@@ -305,14 +308,16 @@ const createSearchSpacesQuerry = (searchObject) => {
 	}
 
 	if (searchObject['fecha_entrada'] && searchObject['fecha_salida']) {
+		const fechaEntrada = formatDateToDB(searchObject['fecha_entrada']);
+		const fechaSalida = formatDateToDB(searchObject['fecha_salida']);
+
 		whereString.push(
-			`(reservas.id NOT IN
-				(SELECT reservas.id
-				FROM reservas
-				WHERE (reservas.fecha_inicio < ${searchObject['fecha_entrada']} AND reservas.fecha_fin > ${searchObject['fecha_entrada']})
-				OR (reservas.fecha_inicio < ${searchObject['fecha_salida']} AND reservas.fecha_fin > ${searchObject['fecha_salida']})
-				OR (${searchObject['fecha_entrada']} between reservas.fecha_inicio AND reservas.fecha_fin AND ${searchObject['fecha_salida']} between reservas.fecha_inicio AND reservas.fecha_fin)
-				OR (reservas.fecha_inicio < ${searchObject['fecha_entrada']} AND reservas.fecha_fin > ${searchObject['fecha_salida']})))`
+			`(espacios.id NOT IN
+				(SELECT reservas.id_espacio
+					FROM reservas
+					WHERE "${fechaEntrada}" between reservas.fecha_inicio AND reservas.fecha_fin 
+					OR "${fechaSalida}" between reservas.fecha_inicio AND reservas.fecha_fin
+					OR (reservas.fecha_inicio >= "${fechaEntrada}" AND reservas.fecha_fin <= "${fechaSalida}") ))`
 		);
 	}
 	if (whereString.length > 0) {
