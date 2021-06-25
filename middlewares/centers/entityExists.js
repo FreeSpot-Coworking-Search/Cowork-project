@@ -12,6 +12,7 @@ const entityExists = async (req, res, next) => {
 			admins: 'administradores',
 			centers: 'centros',
 			reserves: 'reservas',
+			incidences: 'reservas',
 		};
 		const table = options[`${route}`];
 
