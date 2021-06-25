@@ -4,11 +4,12 @@ const getIncidences = async (req, res, next) => {
 	try {
 		const { id } = req.query;
 
-		const searchObject = {
-			id_reserva: id,
-		};
-
-		const incidences = await getRegistrations('incidencias', searchObject);
+		const incidences = await getRegistrations(`
+		SELECT *
+		FROM incidencias
+		WHERE id_reserva = ${id} 
+		ORDER BY fecha_incidencia DESC;
+		`);
 
 		console.log('Mostrando incidencias requeridas para reserva id:', id);
 		res.httpStatus = 200;

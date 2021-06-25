@@ -19,6 +19,12 @@ const adminIsLogged = (req, res, next) => {
 			throw err;
 		}
 
+		if (tokenInfo.tipo !== 'administrador') {
+			const error2 = new Error('El usuario no es de tipo administrador');
+			error2.httpStatus = 401;
+			throw error2;
+		}
+
 		req.auth = tokenInfo;
 		next();
 	} catch (error) {
