@@ -20,12 +20,13 @@ const postReserve = async (req, res, next) => {
 		delete newReserve.servicios;
 
 		const { fecha_inicio, fecha_fin } = newReserve;
+
 		const datesValidation = await getRegistrations(`
 			SELECT reservas.id
 			FROM reservas
-			WHERE "${fecha_inicio}" between reservas.fecha_inicio AND reservas.fecha_fin 
-			OR "${fecha_fin}" between reservas.fecha_inicio AND reservas.fecha_fin
-			OR (reservas.fecha_inicio >= "${fecha_inicio}" AND reservas.fecha_fin <= "${fecha_fin}");`);
+			WHERE reservas.id_espacio = ${newReserve.id_espacio} AND (("${fecha_inicio}" > reservas.fecha_inicio AND "${fecha_inicio}" < reservas.fecha_fin) 
+			OR ("${fecha_fin}" > reservas.fecha_inicio AND "${fecha_fin}" < reservas.fecha_fin)
+			OR (reservas.fecha_inicio >= "${fecha_inicio}" AND reservas.fecha_fin <= "${fecha_fin}"));`);
 
 		if (datesValidation.length !== 0) {
 			const error = new Error(
