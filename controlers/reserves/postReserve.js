@@ -16,6 +16,8 @@ const postReserve = async (req, res, next) => {
 		}
 
 		await validation(postReserveSchema, newReserve);
+		const { servicios: reserveServices } = newReserve;
+		delete newReserve.servicios;
 
 		const { fecha_inicio, fecha_fin } = newReserve;
 		const datesValidation = await getRegistrations(`
@@ -37,6 +39,7 @@ const postReserve = async (req, res, next) => {
 			id: newReserve.id_espacio,
 		});
 
+		//TODO: VERIFICAR CONCORDANCIA DE FECHAS!!!
 		newReserve = {
 			...newReserve,
 			fecha_reserva: formatDateToDB(new Date()),
@@ -45,6 +48,25 @@ const postReserve = async (req, res, next) => {
 		};
 
 		const { insertId } = await insertRegistration('reservas', newReserve);
+
+		const infoServices = await getRegistrations('espacios_servicios', {
+			id_espacio: newReserve.id_espacio,
+		});
+
+		for (const servicio of infoServices) {
+			if (
+				servicio.precio === null ||
+				reserveServices.indexOf(servicio.id_servicio) !== -1
+			) {
+				let newService = {
+					precio: servicio.precio,
+					id_servicio: servicio.id_servicio,
+					id_reserva: insertId,
+				};
+				if (servicio.precio === null) delete newService.precio;
+				await insertRegistration('reservas_servicios', newService);
+			}
+		}
 
 		console.log(
 			'Nueva reserva creada, Id:',

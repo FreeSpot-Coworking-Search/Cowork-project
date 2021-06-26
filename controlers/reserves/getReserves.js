@@ -28,10 +28,24 @@ const getReservation = async (req, res, next) => {
 				'espacios',
 				searchObject
 			);
+			const infoServices = await getRegistrations(
+				`SELECT reservas_servicios.*, servicios.nombre 
+				FROM reservas_servicios 
+				INNER JOIN servicios ON reservas_servicios.id_servicio = servicios.id 
+				WHERE reservas_servicios.id_reserva = ${id} AND reservas_servicios.precio IS null;`
+			);
+			const infoExtraServices = await getRegistrations(
+				`SELECT reservas_servicios.*, servicios.nombre 
+				FROM reservas_servicios 
+				INNER JOIN servicios ON reservas_servicios.id_servicio = servicios.id 
+				WHERE reservas_servicios.id_reserva = ${id} AND reservas_servicios.precio IS NOT null;`
+			);
 
 			result.push({
 				...reservation,
 				info_espacio: infoEspacio[0],
+				servicios: infoServices,
+				servicios_extra: infoExtraServices,
 			});
 		}
 
