@@ -4,6 +4,7 @@ const postReserveSchema = Joi.object().keys({
 	fecha_inicio: Joi.date().min('now').required(),
 	fecha_fin: Joi.date().min(Joi.ref('fecha_inicio')).required(),
 	id_espacio: Joi.number().integer().required(),
+	servicios: Joi.array(),
 });
 
 const putRateSchema = Joi.object().keys({

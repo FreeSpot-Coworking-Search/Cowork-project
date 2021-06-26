@@ -125,6 +125,7 @@ const createSelectAllWhereQuerry = (table, searchObject) => {
 	) {
 		query += ' AND borrado <> 1;';
 	} else query += ';';
+
 	return query;
 };
 
