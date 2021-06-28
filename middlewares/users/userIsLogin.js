@@ -19,6 +19,12 @@ const userIsLogin = (req, res, next) => {
 			throw err;
 		}
 
+		if (tokenInfo.tipo !== 'usuario') {
+			const error2 = new Error('El cliente no es de tipo usuario');
+			error2.httpStatus = 401;
+			throw error2;
+		}
+
 		// Creamos la propiedad "userAuth" en la request.
 		req.userAuth = tokenInfo;
 		next();

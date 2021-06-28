@@ -2,14 +2,8 @@ const { getRegistrations } = require('../../helpers/dbHelpers');
 
 const adminOwnsSpace = async (req, res, next) => {
 	try {
-		const { idAuth, tipo } = req.auth;
+		const { idAuth } = req.auth;
 		const { id } = req.query;
-
-		if (tipo !== 'administrador') {
-			const error = new Error('El usuario no es de tipo administrador');
-			error.httpStatus = 400;
-			throw error;
-		}
 
 		const result =
 			await getRegistrations(`SELECT espacios.id FROM espacios INNER JOIN centros ON centros.id = espacios.id_centro

@@ -2,14 +2,9 @@ const { getRegistrations } = require('../../helpers/dbHelpers');
 
 const adminOwnsSpaceCenter = async (req, res, next) => {
 	try {
-		const { idAuth, tipo } = req.auth;
+		const { idAuth } = req.auth;
 		const { id_centro } = req.body;
 
-		if (tipo !== 'administrador') {
-			const error = new Error('El usuario no es de tipo administrador');
-			error.httpStatus = 400;
-			throw error;
-		}
 		const objectSearch = {
 			id: `${id_centro}`,
 			id_administrador: `${idAuth}`,

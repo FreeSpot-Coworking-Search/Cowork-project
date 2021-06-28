@@ -20,7 +20,7 @@ const adminIsLogged = (req, res, next) => {
 		}
 
 		if (tokenInfo.tipo !== 'administrador') {
-			const error2 = new Error('El usuario no es de tipo administrador');
+			const error2 = new Error('El cliente no es de tipo administrador');
 			error2.httpStatus = 401;
 			throw error2;
 		}
