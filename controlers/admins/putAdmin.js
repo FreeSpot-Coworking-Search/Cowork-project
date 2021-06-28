@@ -22,6 +22,8 @@ const putAdmin = async (req, res, next) => {
 		};
 
 		await updateRegistration('administradores', id, updateObject);
+
+		console.log('Modificación de datos de administrador id:', id);
 		next();
 	} catch (error) {
 		next(error);

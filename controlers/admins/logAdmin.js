@@ -32,6 +32,7 @@ const logAdmin = async (req, res, next) => {
 			expiresIn: '7d',
 		});
 
+		console.log('Login de administrador id:', admin[0].id);
 		res.send({
 			status: 'ok',
 			data: {

@@ -26,6 +26,7 @@ const postPhotoAdmin = async (req, res, next) => {
 			foto: `${savedPhoto}`,
 		});
 
+		console.log('Cambio de avatar administrador, id:', id);
 		next();
 	} catch (error) {
 		next(error);

@@ -32,6 +32,7 @@ const validateAdmin = async (req, res, next) => {
 			codigo_registro: null,
 		});
 
+		console.log('Validación de administrador id:', results[0].id);
 		res.status(200);
 		res.send({
 			status: 'ok',

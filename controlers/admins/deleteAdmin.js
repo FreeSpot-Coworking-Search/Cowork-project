@@ -8,7 +8,7 @@ const deleteAdmin = async (req, res, next) => {
 			borrado: 1,
 		});
 		res.status(200);
-		res.send('Usuario eliminado');
+		res.send('Administrador eliminado, id', id);
 	} catch (error) {
 		next(error);
 	}
