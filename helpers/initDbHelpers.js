@@ -87,7 +87,7 @@ async function resetDB() {
     CREATE TABLE usuarios(
       id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
       correo VARCHAR(50) NOT NULL UNIQUE,
-      password VARCHAR(50) NOT NULL,
+      password VARCHAR(100) NOT NULL,
       nombre_usuario VARCHAR(50) NOT NULL,
       nombre VARCHAR(20) NOT NULL,
       apellidos VARCHAR(50) NOT NULL,
@@ -240,7 +240,7 @@ async function resetDB() {
                   CREATE TABLE administradores(
                     id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
                     correo VARCHAR(50) NOT NULL UNIQUE,
-                    password VARCHAR(50) NOT NULL,
+                    password VARCHAR(100) NOT NULL,
                     nombre VARCHAR(20) NOT NULL,
                     apellidos VARCHAR(50) NOT NULL,
                     fecha_nacimiento DATE NOT NULL,
@@ -326,7 +326,7 @@ async function resetDB() {
 	  activo
 	  )
 	  VALUES(
-		"ricardozarroca@gmail.com",
+		"richardzarroca@gmail.com",
 		"user123456",
 		"rzarroca",
 		"Ricardo",
@@ -743,7 +743,7 @@ async function resetDB() {
 	  roll
 	  )
 	  VALUES(
-		"ricardozarroca@gmail.com",
+		"richardzarroca@gmail.com",
 		"admin123456",
 		"Ricardo",
 		"Zarroca",

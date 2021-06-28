@@ -1,5 +1,8 @@
 const jwt = require('jsonwebtoken');
 const { getRegistrations } = require('../../helpers/dbHelpers');
+const { validation } = require('../../helpers/schemaHelpers');
+const { putAdminSchema } = require('../../schemas/adminSchema');
+const bcrypt = require('bcryptjs');
 
 const logAdmin = async (req, res, next) => {
 	try {
@@ -11,14 +14,26 @@ const logAdmin = async (req, res, next) => {
 			throw error;
 		}
 
+		await validation(putAdminSchema, { correo, password });
+
 		const admin = await getRegistrations('administradores', {
 			correo: `${correo}`,
-			password: `${password}`,
 		});
 
 		if (admin.length === 0) {
-			const error = new Error('Email o contraseña incorrectos');
+			const error = new Error('El administrador no existe');
 			error.httpStatus = 401;
+			throw error;
+		}
+
+		const isValidPassword = await bcrypt.compare(
+			password,
+			admin[0].password
+		);
+
+		if (!isValidPassword) {
+			const error = new Error('El password no es válido');
+			error.code = 401;
 			throw error;
 		}
 

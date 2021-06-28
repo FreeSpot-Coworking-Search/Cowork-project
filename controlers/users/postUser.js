@@ -7,10 +7,12 @@ const {
 const { sendMail } = require('../../helpers/mailHelpers');
 const { validation } = require('../../helpers/schemaHelpers');
 const { postUserSchema } = require('../../schemas/userSchema');
+const bcrypt = require('bcryptjs');
 
 const postUser = async (req, res, next) => {
 	try {
 		let newUser = req.body;
+		const { password } = req.body;
 
 		await validation(postUserSchema, newUser);
 
@@ -40,15 +42,20 @@ const postUser = async (req, res, next) => {
 			body: emailBody,
 		});
 
+		const passwordHash = await bcrypt.hash(password, 10);
+		delete newUser.password;
+
 		newUser = {
 			...newUser,
+			password: passwordHash,
 			codigo_registro,
 			fecha_creacion: formatDateToDB(new Date()),
 		};
 
 		const { insertId } = await insertRegistration('usuarios', newUser);
-		req.query.idUser = insertId;
 
+		console.log('Creacion de usuario id:', insertId);
+		req.query.idUser = insertId;
 		next();
 	} catch (error) {
 		next(error);

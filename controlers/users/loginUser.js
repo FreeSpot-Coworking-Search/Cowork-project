@@ -2,21 +2,38 @@ const jwt = require('jsonwebtoken');
 const { getRegistrations } = require('../../helpers/dbHelpers');
 const { putUserSchema } = require('../../schemas/userSchema');
 const { validation } = require('../../helpers/schemaHelpers');
+const bcrypt = require('bcryptjs');
 
 const loginUser = async (req, res, next) => {
 	try {
 		const { correo, password } = req.body;
 
+		if (!correo || !password) {
+			const error = new Error('Faltan completar correo y/o pasword');
+			error.httpStatus = 400;
+			throw error;
+		}
+
 		await validation(putUserSchema, { correo, password });
 
 		const user = await getRegistrations('usuarios', {
 			correo: `${correo}`,
-			password: `${password}`,
 		});
 
 		if (user.length === 0) {
-			const error = new Error('Email o contraseña incorrectos');
+			const error = new Error('El usuario no existe');
 			error.httpStatus = 401;
+			throw error;
+		}
+
+		const isValidPassword = await bcrypt.compare(
+			password,
+			user[0].password
+		);
+
+		if (!isValidPassword) {
+			const error = new Error('El password no es válido');
+			error.code = 401;
 			throw error;
 		}
 
@@ -30,6 +47,7 @@ const loginUser = async (req, res, next) => {
 			expiresIn: '7d',
 		});
 
+		console.log('Login de usuario id:', user[0].id);
 		res.send({
 			status: 'ok',
 			data: {

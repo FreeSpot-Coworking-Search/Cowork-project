@@ -7,10 +7,12 @@ const {
 const { sendMail } = require('../../helpers/mailHelpers');
 const { validation } = require('../../helpers/schemaHelpers');
 const { postAdminSchema } = require('../../schemas/adminSchema');
+const bcrypt = require('bcryptjs');
 
 const postAdmin = async (req, res, next) => {
 	try {
 		let newAdmin = req.body;
+		const { password } = req.body;
 
 		await validation(postAdminSchema, newAdmin);
 
@@ -40,8 +42,12 @@ const postAdmin = async (req, res, next) => {
 			body: emailBody,
 		});
 
+		const passwordHash = await bcrypt.hash(password, 10);
+		delete newAdmin.password;
+
 		newAdmin = {
 			...newAdmin,
+			password: passwordHash,
 			codigo_registro,
 			fecha_creacion: formatDateToDB(new Date()),
 		};
@@ -51,16 +57,8 @@ const postAdmin = async (req, res, next) => {
 			newAdmin
 		);
 
-		if (insertId === undefined) {
-			const error = new Error(
-				'El administrador no se pudo crear por falta de campos requeridos'
-			);
-			error.httpStatus = 409;
-			throw error;
-		}
-
-		console.log('Creacion de administrador id:', insertId.inserId);
-		req.query.id = insertId.inserId;
+		console.log('Creacion de administrador id:', insertId);
+		req.query.id = insertId;
 		next();
 	} catch (error) {
 		next(error);
