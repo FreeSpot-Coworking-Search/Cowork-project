@@ -3,6 +3,7 @@ const faker = require('faker/locale/es');
 const { getConnection } = require('./dbHelpers');
 const { random } = require('lodash');
 const { formatDateToDB } = require('./dateHelpers');
+const bcrypt = require('bcryptjs');
 
 async function resetDB() {
 	let connection;
@@ -297,7 +298,7 @@ async function resetDB() {
 	  )
 	  VALUES(
 		"jcoastmail@gmail.com",
-		"Dani",
+		"${await bcrypt.hash('Dani', 10)}",
 		"jCoast",
 		"Dani",
 		"Martinez",
@@ -327,7 +328,7 @@ async function resetDB() {
 	  )
 	  VALUES(
 		"richardzarroca@gmail.com",
-		"user123456",
+		"${await bcrypt.hash('user123456', 10)}",
 		"rzarroca",
 		"Ricardo",
 		"Zarroca",
@@ -344,6 +345,7 @@ async function resetDB() {
 		for (let i = 0; i < usuarios; i++) {
 			const correo = faker.internet.email();
 			const password = faker.internet.password();
+			const passwordHash = await bcrypt.hash(password, 10);
 			const nombre_usuario = faker.internet.userName();
 			const nombre = faker.name.firstName();
 			const apellidos = faker.name.lastName();
@@ -367,7 +369,7 @@ async function resetDB() {
 		  )
 		  VALUES(
 		    "${correo}",
-		    "${password}",
+		    "${passwordHash}",
 		    "${nombre_usuario}",
 		    "${nombre}",
 		    "${apellidos}",
@@ -720,7 +722,7 @@ async function resetDB() {
 	  )
 	  VALUES(
 		"jcoastmail@gmail.com",
-		"Dani",
+		"${await bcrypt.hash('Dani', 10)}",
 		"Dani",
 		"Martinez",
 		"1982-10-04",
@@ -744,7 +746,7 @@ async function resetDB() {
 	  )
 	  VALUES(
 		"richardzarroca@gmail.com",
-		"admin123456",
+		"${await bcrypt.hash('admin123456', 10)}",
 		"Ricardo",
 		"Zarroca",
 		"1990-06-13",
@@ -758,6 +760,7 @@ async function resetDB() {
 		for (let i = 0; i < administradores; i++) {
 			const correo = faker.internet.email();
 			const password = faker.internet.password();
+			const passwordHash = await bcrypt.hash(password, 10);
 			const nombre = faker.name.firstName();
 			const apellidos = faker.name.lastName();
 			const fechaNacimiento = formatDateToDB(faker.date.past());
@@ -776,7 +779,7 @@ async function resetDB() {
           )
           VALUES(
             "${correo}",
-            "${password}",
+            "${passwordHash}",
             "${nombre}",
             "${apellidos}",
             "${fechaNacimiento}",
