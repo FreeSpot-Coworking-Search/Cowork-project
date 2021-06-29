@@ -6,13 +6,11 @@ const morgan = require('morgan');
 const app = express();
 const { SERVER_HOST, SERVER_PORT } = process.env;
 
-const getReset = require('./controlers/db/getReset');
-
 app.use(express.json());
 app.use(morgan('dev'));
 app.use(fileUpload());
 
-app.get('/api/reset/', getReset);
+app.use('/api/reset', require('./controlers/db'));
 app.use('/api/users', require('./controlers/users'));
 app.use('/api/spaces', require('./controlers/spaces'));
 app.use('/api/admins', require('./controlers/admins'));

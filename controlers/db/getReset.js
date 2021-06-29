@@ -1,6 +1,6 @@
-const { resetDB } = require('../../helpers/initDbHelpers');
+const { resetDB } = require('../../helpers/resetDbHelpers');
 
-const deleteUser = async (req, res, next) => {
+const getReset = async (req, res, next) => {
 	try {
 		resetDB();
 		res.status(200);
@@ -10,4 +10,4 @@ const deleteUser = async (req, res, next) => {
 	}
 };
 
-module.exports = deleteUser;
+module.exports = getReset;

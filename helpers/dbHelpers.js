@@ -223,8 +223,8 @@ const createSearchCentersQuerry = (searchObject) => {
 			`(espacios.id NOT IN
 				(SELECT reservas.id_espacio
 					FROM reservas
-					WHERE "${fechaEntrada}" between reservas.fecha_inicio AND reservas.fecha_fin 
-					OR "${fechaSalida}" between reservas.fecha_inicio AND reservas.fecha_fin
+					WHERE ("${fechaEntrada}" > reservas.fecha_inicio AND "${fechaEntrada}" < reservas.fecha_fin )
+					OR ("${fechaSalida}" > reservas.fecha_inicio AND "${fechaSalida}" < reservas.fecha_fin)
 					OR (reservas.fecha_inicio >= "${fechaEntrada}" AND reservas.fecha_fin <= "${fechaSalida}") ))`
 		);
 	}
@@ -322,9 +322,9 @@ const createSearchSpacesQuerry = (searchObject) => {
 			`(espacios.id NOT IN
 				(SELECT reservas.id_espacio
 					FROM reservas
-					WHERE "${fechaEntrada}" between reservas.fecha_inicio AND reservas.fecha_fin 
-					OR "${fechaSalida}" between reservas.fecha_inicio AND reservas.fecha_fin
-					OR (reservas.fecha_inicio >= "${fechaEntrada}" AND reservas.fecha_fin <= "${fechaSalida}") ))`
+					WHERE ("${fechaEntrada}" > reservas.fecha_inicio AND "${fechaEntrada}" < reservas.fecha_fin )
+					OR ("${fechaSalida}" > reservas.fecha_inicio AND "${fechaSalida}" < reservas.fecha_fin)
+					OR (reservas.fecha_inicio >= "${fechaEntrada}" AND reservas.fecha_fin <= "${fechaSalida}")))`
 		);
 	}
 	if (whereString.length > 0) {
