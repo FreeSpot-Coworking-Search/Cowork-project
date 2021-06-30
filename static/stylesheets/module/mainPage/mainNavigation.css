@@ -1,0 +1,17 @@
+.mainNavigation {
+	display: flex;
+	flex: row no-wrap;
+	justify-content: center;
+	gap: 5vw;
+
+	height: 40px;
+}
+
+.mainNavigation-box {
+	background-color: var(--blue);
+	color: var(--black);
+	height: 80px;
+	width: 250px;
+
+	padding: 10px;
+}
