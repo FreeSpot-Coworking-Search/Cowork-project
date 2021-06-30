@@ -1,0 +1,6 @@
+.bottomArticle {
+	background-color: var(--white);
+	color: var(--green);
+	border-radius: 3% 5% 0% 5%;
+	padding: 1%;
+}
