@@ -1,0 +1,7 @@
+.bottomArticle {
+    background-color: #838383;
+
+    grid-row: 6/8;
+    grid-column: 2/4;
+    order: 0;
+}

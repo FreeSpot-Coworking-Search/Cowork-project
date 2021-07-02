@@ -1,0 +1,7 @@
+.mainNavigation {
+    background-color: #64b6acab;
+
+    grid-row: 4/7;
+    grid-column: 2/4;
+    order: 2;
+}

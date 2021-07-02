@@ -1,0 +1,34 @@
+.mainPage {
+    display: grid;
+    grid-template-columns:
+        minmax(30px, min(5vw, 70px))
+        minmax(270px, 1fr)
+        minmax(40px, 60px);
+
+    grid-template-rows:
+        minmax(50px, 60px)
+        1fr
+        minmax(270px, 320px)
+        clamp(80px, calc(250px - 15vw), 250px)
+        minmax(20px, 40px)
+        1fr
+        7fr
+        1fr;
+
+    justify-items: stretch;
+    align-items: stretch;
+
+    width: 100vw;
+    height: 100vh;
+}
+
+/* 
+Eliminar en cuanto comencemos a trabajar dentro
+ */
+.mainPage > * {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid 5px var(--white);
+    border-radius: 50px;
+}
