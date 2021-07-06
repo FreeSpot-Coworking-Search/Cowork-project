@@ -1,7 +1,7 @@
 .topArticle {
-    background-color: #838383;
+	background-color: #838383;
 
-    grid-row: 1/5;
-    grid-column: 2/4;
-    order: 0;
+	grid-row: 2/4;
+	grid-column: 2/4;
+	order: 0;
 }
