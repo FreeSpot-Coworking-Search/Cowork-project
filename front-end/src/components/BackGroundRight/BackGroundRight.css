@@ -1,0 +1,9 @@
+.backGroundRight {
+	grid-row: 1/4;
+	grid-column: 5/8;
+	order: 1;
+	background-image: linear-gradient(270deg,rgba(255,255,255,0.3),rgba(255,255,255,1)),url(../../assets/img/HeroCowork_1536x1040.png) ;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: left;
+}
