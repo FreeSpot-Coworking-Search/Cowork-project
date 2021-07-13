@@ -6,6 +6,7 @@
   "dependencies": {
     "@sendgrid/mail": "^7.4.5",
     "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "date-fns": "^2.22.1",
     "dotenv": "^10.0.0",

@@ -33,7 +33,7 @@ const logAdmin = async (req, res, next) => {
 
 		if (!isValidPassword) {
 			const error = new Error('El password no es válido');
-			error.code = 401;
+			error.httpStatus = 401;
 			throw error;
 		}
 
