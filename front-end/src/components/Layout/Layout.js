@@ -8,7 +8,7 @@ import './Layout.css';
 
 export default function Layout() {
   return (
-    <section class="mainPage">
+    <section className="mainPage">
       <BackGroundLeft />
       <BackGroundRight />
       <Header></Header>

@@ -1,0 +1,5 @@
+.searchCenter{
+   display:flex;
+   flex-direction: row; 
+   border: black;
+}

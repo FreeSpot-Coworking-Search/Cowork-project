@@ -3,7 +3,7 @@ import './Header.css';
 
 export default function Header() {
   return (
-    <header class="header">
+    <header className="header">
       <svg
         width="600"
         height="129"
@@ -16,7 +16,7 @@ export default function Header() {
           fill="#292F36"
         />
       </svg>
-      <a class="header-logo" href="#">
+      <a className="header-logo" href="#">
         CWO HAB
       </a>
       <TopNavigation />
