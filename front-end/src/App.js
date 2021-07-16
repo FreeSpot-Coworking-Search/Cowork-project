@@ -8,15 +8,15 @@ import { React } from 'react';
 // import MyCenter from './pages/MyCenter/MyCenter';
 // import MyCoworking from './pages/MyCoworking/MyCoworking';
 // import Space from './pages/Space/Space';
-import SearchCenter from './pages/SearchCenter/SearchCenter';
+// import SearchCenter from './pages/SearchCenter/SearchCenter';
 // import SearchSpaces from './pages/SearchSpaces/SearchSpaces';
-// import Layout from './components/Layout/Layout';
+import Layout from './components/Layout/Layout';
 
 function App() {
   return (
-    <SearchCenter></SearchCenter>
+    // <SearchCenter></SearchCenter>
 
-    // <Layout></Layout>
+    <Layout></Layout>
 
     // <>
     // 	<BrowserRouter>

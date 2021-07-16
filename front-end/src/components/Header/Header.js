@@ -1,24 +1,15 @@
 import TopNavigation from '../TopNavigation/TopNavigation';
 import './Header.css';
+import logo from '../../assets/logos/lincolnSquare.png';
 
 export default function Header() {
   return (
     <header className="header">
-      <svg
-        width="600"
-        height="129"
-        viewBox="0 0 600 129"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M0 -19H600V75C600 75 600 129 535 129C470 129 0 129 0 129V-19Z"
-          fill="#292F36"
-        />
-      </svg>
-      <a className="header-logo" href="#">
+      <div className="headerDecoration"></div>
+      {/* <a className="header-logo" href="#">
         CWO HAB
-      </a>
+      </a> */}
+      <img src={logo} alt="LOGO" className="logo"></img>
       <TopNavigation />
     </header>
   );

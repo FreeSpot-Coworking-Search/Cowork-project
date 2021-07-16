@@ -24,8 +24,9 @@ Eliminar en cuanto comencemos a trabajar dentro
 .mainPage {
 	display: grid;
 	grid-template-rows:
-		50px
-		0.5fr
+		150px
+		/* 50px
+		0.5fr */
 		minmax(270px, 10fr)
 		minmax(10px, 30px);
 
@@ -43,5 +44,12 @@ Eliminar en cuanto comencemos a trabajar dentro
 
 	width: 100vw;
 	height: 100vh;
+}
+
+.decorationLeft{
+	background-color: rgba(var(--dark));
+	grid-row: 1/5;
+	grid-column: 1/2;
+	order:1;
 }
 

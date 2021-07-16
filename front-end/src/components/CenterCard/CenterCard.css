@@ -1,15 +1,16 @@
 
   
   .centerCard {
-    margin-bottom:20px;
-    max-width: 400px;
-    height: 150px;
+    margin-bottom:1rem;
+    height: 11rem;
+    width: 400px;
     border-radius: 40px;
     box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);
     cursor: pointer;
     transition: 0.4s;
     display: flex;
     justify-content: space-between;
+    color:rgba(var(--dark));
   }
   .leftColumn{
     display: flex;
