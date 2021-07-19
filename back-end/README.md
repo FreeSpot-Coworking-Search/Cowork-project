@@ -133,3 +133,18 @@
     - entityExists - Comprueba la existencia de la reserva. ✅
     - userIsLogin - Comprueba que se trate de un usuario logueado. ✅
     - userOwnReservation - Comprueba que el usuario sea el propietario de la reserva ✅
+
+### Images
+
+-   **GET - [api/images/adminsPhotos/] -** Retorna el avatar solicitado por el cliente tipo administrador. ✅
+    **Requiere:** userIsLogin. ❌
+-   **GET - [api/images/usersPhotos/] -** Retorna el avatar solicitado por el cliente tipo usuario. ✅
+    **Requiere:** userIsLogin. ❌
+-   **GET - [api/images/spacesCentersPhotos/] -** Retorna la imagen solicitda por el cliente. ✅
+    **Requiere:** userIsLogin. ❌
+
+#### Middlewares utilizados:
+
+    - entityExists - Comprueba la existencia de la reserva. ❌
+    - userIsLogin - Comprueba que se trate de un usuario logueado. ❌
+    - userOwnReservation - Comprueba que el usuario sea el propietario de la reserva ❌
