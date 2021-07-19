@@ -53,6 +53,7 @@ const logAdmin = async (req, res, next) => {
 			data: {
 				authorization,
 				tokenInfo,
+				avatarUrl: admin[0].foto,
 			},
 		});
 	} catch (error) {
