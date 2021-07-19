@@ -53,6 +53,7 @@ const loginUser = async (req, res, next) => {
 			data: {
 				token,
 				tokenInfo,
+				avatarUrl: user[0].foto,
 			},
 		});
 	} catch (error) {
