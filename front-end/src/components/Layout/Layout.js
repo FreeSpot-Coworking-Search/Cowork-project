@@ -7,17 +7,17 @@ import RightArticle from '../RightArticle/RightArticle';
 import './Layout.css';
 
 export default function Layout() {
-  return (
-    <section class="mainPage">
-      <BackGroundLeft />
-      <BackGroundRight />
-      <Header></Header>
+    return (
+        <section className="mainPage">
+            <BackGroundLeft />
+            <BackGroundRight />
+            <Header />
 
-      {/* <LeftArticle /> */}
+            {/* <LeftArticle /> */}
 
-      <MainNavigation />
+            {/* <MainNavigation /> */}
 
-      <RightArticle />
-    </section>
-  );
+            <RightArticle />
+        </section>
+    );
 }

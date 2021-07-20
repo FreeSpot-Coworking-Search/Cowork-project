@@ -1,9 +1,6 @@
 .topNavigation {
-    display:flex;
+    display: flex;
     justify-content: space-between;
-	
-}
-.avatar {
-	background-color: #998fc76b;
-	order: 2;
+    background-color: darkblue;
+    color: white;
 }
