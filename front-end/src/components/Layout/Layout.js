@@ -8,18 +8,17 @@ import SearchCenter from '../../pages/SearchCenter/SearchCenter';
 import './Layout.css';
 
 export default function Layout() {
-  return (
-    <section className="mainPage">
-      <BackGroundLeft />
-      <BackGroundRight />
-      <Header></Header>
-      <div className="decorationLeft"></div>
-      <SearchCenter></SearchCenter>
-      {/* <LeftArticle />
+    return (
+        <section className="mainPage">
+            <BackGroundLeft />
+            <BackGroundRight />
+            <Header />
 
-      <MainNavigation />
+            {/* <LeftArticle /> */}
 
-      <RightArticle /> */}
-    </section>
-  );
+            <MainNavigation />
+
+            <RightArticle />
+        </section>
+    );
 }

@@ -54,6 +54,7 @@ const loginUser = async (req, res, next) => {
 				token,
 				tokenInfo,
 				avatarUrl: user[0].foto,
+				name: user[0].nombre,
 			},
 		});
 	} catch (error) {
