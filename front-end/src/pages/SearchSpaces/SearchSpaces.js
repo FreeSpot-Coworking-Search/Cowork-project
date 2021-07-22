@@ -1,5 +1,9 @@
 import './SearchSpaces.css';
 
 export default function SearchSpaces() {
-	return <h1>SearchSpaces</h1>;
+  return (
+    <div className="mainSection">
+      <h1>SearchSpaces</h1>
+    </div>
+  );
 }

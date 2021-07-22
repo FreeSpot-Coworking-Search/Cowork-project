@@ -176,7 +176,9 @@ async function resetDB() {
                 FOREIGN KEY (id_administrador) REFERENCES administradores(id),
                 borrado BOOLEAN NOT NULL DEFAULT 0,
 				fecha_creacion DATETIME NOT NULL,
-				fecha_modificacion DATETIME
+				fecha_modificacion DATETIME,
+				latitud DECIMAL(9,6),
+				longitud DECIMAL(9,6)
                 );
                 `);
 
@@ -693,6 +695,8 @@ async function populateDB() {
 			const descripcion = faker.lorem.words(25);
 			const equipamiento = faker.lorem.words(25);
 			const idAdministrador = i < 175 ? i : random(1, 175);
+			const latitud = 42.34;
+			const longitud = -7.86464;
 
 			await connection.query(
 				`INSERT INTO centros(
@@ -707,7 +711,9 @@ async function populateDB() {
                       descripcion,
                       equipamiento,
                       id_administrador,
-					  fecha_creacion
+					  fecha_creacion,
+					  latitud,
+					  longitud
                       )
                       VALUES(
                         "${nombre}",
@@ -721,7 +727,9 @@ async function populateDB() {
                         "${descripcion}",
                         "${equipamiento}",
                         "${idAdministrador}",
-						"${now}"
+						"${now}",
+						"${latitud}",
+						"${longitud}"
                         )
                         `
 			);

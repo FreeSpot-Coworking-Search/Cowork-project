@@ -70,7 +70,7 @@ export default function SearchCenter() {
   console.log(objectSearch);
 
   return (
-    <div className="searchCenter">
+    <div className="mainSection">
       <ListCentersSearch data={data}></ListCentersSearch>
       <MainNavigation></MainNavigation>
       <SearchForm setObjectSearch={setObjectSearch} services={services} />

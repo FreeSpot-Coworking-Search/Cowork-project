@@ -1,5 +1,9 @@
 import './MyCenter.css';
 
 export default function MyCenter() {
-	return <h1>MyCenter</h1>;
+  return (
+    <div className="mainSection">
+      <h1>MyCenter</h1>
+    </div>
+  );
 }

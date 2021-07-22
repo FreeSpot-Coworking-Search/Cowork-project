@@ -165,9 +165,10 @@ export default function SearchForm({ setObjectSearch, services }) {
             })
           }
         />
+        <br></br>
+        <input type="submit" />
       </fieldset>
       <ServicesCheck services={services} />
-      <input type="submit" />
     </form>
   );
 }

@@ -1,4 +1,6 @@
 .customGoogleMaps{
+    margin-top: 2rem;
     grid-row: 1/2;
     grid-column: 3/4;
+    align-self: center;
 }

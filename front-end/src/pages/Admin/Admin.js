@@ -1,5 +1,9 @@
 import './Admin.css';
 
 export default function Admin() {
-	return <h1>Admin</h1>;
+  return (
+    <div className="mainSection">
+      <h1>Admin</h1>
+    </div>
+  );
 }

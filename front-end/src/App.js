@@ -13,54 +13,7 @@ import { React } from 'react';
 import Layout from './components/Layout/Layout';
 
 function App() {
-  return (
-    // <SearchCenter></SearchCenter>
-
-    <Layout></Layout>
-
-    // <>
-    // 	<BrowserRouter>
-    // 		<Link to="/"> Home </Link>
-    // 		<Link to="/user"> user </Link>
-    // 		<Link to="/admin"> admin </Link>
-    // 		<Link to="/space"> space </Link>
-    // 		<Link to="/center"> center </Link>
-    // 		<Link to="/search/center"> searchCenter </Link>
-    // 		<Link to="/search/space"> searchSpace </Link>
-    // 		<Link to="/mycoworking"> mycoworking </Link>
-    // 		<Link to="/mycenter"> mycenter </Link>
-    // 		<Switch>
-    // 			<Route path="/user">
-    // 				<User />
-    // 			</Route>
-    // 			<Route path="/admin">
-    // 				<Admin />
-    // 			</Route>
-    // 			<Route path="/space">
-    // 				<Space />
-    // 			</Route>
-    // 			<Route path="/center">
-    // 				<Center />
-    // 			</Route>
-    // 			<Route path="/search/center">
-    // 				<SearchCenter />
-    // 			</Route>
-    // 			<Route path="/search/space">
-    // 				<SearchSpaces />
-    // 			</Route>
-    // 			<Route path="/mycoworking">
-    // 				<MyCoworking />
-    // 			</Route>
-    // 			<Route path="/mycenter">
-    // 				<MyCenter />
-    // 			</Route>
-    // 			<Route path="/">
-    // 				<Home />
-    // 			</Route>
-    // 		</Switch>
-    // 	</BrowserRouter>
-    // </>
-  );
+  return <Layout></Layout>;
 }
 
 export default App;
