@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 
-function useClientData(key) {
-    const initialValue = JSON.parse(localStorage.getItem(key)) && {
-        state: false,
-    };
+function useToLocalStorage(key) {
+    const initialValue = JSON.parse(localStorage.getItem(key)) && {};
 
     const [value, setValue] = useState(initialValue);
 
@@ -14,4 +12,4 @@ function useClientData(key) {
     return [value, setValue];
 }
 
-export default useClientData;
+export default useToLocalStorage;

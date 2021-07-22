@@ -1,7 +1,10 @@
-import { useState } from 'react';
 import './logout.css';
 
-function Logout({ setClientData, handleClose, clientData }) {
+import { useClient } from '../../../hooks/useClient';
+
+function Logout({ handleClose }) {
+    const [clientData, setClientData] = useClient();
+
     function performLogout() {
         setClientData({ state: false });
         handleClose();
