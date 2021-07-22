@@ -4,7 +4,7 @@ import halfStar from '../../assets/stars/bxs-star-half.svg';
 import star from '../../assets/stars/bxs-star.svg';
 import noStar from '../../assets/stars/bx-star.svg';
 
-export default function StarsDisplay({ puntuation }) {
+export default function StarsDisplay({ puntuation, className }) {
   const [stars, setStars] = useState(Array(5).fill('bx-star.svg'));
 
   useEffect(() => analyzeStars(), [puntuation]);
@@ -19,12 +19,13 @@ export default function StarsDisplay({ puntuation }) {
     setStars(newStars);
   };
   return (
-    <div>
+    <div className={className}>
       {stars.map((imagen, index) => {
         return (
           <img
             key={index}
             src={imagen === 0 ? noStar : imagen === 1 ? halfStar : star}
+            className="StarDisplayStar"
             alt="*"
           ></img>
         );

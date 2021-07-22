@@ -3,23 +3,18 @@ import './CenterCard.css';
 import image from '../../assets/img/Coworking-768x380.png';
 
 export default function ListCentersSearchElement({ center }) {
-  const styleBackground = {
-    // background:
-    //   'linear-gradient(0deg, RGBA(78,205,196,0.3), RGBA(78,205,196,0.0)), url(https://unsplash.com/photos/dZxQn4VEv2M/download?force=true&w=1920)',
-
-    background: 'rgba(var(--clear))',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center center',
-  };
   return (
-    <li className="centerCard" style={styleBackground}>
+    <li className="centerCard">
       <div className="leftColumn">
-        <p>{center.nombre}</p>
-        <p>{center.localidad}</p>
-        <p>
+        <p className="centerCardName">{center.nombre}</p>
+        <h4 className="centerCardPlace">({center.localidad})</h4>
+        <p className="centerCardPrice">
           {center.precio_minimo}-{center.precio_maximo}€
         </p>
-        <StarsDisplay puntuation={center.puntuacion_media}></StarsDisplay>
+        <StarsDisplay
+          className="centerCardStarsDisplay"
+          puntuation={center.puntuacion_media}
+        ></StarsDisplay>
       </div>
       <div className="rightColumn">
         {center.imagenes ? (

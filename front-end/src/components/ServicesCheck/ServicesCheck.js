@@ -2,7 +2,8 @@ import './ServicesCheck.css';
 
 export default function ServicesCheck({ services }) {
   return (
-    <fieldset className="searchFormFieldset">
+    <fieldset className="searchFormFieldset serviceCheck">
+      <legend>Servicios</legend>
       {services.map((service, index) => {
         return (
           <label key={index} className="searchFormLabel">

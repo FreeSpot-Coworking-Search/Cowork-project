@@ -1,0 +1,14 @@
+.SearchCenter{
+   display: flex;
+    flex-direction: row;
+
+    display: grid;
+    grid-template-columns:
+        40vw
+        15vw
+        40vw;
+    grid-template-rows:
+        39vh
+        40vh;
+    gap: 1vh;
+}

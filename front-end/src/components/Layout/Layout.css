@@ -14,8 +14,8 @@ body {
 .mainPage {
     display: grid;
     grid-template-rows:
-        minmax(50px, 120px)
-        minmax(270px, 10fr)
+        minmax(16vh, 120px)
+        minmax(80vh, 10fr)
         minmax(10px, 30px);
 
     grid-template-columns:
@@ -41,19 +41,7 @@ body {
     order: 1;
 }
 .mainSection {
-    grid-row: 2/4;
+    grid-row: 2/3;
     grid-column: 2/7;
     order: 1;
-    display: flex;
-    flex-direction: row;
-
-    display: grid;
-    grid-template-columns:
-        1fr
-        16rem
-        1fr;
-    grid-template-rows:
-        1fr
-        1fr;
-    gap: 1rem;
 }

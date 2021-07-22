@@ -4,18 +4,20 @@ import MainNavigationButton from '../MainNavigationButton/MainNavigationButton';
 export default function MainNavigation(links) {
   const temporalLinks = [
     {
-      path: '/',
-      icon: '../../assets/icons/bxs-location-plus 1.png',
+      action: () => {
+        console.log('hola');
+      },
+      icon: locationIcon,
       text: 'Uno',
     },
     { path: '/', icon: locationIcon, text: 'Uno' },
     { path: '/', icon: locationIcon, text: 'Uno' },
   ];
   return (
-    <div className="mainNavigation">
+    <ul className="mainNavigation">
       {temporalLinks.map((link, index) => (
         <MainNavigationButton key={index} link={link} />
       ))}
-    </div>
+    </ul>
   );
 }

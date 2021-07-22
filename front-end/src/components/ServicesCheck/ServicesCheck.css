@@ -1,0 +1,9 @@
+.serviceCheck{
+    text-align: start;
+}
+
+.serviceCheck legend{
+    color: rgba(var(--dark));
+    font-size: var(--cardTittle);
+    text-align: center;
+}

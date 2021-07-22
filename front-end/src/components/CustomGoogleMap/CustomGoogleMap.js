@@ -3,11 +3,10 @@ import './CustomGoogleMap.css';
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 
 const containerStyle = {
-  width: '100%',
-  height: '400px',
+  width: '40vw',
+  height: '39vh',
   border: 'solid white',
   margin: 'auto',
-  marginTop: '2.2rem',
 };
 
 const center = {
