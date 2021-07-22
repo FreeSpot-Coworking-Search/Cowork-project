@@ -16,9 +16,9 @@ export default function Layout() {
 
             {/* <LeftArticle /> */}
 
-            <MainNavigation />
+            {/* <MainNavigation /> */}
 
-            <RightArticle />
+            {/* <RightArticle /> */}
         </section>
     );
 }

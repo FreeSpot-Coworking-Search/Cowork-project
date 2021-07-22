@@ -1,7 +1,7 @@
 import './avatar.css';
 import { useState, Suspense, lazy } from 'react';
 import { FaUserAlt } from 'react-icons/fa';
-import useClientData from '../../assets/customHooks/useClientData';
+import useClientData from '../../hooks/useClientData';
 
 const Dialog = lazy(() => import('@material-ui/core/Dialog'));
 const Login = lazy(() => import('../Login/Login'));
