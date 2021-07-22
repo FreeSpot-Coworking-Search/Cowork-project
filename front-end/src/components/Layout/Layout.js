@@ -21,51 +21,51 @@ const isUserLogged = false;
 // TEMPORAL
 
 export default function Layout() {
-  return (
-    <section className="mainPage">
-      <BackGroundLeft />
-      <BackGroundRight />
-      <Header></Header>
-      <div className="decorationLeft"></div>
-      <BrowserRouter>
-        <Switch>
-          <Route path="/user">
-            <User />
-          </Route>
-          <Route path="/admin">
-            <Admin />
-          </Route>
-          <Route path="/space">
-            <Space />
-          </Route>
-          <Route path="/center">
-            <Center />
-          </Route>
-          <Route path="/search/center">
-            <SearchCenter className="mainSection" />
-          </Route>
-          <Route path="/search/space">
-            <SearchSpaces />
-          </Route>
-          <Route path="/mycoworking">
-            <MyCoworking />
-          </Route>
+    return (
+        <section className="mainPage">
+            <BackGroundLeft />
+            <BackGroundRight />
+            <Header></Header>
+            <div className="decorationLeft"></div>
+            <BrowserRouter>
+                <Switch>
+                    <Route path="/user">
+                        <User />
+                    </Route>
+                    <Route path="/admin">
+                        <Admin />
+                    </Route>
+                    <Route path="/space">
+                        <Space />
+                    </Route>
+                    <Route path="/center">
+                        <Center />
+                    </Route>
+                    <Route path="/search/center">
+                        <SearchCenter className="mainSection" />
+                    </Route>
+                    <Route path="/search/space">
+                        <SearchSpaces />
+                    </Route>
+                    <Route path="/mycoworking">
+                        <MyCoworking />
+                    </Route>
 
-          {/* EJEMPLO DE RUTA PRIVADA */}
-          <PrivateRoute
-            path="/mycenter"
-            Component={MyCenter}
-            isUserLogged={isUserLogged}
-            propsDelComponente="Las props del componente iran aqui"
-          />
-          {/* EJEMPLO DE RUTA PRIVADA */}
+                    {/* EJEMPLO DE RUTA PRIVADA */}
+                    <PrivateRoute
+                        path="/mycenter"
+                        Component={MyCenter}
+                        isUserLogged={isUserLogged}
+                        propsDelComponente="Las props del componente iran aqui"
+                    />
+                    {/* EJEMPLO DE RUTA PRIVADA */}
 
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </BrowserRouter>
-      <Footer />
-    </section>
-  );
+                    <Route path="/">
+                        <Home />
+                    </Route>
+                </Switch>
+            </BrowserRouter>
+            <Footer />
+        </section>
+    );
 }

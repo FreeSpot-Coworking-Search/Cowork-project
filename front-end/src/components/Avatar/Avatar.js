@@ -1,7 +1,7 @@
 import './avatar.css';
 import { useState, Suspense, lazy } from 'react';
 import { FaUserAlt } from 'react-icons/fa';
-import useClientData from '../../assets/customHooks/useClientData';
+import { useClient } from '../../hooks/useClient';
 
 const Dialog = lazy(() => import('@material-ui/core/Dialog'));
 const Login = lazy(() => import('../Login/Login'));
@@ -10,7 +10,7 @@ const Logout = lazy(() => import('./Logout/Logout'));
 function Avatar() {
     const [open, setOpen] = useState(false);
 
-    const [clientData, setClientData] = useClientData('clienData');
+    const [clientData] = useClient();
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -38,16 +38,9 @@ function Avatar() {
             <Suspense fallback={null}>
                 <Dialog open={open} onClose={handleClose}>
                     {clientData?.state ? (
-                        <Logout
-                            setClientData={setClientData}
-                            handleClose={handleClose}
-                            clientData={clientData}
-                        />
+                        <Logout handleClose={handleClose} />
                     ) : (
-                        <Login
-                            setClientData={setClientData}
-                            handleClose={handleClose}
-                        />
+                        <Login handleClose={handleClose} />
                     )}
                 </Dialog>
             </Suspense>

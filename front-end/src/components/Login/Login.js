@@ -2,9 +2,10 @@ import './login.css';
 import './form.css';
 
 import { useState } from 'react';
+import { useClient } from '../../hooks/useClient';
 const axios = require('axios');
 
-function Login({ setClientData, handleClose }) {
+function Login({ handleClose }) {
     const [userType, setUserType] = useState('usuario');
 
     function changeUser(userType) {
@@ -22,11 +23,7 @@ function Login({ setClientData, handleClose }) {
                     acceso administradores
                 </button>
             </div>
-            <Form
-                userType={userType}
-                setClientData={setClientData}
-                handleClose={handleClose}
-            />
+            <Form userType={userType} handleClose={handleClose} />
             <button onClick={handleClose}>Cerrar</button>
         </article>
     );
@@ -34,7 +31,9 @@ function Login({ setClientData, handleClose }) {
 
 export default Login;
 
-function Form({ userType, setClientData, handleClose }) {
+function Form({ userType, handleClose }) {
+    const [, setClientData] = useClient();
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');

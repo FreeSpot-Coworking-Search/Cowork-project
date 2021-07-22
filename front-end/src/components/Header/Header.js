@@ -1,10 +1,19 @@
 import './Header.css';
-import logo from '../../assets/logos/lincolnSquare.png';
+import { Link } from 'react-router-dom';
 
-import TopNavigation from '../TopNavigation/TopNavigation';
+import logo from '../../assets/logos/lincolnSquare.png';
 import Avatar from '../Avatar/Avatar';
+import ButtonList from '../ButtonList/ButtonList';
 
 export default function Header() {
+    const buttonAction = () => console.log('Its Alive!');
+
+    const btnBehavior = [
+        { text: 'Home', route: '/' },
+        { text: 'Usuarios', route: '/users' },
+        { text: 'Espacios', action: buttonAction },
+    ];
+
     return (
         <header className="header">
             {/* <svg
@@ -19,10 +28,13 @@ export default function Header() {
                     fill="#292F36"
                 />
             </svg> */}
-            <a className="header-logo" href="#">
-                CWO HAB
-            </a>
-            <TopNavigation />
+            <Link to="/">
+                <img src={logo} alt="CWO" className="header-logo" />
+            </Link>
+            <ButtonList
+                btnBehavior={[...btnBehavior]}
+                cssStyle="header-links"
+            />
             <Avatar />
         </header>
     );
