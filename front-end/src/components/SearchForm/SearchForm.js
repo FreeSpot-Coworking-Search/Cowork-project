@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './SearchForm.css';
 import ServicesCheck from '../ServicesCheck/ServicesCheck';
 
-export default function SearchForm({ setObjectSearch, services }) {
+export default function SearchForm({ setObjectSearch, services, className }) {
   const [newObjectSearch, setNewObjectSearch] = useState({ texto: '' });
 
   const onSubmitForm = (event) => {
@@ -19,8 +19,12 @@ export default function SearchForm({ setObjectSearch, services }) {
 
     setObjectSearch(cleanNewObjectSearch);
   };
+  console.log('newObjectSearch');
+  console.log('---------------');
+  console.log(newObjectSearch);
+
   return (
-    <form onSubmit={onSubmitForm} className="searchForm">
+    <form onSubmit={onSubmitForm} className={className + ' searchForm'}>
       <fieldset className="searchFormFieldset">
         <label className="searchFormLabel" htmlFor="texto">
           Texto

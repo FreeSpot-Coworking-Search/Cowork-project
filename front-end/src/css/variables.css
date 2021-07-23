@@ -12,7 +12,7 @@
 	--tertiary: 153, 143, 199;
 	--clear: 247, 255, 247;
 
-	--origin: 1vw;
+	--origin: 1em;
 	--tittle: calc(var(--origin) * 2);
 	--cardTittle: calc(var(--origin) * 1.2);
 	--cardSubTittle: calc(var(--origin) * 0.9);
