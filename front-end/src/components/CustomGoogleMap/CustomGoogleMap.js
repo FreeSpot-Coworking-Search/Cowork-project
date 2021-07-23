@@ -4,7 +4,7 @@ import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 
 const containerStyle = {
   width: '40vw',
-  height: '39vh',
+  height: '80hv',
   border: 'solid white',
   margin: 'auto',
 };
@@ -20,7 +20,7 @@ export default function CustomGoogleMap() {
     googleMapsApiKey: 'AIzaSyAGaha6kvv2kfM94x8ScnXt9PIG2KOH2cs',
   });
 
-  const [map, setMap] = useState(null);
+  const [, setMap] = useState(null);
 
   const onLoad = useCallback(function callback(map) {
     const bounds = new window.google.maps.LatLngBounds();

@@ -21,7 +21,7 @@ const searchCenters = async (req, res, next) => {
 			})
 		);
 
-		console.log(result);
+		console.log(searchObject);
 		res.status(200);
 		res.send({
 			status: 'ok',

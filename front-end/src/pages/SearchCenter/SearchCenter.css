@@ -1,14 +1,29 @@
-.SearchCenter{
-   display: flex;
-    flex-direction: row;
-
+.searchCenterFullView{
     display: grid;
     grid-template-columns:
         40vw
         15vw
         40vw;
     grid-template-rows:
-        39vh
-        40vh;
+        80vh;
     gap: 1vh;
+}
+.searchCenterSingleView{
+    display: grid;
+    grid-template-columns:
+        65vw
+        35vw;
+    grid-template-rows:
+        80vh;
+    gap: 1vh;
+}
+
+.articleSingleView{
+    grid-column: 1/2;   
+}
+.leftArticleFullView{
+    grid-column: 1/2;   
+}
+.rightArticleFullView{
+    grid-column: 3/4;   
 }
