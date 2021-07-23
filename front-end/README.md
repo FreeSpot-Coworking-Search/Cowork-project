@@ -46,7 +46,10 @@ Componentes reutilizables dentro de la app.
 
 ## CUSTOM HOOKS
 
--   **useClientData** - Guarda un objeto con la información del usuario en el local storage y retorna dicha información en "value". ✅
-    **Retorna:** - value, setValue.✅
+-   **useToLocalStorage** - Permite utilizar y modificar la información un objeto en localStorage, con el valor de "key" que definamos al instaciar el hook ✅
+    **Uso:** - const [localObject, storageLocalObject] = useToLocalStorage(key). ✅
+
+    **useClient** - Permite utilizar y modificar información del usuario logueado (idAuth, roll, tipo, authorization, avatarUrl, name). ✅
+    **Uso:** - const [clientData, setClientData] = useClient() ✅
 
     ✅❌

@@ -1,4 +1,4 @@
-import { BrowserRouter, Link, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Header from '../Header/Header';
 import BackGroundLeft from '../BackGroundLeft/BackGroundLeft';
 import BackGroundRight from '../BackGroundRight/BackGroundRight';

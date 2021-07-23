@@ -13,7 +13,16 @@ function useClient() {
 }
 
 function ClientProvider(props) {
-    const [clientData, setClientData] = useState({ state: false });
+    const initialValue = JSON.parse(localStorage.getItem('client')) || {
+        state: false,
+    };
+
+    const [clientData, setInternalData] = useState(initialValue);
+
+    function setClientData(newData) {
+        setInternalData(newData);
+        localStorage.setItem('client', JSON.stringify(newData));
+    }
 
     const value = useMemo(() => [clientData, setClientData], [clientData]);
 

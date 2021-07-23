@@ -10,8 +10,8 @@ export default function Header() {
 
     const btnBehavior = [
         { text: 'Home', route: '/' },
-        { text: 'Usuarios', route: '/users' },
-        { text: 'Espacios', action: buttonAction },
+        { text: 'Usuarios', route: '/user' },
+        { text: 'console.log', action: buttonAction },
     ];
 
     return (
@@ -28,8 +28,8 @@ export default function Header() {
                     fill="#292F36"
                 />
             </svg> */}
-            <Link to="/">
-                <img src={logo} alt="CWO" className="header-logo" />
+            <Link to="/" className="header-logo">
+                <img src={logo} alt="CWO" />
             </Link>
             <ButtonList
                 btnBehavior={[...btnBehavior]}
