@@ -1,25 +1,33 @@
 .header {
     grid-row: 1/2;
     grid-column: 1/-1;
-    order: 1;
+    order: 2;
+    height: clamp(50px, 10vw, 100px);
+
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 100px;
 }
 
 .header-logo {
-    height: 50px;
     padding: 5px;
     background-color: var(--black);
+    display: block;
+    max-height: 50px;
+    max-width: 50px;
+}
+
+.header-logo img {
+    max-width: 100%;
+    height: auto;
 }
 
 .header-links {
     align-self: stretch;
     flex: 1 1 auto;
-
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 10vw;
 }
 
 .headerDecoration {

@@ -2,6 +2,7 @@ import './login.css';
 import './form.css';
 
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useClient } from '../../hooks/useClient';
 const axios = require('axios');
 
@@ -102,11 +103,12 @@ function Form({ userType, handleClose }) {
             <hr />
             <div className="form-options">
                 <p>
-                    Olvidaste tu contraseña? <a href="#">Pincha aquí</a>.
+                    Olvidaste tu contraseña?{' '}
+                    <Link to="/reset">Pincha aquí</Link>
                 </p>
                 <p>
                     Aún no tienes una cuenta con nosotros?{' '}
-                    <a href="#">Regístrate aquí</a>.
+                    <Link to="/register">Regístrate aquí</Link>.
                 </p>
             </div>
         </form>

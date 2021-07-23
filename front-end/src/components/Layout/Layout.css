@@ -14,7 +14,7 @@ body {
 .mainPage {
     display: grid;
     grid-template-rows:
-        minmax(50px, 120px)
+        minmax(50px, 100px)
         minmax(270px, 10fr)
         minmax(10px, 30px);
 

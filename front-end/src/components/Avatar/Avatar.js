@@ -25,6 +25,7 @@ function Avatar() {
     return (
         <figcaption className="avatar">
             {clientData?.state ? (
+                // eslint-disable-next-line jsx-a11y/img-redundant-alt
                 <img
                     onClick={handleClickOpen}
                     src={avatarPath}
