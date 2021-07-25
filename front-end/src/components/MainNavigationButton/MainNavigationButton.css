@@ -3,13 +3,17 @@
 .mainNavigationButton {
 	background-color: rgba(var(--primary), 0.8);
 	clip-path: polygon(20% 0%, 100% 0, 80% 100%, 0% 100%);
+	box-shadow: violet;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	
-	min-width: 15vw;
-	height: 19vh;
+	width: 85%;
+	height: 20vh;
+	border: none;
+}
+.mainNavigationButton button {
+	background-color: transparent;
 	border: none;
 }
 

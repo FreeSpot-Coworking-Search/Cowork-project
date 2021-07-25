@@ -1,5 +1,5 @@
 import './ListCentersSearch.css';
-import CenterCard from '../../../../components/CenterCard/CenterCard';
+import CenterCard from '../CenterCard/CenterCard';
 
 export default function ListCentersSearch({ data, className }) {
   return (

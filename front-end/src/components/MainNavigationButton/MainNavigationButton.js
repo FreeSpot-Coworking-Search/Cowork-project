@@ -4,14 +4,14 @@ import './MainNavigationButton.css';
 export default function MainNavigationButton({ link }) {
   const { path, text, action, icon } = link;
   return path ? (
-    <li>
-      <Link className="mainNavigationButton" to={path}>
+    <li className="mainNavigationButton">
+      <Link to={path}>
         <img src={icon} alt="Icon" className="mainNavigationButtonIcon" />
       </Link>
     </li>
   ) : (
-    <li>
-      <button className="mainNavigationButton" onClick={action}>
+    <li className="mainNavigationButton">
+      <button onClick={action}>
         <img src={icon} alt="Icon" className="mainNavigationButtonIcon" />
       </button>
     </li>

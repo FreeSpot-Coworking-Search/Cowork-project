@@ -12,9 +12,12 @@ import MyCoworking from '../../pages/MyCoworking/MyCoworking';
 import MyCenter from '../../pages/MyCenter/MyCenter';
 import Home from '../../pages/Home/Home';
 import PrivateRoute from '../../components/PrivateRoute/PrivateRoute';
+
 import Footer from '../../components/Footer/Footer';
 
 import './Layout.css';
+import '../../css/mainSection.css';
+import TemplateMainSection from '../Templates/TemplateMainSection/TemplateMainSection';
 
 // TEMPORAL
 const isUserLogged = false;
@@ -25,8 +28,10 @@ export default function Layout() {
     <section className="mainPage">
       <BackGroundLeft />
       <BackGroundRight />
-      <Header></Header>
+      {/* <Header></Header> */}
       <div className="decorationLeft"></div>
+      <div className="decorationRight"></div>
+      <div className="decorationTop"></div>
       <Switch>
         <Route path="/user">
           <User />
@@ -48,6 +53,9 @@ export default function Layout() {
         </Route>
         <Route path="/mycoworking">
           <MyCoworking />
+        </Route>
+        <Route path="/template">
+          <TemplateMainSection className="mainSection" />
         </Route>
 
         {/* EJEMPLO DE RUTA PRIVADA */}

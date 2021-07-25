@@ -14,18 +14,22 @@ body {
 .mainPage {
     display: grid;
     grid-template-rows:
-        minmax(16vh, 120px)
-        minmax(80vh, 10fr)
+        minmax(14vh, 120px)
+        minmax(84vh, 10fr)
         minmax(10px, 30px);
 
     grid-template-columns:
-        minmax(30px, 50px)
+        2vw
+        48vw
+        48vw
+        2vw;
+        /* minmax(30px, 50px)
         minmax(280px, 650px)
         minmax(35px, min(30vw, 280px))
         minmax(15px, 40px)
         2fr
         6fr
-        0.5fr;
+        0.5fr; */
 
     justify-items: stretch;
     align-items: stretch;
@@ -40,8 +44,20 @@ body {
     grid-column: 1/2;
     order: 1;
 }
+.decorationRight {
+    background-color: rgba(var(--dark));
+    grid-row: 1/5;
+    grid-column: 4/5;
+    order: 1;
+}
+.decorationTop {
+    background-color: rgba(var(--dark));
+    grid-row: 1/2;
+    grid-column: 2/4;
+    order: 1;
+}
 .mainSection {
     grid-row: 2/3;
-    grid-column: 2/7;
+    grid-column: 2/4;
     order: 1;
 }

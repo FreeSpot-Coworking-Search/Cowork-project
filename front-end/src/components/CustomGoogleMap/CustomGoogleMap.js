@@ -1,34 +1,31 @@
-import { useCallback, useState } from 'react';
-import './CustomGoogleMap.css';
+import React from 'react';
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
-
+const { REACT_APP_GOOGLE_MAPS_API_KEY } = process.env;
 const containerStyle = {
   width: '40vw',
   height: '80hv',
-  border: 'solid white',
-  margin: 'auto',
 };
 
 const center = {
-  lat: 42.34,
-  lng: -7.86464,
+  lat: -3.745,
+  lng: -38.523,
 };
 
-export default function CustomGoogleMap() {
+function CustomGoogleMap() {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: 'AIzaSyAGaha6kvv2kfM94x8ScnXt9PIG2KOH2cs',
+    googleMapsApiKey: REACT_APP_GOOGLE_MAPS_API_KEY,
   });
 
-  const [, setMap] = useState(null);
+  const [map, setMap] = React.useState(null);
 
-  const onLoad = useCallback(function callback(map) {
+  const onLoad = React.useCallback(function callback(map) {
     const bounds = new window.google.maps.LatLngBounds();
     map.fitBounds(bounds);
     setMap(map);
   }, []);
 
-  const onUnmount = useCallback(function callback(map) {
+  const onUnmount = React.useCallback(function callback(map) {
     setMap(null);
   }, []);
 
@@ -39,7 +36,6 @@ export default function CustomGoogleMap() {
       zoom={10}
       onLoad={onLoad}
       onUnmount={onUnmount}
-      className="customGoogleMaps"
     >
       {/* Child components, such as markers, info windows, etc. */}
       <></>
@@ -48,3 +44,5 @@ export default function CustomGoogleMap() {
     <></>
   );
 }
+
+export default React.memo(CustomGoogleMap);

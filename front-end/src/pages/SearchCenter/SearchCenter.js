@@ -3,9 +3,10 @@ import './SearchCenter.css';
 import { useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
-import ListCentersSearch from './components/ListCentersSearch/ListCentersSearch';
-import SearchForm from '../../components/SearchForm/SearchForm';
 import axios from 'axios';
+
+import ListCentersSearch from '../../components/ListCentersSearch/ListCentersSearch';
+import SearchForm from '../../components/SearchForm/SearchForm';
 import MainNavigation from '../../components/MainNavigation/MainNavigation';
 import GoogleMap from '../../components/CustomGoogleMap/CustomGoogleMap';
 
@@ -46,12 +47,14 @@ export default function SearchCenter({ className }) {
     'Internet + wifi',
     'Oficina virtual',
   ];
-
+  const { REACT_APP_MIN_WIDTH_FULL_VIEW_MAIN_SECTION } = process.env;
   const [objectSearch, setObjectSearch] = useState({});
   const [data, setData] = useState([]);
   const [visualization, setVisualization] = useState('list');
   const [fullView, setFullView] = useState(
-    useMediaQuery({ query: '(min-width: 800px)' })
+    useMediaQuery({
+      query: `(min-width: ${REACT_APP_MIN_WIDTH_FULL_VIEW_MAIN_SECTION})`,
+    })
   );
 
   useEffect(() => {
@@ -63,15 +66,35 @@ export default function SearchCenter({ className }) {
     setObjectSearch({});
   };
 
+  const getSpaces = async (searchObject) => {
+    try {
+      const response = await axios.post(
+        'http://localhost:8080/api/centers/search',
+        searchObject
+      );
+      const { data: newData } = response.data;
+      setData(newData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // ****************
+  // ** RESPONSIVE **
+  // ****************
+
   const handleMediaQueryChange = (matches) => {
-    // matches will be true or false based on the value for the media query
     setFullView(matches);
   };
-  const isDesktopOrLaptop = useMediaQuery(
-    { query: '(min-width: 800px)' },
+  const isFullView = useMediaQuery(
+    { query: `(min-width: ${REACT_APP_MIN_WIDTH_FULL_VIEW_MAIN_SECTION})` },
     undefined,
     handleMediaQueryChange
   );
+
+  // ****************************
+  // ** MAIN NAVIGATION CONFIG **
+  // ****************************
 
   const mapButton = {
     action: () => setVisualization('map'),
@@ -116,26 +139,14 @@ export default function SearchCenter({ className }) {
       break;
   }
 
-  const getSpaces = async (searchObject) => {
-    try {
-      const response = await axios.post(
-        'http://localhost:8080/api/centers/search',
-        searchObject
-      );
-      const { data: newData } = response.data;
-      setData(newData);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  console.log('Visualization');
-  console.log('-------------');
-  console.log(visualization);
+  // *********
+  // ** JSX **
+  // *********
 
   return (
     <>
       {fullView ? (
-        <div className={className + ' searchCenterFullView'}>
+        <div className={className + ' mainSectionFullView'}>
           <ListCentersSearch
             data={data}
             className="listCentersFullView"
@@ -145,14 +156,14 @@ export default function SearchCenter({ className }) {
             <SearchForm
               setObjectSearch={setObjectSearch}
               services={services}
-              className="rightArticleFullView"
+              className="mainSectionRightArticle"
             />
           ) : (
             <GoogleMap></GoogleMap>
           )}
         </div>
       ) : (
-        <div className={className + ' searchCenterSingleView'}>
+        <div className={className + ' mainSectionSingleView'}>
           {visualization === 'list' ? (
             <ListCentersSearch
               data={data}
@@ -164,7 +175,7 @@ export default function SearchCenter({ className }) {
             <SearchForm
               setObjectSearch={setObjectSearch}
               services={services}
-              className="articleSingleView"
+              className="mainSectionLeftArticle"
             />
           )}
           <MainNavigation links={Links}></MainNavigation>
