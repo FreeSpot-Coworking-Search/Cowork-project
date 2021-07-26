@@ -17,4 +17,5 @@
 	--cardTittle: calc(var(--origin) * 1.2);
 	--cardSubTittle: calc(var(--origin) * 0.9);
 	--cardText: calc(var(--origin) * 0.9);
+
 }

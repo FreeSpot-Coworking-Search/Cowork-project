@@ -1,0 +1,31 @@
+.decorationHeader{
+    display: grid;
+
+    grid-template-columns: 
+    auto auto    ;
+    grid-template-rows: 
+    14vh;
+}
+.decorationHeaderAdjustment{
+    height: 4.162vh;
+    width: 100%;
+    grid-column: 1/3;
+    grid-row: 1/2;
+    order: -1;
+background:rgba(var(--dark));
+
+}
+.decorationHeaderAdjustmentSingleView{
+    height: 12vh;
+    width: 100%;
+    grid-column: 1/3;
+    grid-row: 1/2;
+    order: -1;
+background:rgba(var(--dark));
+
+}
+.decorationHeaderLogo{
+    grid-column: 1/2;
+    grid-row: 1/2;
+    height:14vh; 
+}

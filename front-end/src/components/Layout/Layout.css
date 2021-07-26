@@ -1,4 +1,7 @@
 @import '../../css/variables.css';
+@import '../../css/decoration.css';
+
+
 
 * {
     box-sizing: border-box;
@@ -51,7 +54,7 @@ body {
     order: 1;
 }
 .decorationTop {
-    background-color: rgba(var(--dark));
+
     grid-row: 1/2;
     grid-column: 2/4;
     order: 1;

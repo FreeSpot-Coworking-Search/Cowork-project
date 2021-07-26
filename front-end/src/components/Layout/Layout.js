@@ -18,6 +18,7 @@ import Footer from '../../components/Footer/Footer';
 import './Layout.css';
 import '../../css/mainSection.css';
 import TemplateMainSection from '../Templates/TemplateMainSection/TemplateMainSection';
+import DecorationHeader from '../Decoration/DecorationHeader/DecorationHeader';
 
 // TEMPORAL
 const isUserLogged = false;
@@ -28,10 +29,10 @@ export default function Layout() {
     <section className="mainPage">
       <BackGroundLeft />
       <BackGroundRight />
-      {/* <Header></Header> */}
+      <Header></Header>
       <div className="decorationLeft"></div>
       <div className="decorationRight"></div>
-      <div className="decorationTop"></div>
+      <DecorationHeader className="decorationTop" />
       <Switch>
         <Route path="/user">
           <User />
