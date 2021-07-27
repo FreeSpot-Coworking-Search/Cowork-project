@@ -29,27 +29,10 @@ export default function SearchCenter({ className }) {
   // 	puntuacion_minima:
   // 	ordenado_por:
   // }
-  const services = [
-    'Acceso 24/7',
-    'Aire acondicionado / calefacción',
-    'Alarma',
-    'Café de cortesía',
-    'Catering',
-    'Cocina',
-    'Coworking Visa',
-    'Domicilación fiscal',
-    'Domiciliación social',
-    'Equipo de sonido',
-    'Fotocopiadora',
-    'Gestión de agendas (secretaria virtual)',
-    'Gestión de eventos',
-    'Impresora / escaner',
-    'Internet + wifi',
-    'Oficina virtual',
-  ];
+
   const { REACT_APP_MIN_WIDTH_FULL_VIEW_MAIN_SECTION } = process.env;
   const [objectSearch, setObjectSearch] = useState({});
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({ results: [], services: [] });
   const [visualization, setVisualization] = useState('list');
   const [fullView, setFullView] = useState(
     useMediaQuery({
@@ -59,24 +42,23 @@ export default function SearchCenter({ className }) {
 
   useEffect(() => {
     getSpaces(objectSearch);
-    console.log(data);
-  }, [objectSearch]);
-
-  const resetSearch = () => {
-    setObjectSearch({});
-  };
+  }, []);
 
   const getSpaces = async (searchObject) => {
     try {
       const response = await axios.post(
         'http://localhost:8080/api/centers/search',
-        searchObject
+        objectSearch
       );
-      const { data: newData } = response.data;
-      setData(newData);
+
+      setData(response.data.data);
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const resetSearch = () => {
+    setObjectSearch({});
   };
 
   // ****************
@@ -143,19 +125,21 @@ export default function SearchCenter({ className }) {
   // ** JSX **
   // *********
 
+  console.log(data.results);
+
   return (
     <>
       {fullView ? (
         <div className={className + ' mainSectionFullView'}>
           <ListCentersSearch
-            data={data}
+            data={data.results}
             className="listCentersFullView"
           ></ListCentersSearch>
           <MainNavigation links={Links}></MainNavigation>
           {visualization === 'filter' ? (
             <SearchForm
               setObjectSearch={setObjectSearch}
-              services={services}
+              services={data.services}
               className="mainSectionRightArticle"
             />
           ) : (
@@ -166,7 +150,7 @@ export default function SearchCenter({ className }) {
         <div className={className + ' mainSectionSingleView'}>
           {visualization === 'list' ? (
             <ListCentersSearch
-              data={data}
+              data={data.results}
               className="listCentersSingleView"
             ></ListCentersSearch>
           ) : visualization === 'map' ? (
@@ -174,7 +158,7 @@ export default function SearchCenter({ className }) {
           ) : (
             <SearchForm
               setObjectSearch={setObjectSearch}
-              services={services}
+              services={data.services}
               className="mainSectionLeftArticle"
             />
           )}

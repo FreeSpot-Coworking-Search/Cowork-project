@@ -44,6 +44,7 @@ const getRegistrations = async (tableOrQuery, searchObject) => {
 				tableOrQuery,
 				searchObject
 			);
+		console.log(tableOrQuery);
 		const [results] = await connection.query(tableOrQuery);
 		return results;
 	} catch (error) {

@@ -21,7 +21,7 @@ import TemplateMainSection from '../Templates/TemplateMainSection/TemplateMainSe
 import DecorationHeader from '../Decoration/DecorationHeader/DecorationHeader';
 
 // TEMPORAL
-const isUserLogged = false;
+const isUserLogged = true;
 // TEMPORAL
 
 export default function Layout() {
@@ -44,13 +44,13 @@ export default function Layout() {
           <Space />
         </Route>
         <Route path="/center">
-          <Center />
+          <Center className="mainSection" />
         </Route>
         <Route path="/search/center">
           <SearchCenter className="mainSection" />
         </Route>
         <Route path="/search/space">
-          <SearchSpaces />
+          <SearchSpaces className="mainSection" />
         </Route>
         <Route path="/mycoworking">
           <MyCoworking />
@@ -64,6 +64,7 @@ export default function Layout() {
           path="/mycenter"
           Component={MyCenter}
           isUserLogged={isUserLogged}
+          className="mainSection"
           propsDelComponente="Las props del componente iran aqui"
         />
         {/* EJEMPLO DE RUTA PRIVADA */}

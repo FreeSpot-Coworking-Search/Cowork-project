@@ -19,9 +19,9 @@ export default function SearchForm({ setObjectSearch, services, className }) {
 
     setObjectSearch(cleanNewObjectSearch);
   };
-  console.log('newObjectSearch');
-  console.log('---------------');
-  console.log(newObjectSearch);
+  // console.log('newObjectSearch');
+  // console.log('---------------');
+  // console.log(newObjectSearch);
 
   return (
     <form onSubmit={onSubmitForm} className={className + ' searchForm'}>

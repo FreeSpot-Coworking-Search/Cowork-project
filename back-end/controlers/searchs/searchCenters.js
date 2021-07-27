@@ -9,10 +9,10 @@ const searchCenters = async (req, res, next) => {
 	try {
 		const searchObject = req.body;
 		await validation(searchCentersSchema, searchObject);
-		let result = await getSearchCenters(searchObject);
+		let results = await getSearchCenters(searchObject);
 
-		result = await Promise.all(
-			result.map(async (center) => {
+		results = await Promise.all(
+			results.map(async (center) => {
 				const images = await getRegistrations('imagenes', {
 					id_centro: center.id,
 				});
@@ -20,12 +20,16 @@ const searchCenters = async (req, res, next) => {
 				return newCenter;
 			})
 		);
+		const services = await getRegistrations('SELECT * FROM servicios;');
+		console.log('hola');
 
-		console.log(searchObject);
 		res.status(200);
 		res.send({
 			status: 'ok',
-			data: result,
+			data: {
+				results,
+				services,
+			},
 		});
 	} catch (error) {
 		next(error);
