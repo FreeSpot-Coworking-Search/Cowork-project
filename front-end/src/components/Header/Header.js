@@ -11,7 +11,7 @@ export default function Header() {
     const btnBehavior = [
         { text: 'Home', route: '/' },
         { text: 'Usuarios', route: '/user' },
-        { text: 'console.log', action: buttonAction },
+        { text: 'Lorem', action: buttonAction },
     ];
 
     return (

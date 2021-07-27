@@ -12,6 +12,7 @@ import MyCoworking from '../../pages/MyCoworking/MyCoworking';
 import MyCenter from '../../pages/MyCenter/MyCenter';
 import Home from '../../pages/Home/Home';
 import PrivateRoute from '../../components/PrivateRoute/PrivateRoute';
+import RegisterAdmin from '../../pages/RegisterAdmin/RegisterAdmin';
 
 import Footer from '../../components/Footer/Footer';
 
@@ -56,6 +57,9 @@ export default function Layout() {
                 </Route>
                 <Route path="/template">
                     <TemplateMainSection className="mainSection" />
+                </Route>
+                <Route path="/register/admin">
+                    <RegisterAdmin className="mainSection" />
                 </Route>
 
                 {/* EJEMPLO DE RUTA PRIVADA */}

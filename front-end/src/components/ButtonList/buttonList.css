@@ -1,7 +1,7 @@
 .dualBtn {
     width: clamp(50px, 10vw, 150px);
     height: 100%;
-    padding: 5px;
+    padding: 10px;
     clip-path: polygon(20% 0%, 100% 0, 80% 100%, 0% 100%);
     background-color: rgba(var(--primary), 0.8);
     color: gba(var(--dark), 1);
@@ -16,7 +16,7 @@
 }
 
 .shadow-wrap {
-    filter: drop-shadow(2px 2px 5px var(--dark), 0.6);
+    filter: drop-shadow(2px 2px 5px rgba(var(--dark), 0.6));
 }
 
 .dualBtn > * {

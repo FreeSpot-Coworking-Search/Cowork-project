@@ -1,0 +1,65 @@
+.register {
+    max-width: 900px;
+    margin: 0 auto;
+    color: rgba(var(--dark));
+    background: rgba(var(--clear));
+    box-shadow: 1px 1px 10px 0px rgba(var(--dark), 0.6);
+    border-radius: 40px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+}
+
+.register-title {
+    font-size: var(--tittle);
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.register-subtitle {
+    font-size: var(--cardTittle);
+    text-align: justify;
+    text-transform: lowercase;
+}
+
+.register-subtitle::first-letter {
+    text-transform: capitalize;
+}
+
+.registerForm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+hr {
+    color: rgba(var(--dark));
+    opacity: 0.3;
+}
+
+.registerForm-main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.registerForm-main > * {
+    flex: 1 1 auto;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.registerForm-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn {
+    display: block;
+}
