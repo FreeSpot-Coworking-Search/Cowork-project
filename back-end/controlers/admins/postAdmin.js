@@ -3,7 +3,9 @@ const { formatDateToDB } = require('../../helpers/dateHelpers');
 const {
 	insertRegistration,
 	getRegistrations,
+	updateRegistration,
 } = require('../../helpers/dbHelpers');
+const { saveAdminPhoto } = require('../../helpers/photoHelpers');
 const { sendMail } = require('../../helpers/mailHelpers');
 const { validation } = require('../../helpers/schemaHelpers');
 const { postAdminSchema } = require('../../schemas/adminSchema');
@@ -11,20 +13,15 @@ const bcrypt = require('bcryptjs');
 
 const postAdmin = async (req, res, next) => {
 	try {
-		if (!req.files || Object.keys(req.files).length === 0) {
+		console.log(req.files);
+		if (!req.body) {
 			const error = new Error('No se han subido archivos');
 			error.httpStatus = 400;
 			throw error;
 		}
 
-		let newAdmin = {
-			correo: req.files.correo,
-			nombre: req.files.nombre,
-			apellidos: req.files.apellidos,
-			password: req.files.password,
-			fecha_nacimiento: req.files.fecha_nacimiento,
-		};
-
+		let newAdmin = req.body;
+		delete newAdmin.photo;
 		const { password } = newAdmin;
 
 		await validation(postAdminSchema, newAdmin);
@@ -69,6 +66,13 @@ const postAdmin = async (req, res, next) => {
 			'administradores',
 			newAdmin
 		);
+
+		if (req.files) {
+			let savedPhoto = await saveAdminPhoto(req.files.photo);
+			await updateRegistration('administradores', insertId, {
+				foto: `${savedPhoto}`,
+			});
+		}
 
 		console.log('Creacion de administrador id:', insertId);
 

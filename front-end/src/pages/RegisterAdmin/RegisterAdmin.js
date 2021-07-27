@@ -3,6 +3,7 @@ import './registerAdmin.css';
 import { useState } from 'react';
 import ButtonList from '../../components/ButtonList/ButtonList';
 import { toFormDate } from '../../helpers/dateHelper';
+import { useHistory } from 'react-router';
 
 import { GrMail } from 'react-icons/gr';
 import { RiLockPasswordFill } from 'react-icons/ri';
@@ -15,18 +16,27 @@ const {
 const axios = require('axios');
 
 export default function RegisterAdmin({ className }) {
-    const [correo, setCorreo] = useState();
-    const [nombre, setNombre] = useState();
-    const [apellidos, setApellidos] = useState();
-    const [password, setPassword] = useState();
-    const [confirmPw, setConfirmPw] = useState();
-    const [fecha_nacimiento, setFecha_nacimiento] = useState();
+    const [correo, setCorreo] = useState('');
+    const [nombre, setNombre] = useState('');
+    const [apellidos, setApellidos] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPw, setConfirmPw] = useState('');
+    const [fecha_nacimiento, setFecha_nacimiento] = useState('');
 
     const [photo, setPhoto] = useState();
     const [error, setError] = useState();
     const [message, setMessage] = useState();
 
     const today = toFormDate(new Date());
+
+    const btnBehavior = [{ text: 'registrarse', action: () => {} }];
+
+    const onFileChange = (event) => {
+        const file = event.target.files[0];
+        setPhoto(file);
+    };
+
+    let history = useHistory();
 
     const performSubmit = async (e) => {
         try {
@@ -35,7 +45,7 @@ export default function RegisterAdmin({ className }) {
                 setError('Revisa que las contraseñas ingresadas sean iguales.');
                 setTimeout(() => {
                     setError('');
-                }, 3000);
+                }, 5000);
 
                 return;
             }
@@ -44,8 +54,9 @@ export default function RegisterAdmin({ className }) {
             data.append('correo', correo);
             data.append('nombre', nombre);
             data.append('apellidos', apellidos);
-            data.append('dpassword', password);
+            data.append('password', password);
             data.append('fecha_nacimiento', fecha_nacimiento);
+            data.append('photo', photo);
 
             const route = `${host}:${port}/api/admins/`;
 
@@ -54,25 +65,24 @@ export default function RegisterAdmin({ className }) {
             };
 
             const response = await axios.post(route, data, config);
-            console.log(response);
-            if (response.status === 200)
+            if (response.status === 200) {
                 setMessage(
                     'Cuenta creada, falta activar la misma. Para ello, hemos enviado un mail al correo indicado con el enlace de activación. Muchas gracias.'
                 );
+                setTimeout(() => {
+                    history.push('/');
+                }, 5000);
+            }
         } catch (error) {
             const {
                 data: { message },
             } = error.response;
             message ? setError(message) : setError(error.message);
+            setTimeout(() => {
+                setError('');
+            }, 5000);
         }
     };
-
-    const onFileChange = (event) => {
-        const file = event.target.files[0];
-        setPhoto(file);
-    };
-
-    const btnBehavior = [{ text: 'registrarse', action: () => {} }];
 
     return (
         <main className={`${className} register`}>
