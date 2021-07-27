@@ -1,7 +1,7 @@
 .login {
     max-width: 500px;
     padding: 3vw;
-    box-shadow: 1px 1px 10px 0 rgba(0, 0, 0, 0.4);
+    box-shadow: 1px 1px 10px 0 gba(var(--dark), 0.4);
     border-radius: 10px;
 
     display: flex;

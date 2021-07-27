@@ -2,9 +2,14 @@ import './login.css';
 import './form.css';
 
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useClient } from '../../hooks/useClient';
+import { Link } from 'react-router-dom';
 const axios = require('axios');
+
+const {
+    REACT_APP_API_LOCAL_SERVER_HOST: host,
+    REACT_APP_API_LOCAL_SERVER_PORT: port,
+} = process.env;
 
 function Login({ handleClose }) {
     const [userType, setUserType] = useState('usuario');
@@ -48,8 +53,8 @@ function Form({ userType, handleClose }) {
         try {
             const route =
                 userType === 'usuario'
-                    ? 'http://localhost:8080/api/users/login'
-                    : 'http://localhost:8080/api/admins/login';
+                    ? `${host}:${port}/api/users/login`
+                    : `${host}:${port}/api/admins/login`;
 
             const response = await axios.post(route, {
                 correo: email,
@@ -104,11 +109,16 @@ function Form({ userType, handleClose }) {
             <div className="form-options">
                 <p>
                     Olvidaste tu contraseña?{' '}
-                    <Link to="/reset">Pincha aquí</Link>
+                    <Link to="/reset" onClick={() => handleClose()}>
+                        Pincha aquí
+                    </Link>
                 </p>
                 <p>
                     Aún no tienes una cuenta con nosotros?{' '}
-                    <Link to="/register">Regístrate aquí</Link>.
+                    <Link to="/register/admin" onClick={() => handleClose()}>
+                        Regístrate aquí
+                    </Link>
+                    .
                 </p>
             </div>
         </form>

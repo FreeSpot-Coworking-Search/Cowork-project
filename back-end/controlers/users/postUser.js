@@ -55,8 +55,10 @@ const postUser = async (req, res, next) => {
 		const { insertId } = await insertRegistration('usuarios', newUser);
 
 		console.log('Creacion de usuario id:', insertId);
-		req.query.idUser = insertId;
-		next();
+		res.status(200);
+		res.send({
+			message: 'Admin created',
+		});
 	} catch (error) {
 		next(error);
 	}

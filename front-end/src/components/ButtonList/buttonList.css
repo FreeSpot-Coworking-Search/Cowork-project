@@ -1,15 +1,13 @@
 .dualBtn {
-    display: block;
-    width: 150px;
+    width: clamp(50px, 10vw, 150px);
     height: 100%;
+    padding: 10px;
     clip-path: polygon(20% 0%, 100% 0, 80% 100%, 0% 100%);
-    padding: 5px;
+    background-color: rgba(var(--primary), 0.8);
+    color: gba(var(--dark), 1);
 
     display: flex;
     align-items: stretch;
-
-    background-color: rgba(var(--primary), 0.8);
-    color: var(--black);
 }
 
 .dualBtn:hover {
@@ -18,17 +16,18 @@
 }
 
 .shadow-wrap {
-    filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.6));
+    filter: drop-shadow(2px 2px 5px rgba(var(--dark), 0.6));
 }
 
 .dualBtn > * {
     width: 100%;
-    text-transform: capitalize;
     color: var(--black);
     background-color: rgba(0, 0, 0, 0);
     border-color: rgba(0, 0, 0, 0);
+    text-transform: capitalize;
     font: inherit;
     text-decoration: none;
+
     display: flex;
     justify-content: center;
 }

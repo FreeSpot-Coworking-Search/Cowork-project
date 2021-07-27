@@ -14,7 +14,7 @@ const adminIsLogged = require('../../middlewares/admins/adminIsLogged');
 const adminIsOwner = require('../../middlewares/admins/adminIsOwner');
 
 router.get('/', adminExists, adminIsLogged, adminIsOwner, getAdmin);
-router.post('/', postAdmin, getAdmin);
+router.post('/', postAdmin);
 router.get('/validate', validateAdmin);
 router.post('/login', logAdmin);
 router.delete('/', adminExists, adminIsLogged, adminIsOwner, deleteAdmin);

@@ -58,7 +58,11 @@ const postAdmin = async (req, res, next) => {
 		);
 
 		console.log('Creacion de administrador id:', insertId);
-		req.query.id = insertId;
+
+		res.status(200);
+		res.send({
+			message: 'Admin created',
+		});
 		next();
 	} catch (error) {
 		next(error);

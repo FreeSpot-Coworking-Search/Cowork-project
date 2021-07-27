@@ -17,7 +17,7 @@ const postPhotoUser = require('./postPhotoUser');
 router.post('/login/', loginUser);
 router.get('/validate/', validateUser);
 router.get('/', getUser);
-router.post('/', postUser, getUser);
+router.post('/', postUser);
 router.put('/', userIsLogin, userIsOwner, userExists, putUser, getUser);
 router.delete('/', userIsLogin, userExists, deleteUser);
 router.post('/photo/', postPhotoUser, getUser);

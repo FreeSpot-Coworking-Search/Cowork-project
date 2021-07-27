@@ -6,21 +6,24 @@ import Avatar from '../Avatar/Avatar';
 import ButtonList from '../ButtonList/ButtonList';
 
 export default function Header() {
-  const buttonAction = () => console.log('Its Alive!');
+    const buttonAction = () => console.log('Its Alive!');
 
-  const btnBehavior = [
-    { text: 'Home', route: '/' },
-    { text: 'Usuarios', route: '/user' },
-    { text: 'console.log', action: buttonAction },
-  ];
+    const btnBehavior = [
+        { text: 'Home', route: '/' },
+        { text: 'Usuarios', route: '/user' },
+        { text: 'Lorem', action: buttonAction },
+    ];
 
-  return (
-    <header className="header">
-      <Link to="/" className="header-logo">
-        <img src={logo} alt="CWO" />
-      </Link>
-      <ButtonList btnBehavior={[...btnBehavior]} cssStyle="header-links" />
-      <Avatar />
-    </header>
-  );
+    return (
+        <header className="header">
+            <Link to="/" className="header-logo">
+                <img src={logo} alt="CWO" />
+            </Link>
+            <ButtonList
+                btnBehavior={[...btnBehavior]}
+                cssStyle="header-links"
+            />
+            <Avatar />
+        </header>
+    );
 }
