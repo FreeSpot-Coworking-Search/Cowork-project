@@ -11,8 +11,21 @@ const bcrypt = require('bcryptjs');
 
 const postAdmin = async (req, res, next) => {
 	try {
-		let newAdmin = req.body;
-		const { password } = req.body;
+		if (!req.files || Object.keys(req.files).length === 0) {
+			const error = new Error('No se han subido archivos');
+			error.httpStatus = 400;
+			throw error;
+		}
+
+		let newAdmin = {
+			correo: req.files.correo,
+			nombre: req.files.nombre,
+			apellidos: req.files.apellidos,
+			password: req.files.password,
+			fecha_nacimiento: req.files.fecha_nacimiento,
+		};
+
+		const { password } = newAdmin;
 
 		await validation(postAdminSchema, newAdmin);
 

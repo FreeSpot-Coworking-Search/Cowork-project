@@ -109,13 +109,13 @@ function Form({ userType, handleClose }) {
             <div className="form-options">
                 <p>
                     Olvidaste tu contraseña?{' '}
-                    <Link to="/reset" onClick={() => handleClose()}>
+                    <Link to="/admins/reset" onClick={() => handleClose()}>
                         Pincha aquí
                     </Link>
                 </p>
                 <p>
                     Aún no tienes una cuenta con nosotros?{' '}
-                    <Link to="/register/admin" onClick={() => handleClose()}>
+                    <Link to="/admins/register" onClick={() => handleClose()}>
                         Regístrate aquí
                     </Link>
                     .

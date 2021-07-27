@@ -38,7 +38,10 @@ export default function Layout() {
                 <Route path="/user">
                     <User />
                 </Route>
-                <Route path="/admin">
+                <Route path="/admins/register">
+                    <RegisterAdmin className="mainSection" />
+                </Route>
+                <Route path="/admins">
                     <Admin />
                 </Route>
                 <Route path="/space">

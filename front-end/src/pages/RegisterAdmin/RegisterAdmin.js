@@ -14,18 +14,17 @@ const {
 } = process.env;
 const axios = require('axios');
 
-export default function Register({ className }) {
-    const [correo, setCorreo] = useState('');
-    const [nombre, setNombre] = useState('');
-    const [apellidos, setApellidos] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPw, setConfirmPw] = useState('');
-    const [fecha_nacimiento, setFecha_nacimiento] = useState('');
+export default function RegisterAdmin({ className }) {
+    const [correo, setCorreo] = useState();
+    const [nombre, setNombre] = useState();
+    const [apellidos, setApellidos] = useState();
+    const [password, setPassword] = useState();
+    const [confirmPw, setConfirmPw] = useState();
+    const [fecha_nacimiento, setFecha_nacimiento] = useState();
 
-    const [file, setFile] = useState();
-
-    const [error, setError] = useState('');
-    const [message, setMessage] = useState('');
+    const [photo, setPhoto] = useState();
+    const [error, setError] = useState();
+    const [message, setMessage] = useState();
 
     const today = toFormDate(new Date());
 
@@ -41,26 +40,25 @@ export default function Register({ className }) {
                 return;
             }
 
-            const registrationRoute = `${host}:${port}/api/admins/`;
-            const body = {
-                correo,
-                nombre,
-                apellidos,
-                password,
-                fecha_nacimiento,
+            let data = new FormData();
+            data.append('correo', correo);
+            data.append('nombre', nombre);
+            data.append('apellidos', apellidos);
+            data.append('dpassword', password);
+            data.append('fecha_nacimiento', fecha_nacimiento);
+
+            const route = `${host}:${port}/api/admins/`;
+
+            const config = {
+                headers: { 'Content-Type': 'multipart/form-data' },
             };
-            const response = await axios.post(registrationRoute, body);
+
+            const response = await axios.post(route, data, config);
             console.log(response);
             if (response.status === 200)
                 setMessage(
                     'Cuenta creada, falta activar la misma. Para ello, hemos enviado un mail al correo indicado con el enlace de activación. Muchas gracias.'
                 );
-
-            /* const photoRoute = `${host}:${port}/api/admins/photo/?id=112`
-            const data = new FormData();
-            data.append("photo", file);
-            const photoResponse = await axios.post(photoRoute, data);
-            console.log(photoResponse); */
         } catch (error) {
             const {
                 data: { message },
@@ -71,7 +69,7 @@ export default function Register({ className }) {
 
     const onFileChange = (event) => {
         const file = event.target.files[0];
-        setFile(file);
+        setPhoto(file);
     };
 
     const btnBehavior = [{ text: 'registrarse', action: () => {} }];
