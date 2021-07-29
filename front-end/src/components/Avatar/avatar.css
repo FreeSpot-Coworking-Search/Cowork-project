@@ -22,3 +22,7 @@
     opacity: 1;
     box-shadow: 1px 1px 10px 0 rgba(var(--primary), 1);
 }
+
+.avatar:hover {
+    cursor: pointer;
+}

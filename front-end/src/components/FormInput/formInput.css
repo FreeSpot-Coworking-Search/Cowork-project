@@ -1,0 +1,20 @@
+.label {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+.label-icon {
+    flex: 0 0 auto;
+    height: 100%;
+    width: 20px;
+    color: rgba(var(--dark), 1);
+    margin-right: 2px;
+}
+
+.label-input {
+    flex: 1 1 auto;
+    font-size: var(--cardText);
+    margin-right: 50px;
+}

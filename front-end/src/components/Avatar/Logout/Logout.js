@@ -13,7 +13,7 @@ function Logout({ handleClose }) {
 
     return (
         <article className="logout">
-            <h2 className="logout-header">{clientData.name}</h2>
+            <h2 className="logout-header">Hola {clientData.name}</h2>
             {clientData.tipo === 'usuario' ? (
                 <Link to="/user">Mis datos</Link>
             ) : (

@@ -1,21 +1,27 @@
-
-
 .mainNavigationButton {
-	background-color: rgba(var(--primary), 0.8);
-	clip-path: polygon(20% 0%, 100% 0, 80% 100%, 0% 100%);
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	width: 85%;
-	height: 20vh;
-	border: none;
+    background-color: rgba(var(--primary), 0.8);
+    clip-path: polygon(20% 0%, 100% 0, 80% 100%, 0% 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 85%;
+    height: 20vh;
+    border: none;
 }
 .mainNavigationButton button {
-	background-color: transparent;
-	border: none;
+    background-color: transparent;
+    border: none;
 }
 
-.mainNavigationButtonIcon{ 
-	height:10vh ;
+.mainNavigationButtonIcon {
+    height: 10vh;
+}
+
+.mainNavigationButton:hover {
+    cursor: pointer;
+}
+
+.mainNavigationButton *:hover {
+    cursor: pointer;
 }

@@ -1,25 +1,29 @@
+import './Layout.css';
+import '../../css/mainSection.css';
 import { Switch, Route } from 'react-router-dom';
+
 import Header from '../Header/Header';
 import BackGroundLeft from '../BackGroundLeft/BackGroundLeft';
 import BackGroundRight from '../BackGroundRight/BackGroundRight';
+import Footer from '../../components/Footer/Footer';
+import DecorationHeader from '../Decoration/DecorationHeader/DecorationHeader';
+
 import User from '../../pages/User/User';
-import Admin from '../../pages/Admin/Admin';
-import Space from '../../pages/Space/Space';
-import Center from '../../pages/Center/Center';
-import SearchSpaces from '../../pages/SearchSpaces/SearchSpaces';
-import SearchCenter from '../../pages/SearchCenter/SearchCenter';
 import MyCoworking from '../../pages/MyCoworking/MyCoworking';
+
+import Admin from '../../pages/Admin/Admin';
+import Registration from '../../pages/Registration/Registration';
 import MyCenter from '../../pages/MyCenter/MyCenter';
+
+import Space from '../../pages/Space/Space';
+import SearchSpaces from '../../pages/SearchSpaces/SearchSpaces';
+
+import Center from '../../pages/Center/Center';
+import SearchCenter from '../../pages/SearchCenter/SearchCenter';
 import Home from '../../pages/Home/Home';
 import PrivateRoute from '../../components/PrivateRoute/PrivateRoute';
-import RegisterAdmin from '../../pages/RegisterAdmin/RegisterAdmin';
 
-import Footer from '../../components/Footer/Footer';
-
-import './Layout.css';
-import '../../css/mainSection.css';
 import TemplateMainSection from '../Templates/TemplateMainSection/TemplateMainSection';
-import DecorationHeader from '../Decoration/DecorationHeader/DecorationHeader';
 
 // TEMPORAL
 const isUserLogged = false;
@@ -35,11 +39,14 @@ export default function Layout() {
             <div className="decorationRight"></div>
             <DecorationHeader className="decorationTop" />
             <Switch>
+                <Route path="/user/register">
+                    <Registration className="mainSection" />
+                </Route>
                 <Route path="/user">
                     <User />
                 </Route>
                 <Route path="/admins/register">
-                    <RegisterAdmin className="mainSection" />
+                    <Registration className="mainSection" />
                 </Route>
                 <Route path="/admins">
                     <Admin />

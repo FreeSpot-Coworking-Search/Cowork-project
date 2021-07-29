@@ -1,65 +1,65 @@
-.register {
-    max-width: 900px;
-    margin: 0 auto;
-    color: rgba(var(--dark));
-    background: rgba(var(--clear));
-    box-shadow: 1px 1px 10px 0px rgba(var(--dark), 0.6);
+.registerForm {
+    background-color: rgba(var(--clear), 0.9);
     border-radius: 40px;
 
+    color: rgba(var(--dark), 1);
     display: flex;
     flex-direction: column;
     gap: 20px;
     padding: 20px;
 }
 
-.register-title {
+.registerForm-title {
     font-size: var(--tittle);
     text-align: center;
     text-transform: capitalize;
 }
 
-.register-subtitle {
+.registerForm-subtitle {
     font-size: var(--cardTittle);
     text-align: justify;
     text-transform: lowercase;
 }
 
-.register-subtitle::first-letter {
+.registerForm-subtitle::first-letter {
     text-transform: capitalize;
 }
 
-.registerForm {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
 hr {
-    color: rgba(var(--dark));
     opacity: 0.3;
 }
 
-.registerForm-main {
+.registerForm-inputs {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    gap: 10px;
 }
 
-.registerForm-main > * {
+.registerForm-inputs > * {
     flex: 1 1 auto;
 
     display: flex;
     flex-direction: column;
+    gap: 8px;
 }
 
-.registerForm-button {
+.registerForm-error {
+    color: rgba(var(--alert), 1);
+    font-size: var(--cardText);
+}
+
+.registerForm-message {
+    color: rgba(var(--dark), 1);
+    font-size: var(--cardText);
+}
+
+.registerForm-submit {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 10px;
-}
-
-.btn {
-    display: block;
+    text-align: justify;
+    font-size: var(--cardText);
 }

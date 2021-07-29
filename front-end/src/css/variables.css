@@ -1,21 +1,21 @@
 :root {
-	--blue: #00adb5;
-	--green: #64b6ac;
-	--black: #303841;
-	--white: #eeeeee;
-	--orange: #dc795a;
-	--violet: #998fc7;
+    --blue: #00adb5;
+    --green: #64b6ac;
+    --black: #303841;
+    --white: #eeeeee;
+    --orange: #dc795a;
+    --violet: #998fc7;
 
-	--dark: 41, 47, 54;
-	--primary: 0, 173, 181;
-	--secondary: 131, 119, 209;
-	--tertiary: 153, 143, 199;
-	--clear: 247, 255, 247;
+    --dark: 41, 47, 54;
+    --primary: 0, 173, 181;
+    --secondary: 131, 119, 209;
+    --tertiary: 153, 143, 199;
+    --clear: 247, 255, 247;
+    --alert: 220, 121, 90;
 
-	--origin: 1em;
-	--tittle: calc(var(--origin) * 2);
-	--cardTittle: calc(var(--origin) * 1.2);
-	--cardSubTittle: calc(var(--origin) * 0.9);
-	--cardText: calc(var(--origin) * 0.9);
-
+    --origin: 1em;
+    --tittle: calc(var(--origin) * 2);
+    --cardTittle: calc(var(--origin) * 1.2);
+    --cardSubTittle: calc(var(--origin) * 0.9);
+    --cardText: calc(var(--origin) * 0.9);
 }
