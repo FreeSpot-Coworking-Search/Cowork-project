@@ -3,7 +3,9 @@ const { formatDateToDB } = require('../../helpers/dateHelpers');
 const {
 	insertRegistration,
 	getRegistrations,
+	updateRegistration,
 } = require('../../helpers/dbHelpers');
+const { saveUserPhoto } = require('../../helpers/photoHelpers');
 const { sendMail } = require('../../helpers/mailHelpers');
 const { validation } = require('../../helpers/schemaHelpers');
 const { postUserSchema } = require('../../schemas/userSchema');
@@ -11,8 +13,15 @@ const bcrypt = require('bcryptjs');
 
 const postUser = async (req, res, next) => {
 	try {
+		if (!req.body) {
+			const error = new Error('No se han subido archivos');
+			error.httpStatus = 400;
+			throw error;
+		}
+
 		let newUser = req.body;
-		const { password } = req.body;
+		delete newUser.photo;
+		const { password } = newUser;
 
 		await validation(postUserSchema, newUser);
 
@@ -54,7 +63,15 @@ const postUser = async (req, res, next) => {
 
 		const { insertId } = await insertRegistration('usuarios', newUser);
 
-		console.log('Creacion de usuario id:', insertId);
+		if (req.files) {
+			let savedPhoto = await saveUserPhoto(req.files.photo);
+			await updateRegistration('usuarios', insertId, {
+				foto: `${savedPhoto}`,
+			});
+		}
+
+		console.log('Creacion de administrador id:', insertId);
+
 		res.status(200);
 		res.send({
 			message: 'Admin created',

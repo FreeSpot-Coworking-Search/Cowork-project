@@ -90,7 +90,7 @@ export default function RegistrationFormAdmin({ className }) {
         <form className={`${className} registerForm`} onSubmit={performSubmit}>
             <h1 className="registerForm-title">registro como administrador</h1>
             <h2 className="registerForm-subtitle">
-                como administrador usted será capaz de crear y modificar y
+                como administrador usted será capaz de crear, modificar y
                 publicar diferentes centros con sus respectivos espacios
             </h2>
 

@@ -13,7 +13,6 @@ const bcrypt = require('bcryptjs');
 
 const postAdmin = async (req, res, next) => {
 	try {
-		console.log(req.files);
 		if (!req.body) {
 			const error = new Error('No se han subido archivos');
 			error.httpStatus = 400;
@@ -80,7 +79,6 @@ const postAdmin = async (req, res, next) => {
 		res.send({
 			message: 'Admin created',
 		});
-		next();
 	} catch (error) {
 		next(error);
 	}
