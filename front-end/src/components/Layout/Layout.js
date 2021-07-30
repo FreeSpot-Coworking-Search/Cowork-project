@@ -6,7 +6,7 @@ import User from '../../pages/User/User';
 import Admin from '../../pages/Admin/Admin';
 import Space from '../../pages/Space/Space';
 import Center from '../../pages/Center/Center';
-import SearchSpaces from '../../pages/SearchSpaces/SearchSpaces';
+import SearchSpace from '../../pages/SearchSpace/SearchSpace';
 import SearchCenter from '../../pages/SearchCenter/SearchCenter';
 import MyCoworking from '../../pages/MyCoworking/MyCoworking';
 import MyCenter from '../../pages/MyCenter/MyCenter';
@@ -50,7 +50,7 @@ export default function Layout() {
           <SearchCenter className="mainSection" />
         </Route>
         <Route path="/search/space">
-          <SearchSpaces className="mainSection" />
+          <SearchSpace className="mainSection" />
         </Route>
         <Route path="/mycoworking">
           <MyCoworking />

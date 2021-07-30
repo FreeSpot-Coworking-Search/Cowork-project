@@ -17,48 +17,55 @@ import resetIcon from '../../assets/icons/bx-reset.svg';
 import listIcon from '../../assets/icons/bx-list-ul.svg';
 
 export default function SearchCenter({ className }) {
-  // const INITIAL_SEARCH_OBJECT = {
-  // 	texto: ,
-  // 	tipo: "Mesa Flex"
-  // 	aforo:
-  // 	dias_estancia:
-  // 	precio_maximo:
-  // 	precio_minimo:
-  // 	fecha_entrada:
-  // 	fecha_salida:
-  // 	puntuacion_minima:
-  // 	ordenado_por:
-  // }
+  const INITIAL_SEARCH_OBJECT = {
+    texto: '',
+    tipo: '',
+    aforo: '',
+    dias_estancia: '',
+    precio_maximo: '',
+    precio_minimo: '',
+    fecha_entrada: '',
+    fecha_salida: '',
+    puntuacion_minima: '',
+    ordenado_por: '',
+  };
 
-  const { REACT_APP_MIN_WIDTH_FULL_VIEW_MAIN_SECTION } = process.env;
-  const [objectSearch, setObjectSearch] = useState({});
+  const {
+    REACT_APP_API_LOCAL_SERVER_HOST: host,
+    REACT_APP_API_LOCAL_SERVER_PORT: port,
+    REACT_APP_MIN_WIDTH_FULL_VIEW_MAIN_SECTION: minWidth,
+  } = process.env;
+  const registrationRoute = `${host}:${port}/api/search/center`;
+  const linksRoute = `${host}:${port}/api/search/space`;
+
+  const [searchObject, setSearchObject] = useState(INITIAL_SEARCH_OBJECT);
   const [data, setData] = useState({ results: [], services: [] });
   const [visualization, setVisualization] = useState('list');
   const [fullView, setFullView] = useState(
     useMediaQuery({
-      query: `(min-width: ${REACT_APP_MIN_WIDTH_FULL_VIEW_MAIN_SECTION})`,
+      query: `(min-width: ${minWidth})`,
     })
   );
 
   useEffect(() => {
-    getSpaces(objectSearch);
-  }, []);
+    getSpaces(cleanSearchObject(searchObject));
+  }, [searchObject]);
 
   const getSpaces = async (searchObject) => {
     try {
-      const response = await axios.post(
-        'http://localhost:8080/api/centers/search',
-        objectSearch
-      );
+      // const response = await axios.post(registrationRoute, searchObject);
+      const response = await axios.get(registrationRoute, {
+        params: searchObject,
+      });
 
-      setData(response.data.data);
+      setData(response.data);
     } catch (error) {
       console.error(error);
     }
   };
 
   const resetSearch = () => {
-    setObjectSearch({});
+    setSearchObject(INITIAL_SEARCH_OBJECT);
   };
 
   // ****************
@@ -69,7 +76,7 @@ export default function SearchCenter({ className }) {
     setFullView(matches);
   };
   const isFullView = useMediaQuery(
-    { query: `(min-width: ${REACT_APP_MIN_WIDTH_FULL_VIEW_MAIN_SECTION})` },
+    { query: `(min-width: ${minWidth})` },
     undefined,
     handleMediaQueryChange
   );
@@ -125,21 +132,23 @@ export default function SearchCenter({ className }) {
   // ** JSX **
   // *********
 
-  console.log(data.results);
-
   return (
     <>
       {fullView ? (
         <div className={className + ' mainSectionFullView'}>
           <ListCentersSearch
-            data={data.results}
+            results={data.results}
+            searchObject={cleanSearchObject(searchObject)}
+            linksRoute={linksRoute}
             className="listCentersFullView"
           ></ListCentersSearch>
           <MainNavigation links={Links}></MainNavigation>
           {visualization === 'filter' ? (
             <SearchForm
-              setObjectSearch={setObjectSearch}
+              searchObject={searchObject}
+              setSearchObject={setSearchObject}
               services={data.services}
+              results={data.results}
               className="mainSectionRightArticle"
             />
           ) : (
@@ -150,15 +159,19 @@ export default function SearchCenter({ className }) {
         <div className={className + ' mainSectionSingleView'}>
           {visualization === 'list' ? (
             <ListCentersSearch
-              data={data.results}
+              results={data.results}
+              searchObject={cleanSearchObject(searchObject)}
+              linksRoute={linksRoute}
               className="listCentersSingleView"
             ></ListCentersSearch>
           ) : visualization === 'map' ? (
             <GoogleMap></GoogleMap>
           ) : (
             <SearchForm
-              setObjectSearch={setObjectSearch}
+              searchObject={searchObject}
+              setSearchObject={setSearchObject}
               services={data.services}
+              results={data.results}
               className="mainSectionLeftArticle"
             />
           )}
@@ -168,3 +181,16 @@ export default function SearchCenter({ className }) {
     </>
   );
 }
+
+const cleanSearchObject = (searchObject) => {
+  let newSearchObject = {};
+  for (const key in searchObject) {
+    if (searchObject[key] !== '') {
+      newSearchObject = {
+        ...newSearchObject,
+        [key]: searchObject[key],
+      };
+    }
+  }
+  return newSearchObject;
+};

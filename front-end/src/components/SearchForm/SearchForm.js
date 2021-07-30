@@ -1,46 +1,57 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './SearchForm.css';
 import ServicesCheck from '../ServicesCheck/ServicesCheck';
 
-export default function SearchForm({ setObjectSearch, services, className }) {
-  const [newObjectSearch, setNewObjectSearch] = useState({ texto: '' });
+export default function SearchForm({
+  searchObject,
+  setSearchObject,
+  services,
+  className,
+  results,
+  type,
+}) {
+  const [newSearchObject, setNewSearchObject] = useState(searchObject);
+  const [formLimits, setFormLimits] = useState(searchFormLimits(results));
+
+  console.log(results);
+  console.log(searchFormLimits(results));
+
+  useEffect(() => {
+    setNewSearchObject(searchObject);
+  }, [searchObject]);
+  useEffect(() => {
+    setFormLimits(searchFormLimits(results));
+  }, [results]);
 
   const onSubmitForm = (event) => {
     event.preventDefault();
-    let cleanNewObjectSearch = {};
-    for (const key in newObjectSearch) {
-      if (newObjectSearch[key] !== '') {
-        cleanNewObjectSearch = {
-          ...cleanNewObjectSearch,
-          [key]: newObjectSearch[key],
-        };
-      }
-    }
-
-    setObjectSearch(cleanNewObjectSearch);
+    setSearchObject(newSearchObject);
   };
-  // console.log('newObjectSearch');
-  // console.log('---------------');
-  // console.log(newObjectSearch);
 
   return (
     <form onSubmit={onSubmitForm} className={className + ' searchForm'}>
       <fieldset className="searchFormFieldset">
-        <label className="searchFormLabel" htmlFor="texto">
-          Texto
-        </label>
-        <input
-          id="texto"
-          className="searchFormInput"
-          type="text"
-          value={newObjectSearch.texto}
-          onChange={(event) =>
-            setNewObjectSearch({
-              ...newObjectSearch,
-              texto: event.target.value,
-            })
-          }
-        />
+        {type !== 'space' ? (
+          <>
+            <label className="searchFormLabel" htmlFor="texto">
+              Texto
+            </label>
+            <input
+              id="texto"
+              className="searchFormInput"
+              type="text"
+              value={newSearchObject.texto}
+              onChange={(event) =>
+                setNewSearchObject({
+                  ...newSearchObject,
+                  texto: event.target.value,
+                })
+              }
+            />
+          </>
+        ) : (
+          ''
+        )}
         <label className="searchFormLabel" htmlFor="tipo">
           Tipo
         </label>
@@ -48,15 +59,15 @@ export default function SearchForm({ setObjectSearch, services, className }) {
           id="tipo"
           className="searchFormInput"
           type="text"
-          value={newObjectSearch.tipo}
+          value={newSearchObject.tipo}
           onChange={(event) =>
-            setNewObjectSearch({
-              ...newObjectSearch,
+            setNewSearchObject({
+              ...newSearchObject,
               tipo: event.target.value,
             })
           }
         >
-          <option value="*"></option>
+          <option value=""></option>
           <option value="Mesa Flex">Mesa Flex</option>
           <option value="Mesa Fija">Mesa Fija</option>
           <option value="Despacho">Despacho</option>
@@ -69,10 +80,10 @@ export default function SearchForm({ setObjectSearch, services, className }) {
           id="aforo"
           className="searchFormInput"
           type="number"
-          value={newObjectSearch.aforo}
+          value={newSearchObject.aforo}
           onChange={(event) =>
-            setNewObjectSearch({
-              ...newObjectSearch,
+            setNewSearchObject({
+              ...newSearchObject,
               aforo: event.target.value,
             })
           }
@@ -84,10 +95,10 @@ export default function SearchForm({ setObjectSearch, services, className }) {
           id="dias_estancia"
           className="searchFormInput"
           type="number"
-          value={newObjectSearch.dias_estancia}
+          value={newSearchObject.dias_estancia}
           onChange={(event) =>
-            setNewObjectSearch({
-              ...newObjectSearch,
+            setNewSearchObject({
+              ...newSearchObject,
               dias_estancia: event.target.value,
             })
           }
@@ -98,11 +109,13 @@ export default function SearchForm({ setObjectSearch, services, className }) {
         <input
           id="precio_maximo"
           className="searchFormInput"
-          type="range"
-          value={newObjectSearch.precio_maximo}
+          type="number"
+          value={newSearchObject.precio_maximo}
+          min={newSearchObject.precio_minimo}
+          max={formLimits.maxPrice}
           onChange={(event) =>
-            setNewObjectSearch({
-              ...newObjectSearch,
+            setNewSearchObject({
+              ...newSearchObject,
               precio_maximo: event.target.value,
             })
           }
@@ -113,11 +126,13 @@ export default function SearchForm({ setObjectSearch, services, className }) {
         <input
           id="precio_minimo"
           className="searchFormInput"
-          type="range"
-          value={newObjectSearch.precio_minimo}
+          type="number"
+          value={newSearchObject.precio_minimo}
+          min={formLimits.minPrice}
+          max={newSearchObject.precio_maximo}
           onChange={(event) =>
-            setNewObjectSearch({
-              ...newObjectSearch,
+            setNewSearchObject({
+              ...newSearchObject,
               precio_minimo: event.target.value,
             })
           }
@@ -129,10 +144,10 @@ export default function SearchForm({ setObjectSearch, services, className }) {
           id="fecha_entrada"
           className="searchFormInput"
           type="date"
-          value={newObjectSearch.fecha_entrada}
+          value={newSearchObject.fecha_entrada}
           onChange={(event) =>
-            setNewObjectSearch({
-              ...newObjectSearch,
+            setNewSearchObject({
+              ...newSearchObject,
               fecha_entrada: event.target.value,
             })
           }
@@ -144,10 +159,10 @@ export default function SearchForm({ setObjectSearch, services, className }) {
           id="fecha_salida"
           className="searchFormInput"
           type="date"
-          value={newObjectSearch.fecha_salida}
+          value={newSearchObject.fecha_salida}
           onChange={(event) =>
-            setNewObjectSearch({
-              ...newObjectSearch,
+            setNewSearchObject({
+              ...newSearchObject,
               fecha_salida: event.target.value,
             })
           }
@@ -158,13 +173,13 @@ export default function SearchForm({ setObjectSearch, services, className }) {
         <input
           id="puntuacion_minima"
           className="searchFormInput"
-          type="range"
+          type="number"
           min="0"
           max="5"
-          value={newObjectSearch.puntuacion_minima}
+          value={newSearchObject.puntuacion_minima}
           onChange={(event) =>
-            setNewObjectSearch({
-              ...newObjectSearch,
+            setNewSearchObject({
+              ...newSearchObject,
               puntuacion_minima: event.target.value,
             })
           }
@@ -176,3 +191,14 @@ export default function SearchForm({ setObjectSearch, services, className }) {
     </form>
   );
 }
+
+const searchFormLimits = (results) => {
+  let minPrice, maxPrice;
+  for (const result of results) {
+    if (!minPrice || minPrice > result.precio_minimo)
+      minPrice = result.precio_minimo;
+    if (!maxPrice || minPrice > result.precio_maximo)
+      maxPrice = result.precio_maximo;
+  }
+  return { minPrice, maxPrice };
+};

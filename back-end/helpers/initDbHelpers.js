@@ -670,7 +670,7 @@ async function resetDB() {
 			const email = faker.internet.email();
 			const descripcion = faker.lorem.words(25);
 			const equipamiento = faker.lorem.words(25);
-			const idAdministrador = i < 175 ? i : random(1, 175);
+			const idAdministrador = i < 175 ? i + 1 : random(1, 175);
 
 			await connection.query(
 				`INSERT INTO centros(

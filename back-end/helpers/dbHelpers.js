@@ -44,7 +44,6 @@ const getRegistrations = async (tableOrQuery, searchObject) => {
 				tableOrQuery,
 				searchObject
 			);
-		console.log(tableOrQuery);
 		const [results] = await connection.query(tableOrQuery);
 		return results;
 	} catch (error) {
@@ -258,7 +257,6 @@ const createSearchCentersQuerry = (searchObject) => {
 			query += 'DESC';
 	}
 	query += ';';
-	console.log(query);
 	return query;
 };
 
@@ -346,7 +344,6 @@ const createSearchSpacesQuerry = (searchObject) => {
 			query += 'DESC';
 	}
 	query += ';';
-	console.log(query);
 	return query;
 };
 

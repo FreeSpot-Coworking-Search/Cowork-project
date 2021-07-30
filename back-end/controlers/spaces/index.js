@@ -32,6 +32,4 @@ router.post(
 );
 router.delete('/photo/', adminIsLogged, deletePhoto);
 
-router.post('/search/', searchSpaces);
-
 module.exports = router;

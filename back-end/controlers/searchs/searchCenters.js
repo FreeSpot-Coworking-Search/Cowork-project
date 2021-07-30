@@ -7,7 +7,8 @@ const { searchCentersSchema } = require('../../schemas/searchSchema');
 
 const searchCenters = async (req, res, next) => {
 	try {
-		const searchObject = req.body;
+		const searchObject = req.query;
+		console.log(searchObject);
 		await validation(searchCentersSchema, searchObject);
 		let results = await getSearchCenters(searchObject);
 
@@ -21,15 +22,11 @@ const searchCenters = async (req, res, next) => {
 			})
 		);
 		const services = await getRegistrations('SELECT * FROM servicios;');
-		console.log('hola');
 
 		res.status(200);
 		res.send({
-			status: 'ok',
-			data: {
-				results,
-				services,
-			},
+			results,
+			services,
 		});
 	} catch (error) {
 		next(error);

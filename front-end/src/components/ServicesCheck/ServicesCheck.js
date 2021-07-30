@@ -1,7 +1,6 @@
 import './ServicesCheck.css';
 
 export default function ServicesCheck({ services }) {
-  console.log(services);
   return (
     <fieldset className="searchFormFieldset serviceCheck">
       <legend>Servicios</legend>

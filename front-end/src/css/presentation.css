@@ -1,0 +1,30 @@
+
+
+.presentationName{
+    font-size: var(--presentationTittle);
+    text-align: center;
+    padding-bottom: 2vw;
+}
+.presentationCity{
+    font-size: var(--presentationSubTittle);
+    padding-bottom: 1vw;
+}
+.presentationSlide{
+    padding-bottom: 2vw;
+   
+}
+.presentationPhone{}
+.presentationAddress{}
+.presentationPhone{}
+.presentationDescription{}
+
+.presentation{
+    color: rgba(var(--dark));
+    border-radius: 40px;
+    background-color: rgba(var(--primary),0.4);
+    padding: 2vw;
+}
+
+
+
+

@@ -49,8 +49,7 @@ const getCenter = async (req, res, next) => {
 		console.log('Mostrando centro requerido, Id:', id);
 		res.status(200);
 		res.send({
-			status: 'ok',
-			data: centro,
+			center: centro,
 		});
 	} catch (error) {
 		next(error);

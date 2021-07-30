@@ -29,7 +29,7 @@ export default function DecorationHeader({ className }) {
         <>
           <svg
             height="14vh"
-            class="decorationHeaderLogo"
+            className="decorationHeaderLogo"
             viewBox="0 0 576 125"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
