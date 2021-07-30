@@ -26,8 +26,8 @@ import PrivateRoute from '../../components/PrivateRoute/PrivateRoute';
 import TemplateMainSection from '../Templates/TemplateMainSection/TemplateMainSection';
 
 import CircularSuspense from '../../components/CircularSuspense/CircularSuspense';
-const Registration = lazy(() =>
-    import('../../pages/Registration/Registration')
+const AdminRegistration = lazy(() =>
+    import('../../pages/AdminRegistration/AdminRegistration')
 );
 
 // TEMPORAL
@@ -45,16 +45,14 @@ export default function Layout() {
             <DecorationHeader className="decorationTop" />
             <Switch>
                 <Route path="/users/register">
-                    <CircularSuspense className="mainSection">
-                        <Registration className="mainSection" />
-                    </CircularSuspense>
+                    <Home />
                 </Route>
                 <Route path="/users">
                     <User />
                 </Route>
                 <Route path="/admins/register">
                     <CircularSuspense className="mainSection">
-                        <Registration className="mainSection" />
+                        <AdminRegistration className="mainSection" />
                     </CircularSuspense>
                 </Route>
                 <Route path="/admins">

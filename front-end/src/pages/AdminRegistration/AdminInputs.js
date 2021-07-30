@@ -1,14 +1,12 @@
-import './adminInputs.css';
+import { toFormDate } from '../../helpers/dateHelper';
 
-import { toFormDate } from '../../../../helpers/dateHelper';
-
-import FormInput from '../../../../components/FormInput/FormInput';
+import FormInput from '../../components/FormInput/FormInput';
 
 import { GrMail } from 'react-icons/gr';
 import { RiLockPasswordFill } from 'react-icons/ri';
 import { BsCalendarFill } from 'react-icons/bs';
-import { BiUserPin } from 'react-icons/bi';
-import { FaUsers, FaUser, FaPhone } from 'react-icons/fa';
+import { FaUser } from 'react-icons/fa';
+import { FaUsers } from 'react-icons/fa';
 
 export default function AdminInputs({ className, form, setForm, setPhoto }) {
     const today = toFormDate(new Date());
@@ -36,19 +34,6 @@ export default function AdminInputs({ className, form, setForm, setPhoto }) {
                         value={form.correo}
                         onChange={handleInputChange}
                         placeholder=" Correo"
-                        required
-                    />
-                </FormInput>
-
-                <FormInput name="nombre_usuario">
-                    <BiUserPin />
-                    <input
-                        type="text"
-                        value={form.nombre_usuario}
-                        onChange={handleInputChange}
-                        minLength="1"
-                        maxLength="50"
-                        placeholder=" Nombre de usuario"
                         required
                     />
                 </FormInput>
@@ -116,16 +101,6 @@ export default function AdminInputs({ className, form, setForm, setPhoto }) {
                         required
                     />
                 </FormInput>
-
-                <FormInput name="telefono">
-                    <FaPhone />
-                    <input
-                        type="tel"
-                        value={form.telefono}
-                        onChange={handleInputChange}
-                        maxLength="20"
-                    />
-                </FormInput>
             </div>
 
             <div>
@@ -137,20 +112,6 @@ export default function AdminInputs({ className, form, setForm, setPhoto }) {
                         name="avatar"
                         accept="image/*"
                         onChange={onFileChange}
-                    />
-                </label>
-
-                <label htmlFor="bio">
-                    Cuentanos un poco sobre tí:
-                    <br />
-                    <textarea
-                        value={form.bio}
-                        onChange={handleInputChange}
-                        id="bio"
-                        name="bio"
-                        rows="5"
-                        cols="50"
-                        placeholder="Mis aficiones son..."
                     />
                 </label>
             </div>
