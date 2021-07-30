@@ -106,7 +106,7 @@ export default function AdminInputs({ className, form, setForm, setPhoto }) {
             </div>
 
             <div>
-                <p>Seleccione foto de perfil:</p>
+                <p>Selecciona una foto de perfil:</p>
                 <label htmlFor="avatar">
                     <input
                         type="file"

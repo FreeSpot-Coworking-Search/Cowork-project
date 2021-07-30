@@ -49,6 +49,10 @@ function Form({ userType, handleClose }) {
         performLogin(email, password, setError, userType);
     }
 
+    const registerLink =
+        userType === 'usuario' ? '/users/register' : '/admins/register';
+    const resetLink = userType === 'usuario' ? '/users/reset' : '/admins/reset';
+
     async function performLogin(email, password, setError, userType) {
         try {
             const route =
@@ -109,13 +113,13 @@ function Form({ userType, handleClose }) {
             <div className="form-options">
                 <p>
                     Olvidaste tu contraseña?{' '}
-                    <Link to="/admins/reset" onClick={() => handleClose()}>
+                    <Link to={resetLink} onClick={() => handleClose()}>
                         Pincha aquí
                     </Link>
                 </p>
                 <p>
                     Aún no tienes una cuenta con nosotros?{' '}
-                    <Link to="/admins/register" onClick={() => handleClose()}>
+                    <Link to={registerLink} onClick={() => handleClose()}>
                         Regístrate aquí
                     </Link>
                     .

@@ -1,10 +1,18 @@
-import { useState } from 'react';
+import { useState, lazy } from 'react';
+import { useLocation } from 'react-router';
 import { useMediaQuery } from 'react-responsive';
 
-import RegistrationFormAdmin from './RegistrationForm/RegistrationFormAdmin';
 import MainNavigation from '../../components/MainNavigation/MainNavigation';
+import CircularSuspense from '../../components/CircularSuspense/CircularSuspense';
 
 import locationIcon from '../../assets/icons/bxs-location-plus 1.png';
+
+const RegistrationFormAdmin = lazy(() =>
+    import('./RegistrationForm/RegistrationFormAdmin')
+);
+const RegistrationFormUser = lazy(() =>
+    import('./RegistrationForm/RegistrationFormUser')
+);
 
 export default function AdminsRegister({ className }) {
     const { REACT_APP_MIN_WIDTH_FULL_VIEW_MAIN_SECTION } = process.env;
@@ -71,6 +79,11 @@ export default function AdminsRegister({ className }) {
     // ** ESTADOS Y OBJETOS COMUNES **
     // *******************************
 
+    const { pathname } = useLocation();
+    const isAdmin = pathname.includes('admins') ? true : false;
+    console.log('isAdmin: ', isAdmin);
+    console.log('fullView: ', fullView)
+
     // *********
     // ** JSX **
     // *********
@@ -79,7 +92,18 @@ export default function AdminsRegister({ className }) {
         <>
             {fullView ? (
                 <div className={className + ' mainSectionFullView'}>
-                    <RegistrationFormAdmin className="mainSectionLeftArticle" />
+                    <>
+                        {isAdmin && (
+                            <CircularSuspense className="mainSectionLeftArticle">
+                                <RegistrationFormAdmin className="mainSectionLeftArticle" />
+                            </CircularSuspense>
+                        )}
+                        {!isAdmin && (
+                            <CircularSuspense className="mainSectionLeftArticle">
+                                <RegistrationFormUser className="mainSectionLeftArticle" />
+                            </CircularSuspense>
+                        )}
+                    </>
 
                     <MainNavigation
                         links={Links}
@@ -93,12 +117,25 @@ export default function AdminsRegister({ className }) {
             ) : (
                 <div className={className + ' mainSectionSingleView'}>
                     {visualization === 1 ? (
-                        <RegistrationFormAdmin className="mainSectionLeftArticle" />
+                        <>
+                            {isAdmin && (
+                                <CircularSuspense className="mainSectionLeftArticle">
+                                    <RegistrationFormAdmin className="mainSectionLeftArticle" />
+                                </CircularSuspense>
+                            )}
+                            {!isAdmin && (
+                                <CircularSuspense className="mainSectionLeftArticle">
+                                    <RegistrationFormUser className="mainSectionLeftArticle" />
+                                </CircularSuspense>
+                            )}
+                        </>
+                        
                     ) : (
                         <div className="mainSectionLeftArticle Borrame">
                             <p>2</p>
                         </div>
                     )}
+
                     <MainNavigation
                         links={Links}
                         className="mainSectionNavigation"

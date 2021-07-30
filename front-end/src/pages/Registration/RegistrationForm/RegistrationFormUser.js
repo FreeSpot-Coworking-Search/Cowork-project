@@ -3,7 +3,7 @@ import './registrationForm.css';
 import { useState } from 'react';
 import { useHistory } from 'react-router';
 
-import AdminInputs from './inputs/AdminInputs';
+import UserInputs from './inputs/UserInputs';
 import ButtonList from '../../../components/ButtonList/ButtonList';
 
 const {
@@ -15,11 +15,14 @@ const axios = require('axios');
 export default function RegistrationFormAdmin({ className }) {
     const [form, setForm] = useState({
         correo: '',
+        nombre_usuario: '',
         nombre: '',
         apellidos: '',
         password: '',
         confirmPw: '',
         fecha_nacimiento: '',
+        telefono: '',
+        bio: '',
     });
     const [photo, setPhoto] = useState();
 
@@ -61,7 +64,7 @@ export default function RegistrationFormAdmin({ className }) {
             }
             data.append('photo', photo);
 
-            const route = `${host}:${port}/api/admins/`;
+            const route = `${host}:${port}/api/users/`;
             const config = {
                 headers: { 'Content-Type': 'multipart/form-data' },
             };
@@ -88,14 +91,14 @@ export default function RegistrationFormAdmin({ className }) {
 
     return (
         <form className={`${className} registerForm`} onSubmit={performSubmit}>
-            <h1 className="registerForm-title">registro como administrador</h1>
+            <h1 className="registerForm-title">registro como usuario</h1>
             <h2 className="registerForm-subtitle">
-                como administrador usted será capaz de crear y modificar y
-                publicar diferentes centros con sus respectivos espacios
+                como usuario usted será capaz de buscar y reservar los
+                diferentes espacios de co-working disponibles.
             </h2>
 
             <hr />
-            <AdminInputs className="registerForm-inputs" {...InputParams} />
+            <UserInputs className="registerForm-inputs" {...InputParams} />
 
             {error && <p className="registerForm-error">{error}</p>}
             {message && <p className="registerForm-message">{message}</p>}

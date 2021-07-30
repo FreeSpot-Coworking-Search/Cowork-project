@@ -1,5 +1,6 @@
 import './Layout.css';
 import '../../css/mainSection.css';
+import { lazy, Suspense } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import Header from '../Header/Header';
@@ -12,7 +13,6 @@ import User from '../../pages/User/User';
 import MyCoworking from '../../pages/MyCoworking/MyCoworking';
 
 import Admin from '../../pages/Admin/Admin';
-import Registration from '../../pages/Registration/Registration';
 import MyCenter from '../../pages/MyCenter/MyCenter';
 
 import Space from '../../pages/Space/Space';
@@ -24,6 +24,11 @@ import Home from '../../pages/Home/Home';
 import PrivateRoute from '../../components/PrivateRoute/PrivateRoute';
 
 import TemplateMainSection from '../Templates/TemplateMainSection/TemplateMainSection';
+
+import CircularSuspense from '../../components/CircularSuspense/CircularSuspense';
+const Registration = lazy(() =>
+    import('../../pages/Registration/Registration')
+);
 
 // TEMPORAL
 const isUserLogged = false;
@@ -39,14 +44,18 @@ export default function Layout() {
             <div className="decorationRight"></div>
             <DecorationHeader className="decorationTop" />
             <Switch>
-                <Route path="/user/register">
-                    <Registration className="mainSection" />
+                <Route path="/users/register">
+                    <CircularSuspense className="mainSection">
+                        <Registration className="mainSection" />
+                    </CircularSuspense>
                 </Route>
-                <Route path="/user">
+                <Route path="/users">
                     <User />
                 </Route>
                 <Route path="/admins/register">
-                    <Registration className="mainSection" />
+                    <CircularSuspense className="mainSection">
+                        <Registration className="mainSection" />
+                    </CircularSuspense>
                 </Route>
                 <Route path="/admins">
                     <Admin />
