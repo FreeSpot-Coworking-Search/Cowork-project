@@ -3,9 +3,11 @@ import { useMediaQuery } from 'react-responsive';
 import { useHistory } from 'react-router';
 
 import MainNavigation from '../../components/MainNavigation/MainNavigation';
-import RegistrationFormUser from './RegistrationFormUser';
+import RegistrationFormUser from '../../components/Formularies/RegistrationFormUser';
 
-import locationIcon from '../../assets/icons/bxs-location-plus 1.png';
+import userCheck from '../../assets/icons/user-check-solid.png';
+import erase from '../../assets/icons/eraser-solid.png';
+import swipeArrows from '../../assets/icons/swipe-arrows.png';
 
 const {
     REACT_APP_API_LOCAL_SERVER_HOST: host,
@@ -41,19 +43,19 @@ export default function AdminsRegister({ className }) {
 
     const sendButton = {
         action: performSubmit,
-        icon: locationIcon,
+        icon: userCheck,
         text: 'Registrarse',
     };
 
     const resetButton = {
         action: resetForm,
-        icon: locationIcon,
+        icon: erase,
         text: 'Reset',
     };
 
     const swipeButton = {
         action: () => setVisualization(visualization === 2 ? 1 : 2),
-        icon: locationIcon,
+        icon: swipeArrows,
         text: 'Swipe',
     };
 
