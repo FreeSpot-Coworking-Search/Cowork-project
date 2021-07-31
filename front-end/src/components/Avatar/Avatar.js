@@ -1,7 +1,9 @@
 import './avatar.css';
-import { useState, Suspense, lazy } from 'react';
+import { useState, useEffect, Suspense, lazy } from 'react';
 import { FaUserAlt } from 'react-icons/fa';
 import { useClient } from '../../hooks/useClient';
+
+import axios from 'axios';
 
 const Dialog = lazy(() => import('@material-ui/core/Dialog'));
 const Login = lazy(() => import('../Login/Login'));
@@ -21,6 +23,21 @@ function Avatar() {
     };
 
     const avatarPath = clientData ? getPath(clientData) : null;
+
+    useEffect(() => {
+        (function () {
+            const { authorization } = JSON.parse(
+                localStorage.getItem('client')
+            );
+            console.log(authorization);
+            if (authorization) {
+                axios.defaults.headers.common['Authorization'] = authorization;
+            } else {
+                axios.defaults.headers.common['Authorization'] = null;
+            }
+            console.log(axios.defaults.headers);
+        })();
+    }, [clientData]);
 
     return (
         <figcaption className="avatar">
