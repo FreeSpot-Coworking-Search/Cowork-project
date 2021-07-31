@@ -29,6 +29,9 @@ import CircularSuspense from '../../components/CircularSuspense/CircularSuspense
 const AdminRegistration = lazy(() =>
     import('../../pages/AdminRegistration/AdminRegistration')
 );
+const UserRegistration = lazy(() =>
+    import('../../pages/UserRegistration/UserRegistration')
+);
 
 // TEMPORAL
 const isUserLogged = false;
@@ -45,7 +48,9 @@ export default function Layout() {
             <DecorationHeader className="decorationTop" />
             <Switch>
                 <Route path="/users/register">
-                    <Home />
+                    <CircularSuspense className="mainSection">
+                        <UserRegistration className="mainSection" />
+                    </CircularSuspense>
                 </Route>
                 <Route path="/users">
                     <User />

@@ -14,7 +14,7 @@
 }
 
 .label-input {
-    flex: 1 1 auto;
+    width: 100%;
     font-size: var(--cardText);
-    margin-right: 50px;
+    margin-right: 2vw;
 }
