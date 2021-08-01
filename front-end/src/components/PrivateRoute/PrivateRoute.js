@@ -1,14 +1,17 @@
 import { Route, Redirect } from 'react-router-dom';
 
-export default function PrivateRoute({
-  isUserLogged,
-  path,
-  Component,
-  ...rest
-}) {
-  return (
-    <Route exact path={path}>
-      {isUserLogged ? <Component {...rest} /> : <Redirect to="/" />}
-    </Route>
-  );
+import { useClient } from '../../hooks/useClient';
+
+export default function PrivateRoute({ path, typeRequired, children }) {
+    const [clientData] = useClient();
+
+    console.log(clientData);
+
+    const concedeAcces = clientData.tipo === typeRequired;
+
+    return (
+        <Route exact path={path}>
+            {concedeAcces ? { ...children } : <Redirect to="/" />}
+        </Route>
+    );
 }

@@ -11,15 +11,7 @@ import Routes from '../../routes/Routes';
 
 import Footer from '../../components/Footer/Footer';
 
-import MyCenter from '../../pages/MyCenter/MyCenter';
-
-import PrivateRoute from '../../components/PrivateRoute/PrivateRoute';
-
 import TemplateMainSection from '../Templates/TemplateMainSection/TemplateMainSection';
-
-// TEMPORAL
-const isUserLogged = false;
-// TEMPORAL
 
 export default function Layout() {
     return (
@@ -32,18 +24,9 @@ export default function Layout() {
             <DecorationHeader className="decorationTop" />
             <Switch>
                 <Routes />
-                <Route path="/template">
+                <Route exact path="/template">
                     <TemplateMainSection className="mainSection" />
                 </Route>
-
-                {/* EJEMPLO DE RUTA PRIVADA */}
-                <PrivateRoute
-                    path="/mycenter"
-                    Component={MyCenter}
-                    isUserLogged={isUserLogged}
-                    propsDelComponente="Las props del componente iran aqui"
-                />
-                {/* EJEMPLO DE RUTA PRIVADA */}
             </Switch>
             <Footer />
         </section>

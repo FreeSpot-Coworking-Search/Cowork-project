@@ -1,6 +1,7 @@
 import { lazy } from 'react';
 import { Route } from 'react-router-dom';
 
+import PrivateRoute from '../components/PrivateRoute/PrivateRoute';
 import CircularSuspense from '../components/CircularSuspense/CircularSuspense';
 
 const Home = lazy(() => import('../pages/Home/Home'));
@@ -15,6 +16,7 @@ const Admin = lazy(() => import('../pages/Admin/Admin'));
 const AdminRegistration = lazy(() =>
     import('../pages/AdminRegistration/AdminRegistration')
 );
+const MyCenter = lazy(() => import('../pages/MyCenter/MyCenter'));
 
 const Space = lazy(() => import('../pages/Space/Space'));
 const SearchSpaces = lazy(() => import('../pages/SearchSpaces/SearchSpaces'));
@@ -26,65 +28,90 @@ const routes = [
     {
         path: '/users/register',
         Page: UserRegistration,
-        private: false,
+        typeRequired: '',
     },
     {
         path: '/users',
         Page: User,
-        private: false,
+        typeRequired: '',
     },
     {
         path: '/mycoworking',
         Page: MyCoworking,
-        private: false,
+        typeRequired: '',
     },
     {
         path: '/admins/register',
         Page: AdminRegistration,
-        private: false,
+        ttypeRequiredipo: '',
     },
     {
         path: '/admins',
         Page: Admin,
-        private: false,
+        typeRequired: '',
     },
+
+    // EJEMPLO RUTA PRIVADA
+    {
+        path: '/mycenter',
+        Page: MyCenter,
+        typeRequired: 'administrador',
+    },
+    // EJEMPLO RUTA PRIVADA
+
     {
         path: '/search/space',
         Page: SearchSpaces,
-        private: false,
+        typeRequired: '',
     },
     {
         path: '/space',
         Page: Space,
-        private: false,
+        typeRequired: '',
     },
     {
         path: '/search/center',
         Page: SearchCenter,
-        private: false,
+        typeRequired: '',
     },
     {
         path: '/center',
         Page: Center,
-        private: false,
+        typeRequired: '',
     },
     {
         path: '/',
         Page: Home,
-        private: false,
+        typeRequired: '',
     },
 ];
 
 export default function Routes() {
     return (
         <>
-            {routes.map((route) => (
-                <Route path={route.path} key={route.path}>
-                    <CircularSuspense className="mainSection">
-                        <route.Page className="mainSection" />
-                    </CircularSuspense>
-                </Route>
-            ))}
+            {routes.map((route) => {
+                if (route.typeRequired === '') {
+                    return (
+                        <Route exact path={route.path} key={route.path}>
+                            <CircularSuspense className="mainSection">
+                                <route.Page className="mainSection" />
+                            </CircularSuspense>
+                        </Route>
+                    );
+                } else {
+                    return (
+                        <PrivateRoute
+                            path={route.path}
+                            key={route.path}
+                            typeRequired={route.typeRequired}
+                        >
+                            <CircularSuspense className="mainSection">
+                                <route.Page className="mainSection" />
+                            </CircularSuspense>
+                        </PrivateRoute>
+                    );
+                }
+            })}
         </>
     );
 }
