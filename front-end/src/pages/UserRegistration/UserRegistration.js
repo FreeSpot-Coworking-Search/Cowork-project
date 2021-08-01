@@ -15,7 +15,7 @@ const {
 } = process.env;
 const axios = require('axios');
 
-export default function AdminsRegister({ className }) {
+export default function UserRegistration({ className }) {
     const { REACT_APP_MIN_WIDTH_FULL_VIEW_MAIN_SECTION } = process.env;
     const [visualization, setVisualization] = useState(1);
     const [fullView, setFullView] = useState(

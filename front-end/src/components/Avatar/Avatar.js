@@ -29,13 +29,12 @@ function Avatar() {
             const { authorization } = JSON.parse(
                 localStorage.getItem('client')
             );
-            console.log(authorization);
+
             if (authorization) {
                 axios.defaults.headers.common['Authorization'] = authorization;
             } else {
                 axios.defaults.headers.common['Authorization'] = null;
             }
-            console.log(axios.defaults.headers);
         })();
     }, [clientData]);
 
