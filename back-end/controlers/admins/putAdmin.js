@@ -2,6 +2,7 @@ const { updateRegistration } = require('../../helpers/dbHelpers');
 const { validation } = require('../../helpers/schemaHelpers');
 const { putAdminSchema } = require('../../schemas/adminSchema');
 const { formatDateToDB } = require('../../helpers/dateHelpers');
+const bcrypt = require('bcryptjs');
 
 const putAdmin = async (req, res, next) => {
 	try {
@@ -16,9 +17,19 @@ const putAdmin = async (req, res, next) => {
 
 		await validation(putAdminSchema, updateObject);
 
+		const { password } = updateObject;
+		let passwordHash;
+		if (password === undefined) {
+			passwordHash = password;
+		} else {
+			passwordHash = await bcrypt.hash(password, 10);
+			delete updateObject.password;
+		}
+
 		updateObject = {
 			...updateObject,
-			fecha_fechamodificacion: formatDateToDB(new Date()),
+			password: passwordHash,
+			fecha_modificacion: formatDateToDB(new Date()),
 		};
 
 		await updateRegistration('administradores', id, updateObject);

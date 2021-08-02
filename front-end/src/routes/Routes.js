@@ -43,7 +43,7 @@ const routes = [
     {
         path: '/admins/register',
         Page: AdminRegistration,
-        ttypeRequiredipo: '',
+        typeRequired: '',
     },
     {
         path: '/admins',

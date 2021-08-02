@@ -4,9 +4,6 @@ import { useClient } from '../../hooks/useClient';
 
 export default function PrivateRoute({ path, typeRequired, children }) {
     const [clientData] = useClient();
-
-    console.log(clientData);
-
     const concedeAcces = clientData.tipo === typeRequired;
 
     return (

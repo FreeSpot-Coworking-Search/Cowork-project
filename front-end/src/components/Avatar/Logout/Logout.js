@@ -15,9 +15,13 @@ function Logout({ handleClose }) {
         <article className="logout">
             <h2 className="logout-header">Hola {clientData.name}</h2>
             {clientData.tipo === 'usuario' ? (
-                <Link to="/user">Mis datos</Link>
+                <Link to="/users" onClick={handleClose}>
+                    Mis datos
+                </Link>
             ) : (
-                <Link to="/admin">Mis datos</Link>
+                <Link to="/admins" onClick={handleClose}>
+                    Mis datos
+                </Link>
             )}
 
             <button onClick={() => performLogout()}>Cerrar sesión</button>

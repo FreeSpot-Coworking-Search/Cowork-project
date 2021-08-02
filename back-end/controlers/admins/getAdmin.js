@@ -10,10 +10,7 @@ const getAdmin = async (req, res, next) => {
 
 		console.log('Informacion requerida de administrador id:', id);
 		res.status(200);
-		res.send({
-			status: 'ok',
-			adminData: result[0],
-		});
+		res.send(result[0]);
 	} catch (error) {
 		next(error);
 	}

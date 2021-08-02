@@ -11,7 +11,7 @@ import { FaUser } from 'react-icons/fa';
 import { FaUsers } from 'react-icons/fa';
 
 export default function RegistrationFormAdmin({ className, ...params }) {
-    const { error, message, form, setForm, setPhoto } = params;
+    const { error, message, form, setForm, modification } = params;
 
     const today = toFormDate();
 
@@ -23,17 +23,11 @@ export default function RegistrationFormAdmin({ className, ...params }) {
         setForm({ ...form, [name]: value });
     }
 
-    function onFileChange(event) {
-        const file = event.target.files[0];
-        setPhoto(file);
-    }
-
     return (
         <form className={`${className} registerForm`}>
-            <h1 className="registerForm-title">registro como administrador</h1>
+            <h1 className="registerForm-title">Mis datos Personales</h1>
             <h2 className="registerForm-subtitle">
-                como administrador usted será capaz de crear, modificar y
-                publicar diferentes centros con sus respectivos espacios
+                usuario tipo administrador
             </h2>
 
             <hr />
@@ -47,6 +41,7 @@ export default function RegistrationFormAdmin({ className, ...params }) {
                             onChange={handleInputChange}
                             placeholder=" Correo"
                             required
+                            disabled={!modification}
                         />
                     </FormInput>
 
@@ -60,6 +55,7 @@ export default function RegistrationFormAdmin({ className, ...params }) {
                             maxLength="20"
                             placeholder=" Nombre"
                             required
+                            disabled={!modification}
                         />
                     </FormInput>
 
@@ -73,6 +69,7 @@ export default function RegistrationFormAdmin({ className, ...params }) {
                             maxLength="50"
                             placeholder=" Apellidos"
                             required
+                            disabled={!modification}
                         />
                     </FormInput>
 
@@ -84,8 +81,9 @@ export default function RegistrationFormAdmin({ className, ...params }) {
                             onChange={handleInputChange}
                             minLength="8"
                             maxLength="100"
-                            placeholder=" Password"
+                            placeholder=" Modificar contraseña"
                             required
+                            disabled={!modification}
                         />
                     </FormInput>
 
@@ -99,6 +97,7 @@ export default function RegistrationFormAdmin({ className, ...params }) {
                             maxLength="100"
                             placeholder=" Repita contraseña"
                             required
+                            disabled={!modification}
                         />
                     </FormInput>
 
@@ -111,21 +110,9 @@ export default function RegistrationFormAdmin({ className, ...params }) {
                             min="1900-01-01"
                             max={today}
                             required
+                            disabled={!modification}
                         />
                     </FormInput>
-                </div>
-
-                <div>
-                    <p>Selecciona una foto de perfil:</p>
-                    <label htmlFor="avatar">
-                        <input
-                            type="file"
-                            id="avatar"
-                            name="avatar"
-                            accept="image/*"
-                            onChange={onFileChange}
-                        />
-                    </label>
                 </div>
             </div>
 
