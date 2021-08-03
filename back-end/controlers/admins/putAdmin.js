@@ -17,25 +17,24 @@ const putAdmin = async (req, res, next) => {
 
 		await validation(putAdminSchema, updateObject);
 
-		const { password } = updateObject;
 		let passwordHash;
-		if (password === undefined) {
-			passwordHash = password;
-		} else {
-			passwordHash = await bcrypt.hash(password, 10);
-			delete updateObject.password;
+		if (updateObject.password) {
+			passwordHash = await bcrypt.hash(updateObject.password, 10);
+			updateObject.password = passwordHash;
 		}
 
 		updateObject = {
 			...updateObject,
-			password: passwordHash,
 			fecha_modificacion: formatDateToDB(new Date()),
 		};
 
 		await updateRegistration('administradores', id, updateObject);
-
 		console.log('Modificación de datos de administrador id:', id);
-		next();
+
+		res.status(200);
+		res.send({
+			message: 'Administrador modificado',
+		});
 	} catch (error) {
 		next(error);
 	}

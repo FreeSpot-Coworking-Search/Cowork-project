@@ -9,6 +9,11 @@ const {
 
 const postPhotoUser = async (req, res, next) => {
 	try {
+		if (!req.files || Object.keys(req.files).length === 0) {
+			const error = new Error('No se han subido archivos');
+			error.httpStatus = 400;
+			throw error;
+		}
 		const { id } = req.query;
 
 		const user = await getRegistrations('usuarios', { id: `${id}` });
@@ -23,7 +28,10 @@ const postPhotoUser = async (req, res, next) => {
 			});
 		}
 
-		next();
+		res.status(200);
+		res.send(savedPhoto);
+
+		console.log('Cambio de avatar , id:', id);
 	} catch (error) {
 		next(error);
 	}

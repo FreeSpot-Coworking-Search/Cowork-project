@@ -33,7 +33,7 @@ const routes = [
     {
         path: '/users',
         Page: User,
-        typeRequired: '',
+        typeRequired: 'usuario',
     },
     {
         path: '/mycoworking',
@@ -48,7 +48,7 @@ const routes = [
     {
         path: '/admins',
         Page: Admin,
-        typeRequired: '',
+        typeRequired: 'administrador',
     },
 
     // EJEMPLO RUTA PRIVADA

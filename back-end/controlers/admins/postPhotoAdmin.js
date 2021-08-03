@@ -26,8 +26,10 @@ const postPhotoAdmin = async (req, res, next) => {
 			foto: `${savedPhoto}`,
 		});
 
+		res.status(200);
+		res.send(savedPhoto);
+
 		console.log('Cambio de avatar administrador, id:', id);
-		next();
 	} catch (error) {
 		next(error);
 	}

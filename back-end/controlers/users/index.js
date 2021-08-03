@@ -18,8 +18,8 @@ router.post('/login/', loginUser);
 router.get('/validate/', validateUser);
 router.get('/', getUser);
 router.post('/', postUser);
-router.put('/', userIsLogin, userIsOwner, userExists, putUser, getUser);
+router.put('/', userIsLogin, userIsOwner, userExists, putUser);
 router.delete('/', userIsLogin, userExists, deleteUser);
-router.post('/photo/', postPhotoUser, getUser);
+router.post('/photo/', postPhotoUser);
 
 module.exports = router;

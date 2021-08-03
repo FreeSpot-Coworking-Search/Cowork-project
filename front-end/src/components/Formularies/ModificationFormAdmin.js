@@ -1,8 +1,10 @@
 import './registrationForm.css';
+import { Redirect } from 'react-router-dom';
 
 import { toFormDate } from '../../helpers/dateHelper';
-
 import FormInput from '../../components/FormInput/FormInput';
+import { Dialog } from '@material-ui/core';
+import useDialog from '../../hooks/useDialog';
 
 import { GrMail } from 'react-icons/gr';
 import { RiLockPasswordFill } from 'react-icons/ri';
@@ -10,21 +12,54 @@ import { BsCalendarFill } from 'react-icons/bs';
 import { FaUser } from 'react-icons/fa';
 import { FaUsers } from 'react-icons/fa';
 
-export default function RegistrationFormAdmin({ className, ...params }) {
-    const { error, message, form, setForm, modification } = params;
+import axios from 'axios';
+const {
+    REACT_APP_API_LOCAL_SERVER_HOST: host,
+    REACT_APP_API_LOCAL_SERVER_PORT: port,
+} = process.env;
 
+export default function ModificationFormAdmin({ className, ...params }) {
+    const { open, handleClickOpen, handleClose } = useDialog();
+    const {
+        error,
+        message,
+        form,
+        handleInputChange,
+        setError,
+        modification,
+        id,
+        setClientData,
+    } = params;
     const today = toFormDate();
 
-    function handleInputChange(event) {
-        const target = event.target;
-        const value = target.value;
-        const name = target.name;
+    async function deleteClient(e) {
+        try {
+            e.preventDefault();
+            const route = `${host}:${port}/api/admins/?id=${id}`;
+            const response = axios.delete(route);
+            setClientData({ state: false });
 
-        setForm({ ...form, [name]: value });
+            if (response.status === 200) {
+                setError('Cuenta eliminada.');
+                setTimeout(() => {
+                    <Redirect to="/" />;
+                }, 5000);
+            }
+        } catch (error) {
+            setError('Revisa que las contraseñas ingresadas sean iguales.');
+            setTimeout(() => {
+                setError('');
+            }, 5000);
+
+            return;
+        }
     }
 
     return (
-        <form className={`${className} registerForm`}>
+        <form
+            className={`${className} registerForm`}
+            onSubmit={(e) => e.preventDefault()}
+        >
             <h1 className="registerForm-title">Mis datos Personales</h1>
             <h2 className="registerForm-subtitle">
                 usuario tipo administrador
@@ -41,7 +76,7 @@ export default function RegistrationFormAdmin({ className, ...params }) {
                             onChange={handleInputChange}
                             placeholder=" Correo"
                             required
-                            disabled={!modification}
+                            disabled
                         />
                     </FormInput>
 
@@ -123,13 +158,26 @@ export default function RegistrationFormAdmin({ className, ...params }) {
 
             <div className="registerForm-submit">
                 <p>
-                    Al hacer clic en "Registrarse", estará dando su conformidad
-                    a nuestra{' '}
+                    Recuerde que al darse de sigue bajo la conformidad de
+                    nuestra{' '}
                     <a href="https://www.w3docs.com/privacy-policy">
                         Política de Privacidad
                     </a>
                     .
                 </p>
+
+                <button onClick={handleClickOpen}>
+                    Eliminar administrador
+                </button>
+
+                <Dialog open={open} onClose={handleClose}>
+                    <div className="modificationForm-dialog">
+                        ¡Al eliminar el usuario perderá toda la información
+                        sobre su actividad!
+                        <button onClick={deleteClient}>Eliminar</button>
+                        <button onClick={handleClose}>Cancelar</button>
+                    </div>
+                </Dialog>
             </div>
         </form>
     );

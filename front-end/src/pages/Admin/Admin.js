@@ -1,15 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useState, lazy } from 'react';
 import { useMediaQuery } from 'react-responsive';
-
-import { useClient } from '../../hooks/useClient';
-import { toFormDate } from '../../helpers/dateHelper';
+import useForm from '../../hooks/useForm';
 
 import MainNavigation from '../../components/MainNavigation/MainNavigation';
 import ModificationFormAdmin from '../../components/Formularies/ModificationFormAdmin';
+import CircularSuspense from '../../components/CircularSuspense/CircularSuspense';
 
 import editIcon from '../../assets/icons/edit-solid.png';
 import saveIcon from '../../assets/icons/save-solid.png';
 import swipeArrows from '../../assets/icons/swipe-arrows.png';
+
+const ImageCard = lazy(() => import('../../components/ImageCard/ImageCard'));
 
 const {
     REACT_APP_API_LOCAL_SERVER_HOST: host,
@@ -43,13 +44,13 @@ export default function Admin({ className }) {
     // ** MAIN NAVIGATION CONFIG **
     // ****************************
 
-    const sendButton = {
+    const saveButton = {
         action: performSubmit,
         icon: saveIcon,
         text: 'Guardar',
     };
 
-    const resetButton = {
+    const modifyButton = {
         action: () => setModification(!modification),
         icon: editIcon,
         text: 'Modificar',
@@ -65,13 +66,13 @@ export default function Admin({ className }) {
 
     switch (visualization) {
         case 1:
-            if (fullView) Links = [sendButton, resetButton];
-            else Links = [sendButton, resetButton, swipeButton];
+            if (fullView) Links = [saveButton, modifyButton];
+            else Links = [saveButton, modifyButton, swipeButton];
             break;
 
         case 2:
-            if (fullView) Links = [sendButton, resetButton];
-            else Links = [sendButton, resetButton, swipeButton];
+            if (fullView) Links = [saveButton, modifyButton];
+            else Links = [saveButton, modifyButton, swipeButton];
             break;
 
         default:
@@ -82,49 +83,22 @@ export default function Admin({ className }) {
     // ** ESTADOS Y OBJETOS COMUNES **
     // *******************************
 
-    const [clientData] = useClient();
     const [modification, setModification] = useState(false);
-
-    const [form, setForm] = useState({
-        correo: '',
-        nombre: '',
-        apellidos: '',
-        password: '',
-        confirmPw: '',
-        fecha_nacimiento: '',
-    });
-    const [photo, setPhoto] = useState();
     const [error, setError] = useState();
     const [message, setMessage] = useState();
-
-    useEffect(() => {
-        const route = `${host}:${port}/api/admins/?id=${clientData.idAuth}`;
-        const fetchData = async () => {
-            const { data } = await getRequest(route);
-            console.log(data);
-            const { correo, nombre, apellidos, fecha_nacimiento, foto } = data;
-            let date = toFormDate(fecha_nacimiento);
-            setForm({
-                ...form,
-                correo,
-                nombre,
-                apellidos,
-                fecha_nacimiento: date,
-            });
-            setPhoto(foto);
-        };
-
-        fetchData();
-    }, [clientData]);
+    const { clientData, setClientData, form, handleInputChange } =
+        useForm(setError);
 
     const params = {
         form,
-        setForm,
+        handleInputChange,
         error,
         setError,
         message,
         setMessage,
         modification,
+        id: clientData.idAuth,
+        setClientData,
     };
 
     async function performSubmit() {
@@ -157,36 +131,23 @@ export default function Admin({ className }) {
                 data.append(key, form[key]);
             }
 
-            const config = {
-                headers: { 'Content-Type': 'multipart/form-data' },
-            };
-
-            const response = await axios.put(route, data, config);
+            const response = await axios.put(route, data);
             if (response.status === 200) {
                 setMessage('Cuenta modificada.');
                 setTimeout(() => {
                     setMessage('');
                 }, 5000);
+
+                setClientData({
+                    ...clientData,
+                    name: form.nombre,
+                });
+
+                setModification(false);
             }
         } catch (error) {
             setMessage('');
 
-            const {
-                data: { message },
-            } = error.response;
-
-            message ? setError(message) : setError(error.message);
-            setTimeout(() => {
-                setError('');
-            }, 5000);
-        }
-    }
-
-    async function getRequest(route) {
-        try {
-            const response = await axios(route);
-            return response;
-        } catch (error) {
             const {
                 data: { message },
             } = error.response;
@@ -215,10 +176,9 @@ export default function Admin({ className }) {
                         links={Links}
                         className="mainSectionNavigation"
                     />
-
-                    <div className="mainSectionRightArticle Borrame">
-                        <p>2</p>
-                    </div>
+                    <CircularSuspense>
+                        <ImageCard className="mainSectionRightArticle" />
+                    </CircularSuspense>
                 </div>
             ) : (
                 <div className={className + ' mainSectionSingleView'}>
@@ -228,9 +188,9 @@ export default function Admin({ className }) {
                             {...params}
                         />
                     ) : (
-                        <div className="mainSectionLeftArticle Borrame">
-                            <p>2</p>
-                        </div>
+                        <CircularSuspense>
+                            <ImageCard className="mainSectionLeftArticle" />
+                        </CircularSuspense>
                     )}
 
                     <MainNavigation

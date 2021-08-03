@@ -5,7 +5,7 @@ import { useClient } from '../../hooks/useClient';
 
 import axios from 'axios';
 
-const Dialog = lazy(() => import('@material-ui/core/Dialog'));
+import { Dialog } from '@material-ui/core';
 const Login = lazy(() => import('../Login/Login'));
 const Logout = lazy(() => import('./Logout/Logout'));
 

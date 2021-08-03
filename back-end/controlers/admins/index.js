@@ -18,14 +18,7 @@ router.post('/', postAdmin);
 router.get('/validate', validateAdmin);
 router.post('/login', logAdmin);
 router.delete('/', adminExists, adminIsLogged, adminIsOwner, deleteAdmin);
-router.put('/', adminExists, adminIsLogged, adminIsOwner, putAdmin, getAdmin);
-router.post(
-	'/photo',
-	adminExists,
-	adminIsLogged,
-	adminIsOwner,
-	postPhotoAdmin,
-	getAdmin
-);
+router.put('/', adminExists, adminIsLogged, adminIsOwner, putAdmin);
+router.post('/photo', adminExists, adminIsLogged, adminIsOwner, postPhotoAdmin);
 
 module.exports = router;

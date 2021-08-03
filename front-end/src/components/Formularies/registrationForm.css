@@ -66,3 +66,14 @@ hr {
     text-align: justify;
     font-size: var(--cardText);
 }
+
+.modificationForm-dialog {
+    max-width: 500px;
+    padding: 3vw;
+    box-shadow: 1px 1px 10px 0 gba(var(--dark), 0.4);
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
