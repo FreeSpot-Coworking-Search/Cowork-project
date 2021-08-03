@@ -10,7 +10,7 @@ const searchCentersSchema = Joi.object().keys({
 	dias_estancia: Joi.number().max(365),
 	servicios: Joi.array(),
 	ordenado_por: Joi.string(),
-	orden: Joi.valid('Ascendente', 'Descendente'),
+	orden: Joi.valid('ascendente', 'descendente'),
 	fecha_entrada: Joi.date(),
 	fecha_salida: Joi.date(),
 });

@@ -7,29 +7,41 @@ const { searchSpacesSchema } = require('../../schemas/searchSchema');
 
 const searchSpaces = async (req, res, next) => {
 	try {
-		const searchObject = req.body;
+		const searchObject = req.query;
 		await validation(searchSpacesSchema, searchObject);
-		let result = await getSearchSpaces(searchObject);
+		let results = await getSearchSpaces(searchObject);
+		console.log(results);
 
 		const [center] = await getRegistrations('centros', {
 			id: searchObject.id_centro,
 		});
 
-		const { nombre, direccion, localidad, codigo_postal, telefono, email } =
-			center;
+		const {
+			nombre,
+			direccion,
+			localidad,
+			codigo_postal,
+			telefono,
+			email,
+			descripcion,
+		} = center;
 
-		result = await result.map(async (center) => {
-			const [images] = await getRegistrations('imagenes', {
-				id_centro: center.id,
-			});
-			console.log(images);
-			const newCenter = { ...center, imagenes: images };
-			return newCenter;
+		const centerImages = await getRegistrations('imagenes', {
+			id_centro: center.id,
 		});
+
+		results = await Promise.all(
+			results.map(async (space) => {
+				const spaceImages = await getRegistrations('imagenes', {
+					id_espacio: space.id,
+				});
+				const newSpace = { ...space, imagenes: spaceImages };
+				return newSpace;
+			})
+		);
 
 		res.status(200);
 		res.send({
-			status: 'ok',
 			center: {
 				nombre,
 				direccion,
@@ -37,8 +49,10 @@ const searchSpaces = async (req, res, next) => {
 				codigo_postal,
 				telefono,
 				email,
+				descripcion,
+				imagenes: centerImages,
 			},
-			data: result,
+			results,
 		});
 	} catch (error) {
 		next(error);

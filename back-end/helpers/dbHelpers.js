@@ -257,6 +257,7 @@ const createSearchCentersQuerry = (searchObject) => {
 			query += 'DESC';
 	}
 	query += ';';
+	console.log(searchObject);
 	console.log(query);
 	return query;
 };
@@ -332,7 +333,7 @@ const createSearchSpacesQuerry = (searchObject) => {
 		query += whereString.join(' AND ');
 	}
 
-	query += ' GROUP BY espacios.id';
+	query += ' GROUP BY espacios.id ';
 
 	if (searchObject['ordenado_por']) {
 		query += ` ORDER BY ${searchObject['ordenado_por']} `;
@@ -344,8 +345,8 @@ const createSearchSpacesQuerry = (searchObject) => {
 		)
 			query += 'DESC';
 	}
-	query += ';';
 	console.log(query);
+	query += ';';
 	return query;
 };
 

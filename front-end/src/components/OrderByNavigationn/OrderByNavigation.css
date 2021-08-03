@@ -1,0 +1,37 @@
+.orderByNavigator{
+    width: 100%;
+  }
+  .orderByNavigator ul{
+    width: 100%;
+    list-style: none;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  .orderByNavigator li{
+    width: 100%;
+    display:flex;
+    justify-content: center;
+  }
+  .orderByNavigator button{
+    width: 100%;
+    height: 3vw;
+    background-color: rgba(var(--primary));
+    border:none;
+    cursor: pointer;
+  }
+  .orderByNavigator ul li:only-child  button{
+    border-radius: 40px 40px 0 0;
+  }
+  .orderByNavigator ul li:first-child  button{
+    border-radius: 40px 0 0 0;
+  }
+  .orderByNavigator ul li:last-child  button{
+    border-radius: 0 40px 0 0;
+  }
+  .orderByEnd {
+    width: 100%;
+    height: 4vw;
+    background-color: rgba(var(--primary));
+    border-radius: 0 0 40px 40px;
+  }

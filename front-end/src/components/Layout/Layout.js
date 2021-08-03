@@ -14,21 +14,21 @@ import Footer from '../../components/Footer/Footer';
 import TemplateMainSection from '../Templates/TemplateMainSection/TemplateMainSection';
 
 export default function Layout() {
-    return (
-        <section className="mainPage">
-            <BackGroundLeft />
-            <BackGroundRight />
-            <Header></Header>
-            <div className="decorationLeft"></div>
-            <div className="decorationRight"></div>
-            <DecorationHeader className="decorationTop" />
-            <Switch>
-                <Routes />
-                <Route exact path="/template">
-                    <TemplateMainSection className="mainSection" />
-                </Route>
-            </Switch>
-            <Footer />
-        </section>
-    );
+  return (
+    <section className="mainPage">
+      <BackGroundLeft />
+      <BackGroundRight />
+      <Header></Header>
+      <div className="decorationLeft"></div>
+      <div className="decorationRight"></div>
+      <DecorationHeader className="decorationTop" />
+      <Switch>
+        <Routes />
+        <Route exact path="/template">
+          <TemplateMainSection className="mainSection" />
+        </Route>
+      </Switch>
+      <Footer />
+    </section>
+  );
 }

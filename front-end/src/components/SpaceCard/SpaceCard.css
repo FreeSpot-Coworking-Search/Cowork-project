@@ -1,27 +1,29 @@
 
   
-  .centerCard {
-    margin-bottom:0.5vw;
-    min-height: 10vw;
+  .spaceCard {
+    margin-bottom:0.25rem;
+    min-height: 10rem;
     width: 100%;
+    border-radius: 40px;
+    box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.10);
     cursor: pointer;
     transition: 0.4s;
     display: flex;
     justify-content: space-between;
     color:rgba(var(--dark));
-    background-color: rgba(var(--clear),0.3);
-    text-decoration: none;
+    background: rgba(var(--clear));
+    
   }
   
-  .centerCardImage {
+  .spaceCardImage {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position:center center;
+    border-radius: 0px 40px 40px 0px;
   }
 
   .leftColumn{
-    width: 100%;
     padding: 1rem;
     display: flex;
     flex-direction: column;
@@ -32,18 +34,18 @@
     text-align: center;
   }
 
-  .centerCardName{
+  .spaceCardName{
     font-size: var(--cardTittle);
   }
-  .centerCardPlace{
+  .spaceCardPlace{
     font-size: var(--cardSubTittle);
   }
-  .centerCardPrice{
+  .spaceCardPrice{
     padding-top: 2vw;
     font-size: var(--cardText);
     align-self: center;
   }
-  .centerCardStarsDisplay{
+  .spaceCardStarsDisplay{
     align-self: center;
   }
   
@@ -55,7 +57,8 @@
     justify-content:flex-end;
   }
 
-  .centerCard:hover {
+  .spaceCard:hover {
+    transform: scale(1.002, 1.002);
     box-shadow: 5px 5px 5px 10px rgba(0,0,0,0.20)
   }
   
