@@ -2,13 +2,13 @@ import './CenterPresentation.css';
 import ImageSlide from '../ImageSlide/ImageSlide';
 import '../../css/presentation.css';
 import useCenter from '../../hooks/useCenter';
+import Spinner from '../Spinner/Spinner';
 
 export default function CenterPresentation({ centerId, className }) {
   const [center, loading] = useCenter(centerId);
 
-  console.log(center);
   return loading ? (
-    <p>Loading</p>
+    <Spinner />
   ) : (
     <article className={className + ' presentation centerPresentation'}>
       <h3 className="presentationName">{center.nombre}</h3>

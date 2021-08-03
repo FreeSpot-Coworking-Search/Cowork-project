@@ -10,7 +10,6 @@ export default function ListCentersSearchElement({
   searchObject,
   linksRoute,
 }) {
-  console.log(center);
   return (
     <li>
       <Link

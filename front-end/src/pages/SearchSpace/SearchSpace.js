@@ -1,8 +1,11 @@
 import './SearchSpace.css';
 
+import { useState } from 'react';
 import useSearchSpace from '../../hooks/useSearchSpace';
 import useFullView from '../../hooks/useFullView';
+import cleanSearchObject from '../../helpers/cleanSearchObject';
 
+import Spinner from '../../components/Spinner/Spinner';
 import SearchForm from '../../components/SearchForm/SearchForm';
 import MainNavigation from '../../components/MainNavigation/MainNavigation';
 import ListSpacesSearch from '../../components/ListSpacesSearch/ListSpacesSearch';
@@ -13,7 +16,6 @@ import RetrieveQueryParams from '../../helpers/RetriveQueryParams';
 
 import filterIcon from '../../assets/icons/bxs-filter-alt.svg';
 import presentationIcon from '../../assets/icons/bxs-home.svg';
-import { useState } from 'react';
 
 export default function SearchSpace({ className }) {
   const INITIAL_SEARCH_OBJECT = RetrieveQueryParams([
@@ -34,11 +36,9 @@ export default function SearchSpace({ className }) {
   const [fullView] = useFullView();
   const [visualization, setVisualization] = useState('presentation');
 
-  // const mapButton = {
-  //   action: () => setVisualization('map'),
-  //   icon: mapIcon,
-  //   text: 'Mapa',
-  // };
+  // ****************************
+  // ** MAIN NAVIGATION CONFIG **
+  // ****************************
 
   const filterButton = {
     action: () => setVisualization('filter'),
@@ -50,11 +50,7 @@ export default function SearchSpace({ className }) {
     icon: presentationIcon,
     text: 'Ver centro',
   };
-  // const resetButton = {
-  //   action: resetSearch,
-  //   icon: resetIcon,
-  //   text: 'Resetear busqueda',
-  // };
+
   const genericButton = { path: '/', icon: locationIcon, text: 'Uno' };
   let Links = [];
   if (fullView) Links = [genericButton, genericButton, genericButton];
@@ -76,11 +72,6 @@ export default function SearchSpace({ className }) {
         ];
 
       break;
-    // case 'filter':
-    //   if (fullView) Links = [genericButton, genericButton, genericButton];
-    //   else Links = [genericButton, genericButton, genericButton, genericButton];
-
-    //   break;
 
     default:
       break;
@@ -91,7 +82,7 @@ export default function SearchSpace({ className }) {
   // *********
 
   return loading ? (
-    <p>Loading</p>
+    <Spinner />
   ) : (
     <>
       {fullView ? (
@@ -99,6 +90,7 @@ export default function SearchSpace({ className }) {
           <ListSpacesSearch
             results={results}
             searchObject={cleanSearchObject(searchObject)}
+            setSearchObject={searchObject}
             className="mainSectionLeftArticle"
           ></ListSpacesSearch>
           <MainNavigation links={Links}></MainNavigation>
@@ -123,6 +115,7 @@ export default function SearchSpace({ className }) {
           <ListSpacesSearch
             results={results}
             searchObject={cleanSearchObject(searchObject)}
+            setSearchObject={searchObject}
             className="mainSectionLeftArticle"
           ></ListSpacesSearch>
           <MainNavigation links={Links}></MainNavigation>
@@ -132,16 +125,3 @@ export default function SearchSpace({ className }) {
   );
   // return <p>hola</p>;
 }
-
-const cleanSearchObject = (searchObject) => {
-  let newSearchObject = {};
-  for (const key in searchObject) {
-    if (searchObject[key] !== '') {
-      newSearchObject = {
-        ...newSearchObject,
-        [key]: searchObject[key],
-      };
-    }
-  }
-  return newSearchObject;
-};

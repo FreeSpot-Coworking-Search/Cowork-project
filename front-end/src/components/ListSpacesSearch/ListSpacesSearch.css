@@ -1,7 +1,18 @@
 .listSpaces{
     padding-left: 1.3vw;
     padding-right: 1.3vw;
+    display:flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    overflow-x: hidden;
 
+}
+.listSpaces::-webkit-scrollbar {
+    display: none;
+}
+.listSpaces>ul{
+    background-color: rgba(var(--primary),0.4);
     display:flex;
     justify-content: flex-start;
     align-items: center;
@@ -9,7 +20,10 @@
     list-style: none;
     overflow-x: hidden;
 }
-.listSpaces::-webkit-scrollbar {
+.listSpaces>ul::-webkit-scrollbar {
     display: none;
-  }
-
+}
+.listSpacesType {
+    background-color: rgba(var(--primary),0.8);
+    height: 4vh;
+}
