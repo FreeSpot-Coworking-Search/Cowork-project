@@ -121,8 +121,7 @@ export default function Admin({ className }) {
                 return;
             }
             setMessage('Enviando datos');
-
-            const route = `${host}:${port}/api/users/?id=${clientData.id}`;
+            const route = `${host}:${port}/api/users/?id=${clientData.idUser}`;
 
             let data = new FormData();
             for (const key in form) {
