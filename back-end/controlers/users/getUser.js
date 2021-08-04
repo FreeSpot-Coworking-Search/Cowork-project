@@ -21,10 +21,7 @@ const getUser = async (req, res, next) => {
 			throw error;
 		}
 		res.status(200);
-		res.send({
-			status: 'ok',
-			data: results[0],
-		});
+		res.send(results[0]);
 	} catch (error) {
 		next(error);
 	}

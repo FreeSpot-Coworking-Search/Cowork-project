@@ -105,7 +105,7 @@ export default function Admin({ className }) {
         try {
             if (!modification) {
                 setError(
-                    'Debes tener habilitada la modificación de usuarios para guardar los cambios.'
+                    'Debes tener habilitada la modificación antes de poder guardar los cambios.'
                 );
                 setTimeout(() => {
                     setError('');

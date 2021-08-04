@@ -15,8 +15,12 @@ export default function ImageCard({ className }) {
     const [error, setError] = useState();
     const [message, setMessage] = useState();
 
-    const { avatarUrl, idAuth } = clientData;
-    const baseRoute = `${host}:${port}/api/images/adminsPhotos/`;
+    const { avatarUrl, idAuth, idUser, tipo } = clientData;
+
+    const imageSrc =
+        tipo === 'administrador'
+            ? `${host}:${port}/api/images/adminsPhotos/`
+            : `${host}:${port}/api/images/usersPhotos/`;
 
     function onFileChange(event) {
         const file = event.target.files[0];
@@ -28,7 +32,10 @@ export default function ImageCard({ className }) {
             let data = new FormData();
             data.append('photo', photo);
 
-            const route = `${host}:${port}/api/admins/photo/?id=${idAuth}`;
+            const route =
+                tipo === 'administrador'
+                    ? `${host}:${port}/api/admins/photo/?id=${idAuth}`
+                    : `${host}:${port}/api/users/photo/?id=${idUser}`;
             const response = await axios.post(route, data);
             if (response.status === 200) {
                 setMessage('Imagen modificada.');
@@ -36,7 +43,6 @@ export default function ImageCard({ className }) {
                     setMessage('');
                 }, 5000);
             }
-            console.log(response);
             setClientData({
                 ...clientData,
                 avatarUrl: response.data,
@@ -57,7 +63,7 @@ export default function ImageCard({ className }) {
         <div className={className + ' imageCard'}>
             <figure>
                 <img
-                    src={`${baseRoute}${avatarUrl}`}
+                    src={`${imageSrc}${avatarUrl}`}
                     alt=""
                     className="imageCard-img"
                 />
