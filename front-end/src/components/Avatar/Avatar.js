@@ -13,6 +13,7 @@ function Avatar() {
     const [open, setOpen] = useState(false);
 
     const [clientData] = useClient();
+    console.log(clientData);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -29,7 +30,6 @@ function Avatar() {
             const { authorization } = JSON.parse(
                 localStorage.getItem('client')
             );
-
             if (authorization) {
                 axios.defaults.headers.common['Authorization'] = authorization;
             } else {

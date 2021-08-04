@@ -1,12 +1,12 @@
 const { updateRegistration } = require('../../helpers/dbHelpers');
 const { validation } = require('../../helpers/schemaHelpers');
-const { pullUserSchema } = require('../../schemas/userSchema');
+const { putUserSchema } = require('../../schemas/userSchema');
 const { formatDateToDB } = require('../../helpers/dateHelpers');
 const bcrypt = require('bcryptjs');
 
 const putUser = async (req, res, next) => {
 	try {
-		const { idUser } = req.query;
+		const { id } = req.query;
 		let updateObject = req.body;
 
 		if (!updateObject) {
@@ -15,25 +15,21 @@ const putUser = async (req, res, next) => {
 			throw error;
 		}
 
-		await validation(pullUserSchema, updateObject);
+		await validation(putUserSchema, updateObject);
 
-		const { password } = updateObject;
 		let passwordHash;
-		if (password === undefined) {
-			passwordHash = password;
-		} else {
-			passwordHash = await bcrypt.hash(password, 10);
-			delete updateObject.password;
+		if (updateObject.password) {
+			passwordHash = await bcrypt.hash(updateObject.password, 10);
+			updateObject.password = passwordHash;
 		}
 
 		updateObject = {
 			...updateObject,
 			fecha_modificacion: formatDateToDB(new Date()),
-			password: passwordHash,
 		};
 
-		await updateRegistration('usuarios', idUser, updateObject);
-		console.log('Modificación de datos de usuario id:', idUser);
+		await updateRegistration('usuarios', id, updateObject);
+		console.log('Modificación de datos de usuario id:', id);
 
 		res.status(200);
 		res.send({
