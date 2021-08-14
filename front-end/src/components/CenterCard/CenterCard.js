@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 import './CenterCard.css';
 import image from '../../assets/img/Coworking-768x380.png';
 import objectToQuerryParamsString from '../../helpers/objectToQuerryParamsString';
-import { ClientProvider } from '../../hooks/useClient';
 
 export default function ListCentersSearchElement({
   center,
   searchObject,
   linksRoute,
 }) {
+  console.log(center.imagenes[0].URL);
   return (
     <li>
       <Link
@@ -34,12 +34,12 @@ export default function ListCentersSearchElement({
         <div className="rightColumn">
           {center.imagenes ? (
             <img
-              src={image}
+              src={`http://localhost:8080/api/images/spacesCentersPhotos/${center.imagenes[0].URL}`}
               className="centerCardImage"
               alt="Imagen Generica"
             />
           ) : (
-            <img src={image} className="centerCardImage" alt="" />
+            <img src={center.imagenes[0]} className="centerCardImage" alt="" />
           )}
         </div>
       </Link>

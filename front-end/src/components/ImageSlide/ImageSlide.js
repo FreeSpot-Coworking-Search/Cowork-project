@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
+import Spinner from '../Spinner/Spinner';
 import './ImageSlide.css';
 
-export default function ImageSlide({ images, className }) {
+export default function ImageSlide({ images, className, tag }) {
   const [slide, setSlide] = useState([]);
 
   useEffect(() => {
@@ -21,8 +22,8 @@ export default function ImageSlide({ images, className }) {
 
   function showSlides(n) {
     let i;
-    const slides = document.getElementsByClassName('mySlides');
-    const dots = document.getElementsByClassName('dot');
+    const slides = document.getElementsByClassName(`mySlides ${tag}`);
+    const dots = document.getElementsByClassName(`dot ${tag}`);
     if (n > slides.length) {
       slideIndex = 1;
     }
@@ -41,12 +42,16 @@ export default function ImageSlide({ images, className }) {
     }
   }
 
-  return (
+  return images ? (
     <div className={className}>
       <div className="slideshow-container">
         {slide.map((image, index) => {
           return (
-            <div className="mySlides fade" key={image.URL}>
+            <div
+              className={`mySlides ${tag} fade`}
+              key={image.URL}
+              Style={index === 0 ? 'display: block;' : 'display: none;'}
+            >
               <img
                 src={`http://localhost:8080/api/images/spacesCentersPhotos/${image.URL}`}
                 alt="imagen"
@@ -65,10 +70,17 @@ export default function ImageSlide({ images, className }) {
       <br />
 
       <div className="dotsContainer">
-        <span className="dot" onClick={() => currentSlide(1)}></span>
-        <span className="dot" onClick={() => currentSlide(2)}></span>
-        <span className="dot" onClick={() => currentSlide(3)}></span>
+        {slide.map((image, index) => {
+          return (
+            <span
+              className={`dot ${tag}`}
+              onClick={() => currentSlide(index + 1)}
+            ></span>
+          );
+        })}
       </div>
     </div>
+  ) : (
+    <Spinner></Spinner>
   );
 }

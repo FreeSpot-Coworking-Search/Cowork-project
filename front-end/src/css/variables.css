@@ -16,13 +16,8 @@
 	--origin: 1em;
 	--presentationTittle: calc(var(--origin) * 2);
 	--presentationSubTittle: calc(var(--origin) * 1.5);
+	--presentationText: calc(var(--origin) * 1);
 	--cardTittle: calc(var(--origin) * 1.2);
 	--cardSubTittle: calc(var(--origin) * 0.9);
 	--cardText: calc(var(--origin) * 0.9);
-
-    --origin: 1em;
-    --tittle: calc(var(--origin) * 2);
-    --cardTittle: calc(var(--origin) * 1.2);
-    --cardSubTittle: calc(var(--origin) * 0.9);
-    --cardText: calc(var(--origin) * 0.9);
 }

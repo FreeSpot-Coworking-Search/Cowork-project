@@ -1,23 +1,29 @@
 .searchForm{
     justify-self: center;
     display:flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content:stretch;
-    align-items: flex-start;
-    background-color: rgba(var(--clear));
+    align-items: center;
+    background-color: rgba(var(--primary),0.2);
     border-radius: 30px;
-    padding-top: 1vh;
-    padding-bottom: 1vh;
+    padding: 3vw;
     font-size: var(--cardText);
-    text-align: center;
-    
-}
-.searchFormFieldset{
-    width: 100%;
-    padding: 1vh;
-    border:none;
-    max-height: 100%;
+    text-align: center; 
     overflow-x: hidden;
+  }
+  .searchForm > fieldset::-webkit-scrollbar {
+  display: none;
+  }  
+
+
+.searchFormFieldset{
+    display: flex;
+    flex-direction: column;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    border:none;
+    
+    gap: 2vh;
 }
 .searchFormFieldset input[type='checkbox']{
     text-align:start;
@@ -25,6 +31,56 @@
 
 .searchFormLabel{
     color:rgba(var(--dark));
-    display:block;
-    
+    display:flex;
+    flex-direction: column;
+    gap: 1vh;
+    align-items: center;
+    font-size: var(--presentationSubTittle);
+}
+.search{
+    background: rgba(var(--primary),0.6) ;
+    height: 4vh;
+    border-radius: 40px;
+}
+
+.inputNumbers{
+    display:flex;
+    justify-content: space-around;
+}
+.inputNumbers > label{
+    background-color: rgba(var(--primary),0.6) ;
+    padding:1vh;
+    border-radius: 30px;
+}
+.search:hover {
+    background: rgba(var(--primary),0.4) ;
+}
+.search-btn{
+    float: right;
+    width: 4vh;
+    height: 4vh;
+    border-radius: 50%;
+    background:rgba(var(--secondary),0.6) ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+}
+
+.search-txt{
+    border: none;
+    background: none;
+    outline: none;
+    float: left;
+    padding-left: 3vw;
+    color: rgba(var(--dark));
+    font-size: 16px;
+    transition: ease-in 0.4s;
+    line-height: 40px;
+    width: 80%;
+}
+
+.dateRange{
+    display: flex;
+    justify-content: space-around;
 }

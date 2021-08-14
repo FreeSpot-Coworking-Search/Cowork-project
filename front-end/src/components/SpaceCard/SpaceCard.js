@@ -1,32 +1,44 @@
 import { Link } from 'react-router-dom';
 import './SpaceCard.css';
-import image from '../../assets/img/Coworking-768x380.png';
-import objectToQuerryParamsString from '../../helpers/objectToQuerryParamsString';
 
-export default function SpaceCard({ space, searchObject, linksRoute }) {
+import personIcon from '../../assets/icons/bxs-user.svg';
+import priceIcon from '../../assets/icons/bxs-dollar-circle.svg';
+import calendarIcon from '../../assets/icons/bxs-calendar.svg';
+import objectToQuerryParamsString from '../../helpers/objectToQuerryParamsString';
+import CardImageSlide from '../CardImageSlide/CardImageSlide';
+
+export default function SpaceCard({ space, searchObject, name }) {
   return (
-    <li>
+    <li className="spaceCard">
+      <div className="spaceCardLeftColumn">
+        <CardImageSlide
+          images={space.imagenes}
+          tag={name}
+          className="imageSlide"
+        />
+      </div>
       <Link
         to={objectToQuerryParamsString(
           '/space',
           { id: space.id },
           searchObject
         )}
-        className="spaceCard"
+        className="spaceCardRightColumn"
       >
-        <div className="leftColumn">
-          <p className="spaceCardName">{space.tipo}</p>
-          <h4 className="spaceCardPlace">({space.precio})</h4>
-          <p className="spaceCardPrice">{space.precio}€</p>
-          <p className="spaceCardPrice">{space.reserva_minima}€</p>
-        </div>
-        <div className="rightColumn">
-          {space.imagenes ? (
-            <img src={image} className="spaceCardImage" alt="Imagen Generica" />
-          ) : (
-            <img src={image} className="spaceCardImage" alt="" />
-          )}
-        </div>
+        <ul>
+          <li className="spaceCardCapacity">
+            <img src={personIcon} alt="Person icon" />
+            <p>{space.capacidad_maxima}</p>
+          </li>
+          <li className="spaceCardPrice">
+            <img src={priceIcon} alt="Price icon" />
+            <p>{space.precio}€/día</p>
+          </li>
+          <li className="spaceCardDays">
+            <img src={calendarIcon} alt="Calendar icon" />
+            <p>{`Min. ${space.reserva_minima} días`}</p>
+          </li>
+        </ul>
       </Link>
     </li>
   );

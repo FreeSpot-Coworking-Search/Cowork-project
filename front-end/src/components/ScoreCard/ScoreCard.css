@@ -1,0 +1,32 @@
+.scoreCard{
+    display:flex;
+    flex-direction: column;
+    gap: 0.4vh;
+}
+.scoreCardHeader{
+    display:flex;
+    justify-content: space-between;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    border-radius: 40px;
+    background-color: rgba(var(--clear),0.5);
+}
+.scoreCardHeader>span{
+    display: flex;
+}
+.scoreCardScore{
+    justify-self: flex-end;
+}
+.scoreCardComent{
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    border-radius: 20px;
+    background-color: rgba(var(--primary),0.5);
+    
+}
+.scoreCardComent>p:last-child{
+    text-align:end;
+
+}

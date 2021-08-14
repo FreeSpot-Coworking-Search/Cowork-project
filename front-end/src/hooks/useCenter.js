@@ -3,7 +3,7 @@ import getData from '../helpers/getData';
 
 export default function useCenter(centerId) {
   const [center, setCenter] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(
     function () {

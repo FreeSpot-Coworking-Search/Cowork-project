@@ -322,7 +322,7 @@ async function populateDB() {
 	  )
 	  VALUES(
 		"jcoastmail@gmail.com",
-		"${await bcrypt.hash('Dani', 10)}",
+		"${await bcrypt.hash('password1234', 10)}",
 		"jCoast",
 		"Dani",
 		"Martinez",
@@ -752,7 +752,7 @@ async function populateDB() {
 	  )
 	  VALUES(
 		"jcoastmail@gmail.com",
-		"${await bcrypt.hash('Dani', 10)}",
+		"${await bcrypt.hash('password1234', 10)}",
 		"Dani",
 		"Martinez",
 		"1982-10-04",
@@ -820,49 +820,45 @@ async function populateDB() {
             `
 			);
 		}
+
 		// ********************** CREANDO CONTENIDO IMAGENES *********************
 
-		// console.log('Creando imagenes');
+		console.log('Creando imagenes');
 
-		// for (let i = 0; i < centros; i++) {
-		// 	const idCentro = i;
-		// 	const descripcion = faker.lorem.words(5);
-		// 	const URL = faker.image.imageUrl();
-
-		// 	await connection.query(
-		// 		`INSERT INTO imagenes(
-		//       URL,
-		//       descripcion,
-		//       id_centro
-		//       )
-		//       VALUES(
-		//         "${URL}",
-		//         "${descripcion}",
-		//         "${idCentro}"
-		//         )
-		//         `
-		// 	);
-		// }
-
-		// for (let i = 0; i < espacios; i++) {
-		// 	const idEspacio = i;
-		// 	const descripcion = faker.lorem.words(5);
-		// 	const URL = faker.image.imageUrl();
-
-		// 	await connection.query(
-		// 		`INSERT INTO imagenes(
-		//       URL,
-		//       descripcion,
-		//       id_espacio
-		//       )
-		//       VALUES(
-		//         "${URL}",
-		//         "${descripcion}",
-		//         "${idEspacio}"
-		//         )
-		//         `
-		// 	);
-		// }
+		for (let i = 0; i < espacios; i++) {
+			for (let j = 0; j < 3; j++) {
+				await connection.query(
+					`INSERT INTO imagenes(
+							  URL,
+							  descripcion,
+							  id_espacio
+							  )
+							  VALUES(
+								"SpaceRandom${random(1, 20)}.jpeg",
+								"foto",
+								"${i + 1}"
+								)
+								`
+				);
+			}
+		}
+		for (let i = 0; i < centros; i++) {
+			for (let j = 0; j < 3; j++) {
+				await connection.query(
+					`INSERT INTO imagenes(
+							  URL,
+							  descripcion,
+							  id_centro
+							  )
+							  VALUES(
+								"CenterRandom${random(1, 9)}.jpeg",
+								"foto",
+								"${i + 1}"
+								)
+								`
+				);
+			}
+		}
 
 		// ********************** FIN DE LA CREACIÓN *********************
 

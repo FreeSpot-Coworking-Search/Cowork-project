@@ -2,64 +2,51 @@
   
   .spaceCard {
     margin-bottom:0.25rem;
-    min-height: 10rem;
-    width: 100%;
-    border-radius: 40px;
-    box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.10);
-    cursor: pointer;
-    transition: 0.4s;
-    display: flex;
-    justify-content: space-between;
-    color:rgba(var(--dark));
-    background: rgba(var(--clear));
-    
-  }
-  
-  .spaceCardImage {
-    width: 100%;
     height: 100%;
-    object-fit: cover;
-    object-position:center center;
-    border-radius: 0px 40px 40px 0px;
-  }
-
-  .leftColumn{
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-left: 1vw;
-    width: 25vw;
-    text-align: center;
-  }
-
-  .spaceCardName{
-    font-size: var(--cardTittle);
-  }
-  .spaceCardPlace{
-    font-size: var(--cardSubTittle);
-  }
-  .spaceCardPrice{
-    padding-top: 2vw;
-    font-size: var(--cardText);
-    align-self: center;
-  }
-  .spaceCardStarsDisplay{
-    align-self: center;
-  }
-  
-  .rightColumn{
-    clip-path: polygon(20% 0%, 100% 0, 100% 100%, 0% 100%);
     width: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content:flex-end;
+    gap: 2vw;
+    justify-content: flex-end;
+    color:rgba(var(--dark));
   }
-
-  .spaceCard:hover {
-    transform: scale(1.002, 1.002);
-    box-shadow: 5px 5px 5px 10px rgba(0,0,0,0.20)
+  
+  .spaceCardRightColumn
+  {
+    text-decoration: none;
+    cursor: pointer;
+    display:flex;
+    flex-direction: column;
+    gap: 1vh;
+    justify-content: flex-end;
+    width: 50%;
+    color: var(--dark);
+    font-size: var(--cardSubTittle);
+    margin-right: 0.3vw;
+  }
+  .spaceCardRightColumn>ul{
+    background-color:rgba(var(--clear),0.4);
+    padding: 1vh 1vw;
+    border-radius: 20px;
+    list-style: none;
+  }
+  .spaceCardRightColumn>ul>li{
+    display:flex;
+    justify-content: space-between;
+    gap: 0.5vw;
+    margin-right: 1vw;
+  }
+  .spaceCardRightColumn>ul>li>img{
+    width: 2.5vh;
+  }
+  .spaceCardLeftColumn
+  {  
+    height: 100%;
+     width: 100%;
+    display:flex;
+  }
+  .imageSlide{
+    height: 100%;
+    width: 100%;
   }
   
   

@@ -5,14 +5,13 @@
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
-    overflow-x: hidden;
-
 }
 .listSpaces::-webkit-scrollbar {
     display: none;
 }
 .listSpaces>ul{
     background-color: rgba(var(--primary),0.4);
+    width: 100%;
     display:flex;
     justify-content: flex-start;
     align-items: center;
@@ -24,6 +23,29 @@
     display: none;
 }
 .listSpacesType {
-    background-color: rgba(var(--primary),0.8);
-    height: 4vh;
+    background-color: rgba(var(--secondary),0.5);
+    height: 6vh;
+    width: 100%;
+    text-align: center;
+    padding-top: 1vh;
+    font-size: 3vh;
+    margin-bottom: 1vh;
+}
+.listSpaces>ul>li{
+    width: 100%;
+    
+}
+.listSpaces>ul>li>ul{
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 0.8vh;
+    
+    
+}
+
+.listSpaces>ul>li>ul>li {
+    width: 100%;
+    height: 15vh;
 }

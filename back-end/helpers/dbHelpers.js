@@ -257,8 +257,6 @@ const createSearchCentersQuerry = (searchObject) => {
 			query += 'DESC';
 	}
 	query += ';';
-	console.log(searchObject);
-	console.log(query);
 	return query;
 };
 
@@ -345,7 +343,6 @@ const createSearchSpacesQuerry = (searchObject) => {
 		)
 			query += 'DESC';
 	}
-	console.log(query);
 	query += ';';
 	return query;
 };

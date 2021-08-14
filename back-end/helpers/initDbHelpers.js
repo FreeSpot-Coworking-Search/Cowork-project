@@ -298,7 +298,7 @@ async function resetDB() {
 	  )
 	  VALUES(
 		"jcoastmail@gmail.com",
-		"${await bcrypt.hash('Dani', 10)}",
+		"${await bcrypt.hash('password1234', 10)}",
 		"jCoast",
 		"Dani",
 		"Martinez",
@@ -600,6 +600,45 @@ async function resetDB() {
 			);
 		}
 
+		// ********************** CREANDO CONTENIDO IMAGENES *********************
+
+		console.log('Creando imagenes');
+
+		for (let i = 0; i < espacios; i++) {
+			for (let j = 0; j < 3; j++) {
+				await connection.query(
+					`INSERT INTO imagenes(
+						  URL,
+						  descripcion,
+						  id_espacio,
+						  )
+						  VALUES(
+							"SpaceRandom${random(1, 20)}.jpg",
+							"foto",
+							${i + 1}
+							)
+							`
+				);
+			}
+		}
+		for (let i = 0; i < centros; i++) {
+			for (let j = 0; j < 3; j++) {
+				await connection.query(
+					`INSERT INTO imagenes(
+						  URL,
+						  descripcion,
+						  id_centro,
+						  )
+						  VALUES(
+							"CenterRandom${random(1, 20)}.jpg",
+							"foto",
+							${i + 1}
+							)
+							`
+				);
+			}
+		}
+
 		// ********************** CREANDO CONTENIDO ESPACIOS_SERVICIOS *********************
 
 		console.log('Creando espacios_servicios');
@@ -722,7 +761,7 @@ async function resetDB() {
 	  )
 	  VALUES(
 		"jcoastmail@gmail.com",
-		"${await bcrypt.hash('Dani', 10)}",
+		"${await bcrypt.hash('password1234', 10)}",
 		"Dani",
 		"Martinez",
 		"1982-10-04",

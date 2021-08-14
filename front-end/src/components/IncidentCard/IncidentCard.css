@@ -1,0 +1,17 @@
+.incidentCard{
+    background-color: rgba(var(--clear),0.4);
+    padding: 1vh 0.5vw;
+    border-radius: 20px;
+}
+
+.incidentCard>header{
+    display:flex;
+    justify-content: space-between;
+    padding:0 0.5vw;
+    margin-bottom: 1vh;
+}
+.incidentCard>ul>li{
+    background-color: rgba(var(--primary),0.4);
+    padding: 1vh 1vw;
+    border-radius: 20px;
+}

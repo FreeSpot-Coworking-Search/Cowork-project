@@ -14,6 +14,7 @@ import locationIcon from '../../assets/icons/bxs-location-plus 1.png';
 import CenterPresentation from '../../components/CenterPresentation/CenterPresentation';
 import RetrieveQueryParams from '../../helpers/RetriveQueryParams';
 
+import listIcon from '../../assets/icons/bx-list-ul.svg';
 import filterIcon from '../../assets/icons/bxs-filter-alt.svg';
 import presentationIcon from '../../assets/icons/bxs-home.svg';
 
@@ -48,7 +49,12 @@ export default function SearchSpace({ className }) {
   const presentationButton = {
     action: () => setVisualization('presentation'),
     icon: presentationIcon,
-    text: 'Ver centro',
+    text: 'Presentacion',
+  };
+  const listButton = {
+    action: () => setVisualization('list'),
+    icon: listIcon,
+    text: 'Lista',
   };
 
   const genericButton = { path: '/', icon: locationIcon, text: 'Uno' };
@@ -59,23 +65,86 @@ export default function SearchSpace({ className }) {
   switch (visualization) {
     case 'presentation':
       if (fullView) Links = [filterButton, genericButton, genericButton];
-      else Links = [filterButton, genericButton, genericButton, genericButton];
+      else Links = [filterButton, listButton, genericButton, genericButton];
       break;
     case 'filter':
       if (fullView) Links = [presentationButton, genericButton, genericButton];
       else
+        Links = [presentationButton, listButton, genericButton, genericButton];
+      break;
+    case 'list':
+      if (fullView) Links = [presentationButton, genericButton, genericButton];
+      else
         Links = [
           presentationButton,
-          genericButton,
+          filterButton,
           genericButton,
           genericButton,
         ];
-
       break;
 
     default:
       break;
   }
+  const fullViewJSX = {
+    presentation: (
+      <CenterPresentation
+        className="mainSectionRightArticle"
+        centerId={searchObject.id_centro}
+      />
+    ),
+    filter: (
+      <SearchForm
+        type="space"
+        searchObject={searchObject}
+        setSearchObject={setSearchObject}
+        services={[]}
+        results={results}
+        className="mainSectionRightArticle"
+      />
+    ),
+    list: (
+      <CenterPresentation
+        className="mainSectionRightArticle"
+        centerId={searchObject.id_centro}
+      />
+    ),
+  };
+  const singleViewJSX = {
+    presentation: (
+      <div className={className + ' mainSectionSingleView'}>
+        <CenterPresentation
+          className="mainSectionLeftArticle"
+          centerId={searchObject.id_centro}
+        />
+        <MainNavigation links={Links}></MainNavigation>
+      </div>
+    ),
+    filter: (
+      <div className={className + ' mainSectionSingleView'}>
+        <SearchForm
+          type="space"
+          searchObject={searchObject}
+          setSearchObject={setSearchObject}
+          services={[]}
+          results={results}
+          className="mainSectionLeftArticle"
+        />
+        <MainNavigation links={Links}></MainNavigation>
+      </div>
+    ),
+    list: (
+      <div className={className + ' mainSectionSingleView'}>
+        <ListSpacesSearch
+          results={results}
+          searchObject={cleanSearchObject(searchObject)}
+          setSearchObject={searchObject}
+          className="mainSectionLeftArticle"
+        ></ListSpacesSearch>
+        <MainNavigation links={Links}></MainNavigation>
+      </div>
+    ),
+  };
 
   // *********
   // ** JSX **
@@ -94,34 +163,11 @@ export default function SearchSpace({ className }) {
             className="mainSectionLeftArticle"
           ></ListSpacesSearch>
           <MainNavigation links={Links}></MainNavigation>
-          {visualization === 'presentation' ? (
-            <CenterPresentation
-              className="mainSectionRightArticle"
-              centerId={searchObject.id_centro}
-            />
-          ) : (
-            <SearchForm
-              type="space"
-              searchObject={searchObject}
-              setSearchObject={setSearchObject}
-              services={[]}
-              results={results}
-              className="mainSectionRightArticle"
-            />
-          )}
+          {fullViewJSX[visualization]}
         </div>
       ) : (
-        <div className={className + ' mainSectionSingleView'}>
-          <ListSpacesSearch
-            results={results}
-            searchObject={cleanSearchObject(searchObject)}
-            setSearchObject={searchObject}
-            className="mainSectionLeftArticle"
-          ></ListSpacesSearch>
-          <MainNavigation links={Links}></MainNavigation>
-        </div>
+        <>{singleViewJSX[visualization]}</>
       )}
     </>
   );
-  // return <p>hola</p>;
 }

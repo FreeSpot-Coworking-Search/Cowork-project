@@ -2,14 +2,14 @@
   
   .centerCard {
     margin-bottom:0.5vw;
-    min-height: 10vw;
+    max-height: 17vh;
     width: 100%;
     cursor: pointer;
     transition: 0.4s;
     display: flex;
     justify-content: space-between;
     color:rgba(var(--dark));
-    background-color: rgba(var(--clear),0.3);
+   
     text-decoration: none;
   }
   
@@ -21,25 +21,32 @@
   }
 
   .leftColumn{
-    width: 100%;
-    padding: 1rem;
+  
+    margin-top: 1vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
+    align-items:stretch;
     margin-left: 1vw;
     width: 25vw;
-    text-align: center;
+    text-align: left;
   }
 
   .centerCardName{
+    display: block;
+    width: 100%;
     font-size: var(--cardTittle);
+    background-color: rgba(var(--secondary),0.5);
+    padding-left: 0.7vw;
+    padding-right: 0.7vw;
+    border-radius: 30px;
+
   }
   .centerCardPlace{
     font-size: var(--cardSubTittle);
+    padding-left: 0.7vw;
   }
   .centerCardPrice{
-    padding-top: 2vw;
+    padding-top: 6vh;
     font-size: var(--cardText);
     align-self: center;
   }
@@ -55,8 +62,6 @@
     justify-content:flex-end;
   }
 
-  .centerCard:hover {
-    box-shadow: 5px 5px 5px 10px rgba(0,0,0,0.20)
-  }
+
   
   

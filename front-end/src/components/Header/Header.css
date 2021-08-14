@@ -9,7 +9,6 @@
     align-items: flex-start;
     padding-bottom: 10px;
 }
-
 .header-logo {
     padding: 5px;
     background-color: var(--black);
@@ -23,11 +22,20 @@
     max-width: 100%;
     height: auto;
 }
+.header>nav{
+    display:flex;
+}
+
 
 .header-links {
     align-self: stretch;
     flex: 1 1 auto;
     display: flex;
     justify-content: center;
-    gap: 10vw;
+    gap: 0.1vw;
+    margin-right: 4vw;
+}
+.header-links>span>li {
+    height: 13vh;
+
 }

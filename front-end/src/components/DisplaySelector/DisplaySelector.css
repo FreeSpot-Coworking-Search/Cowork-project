@@ -1,0 +1,33 @@
+.displaySelector{
+    align-self: flex-end;
+}
+.displaySelector>ul{
+    display:flex;
+    list-style: none;
+}
+.checkedVisualization{
+    background-color: rgba(var(--secondary),1);
+}
+.displaySelector ul li button{
+    border: none;
+    width: 4vw;
+    height: 3vh;
+}
+.displaySelector ul li button:hover{
+    
+    background-color: rgba(var(--secondary),1);
+    
+}
+.displaySelector ul li button img{
+    width: 2vw;
+}
+.displaySelector ul li:first-child button{
+    border-radius: 40px 0 0 40px;
+}
+.displaySelector ul li:last-child button{
+    border-radius: 0 40px 40px 0;
+}
+.uncheckedVisualization{
+    background-color: rgba(var(--secondary),0.6);
+}
+

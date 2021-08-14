@@ -1,0 +1,20 @@
+.typeSpaceSelector{
+    display: flex;
+    justify-content: space-around;
+
+    
+}
+.typeSpace{
+    border-radius: 40px;
+    background-color: rgba(var(--primary),0.6);
+    border:none;
+    padding: 2vh;
+    font-size: var(--cardSubTittle);
+}
+.clickedTypeSpace{
+    border-radius: 40px;
+    background-color: rgba(var(--secondary),0.6);
+    border:none;
+    padding: 2vh;
+    font-size: var(--cardSubTittle);
+}
