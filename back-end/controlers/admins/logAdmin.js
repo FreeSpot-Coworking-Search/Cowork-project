@@ -49,13 +49,10 @@ const logAdmin = async (req, res, next) => {
 
 		console.log('Login de administrador id:', admin[0].id);
 		res.send({
-			status: 'ok',
-			data: {
-				authorization,
-				tokenInfo,
-				avatarUrl: admin[0].foto,
-				name: admin[0].nombre,
-			},
+			authorization,
+			tokenInfo,
+			avatarUrl: admin[0].foto,
+			name: admin[0].nombre,
 		});
 	} catch (error) {
 		next(error);

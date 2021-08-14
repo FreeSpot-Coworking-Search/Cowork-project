@@ -65,8 +65,7 @@ function Form({ userType, handleClose }) {
                 password,
             });
 
-            const { authorization, tokenInfo, avatarUrl, name } =
-                response.data.data;
+            const { authorization, tokenInfo, avatarUrl, name } = response.data;
 
             setClientData({
                 state: true,

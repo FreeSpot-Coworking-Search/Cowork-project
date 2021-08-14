@@ -49,13 +49,10 @@ const loginUser = async (req, res, next) => {
 
 		console.log('Login de usuario id:', user[0].id);
 		res.send({
-			status: 'ok',
-			data: {
-				token,
-				tokenInfo,
-				avatarUrl: user[0].foto,
-				name: user[0].nombre,
-			},
+			authorization: token,
+			tokenInfo,
+			avatarUrl: user[0].foto,
+			name: user[0].nombre,
 		});
 	} catch (error) {
 		next(error);
