@@ -8,7 +8,12 @@ import personIcon from '../../assets/icons/bxs-user.svg';
 import priceIcon from '../../assets/icons/bxs-dollar-circle.svg';
 import calendarIcon from '../../assets/icons/bxs-calendar.svg';
 
-export default function SpacePresentation({ spaceData, className, reservation, setReservation}) {
+export default function SpacePresentation({
+    spaceData,
+    className,
+    reservation,
+    setReservation,
+}) {
     console.log(spaceData);
 
     return (
@@ -16,9 +21,13 @@ export default function SpacePresentation({ spaceData, className, reservation, s
             <h3>{`${spaceData.nombre} - ${spaceData.tipo} `}</h3>
 
             <div className="spaceCard">
-                <p className="spaceCardLeftColumn">{spaceData.descripcion}</p>
+                <DateRangeSelector
+                    setNewSearchObject={setReservation}
+                    newSearchObject={reservation}
+                    minDate={true}
+                />
 
-                <ul classname="spaceCardRightColumn">
+                <ul className="spaceCard-list">
                     <li>
                         <img src={personIcon} alt="Person icon" />
                         <p>{spaceData.capacidad_maxima}</p>
@@ -34,18 +43,15 @@ export default function SpacePresentation({ spaceData, className, reservation, s
                 </ul>
             </div>
 
-
             <ImageSlide
                 images={spaceData.imagenes}
                 tag={'presentationSpace'}
                 className="presentationSlide"
             />
 
-            <DateRangeSelector
-                setNewSearchObject={setReservation}
-                newSearchObject={reservation}
-                minDate={true}
-             />
+            <div className="spaceCard">
+                <p>{spaceData.descripcion}</p>
+            </div>
         </article>
-    ) 
+    );
 }

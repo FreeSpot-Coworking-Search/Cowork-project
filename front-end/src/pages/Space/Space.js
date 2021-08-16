@@ -11,44 +11,50 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import SpacePresentation from '../../components/SpacePresentation/SpacePresentation';
 
 import locationIcon from '../../assets/icons/bxs-location-plus 1.png';
+import submitIcon from '../../assets/icons/check-solid.png';
 
 export default function Space({ className }) {
     const [fullView] = useFullView();
-    const [visualization, setVisualization] = useState(1);
+    const [visualization, setVisualization] = useState('presentation');
 
-    const [reservation, setReservation] = useState(
-        RetrieveQueryParams(['id', 'fecha_entrada', 'fecha_salida'])
-    );
-    const [spaceData, loading] = useSpace(reservation.id);
+    const query = RetrieveQueryParams(['id', 'fecha_entrada', 'fecha_salida']);
+
+    const [reservation, setReservation] = useState(query);
+    const [spaceData, loading] = useSpace(query.id);
 
     // ****************************
     // ** MAIN NAVIGATION CONFIG **
     // ****************************
 
     const genericButton = {
-        action: () =>
-            setVisualization(visualization === 3 ? 1 : visualization + 1),
+        action: () => setVisualization(visualization === 'presentation'),
         icon: locationIcon,
         text: 'Mensaje ayuda',
     };
+    const submitButton = {
+        action: () => console.log('submit'),
+        icon: submitIcon,
+        text: 'Reservar',
+    };
+
     let Links = [];
 
     switch (visualization) {
-        case 1:
-            if (fullView) Links = [genericButton, genericButton, genericButton];
+        case 'presentation':
+            if (fullView) Links = [submitButton, genericButton, genericButton];
             else
                 Links = [
-                    genericButton,
+                    submitButton,
                     genericButton,
                     genericButton,
                     genericButton,
                 ];
             break;
         case 2:
-            if (fullView) Links = [genericButton, genericButton, genericButton];
+            if (fullView) Links = [submitButton, genericButton, genericButton];
             else
                 Links = [
-                    genericButton,
+                    submitButton,
                     genericButton,
                     genericButton,
                     genericButton,
@@ -56,10 +62,10 @@ export default function Space({ className }) {
 
             break;
         case 3:
-            if (fullView) Links = [genericButton, genericButton, genericButton];
+            if (fullView) Links = [submitButton, genericButton, genericButton];
             else
                 Links = [
-                    genericButton,
+                    submitButton,
                     genericButton,
                     genericButton,
                     genericButton,
@@ -91,7 +97,7 @@ export default function Space({ className }) {
                         links={Links}
                         className="mainSectionNavigation"
                     ></MainNavigation>
-                    {visualization === 2 ? (
+                    {visualization === 'presentation' ? (
                         <div className="mainSectionRightArticle Borrame">
                             <p>2</p>
                         </div>
@@ -103,7 +109,7 @@ export default function Space({ className }) {
                 </div>
             ) : (
                 <div className={className + ' mainSectionSingleView'}>
-                    {visualization === 1 ? (
+                    {visualization === 'presentation' ? (
                         <SpacePresentation
                             className="mainSectionLeftArticle"
                             spaceData={spaceData}
