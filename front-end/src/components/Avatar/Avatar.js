@@ -13,7 +13,6 @@ function Avatar() {
     const [open, setOpen] = useState(false);
 
     const [clientData] = useClient();
-    console.log(clientData);
 
     const handleClickOpen = () => {
         setOpen(true);

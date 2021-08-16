@@ -1,4 +1,4 @@
-const { getRegistrations, getConnection } = require('../../helpers/dbHelpers');
+const { getRegistrations } = require('../../helpers/dbHelpers');
 
 const getSpace = async (req, res, next) => {
 	try {
@@ -13,14 +13,16 @@ const getSpace = async (req, res, next) => {
 		});
 
 		const services = await getRegistrations(
-			`SELECT servicios.nombre, servicios.id FROM servicios INNER JOIN
-			espacios_servicios ON servicios.id = espacios_servicios.id_servicio
-			AND espacios_servicios.id_espacio = ${id} AND espacios_servicios.precio IS NULL;`
+			`SELECT servicios.nombre, servicios.id 
+				FROM servicios 
+				INNER JOIN espacios_servicios ON servicios.id = espacios_servicios.id_servicio
+				AND espacios_servicios.id_espacio = ${id} AND espacios_servicios.precio IS NULL;`
 		);
 
 		const extraServices = await getRegistrations(
-			`SELECT servicios.nombre, servicios.id, espacios_servicios.precio FROM servicios INNER JOIN
-				espacios_servicios ON servicios.id = espacios_servicios.id_servicio
+			`SELECT servicios.nombre, servicios.id, espacios_servicios.precio 
+				FROM servicios 
+				INNER JOIN espacios_servicios ON servicios.id = espacios_servicios.id_servicio
 				AND espacios_servicios.id_espacio = ${id} AND espacios_servicios.precio IS NOT NULL;`
 		);
 
@@ -42,7 +44,7 @@ const getSpace = async (req, res, next) => {
 				...results,
 				centro: centro,
 				servicios: services,
-				servicios_estra: extraServices,
+				servicios_extra: extraServices,
 				imagenes: photos,
 				reserves,
 			};
@@ -55,18 +57,17 @@ const getSpace = async (req, res, next) => {
 				...results,
 				centro: centro,
 				servicios: services,
-				servicios_estra: extraServices,
+				servicios_extra: extraServices,
 				imagenes: photos,
 				reserves,
 				incidencias,
 			};
 		}
 
-		console.log('Mostadro espacio requerido, Id:', id);
+		console.log('Mostandro espacio requerido, Id:', id);
 		res.status(200);
 		res.send({
-			status: 'ok',
-			data: results,
+			space: results,
 		});
 	} catch (error) {
 		next(error);

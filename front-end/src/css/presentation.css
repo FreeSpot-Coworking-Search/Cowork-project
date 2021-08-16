@@ -1,86 +1,91 @@
-
-.presentation{
+.presentation {
     padding-left: 1.3vw;
     padding-right: 1.3vw;
-    display:flex;
+    display: flex;
     flex-direction: column;
     height: 100%;
 }
 
-.presentation>ul{
+.presentation > ul {
     list-style: none;
     overflow-x: hidden;
-  }
-  .presentation>ul::-webkit-scrollbar{
+}
+.presentation > ul::-webkit-scrollbar {
     display: none;
-  }
+}
 
-  .presentation>ul li img{
+.presentation > ul li img {
     width: 2vh;
-  }
+}
 
-.presentationName{
+.presentationName,
+h3 {
     font-size: var(--presentationTittle);
     text-align: center;
     margin-bottom: 1vh;
     margin-top: 1vh;
-    background-color: rgba(var(--secondary),0.6);
+    background-color: rgba(var(--secondary), 0.6);
     border-radius: 40px;
-
 }
-.presentationCity{
+.presentationCity {
     font-size: var(--presentationSubTittle);
     padding-bottom: 1vh;
 }
-.presentationSlide{
+.presentationSlide {
     padding-bottom: 2vw;
-   
 }
 
-.presentationSlide{
+.presentationSlide {
     max-height: 25vh;
     margin-bottom: 2vh;
 }
-.presentationCity{
+.presentationCity {
     font-size: var(--presentationSubTittle);
     margin-top: 1vh;
 }
 
-.presentationPhone{
+.presentationPhone {
     display: flex;
     justify-content: space-between;
 }
-.presentationAddress{
+.presentationAddress {
     display: flex;
     justify-content: space-between;
 }
-.presentationEmail{
+.presentationEmail {
     display: flex;
     justify-content: space-between;
 }
 
-
-.presentationDescription{
+.presentationDescription,
+p {
     font-size: var(--presentationText);
     padding: 1vh;
+    text-align: justify;
 }
-.presentation{
+
+.presentationDescription::first-letter,
+p::first-letter {
+    text-transform: uppercase;
+}
+
+.presentation {
     color: rgba(var(--dark));
     border-radius: 40px;
-    background-color: rgba(var(--primary),0.4);
+    background-color: rgba(var(--primary), 0.4);
     padding: 2vw;
 }
-.presentationList{
-    display:flex;
+.presentationList {
+    display: flex;
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
     height: 100%;
 }
-.presentationList>ul::-webkit-scrollbar {
+.presentationList > ul::-webkit-scrollbar {
     display: none;
 }
-.presentationList>ul{
+.presentationList > ul {
     display: flex;
     flex-direction: column;
     list-style: none;
@@ -89,7 +94,3 @@
     height: 80%;
     width: 100%;
 }
-
-
-
-
