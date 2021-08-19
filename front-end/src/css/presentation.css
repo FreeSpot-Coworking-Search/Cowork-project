@@ -94,3 +94,13 @@ p::first-letter {
     height: 80%;
     width: 100%;
 }
+
+.error {
+    color: rgba(var(--alert), 1);
+    font-size: var(--cardText);
+}
+
+.message {
+    color: rgba(var(--dark), 1);
+    font-size: var(--cardText);
+}

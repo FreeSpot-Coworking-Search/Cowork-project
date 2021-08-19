@@ -6,7 +6,10 @@ export default function ServicesList({
     checkValues,
 }) {
     const { name, data, type } = listData;
-    console.log(checkValues);
+
+    function addPrice(name) {
+        return name === 'precio' ? 'priceItem' : '';
+    }
 
     let renderedList;
     switch (type) {
@@ -14,7 +17,22 @@ export default function ServicesList({
             renderedList = (
                 <ul className="list list-simple">
                     {data?.map((item) => (
-                        <li key={item.nombre}>{item.nombre}</li>
+                        <li key={item.nombre} className={addPrice(item.nombre)}>
+                            {item.nombre}
+                        </li>
+                    ))}
+                </ul>
+            );
+            break;
+
+        case 'object':
+            renderedList = (
+                <ul className="list list-simple">
+                    {Object.keys(data)?.map((key) => (
+                        <li
+                            key={key}
+                            className={addPrice(key)}
+                        >{`${key} : ${data[key]}`}</li>
                     ))}
                 </ul>
             );

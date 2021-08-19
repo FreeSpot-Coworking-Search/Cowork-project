@@ -25,7 +25,6 @@ const userIsLogin = (req, res, next) => {
 			throw error2;
 		}
 
-		console.log(tokenInfo);
 		// Creamos la propiedad "userAuth" en la request.
 		req.userAuth = tokenInfo;
 		next();

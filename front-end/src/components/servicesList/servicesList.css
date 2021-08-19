@@ -16,7 +16,12 @@
 
 .list-checked li {
     display: flex;
+    flex-wrap: wrap;
 
     flex-direction: row;
     justify-content: space-between;
+}
+
+.priceItem::after {
+    content: ' €/dia';
 }

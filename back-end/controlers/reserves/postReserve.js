@@ -75,8 +75,10 @@ const postReserve = async (req, res, next) => {
 			'usuario id:',
 			id_usuario
 		);
-		req.query.id = insertId;
-		next();
+		res.status(200);
+		res.send({
+			message: 'Reservation created',
+		});
 	} catch (error) {
 		next(error);
 	}

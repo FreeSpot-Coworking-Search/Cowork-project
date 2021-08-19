@@ -1,21 +1,23 @@
 import './Space.css';
 
-import { useState } from 'react';
-import useFullView from '../../hooks/useFullView';
-import RetrieveQueryParams from '../../helpers/RetriveQueryParams';
-import useSpace from '../../hooks/useSpace';
+import { useState, lazy } from 'react';
+import { Dialog, CircularProgress } from '@material-ui/core';
 
 import MainNavigation from '../../components/MainNavigation/MainNavigation';
 import SpacePresentation from '../../components/SpacePresentation/SpacePresentation';
 import ServicesPresentation from '../../components/ServicesPresentation/ServicesPresentation';
-import ConfirmationCard from './ConfirmationCard';
-
-import { Dialog, CircularProgress } from '@material-ui/core';
 import CircularSuspense from '../../components/CircularSuspense/CircularSuspense';
+
+import RetrieveQueryParams from '../../helpers/RetriveQueryParams';
+
+import useFullView from '../../hooks/useFullView';
+import useSpace from '../../hooks/useSpace';
 import useDialog from '../../hooks/useDialog';
 
 import locationIcon from '../../assets/icons/bxs-location-plus 1.png';
 import submitIcon from '../../assets/icons/check-solid.png';
+
+const ConfirmationDialog = lazy(() => import('./ConfirmationDialog'));
 
 export default function Space({ className }) {
     const [fullView] = useFullView();
@@ -117,7 +119,11 @@ export default function Space({ className }) {
 
                     <CircularSuspense>
                         <Dialog open={open} onClose={handleClose}>
-                            <ConfirmationCard />
+                            <ConfirmationDialog
+                                reservation={reservation}
+                                handleClose={handleClose}
+                                spaceData={spaceData}
+                            />
                         </Dialog>
                     </CircularSuspense>
 
@@ -161,7 +167,11 @@ export default function Space({ className }) {
                     ></MainNavigation>
                     <CircularSuspense>
                         <Dialog open={open} onClose={handleClose}>
-                            <ConfirmationCard />
+                            <ConfirmationDialog
+                                reservation={reservation}
+                                handleClose={handleClose}
+                                spaceData={spaceData}
+                            />
                         </Dialog>
                     </CircularSuspense>
                 </div>
