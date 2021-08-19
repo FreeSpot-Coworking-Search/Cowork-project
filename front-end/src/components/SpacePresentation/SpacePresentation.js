@@ -14,8 +14,6 @@ export default function SpacePresentation({
     reservation,
     setReservation,
 }) {
-    console.log(spaceData);
-
     return (
         <article className={className + ' presentation'}>
             <h3>{`${spaceData.nombre} - ${spaceData.tipo} `}</h3>

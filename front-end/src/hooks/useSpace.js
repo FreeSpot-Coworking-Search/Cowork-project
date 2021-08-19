@@ -3,7 +3,7 @@ import getData from '../helpers/getData';
 
 export default function useSpace(spaceId) {
     const [space, setSpace] = useState({});
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     useEffect(
         function () {

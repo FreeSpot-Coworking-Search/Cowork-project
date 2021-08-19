@@ -6,9 +6,13 @@ import RetrieveQueryParams from '../../helpers/RetriveQueryParams';
 import useSpace from '../../hooks/useSpace';
 
 import MainNavigation from '../../components/MainNavigation/MainNavigation';
-import CircularProgress from '@material-ui/core/CircularProgress';
-
 import SpacePresentation from '../../components/SpacePresentation/SpacePresentation';
+import ServicesPresentation from '../../components/ServicesPresentation/ServicesPresentation';
+import ConfirmationCard from './ConfirmationCard';
+
+import { Dialog, CircularProgress } from '@material-ui/core';
+import CircularSuspense from '../../components/CircularSuspense/CircularSuspense';
+import useDialog from '../../hooks/useDialog';
 
 import locationIcon from '../../assets/icons/bxs-location-plus 1.png';
 import submitIcon from '../../assets/icons/check-solid.png';
@@ -18,10 +22,23 @@ export default function Space({ className }) {
     const [visualization, setVisualization] = useState('presentation');
 
     const query = RetrieveQueryParams(['id', 'fecha_entrada', 'fecha_salida']);
-
-    const [reservation, setReservation] = useState(query);
     const [spaceData, loading] = useSpace(query.id);
 
+    const [reservation, setReservation] = useState(query);
+    const { open, handleClickOpen, handleClose } = useDialog();
+
+    const servicesGroup = [
+        {
+            name: 'servicios extra',
+            data: spaceData?.servicios_extra,
+            type: 'checkbox',
+        },
+        {
+            name: 'servicios incluidos',
+            data: spaceData?.servicios,
+            type: 'standar',
+        },
+    ];
     // ****************************
     // ** MAIN NAVIGATION CONFIG **
     // ****************************
@@ -32,7 +49,7 @@ export default function Space({ className }) {
         text: 'Mensaje ayuda',
     };
     const submitButton = {
-        action: () => console.log('submit'),
+        action: handleClickOpen,
         icon: submitIcon,
         text: 'Reservar',
     };
@@ -97,10 +114,20 @@ export default function Space({ className }) {
                         links={Links}
                         className="mainSectionNavigation"
                     ></MainNavigation>
+
+                    <CircularSuspense>
+                        <Dialog open={open} onClose={handleClose}>
+                            <ConfirmationCard />
+                        </Dialog>
+                    </CircularSuspense>
+
                     {visualization === 'presentation' ? (
-                        <div className="mainSectionRightArticle Borrame">
-                            <p>2</p>
-                        </div>
+                        <ServicesPresentation
+                            className="mainSectionRightArticle"
+                            listsGroup={servicesGroup}
+                            reservation={reservation}
+                            setReservation={setReservation}
+                        />
                     ) : (
                         <div className="mainSectionRightArticle Borrame">
                             <p>3</p>
@@ -117,9 +144,12 @@ export default function Space({ className }) {
                             setReservation={setReservation}
                         />
                     ) : visualization === 2 ? (
-                        <div className="mainSectionLeftArticle Borrame">
-                            <p>2</p>
-                        </div>
+                        <ServicesPresentation
+                            className="mainSectionRightArticle"
+                            listsGroup={servicesGroup}
+                            reservation={reservation}
+                            setReservation={setReservation}
+                        />
                     ) : (
                         <div className="mainSectionLeftArticle Borrame">
                             <p>3</p>
@@ -129,6 +159,11 @@ export default function Space({ className }) {
                         links={Links}
                         className="mainSectionNavigation"
                     ></MainNavigation>
+                    <CircularSuspense>
+                        <Dialog open={open} onClose={handleClose}>
+                            <ConfirmationCard />
+                        </Dialog>
+                    </CircularSuspense>
                 </div>
             )}
         </>
