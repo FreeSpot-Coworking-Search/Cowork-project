@@ -261,12 +261,12 @@ const createSearchCentersQuerry = (searchObject) => {
 };
 
 const createSearchSpacesQuerry = (searchObject) => {
-	let query = `SELECT  espacios.id, espacios.tipo, espacios.descripcion, espacios.capacidad_maxima, espacios.reserva_minima, espacios.precio, espacios.id_centro
+	let query = `SELECT  espacios.id, espacios.tipo, espacios.estado, espacios.visible, espacios.descripcion, espacios.capacidad_maxima, espacios.reserva_minima, espacios.precio, espacios.id_centro
 	FROM espacios 
 	INNER JOIN reservas ON reservas.id_espacio = espacios.id `;
 	const whereString = [];
 
-	whereString.push('( espacios.borrado = 0 )');
+	whereString.push('( espacios.borrado = 0 && espacios.visible = 1 )');
 
 	if (searchObject['id_centro']) {
 		whereString.push(

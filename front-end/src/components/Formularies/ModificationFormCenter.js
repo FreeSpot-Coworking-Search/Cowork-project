@@ -1,8 +1,18 @@
 import './registrationForm.css';
 import infoIcon from '../../assets/icons/bx-info-circle.svg';
+import { Redirect } from 'react-router-dom';
 import { useState } from 'react';
+import axios from 'axios';
+import { Dialog } from '@material-ui/core';
+import useDialog from '../../hooks/useDialog';
 
 export default function ModificationFormCenter({ className, center }) {
+  const { open, handleClickOpen, handleClose } = useDialog();
+  const {
+    REACT_APP_API_LOCAL_SERVER_HOST: host,
+    REACT_APP_API_LOCAL_SERVER_PORT: port,
+  } = process.env;
+
   const INITIAL_CENTER_INFO = {
     nombre: center.nombre,
     nombre_fiscal: center.nombre_fiscal,
@@ -20,12 +30,80 @@ export default function ModificationFormCenter({ className, center }) {
       ...centerInfo,
       [prop]: event.target.value,
     });
+    setModification(true);
   };
 
   const [centerInfo, setCenterInfo] = useState(INITIAL_CENTER_INFO);
+  const [error, setError] = useState();
+  const [message, setMessage] = useState();
+  const [modification, setModification] = useState(false);
+
+  async function deleteCenter(e) {
+    e.preventDefault();
+    try {
+      const route = `${host}:${port}/api/centers/?id=${center.id}`;
+      const response = axios.delete(route);
+
+      if (response.status === 200) {
+        setError('Centro eliminado');
+        setTimeout(() => {
+          <Redirect to="/" />;
+        }, 5000);
+      }
+    } catch (error) {
+      setError('Ha habido algun error');
+      setTimeout(() => {
+        setError('');
+      }, 5000);
+
+      return;
+    }
+  }
+  async function performSubmit(e) {
+    e.preventDefault();
+    try {
+      if (!modification) {
+        setError(
+          'Debes tener habilitada la modificación antes de poder guardar los cambios.'
+        );
+        setTimeout(() => {
+          setError('');
+        }, 5000);
+        return;
+      }
+
+      setMessage('Enviando datos');
+
+      const route = `${host}:${port}/api/centers/?id=${center.id}`;
+
+      const response = await axios.put(route, centerInfo);
+      if (response.status === 200) {
+        setMessage('Datos del centro modificados.');
+        setTimeout(() => {
+          setMessage('');
+          <Redirect to={`/center?id_centro=${center.id}`} />;
+        }, 2000);
+        setModification(false);
+      }
+    } catch (error) {
+      setMessage('');
+
+      const {
+        data: { message },
+      } = error.response;
+
+      message ? setError(message) : setError(error.message);
+      setTimeout(() => {
+        setError('');
+      }, 5000);
+    }
+  }
 
   return (
-    <form className={`${className} registerForm`}>
+    <form
+      className={`${className} registerForm`}
+      onSubmit={(e) => performSubmit(e)}
+    >
       <fieldset>
         <label>
           <img src={infoIcon} alt="Nombre del centro" />
@@ -136,6 +214,18 @@ export default function ModificationFormCenter({ className, center }) {
           />
         </label>
       </fieldset>
+      {error && <p className="registerForm-error">{error}</p>}
+      {message && <p className="registerForm-message">{message}</p>}
+      <button>Enviar</button>
+      <button onClick={handleClickOpen}>Eliminar centro</button>
+
+      <Dialog open={open} onClose={handleClose}>
+        <div className="modificationForm-dialog">
+          ¡Al eliminar el centro perderá toda la información sobre su actividad!
+          <button onClick={deleteCenter}>Eliminar</button>
+          <button onClick={handleClose}>Cancelar</button>
+        </div>
+      </Dialog>
     </form>
   );
 }

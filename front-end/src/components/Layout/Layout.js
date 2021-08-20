@@ -1,5 +1,6 @@
 import './Layout.css';
 import '../../css/mainSection.css';
+import '../../css/tooltip.css';
 import { Switch, Route } from 'react-router-dom';
 
 import BackGroundLeft from '../BackGroundLeft/BackGroundLeft';

@@ -45,13 +45,13 @@ export default function CardImageSlide({ images, className, tag }) {
           return (
             <div
               className={`myCardSlides ${tag} fade`}
-              key={image.URL}
+              key={tag + image.URL + index}
               Style={index === 0 ? 'display: block;' : 'display: none;'}
             >
               <img
                 src={`http://localhost:8080/api/images/spacesCentersPhotos/${image.URL}`}
                 alt="imagen"
-                key={image.URL}
+                key={tag + image.URL + index}
               />
             </div>
           );

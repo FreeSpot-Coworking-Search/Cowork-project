@@ -5,7 +5,7 @@ export default function TypeSpaceSelector({
   newSearchObject,
   setNewSearchObject,
 }) {
-  const [state, setState] = useState(newSearchObject);
+  const [state, setState] = useState(newSearchObject.tipo);
 
   const onClick = (e, value) => {
     e.preventDefault();

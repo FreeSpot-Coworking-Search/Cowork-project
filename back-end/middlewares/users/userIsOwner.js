@@ -2,7 +2,6 @@ const userIsOwner = async (req, res, next) => {
 	try {
 		const { idUser: idAuth } = req.userAuth;
 		const { id } = req.query;
-		console.log(id);
 
 		if (Number(id) !== Number(idAuth)) {
 			const error = new Error('Usuario no autorizado');

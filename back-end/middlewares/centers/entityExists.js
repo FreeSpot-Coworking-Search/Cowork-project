@@ -5,7 +5,6 @@ const entityExists = async (req, res, next) => {
 		const { id } = req.query;
 		const url = req.originalUrl;
 		const method = req.method;
-		console.log(method);
 
 		const route = url.slice(url.indexOf('/', 1) + 1, url.indexOf('/', 5));
 		const options = {

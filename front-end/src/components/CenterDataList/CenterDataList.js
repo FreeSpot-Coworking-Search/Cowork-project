@@ -13,7 +13,7 @@ export default function CenterDataList({ center, className }) {
         className="presentationSlide"
         tag="PresentationCenter"
       />
-      <ul>
+      <ul className="centerDataList">
         <li>
           <p className="presentationCity">{center.localidad}</p>
         </li>

@@ -13,11 +13,14 @@ export default function DisplaySelector({
           <li key={button.value}>
             <button
               onClick={() => setVisualization(button.value)}
-              className={
-                button.value === visualization
-                  ? 'checkedVisualization'
-                  : 'uncheckedVisualization'
-              }
+              className={`
+                ${button.alert === true ? 'alertVisualization' : ''}
+                ${
+                  button.value === visualization
+                    ? 'checkedVisualization'
+                    : 'uncheckedVisualization'
+                }
+              `}
             >
               <img src={button.icon} alt="Visualization Icon" />
             </button>

@@ -32,30 +32,38 @@ export default function OrderByNavigation({
       <ul>
         {managementCriteria.criterias.map((criteria, index) => {
           return criteria.position === 0 ? (
-            <li key={criteria}>
+            <li key={criteria.value[criteria.position]}>
               <button
-                key={criteria}
+                key={criteria.value[criteria.position]}
                 onClick={() => {
                   setCriteria(index);
                   updateSearchObject(criteria.value[criteria.position]);
                 }}
               >
-                {criteria.icons[0].map((icon) => (
-                  <img src={icon} alt="icono" key={icon} />
+                {criteria.icons[0].map((icon, indexIcon) => (
+                  <img
+                    src={icon}
+                    alt="icono"
+                    key={criteria.value[criteria.position] + indexIcon}
+                  />
                 ))}
               </button>
             </li>
           ) : (
-            <li key={criteria}>
+            <li key={criteria.value[criteria.position]}>
               <button
-                key={criteria}
+                key={criteria.value[criteria.position]}
                 onClick={() => {
                   setCriteria(index);
                   updateSearchObject(criteria.value[criteria.position]);
                 }}
               >
-                {criteria.icons[1].map((icon) => (
-                  <img src={icon} alt="icono" key={icon} />
+                {criteria.icons[1].map((icon, indexIcon) => (
+                  <img
+                    src={icon}
+                    alt="icono"
+                    key={criteria.value[criteria.position] + indexIcon}
+                  />
                 ))}
               </button>
             </li>

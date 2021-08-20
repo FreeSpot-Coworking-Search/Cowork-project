@@ -9,7 +9,6 @@ export default function ListCentersSearchElement({
   searchObject,
   linksRoute,
 }) {
-  console.log(center.imagenes[0].URL);
   return (
     <li>
       <Link

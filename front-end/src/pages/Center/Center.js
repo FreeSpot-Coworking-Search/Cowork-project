@@ -1,33 +1,22 @@
 import './Center.css';
 
 import { useState } from 'react';
-import { useMediaQuery } from 'react-responsive';
 
+import CenterPresentation from '../../components/CenterPresentation/CenterPresentation';
 import MainNavigation from '../../components/MainNavigation/MainNavigation';
 
 import locationIcon from '../../assets/icons/bxs-location-plus 1.png';
+import useFullView from '../../hooks/useFullView';
+import RetrieveQueryParams from '../../helpers/RetriveQueryParams';
+import ListSpacesSearch from '../../components/ListSpacesSearch/ListSpacesSearch';
+import useCenter from '../../hooks/useCenter';
+import Spinner from '../../components/Spinner/Spinner';
 
 export default function Center({ className }) {
-  const { REACT_APP_MIN_WIDTH_FULL_VIEW_MAIN_SECTION } = process.env;
-  const [visualization, setVisualization] = useState(1);
-  const [fullView, setFullView] = useState(
-    useMediaQuery({
-      query: `(min-width: ${REACT_APP_MIN_WIDTH_FULL_VIEW_MAIN_SECTION})`,
-    })
-  );
-
-  // ****************
-  // ** RESPONSIVE **
-  // ****************
-
-  const handleMediaQueryChange = (matches) => {
-    setFullView(matches);
-  };
-  const isFullView = useMediaQuery(
-    { query: `(min-width: ${REACT_APP_MIN_WIDTH_FULL_VIEW_MAIN_SECTION})` },
-    undefined,
-    handleMediaQueryChange
-  );
+  const centerId = RetrieveQueryParams(['id_centro']).id_centro;
+  const [center, loading] = useCenter(centerId);
+  const [visualization, setVisualization] = useState('modification');
+  const [fullView] = useFullView();
 
   // ****************************
   // ** MAIN NAVIGATION CONFIG **
@@ -41,7 +30,7 @@ export default function Center({ className }) {
   let Links = [];
 
   switch (visualization) {
-    case 1:
+    case 'modification':
       if (fullView) Links = [genericButton, genericButton, genericButton];
       else Links = [genericButton, genericButton, genericButton, genericButton];
       break;
@@ -59,47 +48,55 @@ export default function Center({ className }) {
       break;
   }
 
+  const fullViewJSX = {
+    modification: (
+      <CenterPresentation
+        center={center}
+        loading={loading}
+        className="mainSectionRightArticle"
+      />
+    ),
+  };
+  const singleViewJSX = {
+    modification: (
+      <CenterPresentation
+        center={center}
+        loading={loading}
+        className="mainSectionLeftArticle"
+      />
+    ),
+    list: (
+      <ListSpacesSearch
+        className="mainSectionLeftArticle"
+        results={center.espacios}
+      />
+    ),
+  };
+
   // *********
   // ** JSX **
   // *********
 
-  return (
+  return loading ? (
+    <Spinner />
+  ) : (
     <>
       {fullView ? (
         <div className={className + ' mainSectionFullView'}>
-          <div className="mainSectionLeftArticle Borrame">
-            <p>1</p>
-          </div>
+          <ListSpacesSearch
+            className="mainSectionLeftArticle"
+            results={center.espacios}
+          />
 
           <MainNavigation
             links={Links}
             className="mainSectionNavigation"
           ></MainNavigation>
-          {visualization === 2 ? (
-            <div className="mainSectionRightArticle Borrame">
-              <p>2</p>
-            </div>
-          ) : (
-            <div className="mainSectionRightArticle Borrame">
-              <p>3</p>
-            </div>
-          )}
+          {fullViewJSX[visualization]}
         </div>
       ) : (
         <div className={className + ' mainSectionSingleView'}>
-          {visualization === 1 ? (
-            <div className="mainSectionLeftArticle Borrame">
-              <p>1</p>
-            </div>
-          ) : visualization === 2 ? (
-            <div className="mainSectionLeftArticle Borrame">
-              <p>2</p>
-            </div>
-          ) : (
-            <div className="mainSectionLeftArticle Borrame">
-              <p>3</p>
-            </div>
-          )}
+          {singleViewJSX[visualization]}
           <MainNavigation
             links={Links}
             className="mainSectionNavigation"

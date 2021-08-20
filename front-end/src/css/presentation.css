@@ -42,8 +42,8 @@
     margin-bottom: 2vh;
 }
 .presentationCity{
-    font-size: var(--presentationSubTittle);
-    margin-top: 1vh;
+    font-size: var(--presentationText);
+    text-align: end;
 }
 
 .presentationPhone{
@@ -75,7 +75,9 @@
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
-    height: 100%;
+    flex: 1 1 50%;
+    overflow-x: hidden;
+
 }
 .presentationList>ul::-webkit-scrollbar {
     display: none;
@@ -86,10 +88,24 @@
     list-style: none;
     gap: 1vh;
     overflow-x: hidden;
-    height: 80%;
+    flex: 1 1 50%;
     width: 100%;
 }
-
+.centerDataList{
+    background-color: rgba(var(--clear),0.4);
+    padding: 1vh 1vw;
+    border-radius: 20px;
+}
+.presentationEnd {
+    width: 100%;
+    background-color: rgba(var(--secondary),0.7);
+    border-radius: 0 0 40px 40px;
+  }
+  .presentationStart {
+    width: 100%;
+    background-color: rgba(var(--secondary),0.7);
+    border-radius: 40px 40px 0 0;
+  }
 
 
 

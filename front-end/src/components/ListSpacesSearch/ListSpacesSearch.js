@@ -23,13 +23,12 @@ export default function ListSpacesSearch({
       listSpaces = { ...listSpaces, [result.tipo]: [result] };
     }
   }
-  console.log(results);
 
   const initialManagementCriteria = {
     state: 0,
     criterias: [
       {
-        position: true,
+        position: 0,
         icons: [
           [priceIcon, descIcon],
           [priceIcon, ascIcon],
@@ -38,7 +37,7 @@ export default function ListSpacesSearch({
         value: ['precio descendente', 'precio ascendente'],
       },
       {
-        position: true,
+        position: 0,
         icons: [
           [calendarIcon, descIcon],
           [calendarIcon, ascIcon],
@@ -47,7 +46,7 @@ export default function ListSpacesSearch({
         value: ['reserva_minima descendente', 'reserva_minima ascendente'],
       },
       {
-        position: true,
+        position: 0,
         icons: [
           [personIcon, descIcon],
           [personIcon, ascIcon],
@@ -58,7 +57,7 @@ export default function ListSpacesSearch({
     ],
   };
 
-  return (
+  return results.length !== 0 ? (
     <article className={className + ' listSpaces'}>
       <OrderByNavigation
         searchObject={searchObject}
@@ -85,7 +84,9 @@ export default function ListSpacesSearch({
           );
         })}
       </ul>
-      <div className="orderByEnd" />
+      <div className="presentationEnd" />
     </article>
+  ) : (
+    <Spinner />
   );
 }

@@ -16,7 +16,9 @@ import RetrieveQueryParams from '../../helpers/RetriveQueryParams';
 
 import listIcon from '../../assets/icons/bx-list-ul.svg';
 import filterIcon from '../../assets/icons/bxs-filter-alt.svg';
+import resetIcon from '../../assets/icons/bx-reset.svg';
 import presentationIcon from '../../assets/icons/bxs-home.svg';
+import useCenter from '../../hooks/useCenter';
 
 export default function SearchSpace({ className }) {
   const INITIAL_SEARCH_OBJECT = RetrieveQueryParams([
@@ -32,8 +34,9 @@ export default function SearchSpace({ className }) {
     'ordenado_por',
   ]);
 
-  const [loading, results, searchObject, setSearchObject, resetSearchObject] =
+  const [loading2, results, searchObject, setSearchObject, resetSearchObject] =
     useSearchSpace(INITIAL_SEARCH_OBJECT);
+  const [center, loading] = useCenter(searchObject.id_centro);
   const [fullView] = useFullView();
   const [visualization, setVisualization] = useState('presentation');
 
@@ -56,6 +59,11 @@ export default function SearchSpace({ className }) {
     icon: listIcon,
     text: 'Lista',
   };
+  const resetButton = {
+    action: () => resetSearchObject(),
+    icon: resetIcon,
+    text: 'Resetear busqueda',
+  };
 
   const genericButton = { path: '/', icon: locationIcon, text: 'Uno' };
   let Links = [];
@@ -64,23 +72,17 @@ export default function SearchSpace({ className }) {
 
   switch (visualization) {
     case 'presentation':
-      if (fullView) Links = [filterButton, genericButton, genericButton];
-      else Links = [filterButton, listButton, genericButton, genericButton];
+      if (fullView) Links = [filterButton, resetButton, genericButton];
+      else Links = [filterButton, listButton, resetButton, genericButton];
       break;
     case 'filter':
-      if (fullView) Links = [presentationButton, genericButton, genericButton];
-      else
-        Links = [presentationButton, listButton, genericButton, genericButton];
+      if (fullView) Links = [presentationButton, resetButton, genericButton];
+      else Links = [presentationButton, listButton, resetButton, genericButton];
       break;
     case 'list':
-      if (fullView) Links = [presentationButton, genericButton, genericButton];
+      if (fullView) Links = [presentationButton, resetButton, genericButton];
       else
-        Links = [
-          presentationButton,
-          filterButton,
-          genericButton,
-          genericButton,
-        ];
+        Links = [presentationButton, filterButton, resetButton, genericButton];
       break;
 
     default:
@@ -88,10 +90,7 @@ export default function SearchSpace({ className }) {
   }
   const fullViewJSX = {
     presentation: (
-      <CenterPresentation
-        className="mainSectionRightArticle"
-        centerId={searchObject.id_centro}
-      />
+      <CenterPresentation className="mainSectionRightArticle" center={center} />
     ),
     filter: (
       <SearchForm
@@ -104,10 +103,7 @@ export default function SearchSpace({ className }) {
       />
     ),
     list: (
-      <CenterPresentation
-        className="mainSectionRightArticle"
-        centerId={searchObject.id_centro}
-      />
+      <CenterPresentation className="mainSectionRightArticle" center={center} />
     ),
   };
   const singleViewJSX = {
@@ -115,7 +111,7 @@ export default function SearchSpace({ className }) {
       <div className={className + ' mainSectionSingleView'}>
         <CenterPresentation
           className="mainSectionLeftArticle"
-          centerId={searchObject.id_centro}
+          center={center}
         />
         <MainNavigation links={Links}></MainNavigation>
       </div>
@@ -138,7 +134,7 @@ export default function SearchSpace({ className }) {
         <ListSpacesSearch
           results={results}
           searchObject={cleanSearchObject(searchObject)}
-          setSearchObject={searchObject}
+          setSearchObject={setSearchObject}
           className="mainSectionLeftArticle"
         ></ListSpacesSearch>
         <MainNavigation links={Links}></MainNavigation>
@@ -150,7 +146,7 @@ export default function SearchSpace({ className }) {
   // ** JSX **
   // *********
 
-  return loading ? (
+  return loading || loading2 ? (
     <Spinner />
   ) : (
     <>
@@ -159,7 +155,7 @@ export default function SearchSpace({ className }) {
           <ListSpacesSearch
             results={results}
             searchObject={cleanSearchObject(searchObject)}
-            setSearchObject={searchObject}
+            setSearchObject={setSearchObject}
             className="mainSectionLeftArticle"
           ></ListSpacesSearch>
           <MainNavigation links={Links}></MainNavigation>

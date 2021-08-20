@@ -49,13 +49,13 @@ export default function ImageSlide({ images, className, tag }) {
           return (
             <div
               className={`mySlides ${tag} fade`}
-              key={image.URL}
+              key={tag + image.URL + index}
               Style={index === 0 ? 'display: block;' : 'display: none;'}
             >
               <img
                 src={`http://localhost:8080/api/images/spacesCentersPhotos/${image.URL}`}
                 alt="imagen"
-                key={image.URL}
+                key={tag + image.URL + index}
               />
             </div>
           );
@@ -75,6 +75,7 @@ export default function ImageSlide({ images, className, tag }) {
             <span
               className={`dot ${tag}`}
               onClick={() => currentSlide(index + 1)}
+              key={tag + index}
             ></span>
           );
         })}

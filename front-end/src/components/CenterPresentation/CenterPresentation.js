@@ -1,6 +1,5 @@
 import './CenterPresentation.css';
 import '../../css/presentation.css';
-import useCenter from '../../hooks/useCenter';
 import Spinner from '../Spinner/Spinner';
 import ScoreList from '../ScoreList/ScoreList';
 import { useState } from 'react';
@@ -15,21 +14,45 @@ import ModificationFormCenter from '../Formularies/ModificationFormCenter';
 import IncidentList from '../IncidentList/IncidentList';
 import CleaningList from '../CleaningList/CleaningList';
 
-export default function CenterPresentation({ centerId, className }) {
-  const [center, loading] = useCenter(centerId);
+export default function CenterPresentation({
+  centerId,
+  center,
+  loading,
+  className,
+}) {
   const [visualization, setVisualization] = useState('data');
-  console.log(center);
+
   const visualizationsButtons = center.owner
     ? [
-        { value: 'data', icon: infoIcon },
-        { value: 'edit', icon: editIcon },
-        { value: 'scores', icon: scoresIcon },
-        { value: 'incidents', icon: incidentsIcon },
-        { value: 'cleaning', icon: cleaningIcon },
+        { value: 'data', icon: infoIcon, text: 'Texto de ayuda', alert: false },
+        { value: 'edit', icon: editIcon, text: 'Texto de ayuda', alert: false },
+        {
+          value: 'scores',
+          icon: scoresIcon,
+          text: 'Texto de ayuda',
+          alert: false,
+        },
+        {
+          value: 'incidents',
+          icon: incidentsIcon,
+          text: 'Texto de ayuda',
+          alert: incidentAlert(center),
+        },
+        {
+          value: 'cleaning',
+          icon: cleaningIcon,
+          text: 'Texto de ayuda',
+          alert: cleaningAlert(center),
+        },
       ]
     : [
-        { value: 'data', icon: infoIcon },
-        { value: 'scores', icon: scoresIcon },
+        { value: 'data', text: 'Texto de ayuda', icon: infoIcon, alert: false },
+        {
+          value: 'scores',
+          text: 'Texto de ayuda',
+          icon: scoresIcon,
+          alert: false,
+        },
       ];
 
   const visualizations = {
@@ -54,3 +77,13 @@ export default function CenterPresentation({ centerId, className }) {
     </article>
   );
 }
+
+const incidentAlert = (center) => {
+  if (center.espacios.some((space) => space.incidencias.length > 0))
+    return true;
+  else return false;
+};
+const cleaningAlert = (center) => {
+  if (center.espacios.some((space) => space.estado === 1)) return true;
+  else return false;
+};

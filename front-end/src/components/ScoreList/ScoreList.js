@@ -43,13 +43,13 @@ export default function ScoreList({ scores, className }) {
         setState={setState}
         initialManagementCriteria={initialManagementCriteria}
       />
-      {/* <div className="orderByStart" /> */}
+      {/* <div className="presentationStart" /> */}
       <ul>
         {state.scores.map((score) => (
           <ScoreCard score={score} />
         ))}
       </ul>
-      <div className="orderByEnd" />
+      <div className="presentationEnd" />
     </div>
   ) : (
     <Spinner />

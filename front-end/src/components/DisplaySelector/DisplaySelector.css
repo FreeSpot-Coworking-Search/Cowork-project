@@ -19,7 +19,7 @@
     
 }
 .displaySelector ul li button img{
-    width: 2vw;
+    height: 2.5vh;
 }
 .displaySelector ul li:first-child button{
     border-radius: 40px 0 0 40px;
@@ -29,5 +29,8 @@
 }
 .uncheckedVisualization{
     background-color: rgba(var(--secondary),0.6);
+}
+.alertVisualization{
+    background-color:  rgba(255,0,0,0.5);
 }
 

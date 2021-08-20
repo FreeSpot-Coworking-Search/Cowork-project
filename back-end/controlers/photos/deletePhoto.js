@@ -27,7 +27,6 @@ const deletePhoto = async (req, res, next) => {
 				WHERE C.id_administrador = ${idAuth} AND I.id = ${id};`
 			);
 		}
-		console.log(imageSearch);
 
 		if (imageSearch.length === 0) {
 			const error = new Error('La foto buscada no existe');

@@ -8,7 +8,6 @@ import descIcon from '../../assets/icons/bx-chevron-down.svg';
 import priceIcon from '../../assets/icons/bxs-dollar-circle.svg';
 import aToZAlfabeticIcon from '../../assets/icons/bx-sort-a-z.svg';
 import zToAAlfabeticIcon from '../../assets/icons/bx-sort-z-a.svg';
-import { useState } from 'react';
 import OrderByNavigation from '../OrderByNavigationn/OrderByNavigation';
 
 export default function ListCentersSearch({
@@ -48,8 +47,6 @@ export default function ListCentersSearch({
     ],
   };
 
-  console.log(initialManagementCriteria);
-
   return results.length !== 0 ? (
     <article className={className + ' listCenters'}>
       <OrderByNavigation
@@ -67,7 +64,7 @@ export default function ListCentersSearch({
           />
         ))}
       </ul>
-      <div className="orderByEnd" />
+      <div className="presentationEnd" />
     </article>
   ) : (
     <Spinner />

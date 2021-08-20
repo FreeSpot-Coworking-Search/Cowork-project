@@ -29,7 +29,7 @@
   .orderByNavigator ul li:last-child  button{
     border-radius: 0 40px 0 0;
   }
-  .orderByEnd {
+  .presentationEnd {
     width: 100%;
     height: 6vh;
     background-color: rgba(var(--secondary),0.7);

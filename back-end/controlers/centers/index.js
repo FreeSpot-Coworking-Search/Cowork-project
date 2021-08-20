@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const getCenter = require('./getCenter');
+const getCenter2 = require('./getCenter2');
 const postCenter = require('./postCenter');
 const putCenter = require('./putCenter');
 const deleteCenter = require('./deleteCenter');

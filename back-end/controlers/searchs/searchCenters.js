@@ -8,7 +8,6 @@ const { searchCentersSchema } = require('../../schemas/searchSchema');
 const searchCenters = async (req, res, next) => {
 	try {
 		const searchObject = req.query;
-		console.log(searchObject);
 		await validation(searchCentersSchema, searchObject);
 		let results = await getSearchCenters(searchObject);
 

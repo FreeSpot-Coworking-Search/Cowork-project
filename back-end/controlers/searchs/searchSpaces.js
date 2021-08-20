@@ -10,25 +10,6 @@ const searchSpaces = async (req, res, next) => {
 		const searchObject = req.query;
 		await validation(searchSpacesSchema, searchObject);
 		let results = await getSearchSpaces(searchObject);
-		console.log(results);
-
-		const [center] = await getRegistrations('centros', {
-			id: searchObject.id_centro,
-		});
-
-		const {
-			nombre,
-			direccion,
-			localidad,
-			codigo_postal,
-			telefono,
-			email,
-			descripcion,
-		} = center;
-
-		const centerImages = await getRegistrations('imagenes', {
-			id_centro: center.id,
-		});
 
 		results = await Promise.all(
 			results.map(async (space) => {
@@ -42,16 +23,6 @@ const searchSpaces = async (req, res, next) => {
 
 		res.status(200);
 		res.send({
-			center: {
-				nombre,
-				direccion,
-				localidad,
-				codigo_postal,
-				telefono,
-				email,
-				descripcion,
-				imagenes: centerImages,
-			},
 			results,
 		});
 	} catch (error) {

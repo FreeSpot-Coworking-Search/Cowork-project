@@ -5,7 +5,7 @@ import CleaningCard from '../CleaningCard/CleaningCard';
 export default function CleaningList({ spaces }) {
   return (
     <div className="presentationList">
-      <div className="orderByStart" />
+      <div className="presentationStart" />
       <ul>
         {spaces
           .filter((space) => (space.estado = 1))
@@ -13,7 +13,7 @@ export default function CleaningList({ spaces }) {
             return <CleaningCard space={space} />;
           })}
       </ul>
-      <div className="orderByEnd" />
+      <div className="presentationEnd" />
     </div>
   );
 }

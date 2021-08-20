@@ -42,3 +42,11 @@
     align-items: center;
     font-size: 30vh; 
 }
+.mainSectionFullViewExpand{
+    display: grid;
+    grid-template-columns:
+        80vw
+        16vw;
+    grid-template-rows:
+        84vh;
+}
