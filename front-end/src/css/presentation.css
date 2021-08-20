@@ -1,88 +1,92 @@
-
-.presentation{
+.presentation {
     padding-left: 1.3vw;
     padding-right: 1.3vw;
-    display:flex;
+    display: flex;
     flex-direction: column;
     height: 100%;
 }
 
-.presentation>ul{
+.presentation > ul {
     list-style: none;
     overflow-x: hidden;
-  }
-  .presentation>ul::-webkit-scrollbar{
+}
+.presentation > ul::-webkit-scrollbar {
     display: none;
-  }
+}
 
-  .presentation>ul li img{
+.presentation > ul li img {
     width: 2vh;
-  }
+}
 
-.presentationName{
+.presentationName,
+h3 {
     font-size: var(--presentationTittle);
     text-align: center;
     margin-bottom: 1vh;
     margin-top: 1vh;
-    background-color: rgba(var(--secondary),0.6);
+    background-color: rgba(var(--secondary), 0.6);
     border-radius: 40px;
-
 }
-.presentationCity{
+.presentationCity {
     font-size: var(--presentationSubTittle);
     padding-bottom: 1vh;
 }
-.presentationSlide{
+.presentationSlide {
     padding-bottom: 2vw;
-   
 }
 
-.presentationSlide{
+.presentationSlide {
     max-height: 25vh;
     margin-bottom: 2vh;
 }
-.presentationCity{
+.presentationCity {
     font-size: var(--presentationText);
     text-align: end;
 }
 
-.presentationPhone{
+.presentationPhone {
     display: flex;
     justify-content: space-between;
 }
-.presentationAddress{
+.presentationAddress {
     display: flex;
     justify-content: space-between;
 }
-.presentationEmail{
+.presentationEmail {
     display: flex;
     justify-content: space-between;
 }
 
-
-.presentationDescription{
+.presentationDescription,
+p {
     font-size: var(--presentationText);
     padding: 1vh;
+    text-align: justify;
 }
-.presentation{
+
+.presentationDescription::first-letter,
+p::first-letter {
+    text-transform: uppercase;
+}
+
+.presentation {
     color: rgba(var(--dark));
     border-radius: 40px;
-    background-color: rgba(var(--primary),0.4);
+    background-color: rgba(var(--primary), 0.4);
     padding: 2vw;
 }
-.presentationList{
-    display:flex;
+.presentationList {
+    display: flex;
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
     flex: 1 1 50%;
     overflow-x: hidden;
-
 }
-.presentationList>ul::-webkit-scrollbar {
+.presentationList > ul::-webkit-scrollbar {
     display: none;
 }
-.presentationList>ul{
+.presentationList > ul {
     display: flex;
     flex-direction: column;
     list-style: none;
@@ -91,21 +95,23 @@
     flex: 1 1 50%;
     width: 100%;
 }
-.centerDataList{
-    background-color: rgba(var(--clear),0.4);
+.centerDataList {
+    background-color: rgba(var(--clear), 0.4);
     padding: 1vh 1vw;
     border-radius: 20px;
 }
 .presentationEnd {
     width: 100%;
-    background-color: rgba(var(--secondary),0.7);
+    background-color: rgba(var(--secondary), 0.7);
     border-radius: 0 0 40px 40px;
-  }
-  .presentationStart {
+}
+.presentationStart {
     width: 100%;
-    background-color: rgba(var(--secondary),0.7);
+    background-color: rgba(var(--secondary), 0.7);
     border-radius: 40px 40px 0 0;
-  }
+}
 
-
-
+.message {
+    color: rgba(var(--dark), 1);
+    font-size: var(--cardText);
+}
