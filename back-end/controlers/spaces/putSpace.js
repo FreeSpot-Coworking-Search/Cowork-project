@@ -23,6 +23,8 @@ const putSpace = async (req, res, next) => {
 		const { servicios, servicios_extra } = updateObject;
 		delete updateObject.servicios;
 		delete updateObject.servicios_extra;
+		console.log(servicios);
+		console.log(servicios_extra);
 
 		for (const servicio of servicios) {
 			const insertService = {
@@ -31,11 +33,11 @@ const putSpace = async (req, res, next) => {
 			};
 			await insertRegistration('espacios_servicios', insertService);
 		}
-		for (const servicio of servicios_extra) {
+		for (const servicio_extra of servicios_extra) {
 			const insertService = {
 				id_espacio: id,
-				id_servicio: servicio.id,
-				precio: servicio.precio,
+				id_servicio: servicio_extra.id,
+				precio: servicio_extra.precio,
 			};
 			await insertRegistration('espacios_servicios', insertService);
 		}

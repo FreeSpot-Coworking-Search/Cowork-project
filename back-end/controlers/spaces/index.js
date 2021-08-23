@@ -20,14 +20,7 @@ router.post('/', adminIsLogged, adminOwnsSpaceCenter, postSpace, getSpace);
 router.put('/', spaceExists, adminIsLogged, adminOwnsSpace, putSpace, getSpace);
 router.delete('/', spaceExists, adminIsLogged, adminOwnsSpace, deleteSpace);
 
-router.post(
-	'/photo/',
-	spaceExists,
-	adminIsLogged,
-	adminOwnsSpace,
-	postPhoto,
-	getSpace
-);
+router.post('/photo/', spaceExists, adminIsLogged, adminOwnsSpace, postPhoto);
 router.delete('/photo/', adminIsLogged, deletePhoto);
 
 module.exports = router;

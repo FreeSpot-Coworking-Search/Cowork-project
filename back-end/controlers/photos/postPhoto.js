@@ -7,7 +7,8 @@ const { MAX_CENTER_PHOTOS, MAX_SPACE_PHOTOS } = process.env;
 
 const postPhoto = async (req, res, next) => {
 	try {
-		const { id, description } = req.query;
+		const { id } = req.query;
+		const { description } = req.body;
 
 		if (!req.files || Object.keys(req.files).length === 0) {
 			const error = new Error('No se han subido archivos');
@@ -28,7 +29,7 @@ const postPhoto = async (req, res, next) => {
 
 		if (photos.length >= Number(maxPhotos)) {
 			const error = new Error(
-				`Se han superado el máximo de ${maxPhotos} fotos permitidas.`
+				`Se han superado el máximo de ${maxPhotos} fotos permitidas. Elimine una foto antes de continuar.`
 			);
 			error.httpStatus = 406;
 			throw error;
@@ -44,7 +45,12 @@ const postPhoto = async (req, res, next) => {
 		const { insertId } = await insertRegistration('imagenes', insertObject);
 
 		console.log(`Foto subida, ${choosedId}: ${id}, id foto: ${insertId}`);
-		next();
+		res.status(200);
+		res.send({
+			id: insertId,
+			URL: photoName,
+			descripcion: description || 'undefined',
+		});
 	} catch (error) {
 		next(error);
 	}

@@ -32,7 +32,7 @@
 input[type='file'] {
     display: none;
 }
-.imageCard-fileUpload {
+.fileUpload {
     border: 2px solid rgba(var(--dark), 1);
     border-radius: 10px;
     box-shadow: 1px 1px 10px 0 rgba(var(--dark), 0.6);

@@ -47,6 +47,7 @@ const getSpace = async (req, res, next) => {
 				servicios_extra: extraServices,
 				imagenes: photos,
 				reserves,
+				owner: false,
 			};
 		} else {
 			const incidencias = await getRegistrations(`SELECT incidencias.*
@@ -61,6 +62,7 @@ const getSpace = async (req, res, next) => {
 				imagenes: photos,
 				reserves,
 				incidencias,
+				owner: true,
 			};
 		}
 

@@ -4,14 +4,13 @@
     overflow: auto;
     width: 100%;
     height: 100%;
-    
+
     color: rgba(var(--dark), 1);
     display: flex;
     flex-direction: column;
     gap: 20px;
     padding: 20px;
 }
-
 
 .registerForm-title {
     font-size: var(--tittle);
@@ -72,7 +71,7 @@ hr {
     padding: 3vw;
     box-shadow: 1px 1px 10px 0 gba(var(--dark), 0.4);
     border-radius: 10px;
-    
+
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -80,13 +79,12 @@ hr {
 /* *********************************************************** */
 
 .registerForm > fieldset {
-    flex: 1 1 auto;   
+    flex: 1 1 auto;
     display: flex;
     flex-direction: column;
     gap: 8px;
-    border: none; 
+    border: none;
 }
-
 
 .registerForm > fieldset > label {
     display: flex;

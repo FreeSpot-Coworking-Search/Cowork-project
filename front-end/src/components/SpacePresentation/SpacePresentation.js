@@ -1,12 +1,13 @@
 import '../../css/presentation.css';
 import './spacePresentation.css';
+import { useState } from 'react';
 
-import ImageSlide from '../ImageSlide/ImageSlide';
-import DateRangeSelector from '../DateRange/DateRange';
+import { SpaceData } from '../SpaceData/SpaceData';
+import ModificationFormSpace from '../Formularies/ModificationFormSpace';
+import DisplaySelector from '../DisplaySelector/DisplaySelector';
 
-import personIcon from '../../assets/icons/bxs-user.svg';
-import priceIcon from '../../assets/icons/bxs-dollar-circle.svg';
-import calendarIcon from '../../assets/icons/bxs-calendar.svg';
+import infoIcon from '../../assets/icons/bx-info-circle.svg';
+import editIcon from '../../assets/icons/bx-edit-alt.svg';
 
 export default function SpacePresentation({
     spaceData,
@@ -14,42 +15,43 @@ export default function SpacePresentation({
     reservation,
     setReservation,
 }) {
+    const [visualization, setVisualization] = useState('data');
+
+    const visualizationsButtons = spaceData.owner
+        ? [
+              {
+                  value: 'data',
+                  icon: infoIcon,
+                  text: 'visualizar datos',
+              },
+              {
+                  value: 'edit',
+                  icon: editIcon,
+                  text: 'modificar datos',
+              },
+          ]
+        : [];
+
+    const visualizations = {
+        data: (
+            <SpaceData
+                spaceData={spaceData}
+                reservation={reservation}
+                setReservation={setReservation}
+            />
+        ),
+        edit: <ModificationFormSpace spaceData={spaceData} />,
+    };
+
     return (
         <article className={className + ' presentation'}>
             <h3>{`${spaceData.nombre} - ${spaceData.tipo} `}</h3>
-
-            <div className="spaceCard">
-                <DateRangeSelector
-                    setNewSearchObject={setReservation}
-                    newSearchObject={reservation}
-                    minDate={true}
-                />
-
-                <ul className="spaceCard-list">
-                    <li>
-                        <img src={personIcon} alt="Person icon" />
-                        <p>{spaceData.capacidad_maxima}</p>
-                    </li>
-                    <li>
-                        <img src={priceIcon} alt="Price icon" />
-                        <p>{spaceData.precio}€/día</p>
-                    </li>
-                    <li>
-                        <img src={calendarIcon} alt="Calendar icon" />
-                        <p>{`Min. ${spaceData.reserva_minima} días`}</p>
-                    </li>
-                </ul>
-            </div>
-
-            <ImageSlide
-                images={spaceData.imagenes}
-                tag={'presentationSpace'}
-                className="presentationSlide"
+            <DisplaySelector
+                visualizationsButtons={visualizationsButtons}
+                setVisualization={setVisualization}
+                visualization={visualization}
             />
-
-            <div className="spaceCard">
-                <p>{spaceData.descripcion}</p>
-            </div>
+            {visualizations[visualization]}
         </article>
     );
 }

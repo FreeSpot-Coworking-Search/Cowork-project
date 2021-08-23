@@ -7,7 +7,7 @@
 }
 
 .list-simple {
-    list-style: initial;
+    list-style: circle;
 }
 
 .list-checked {

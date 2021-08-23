@@ -5,10 +5,23 @@ import ServicesList from '../servicesList/ServicesList';
 
 export default function ServicesPresentation({
     className,
-    listsGroup,
+    spaceData,
     reservation,
     setReservation,
 }) {
+    const servicesGroup = [
+        {
+            name: 'servicios extra',
+            data: spaceData?.servicios_extra,
+            type: 'checkbox',
+        },
+        {
+            name: 'servicios incluidos',
+            data: spaceData?.servicios,
+            type: 'standar',
+        },
+    ];
+
     function addService(checkId) {
         const services = reservation.servicios || {};
 
@@ -26,7 +39,7 @@ export default function ServicesPresentation({
 
     return (
         <article className={className + ' presentation'}>
-            {listsGroup.map((list) => (
+            {servicesGroup.map((list) => (
                 <ServicesList
                     key={list.name}
                     listData={list}
