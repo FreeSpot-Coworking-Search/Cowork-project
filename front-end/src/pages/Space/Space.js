@@ -229,7 +229,7 @@ export default function Space({ className }) {
         ),
         photos: (
             <PhotosPresentation
-                className="mainSectionRightArticle"
+                className="mainSectionLeftArticle"
                 data={spaceData}
             />
         ),
