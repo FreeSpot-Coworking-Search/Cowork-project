@@ -8,6 +8,7 @@ import ascIcon from '../../assets/icons/bx-chevron-up.svg';
 import Spinner from '../Spinner/Spinner';
 import OrderByNavigation from '../OrderByNavigationn/OrderByNavigation';
 import spaceTypeToPlural from '../../helpers/spaceTypeToPlural';
+import spaceTyping from '../../helpers/spaceTyping';
 
 export default function ListSpacesSearch({
   results,
@@ -15,14 +16,7 @@ export default function ListSpacesSearch({
   setSearchObject,
   className,
 }) {
-  let listSpaces = {};
-  for (const result of results) {
-    if (Object.hasOwnProperty.call(listSpaces, result.tipo)) {
-      listSpaces[result.tipo].push(result);
-    } else {
-      listSpaces = { ...listSpaces, [result.tipo]: [result] };
-    }
-  }
+  let listSpaces = spaceTyping(results);
 
   const initialManagementCriteria = {
     state: 0,

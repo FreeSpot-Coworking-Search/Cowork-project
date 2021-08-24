@@ -1,0 +1,16 @@
+.notificationContainer { 
+    position:relative;
+} 
+.notificationBubble { 
+    position:absolute; 
+    top: -0.5vh;
+    right:0.5vw;
+    padding:0.2vh 0.4vh ; 
+    background-color:red;
+    color:white; 
+    font-weight:bold; 
+    font-size:1vh;
+    border-radius:30px;
+}
+
+

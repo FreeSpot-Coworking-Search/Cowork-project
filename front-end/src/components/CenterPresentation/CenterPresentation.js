@@ -24,13 +24,13 @@ export default function CenterPresentation({
 
   const visualizationsButtons = center.owner
     ? [
-        { value: 'data', icon: infoIcon, text: 'Texto de ayuda', alert: false },
-        { value: 'edit', icon: editIcon, text: 'Texto de ayuda', alert: false },
+        { value: 'data', icon: infoIcon, text: 'Texto de ayuda', alert: 0 },
+        { value: 'edit', icon: editIcon, text: 'Texto de ayuda', alert: 0 },
         {
           value: 'scores',
           icon: scoresIcon,
           text: 'Texto de ayuda',
-          alert: false,
+          alert: 0,
         },
         {
           value: 'incidents',
@@ -79,11 +79,12 @@ export default function CenterPresentation({
 }
 
 const incidentAlert = (center) => {
-  if (center.espacios.some((space) => space.incidencias.length > 0))
-    return true;
-  else return false;
+  const result = center.espacios.reduce((number, space) => {
+    return (number += space.incidencias.length);
+  }, 0);
+  return result;
 };
 const cleaningAlert = (center) => {
-  if (center.espacios.some((space) => space.estado === 1)) return true;
-  else return false;
+  const result = center.espacios.filter((space) => space.estado === 1);
+  return result.length;
 };
