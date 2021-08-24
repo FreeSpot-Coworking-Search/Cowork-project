@@ -9,14 +9,13 @@ import priceIcon from '../../assets/icons/bxs-dollar-circle.svg';
 import calendarIcon from '../../assets/icons/bxs-calendar.svg';
 
 export function SpaceData({ spaceData, reservation, setReservation }) {
-
     const ownerInfo = {
         data: {
             estado: spaceData.estado ? 'limpio' : 'sucio',
-            visibilidad: spaceData.visible ? 'activado' : 'oculto',
+            visibilidad: spaceData.visible ? 'activa' : 'oculto',
         },
         type: 'object',
-    }
+    };
 
     return (
         <>

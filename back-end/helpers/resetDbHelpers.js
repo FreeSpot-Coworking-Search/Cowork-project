@@ -110,16 +110,17 @@ async function resetDB() {
 		await connection.query(`
           CREATE TABLE espacios(
             id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+			nombre VARCHAR(20) NOT NULL,
             tipo ENUM ('Mesa Flex','Mesa Fija','Despacho','Sala de reuniones') NOT NULL,
-            descripcion VARCHAR(1000),
-            capacidad_maxima TINYINT UNSIGNED NOT NULL,
-            estado BOOLEAN NOT NULL DEFAULT 1,
-            visible BOOLEAN NOT NULL DEFAULT 1,
-            reserva_minima INT UNSIGNED DEFAULT 1 NOT NULL,
             precio DECIMAL(6,2) NOT NULL,
+            capacidad_maxima TINYINT UNSIGNED NOT NULL,
+            reserva_minima INT UNSIGNED DEFAULT 1 NOT NULL,
+            estado BOOLEAN NOT NULL DEFAULT 1,
+            descripcion VARCHAR(1000),
+            visible BOOLEAN NOT NULL DEFAULT 1,
+            borrado BOOLEAN NOT NULL DEFAULT 0,
             id_centro INT UNSIGNED,
-            FOREIGN KEY (id_centro) REFERENCES centros (id),
-            borrado BOOLEAN NOT NULL DEFAULT 0
+            FOREIGN KEY (id_centro) REFERENCES centros (id)
             );
             `);
 
@@ -516,6 +517,7 @@ async function populateDB() {
 
 		for (let i = 0; i < espacios * 0.3; i++) {
 			const tipo = 'Mesa Flex';
+			const nombre = faker.commerce.color();
 			const descripcion = faker.lorem.words(25);
 			const capacidadMaxima = 1;
 			const precio = faker.commerce.price(3, 15);
@@ -525,6 +527,7 @@ async function populateDB() {
 			await connection.query(
 				`INSERT INTO espacios(
                       tipo,
+					  nombre,
                       descripcion,
                       capacidad_maxima,
 					  reserva_minima,
@@ -533,6 +536,7 @@ async function populateDB() {
                       )
                       VALUES(
                         "${tipo}",
+                        "${nombre}",
                         "${descripcion}",
                         "${capacidadMaxima}",
                         "${reservaMinima}",
@@ -544,6 +548,7 @@ async function populateDB() {
 		}
 		for (let i = 0; i < espacios * 0.3; i++) {
 			const tipo = 'Mesa Fija';
+			const nombre = faker.commerce.color();
 			const descripcion = faker.lorem.words(25);
 			const capacidadMaxima = 1;
 			const precio = faker.commerce.price(5, 15);
@@ -553,6 +558,7 @@ async function populateDB() {
 			await connection.query(
 				`INSERT INTO espacios(
                       tipo,
+					  nombre,
                       descripcion,
                       capacidad_maxima,
 					  reserva_minima,
@@ -561,6 +567,7 @@ async function populateDB() {
                       )
                       VALUES(
                         "${tipo}",
+						"${nombre}",
                         "${descripcion}",
                         "${capacidadMaxima}",
                         "${reservaMinima}",
@@ -572,6 +579,7 @@ async function populateDB() {
 		}
 		for (let i = 0; i < espacios * 0.2; i++) {
 			const tipo = 'Despacho';
+			const nombre = faker.commerce.color();
 			const descripcion = faker.lorem.words(25);
 			const capacidadMaxima = random(1, 4);
 			const precio = faker.commerce.price(10, 20);
@@ -581,6 +589,7 @@ async function populateDB() {
 			await connection.query(
 				`INSERT INTO espacios(
                       tipo,
+					  nombre,
                       descripcion,
                       capacidad_maxima,
 					  reserva_minima,
@@ -589,6 +598,7 @@ async function populateDB() {
                       )
                       VALUES(
                         "${tipo}",
+						"${nombre}",
                         "${descripcion}",
                         "${capacidadMaxima}",
                         "${reservaMinima}",
@@ -600,6 +610,7 @@ async function populateDB() {
 		}
 		for (let i = 0; i < espacios * 0.2; i++) {
 			const tipo = 'Sala de reuniones';
+			const nombre = faker.commerce.color();
 			const descripcion = faker.lorem.words(25);
 			const capacidadMaxima = random(5, 20);
 			const precio = faker.commerce.price(15, 30);
@@ -607,20 +618,22 @@ async function populateDB() {
 
 			await connection.query(
 				`INSERT INTO espacios(
-                                        tipo,
-                                        descripcion,
-                                        capacidad_maxima,
-                                        precio,
-                                        id_centro
-                                        )
-                                        VALUES(
-                                          "${tipo}",
-                                          "${descripcion}",
-                                          "${capacidadMaxima}",
-                                          "${precio}",
-                                          "${idCentro}"
-                                          )
-                                          `
+					tipo,
+					nombre,
+					descripcion,
+					capacidad_maxima,
+					precio,
+					id_centro
+					)
+					VALUES(
+						"${tipo}",
+						"${nombre}",
+						"${descripcion}",
+						"${capacidadMaxima}",
+						"${precio}",
+						"${idCentro}"
+						)
+						`
 			);
 		}
 

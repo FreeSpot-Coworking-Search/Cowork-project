@@ -1,6 +1,6 @@
 import './registrationForm.css';
 import { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 import { Dialog } from '@material-ui/core';
@@ -13,8 +13,10 @@ export default function ModificationFormSpace({ className, spaceData }) {
         REACT_APP_API_LOCAL_SERVER_PORT: port,
     } = process.env;
 
+    let history = useHistory();
+
     const INITIAL_SPACE_INFO = {
-        //nombre: spaceData.nombre,
+        nombre: spaceData.nombre,
         tipo: spaceData.tipo,
         precio: spaceData.precio,
         reserva_minima: spaceData.reserva_minima,
@@ -87,9 +89,7 @@ export default function ModificationFormSpace({ className, spaceData }) {
                 setMessage('Datos del espacio modificados.');
                 setTimeout(() => {
                     setMessage('');
-                    <Redirect
-                        to={`/space?space=${spaceData.id}&id_centro=${spaceData.id_centro}`}
-                    />;
+                    // history.push(0);
                 }, 5000);
                 setModification(false);
             }
@@ -113,24 +113,13 @@ export default function ModificationFormSpace({ className, spaceData }) {
                 <h1 className="registerForm-title">Modificación de espacio</h1>
                 <hr />
                 <fieldset>
-                    {/* 
-  nombre: tipo text
-  tipo: Joi.valid('Mesa Flex', 'Mesa Fija', 'Despacho', 'Sala de reuniones'),
-  precio: Joi.number().precision(2),
-  reserva_minima: Joi.number().max(365),
-  capacidad_maxima: Joi.number().integer(),
-  descripcion: Joi.string().min(1).max(1000),
-  estado: Joi.valid(0, 1),
-  visible: Joi.valid(0, 1),
-*/}
-
                     <label>
                         Nombre
                         <input
                             type="text"
-                            /* onChange={(event) =>
+                            onChange={(event) =>
                                 handleInputChange(event, 'nombre')
-                            } */
+                            }
                             placeholder=" Nombre espacio"
                             required
                             maxLength="20"
@@ -216,7 +205,7 @@ export default function ModificationFormSpace({ className, spaceData }) {
                             }
                             required
                         >
-                            <option value="1">Activado</option>
+                            <option value="1">Activa</option>
                             <option value="0">Oculto</option>
                         </select>
                     </label>

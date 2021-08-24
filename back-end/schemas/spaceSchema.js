@@ -7,6 +7,7 @@ const postSpaceSchema = Joi.object().keys({
 		'Despacho',
 		'Sala de reuniones'
 	).required(),
+	nombre: Joi.string().required().min(1).max(20),
 	descripcion: Joi.string().required().min(1).max(1000),
 	capacidad_maxima: Joi.number().required().integer(),
 	estado: Joi.valid(0, 1).required(),
@@ -20,6 +21,7 @@ const postSpaceSchema = Joi.object().keys({
 
 const putSpaceSchema = Joi.object().keys({
 	tipo: Joi.valid('Mesa Flex', 'Mesa Fija', 'Despacho', 'Sala de reuniones'),
+	nombre: Joi.string().min(1).max(20),
 	descripcion: Joi.string().min(1).max(1000),
 	capacidad_maxima: Joi.number().integer(),
 	estado: Joi.valid(0, 1),
