@@ -1,0 +1,73 @@
+.MyCenterMiniSelector a{
+  text-decoration: none;
+}
+.MyCenterMiniSelector nav{
+    position: relative;
+    display: block;
+    background-color: rgba(var(--secondary),0.7);
+    width: 100%;
+    height: 10vh;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1vh;
+  }
+  .MyCenterMiniSelector nav>button{
+    border:none;
+    width: 8vw;
+    background-color: transparent;
+  }
+  .MyCenterMiniSelector nav>div{
+    display: flex;
+    flex-direction: column;
+  }
+  .MyCenterMiniSelector nav>div>p:first-child{
+  color: rgba(var(--dark));
+  font-size: var(--presentationSubTittle);
+  margin: 1vw; 
+  text-align: center;
+}
+.MyCenterMiniSelector nav>div>p:nth-child(2){
+    color: rgba(var(--dark));
+    font-size: var(--presentationText);
+    margin: 1vw; 
+    text-align: center;
+  }
+.MyCenterMiniSelector nav:hover > ul {opacity: 1;}
+
+.MyCenterMiniSelector ul {
+  position: absolute;
+  top: 10vh;
+  left: 3vw;
+  opacity: 0;
+  background: rgba(var(--clear),0.9);
+  border-radius: 0 0 5px 5px;
+  transition: opacity .20s ease .1s;
+  list-style: none;
+}
+
+
+.MyCenterMiniSelector ul li {
+  height: 0;
+  overflow: hidden;
+  padding: 0;
+  
+  transition: height .25s ease .1s;
+}
+
+.MyCenterMiniSelector nav:hover > ul li {
+  height: 3vh;
+  min-width: 100%;
+  overflow: visible;
+  padding: 0;
+}
+
+.MyCenterMiniSelector ul li a {
+  width: 130px;
+  padding: 4px 10px;
+  margin: 0;
+  border: none;
+  border-bottom: 1px solid rgba(var(--secondary),0.7);
+}
+.MyCenterMiniSelector ul li:last-child a { border: none; }

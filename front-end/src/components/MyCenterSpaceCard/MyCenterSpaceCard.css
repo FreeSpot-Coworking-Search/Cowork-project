@@ -1,0 +1,32 @@
+.myCenterSpaceCard>ul{
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  
+  }
+  
+  .myCenterSpaceCard>ul>li{
+    width: 8vw;
+    height: 4vh;
+    background-color: rgba(var(--secondary),0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .myCenterSpaceCard>ul>li:nth-child(1){
+    border-top-left-radius:15px;
+  }
+  .myCenterSpaceCard>ul>li:nth-child(2){
+    border-top-right-radius:15px;
+  }
+  .myCenterSpaceCard>ul>li:nth-child(3){
+    border-bottom-left-radius:15px;
+  }
+  .myCenterSpaceCard>ul>li:nth-child(4){
+    border-bottom-right-radius: 15px;
+  }
+  .myCenterSpaceCard>ul>li img{
+    width: 7vw;
+    max-height: 4vh;
+  }

@@ -18,6 +18,8 @@ export default function Center({ className }) {
   const [visualization, setVisualization] = useState('modification');
   const [fullView] = useFullView();
 
+  console.log(center);
+
   // ****************************
   // ** MAIN NAVIGATION CONFIG **
   // ****************************

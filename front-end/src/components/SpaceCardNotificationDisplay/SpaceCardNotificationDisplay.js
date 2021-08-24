@@ -1,4 +1,6 @@
 import './SpaceCardNotificationDisplay.css';
+import '../../css/notifications.css';
+
 import incidentsIcon from '../../assets/icons/bx-message-square-error.svg';
 import cleaningIcon from '../../assets/icons/carbon_clean.svg';
 import visionIcon from '../../assets/icons/bx-low-vision.svg';

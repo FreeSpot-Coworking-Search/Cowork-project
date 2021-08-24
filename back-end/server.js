@@ -28,6 +28,7 @@ app.use('/api/reserves', require('./controlers/reserves'));
 app.use('/api/incidences', require('./controlers/incidences'));
 app.use('/api/images', require('./controlers/photos'));
 app.use('/api/search', require('./controlers/searchs'));
+app.use('/api/mycenter', require('./controlers/myCenter'));
 
 // ************
 // ** ERRORS **
