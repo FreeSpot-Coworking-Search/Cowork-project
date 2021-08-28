@@ -5,8 +5,7 @@ import { Dialog, CircularProgress } from '@material-ui/core';
 
 import MainNavigation from '../../components/MainNavigation/MainNavigation';
 import SpacePresentation from '../../components/SpacePresentation/SpacePresentation';
-import ServicesPresentation from '../../components/ServicesPresentation/ServicesPresentation';
-import PhotosPresentation from '../../components/PhotosPresentation/PhotosPresentation';
+
 import CircularSuspense from '../../components/CircularSuspense/CircularSuspense';
 
 import RetrieveQueryParams from '../../helpers/RetriveQueryParams';
@@ -21,7 +20,15 @@ import spaceIcon from '../../assets/icons/bxs-home.svg';
 import servicesIcon from '../../assets/icons/plus-solid.png';
 import imageIcon from '../../assets/icons/image-solid.png';
 
-const ConfirmationDialog = lazy(() => import('./ConfirmationDialog'));
+const ConfirmationDialog = lazy(() =>
+    import('../../components/SpacePresentation/ConfirmationDialog')
+);
+const ServicesPresentation = lazy(() =>
+    import('../../components/ServicesPresentation/ServicesPresentation')
+);
+const PhotosPresentation = lazy(() =>
+    import('../../components/PhotosPresentation/PhotosPresentation')
+);
 
 export default function Space({ className }) {
     const [fullView] = useFullView();
@@ -103,11 +110,11 @@ export default function Space({ className }) {
             break;
 
         case 'photos':
-            if (fullView) Links = [firstButton, centerVisualizationBtn];
+            if (fullView) Links = [firstButton, servicesVisualizationBtn];
             else
                 Links = [
                     firstButton,
-                    centerVisualizationBtn,
+                    spaceVisualizationBtn,
                     servicesVisualizationBtn,
                 ];
             break;

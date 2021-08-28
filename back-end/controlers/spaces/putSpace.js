@@ -17,14 +17,14 @@ const putSpace = async (req, res, next) => {
 			throw error;
 		}
 
+		await validation(putSpaceSchema, updateObject);
+
 		await deleteRegistrations('espacios_servicios', {
 			id_espacio: `${id}`,
 		});
 		const { servicios, servicios_extra } = updateObject;
 		delete updateObject.servicios;
 		delete updateObject.servicios_extra;
-		console.log(servicios);
-		console.log(servicios_extra);
 
 		for (const servicio of servicios) {
 			const insertService = {
@@ -42,11 +42,12 @@ const putSpace = async (req, res, next) => {
 			await insertRegistration('espacios_servicios', insertService);
 		}
 
-		await validation(putSpaceSchema, updateObject);
 		await updateRegistration('espacios', id, updateObject);
-
 		console.log('Modificado espacio, Id:', id);
-		next();
+		res.status(200);
+		res.send({
+			message: 'Espacio modificado',
+		});
 	} catch (error) {
 		next(error);
 	}
