@@ -1,7 +1,9 @@
 import './logout.css';
+import '../../../css/dialog.css';
 
 import { useClient } from '../../../hooks/useClient';
 import { Link } from 'react-router-dom';
+import ButtonList from '../../ButtonList/ButtonList';
 
 function Logout({ handleClose }) {
     const [clientData, setClientData] = useClient();
@@ -11,8 +13,17 @@ function Logout({ handleClose }) {
         handleClose();
     }
 
+    const btnBehavior = [
+        {
+            text: 'cerrar sesión',
+            action: () => performLogout(),
+            secondary: true,
+        },
+        { text: 'cerrar', action: () => handleClose() },
+    ];
+
     return (
-        <article className="logout">
+        <article className="dialog">
             <h2 className="logout-header">Hola {clientData.name}</h2>
             {clientData.tipo === 'usuario' ? (
                 <Link to="/users" onClick={handleClose}>
@@ -24,8 +35,10 @@ function Logout({ handleClose }) {
                 </Link>
             )}
 
-            <button onClick={() => performLogout()}>Cerrar sesión</button>
-            <button onClick={handleClose}>Cerrar</button>
+            <ButtonList
+                btnBehavior={[...btnBehavior]}
+                cssStyle="logout-clientBtn"
+            />
         </article>
     );
 }

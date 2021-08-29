@@ -1,0 +1,11 @@
+.dialog {
+    background-color: rgba(var(--clear), 0.6);
+    color: rgba(var(--dark), 1);
+    max-width: 500px;
+    padding: 3vw;
+    box-shadow: 1px 1px 10px 0 gba(var(--dark), 0.4);
+
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+}
