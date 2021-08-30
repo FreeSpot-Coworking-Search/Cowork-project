@@ -1,6 +1,6 @@
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
-import { useEffect, useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { DateRange } from 'react-date-range';
 import { eachDayOfInterval } from 'date-fns';
 
