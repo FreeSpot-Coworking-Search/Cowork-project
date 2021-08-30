@@ -1,4 +1,5 @@
 import './confirmationDialog.css';
+import '../../css/dialog.css';
 import { useState } from 'react';
 import { useHistory } from 'react-router';
 
