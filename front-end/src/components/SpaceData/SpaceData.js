@@ -24,6 +24,7 @@ export function SpaceData({ spaceData, reservation, setReservation }) {
                     setNewSearchObject={setReservation}
                     newSearchObject={reservation}
                     minDate={true}
+                    reserves={spaceData.reserves}
                 />
 
                 <article>

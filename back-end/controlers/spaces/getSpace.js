@@ -38,7 +38,7 @@ const getSpace = async (req, res, next) => {
 		) {
 			reserves = reserves.map((reserva) => {
 				return {
-					fecha_inicio: reserva.fecha_reserva,
+					fecha_inicio: reserva.fecha_inicio,
 					fecha_fin: reserva.fecha_fin,
 				};
 			});

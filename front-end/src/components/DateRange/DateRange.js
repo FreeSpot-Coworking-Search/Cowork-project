@@ -1,12 +1,14 @@
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
+import { useEffect, useState, useMemo } from 'react';
 import { DateRange } from 'react-date-range';
-import { useState } from 'react';
+import { eachDayOfInterval } from 'date-fns';
 
 export default function DateRangeSelector({
     setNewSearchObject,
     newSearchObject,
     minDate,
+    reserves,
 }) {
     const handleSelect = (event) => {
         setSelectionRange({
@@ -29,6 +31,19 @@ export default function DateRangeSelector({
             : new Date(),
         key: 'selection',
     });
+
+    let disabledDates = useMemo(() => {
+        let dates = [];
+        reserves?.forEach((reserve) => {
+            const reserveArray = eachDayOfInterval({
+                start: new Date(reserve.fecha_inicio),
+                end: new Date(reserve.fecha_fin),
+            });
+            dates = dates.concat(reserveArray);
+        });
+        return dates;
+    }, [reserves]);
+
     return (
         <div className="dateRange">
             <DateRange
@@ -36,6 +51,7 @@ export default function DateRangeSelector({
                 rangeColors={['rgba(var(--primary),0.6)']}
                 onChange={(event) => handleSelect(event)}
                 minDate={minDate ? new Date() : ''}
+                disabledDates={disabledDates}
             />
         </div>
     );
