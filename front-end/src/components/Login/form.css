@@ -3,10 +3,6 @@
     flex-direction: column;
 }
 
-.form input {
-    margin: 0 0 20px 0;
-}
-
 .form hr {
     margin: 0;
     padding: 0;

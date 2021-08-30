@@ -1,8 +1,9 @@
 import './confirmationDialog.css';
+import '../../css/dialog.css';
 import { useState } from 'react';
 import { useHistory } from 'react-router';
 
-import ServicesList from '../../components/servicesList/ServicesList';
+import ServicesCard from '../../components/ServicesCard/ServicesCard';
 
 import { reservationHelper } from '../../helpers/reservationHelper';
 
@@ -70,7 +71,7 @@ export default function ConfirmationDialog({
         <article className="dialog">
             <h1>Confirmar reserva</h1>
             {listsGroup.map((list) => (
-                <ServicesList key={list.name} listData={list} />
+                <ServicesCard key={list.name} listData={list} />
             ))}
             <p>Precio final: {getFinalPrice()} €</p>
             {error && <p className="error">{error}</p>}

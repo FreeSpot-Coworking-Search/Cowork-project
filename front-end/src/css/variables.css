@@ -6,11 +6,11 @@
     --orange: #dc795a;
     --violet: #998fc7;
 
-	--dark: 41, 47, 54;
-	--primary: 0, 173, 181;
-	--secondary: 131, 119, 209;
-	--tertiary: 153, 143, 199;
-	--clear: 247, 255, 247;
+    --dark: 41, 47, 54;
+    --primary: 0, 173, 181;
+    --secondary: 131, 119, 209;
+    --tertiary: 153, 143, 199;
+    --clear: 247, 255, 247;
     --alert: 220, 121, 90;
 
 	--origin: 1vw;
@@ -21,3 +21,12 @@
 	--cardSubTittle: calc(var(--origin) * 0.9);
 	--cardText: calc(var(--origin) * 0.9);
 }
+
+/* :root {
+    --step--2: clamp(0.61rem, 0.59rem + 0.11vw, 0.72rem);
+    --step--1: clamp(0.73rem, 0.7rem + 0.17vw, 0.9rem);
+    --step-0: clamp(0.88rem, 0.83rem + 0.25vw, 1.13rem);
+    --step-1: clamp(1.05rem, 0.98rem + 0.36vw, 1.41rem);
+    --step-2: clamp(1.26rem, 1.16rem + 0.5vw, 1.76rem);
+    --step-3: clamp(1.51rem, 1.37rem + 0.69vw, 2.2rem);
+} */

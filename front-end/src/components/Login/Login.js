@@ -1,9 +1,11 @@
+import '../../css/dialog.css';
 import './login.css';
 import './form.css';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useClient } from '../../hooks/useClient';
 import { Link } from 'react-router-dom';
+import ButtonList from '../ButtonList/ButtonList';
 const axios = require('axios');
 
 const {
@@ -11,33 +13,48 @@ const {
     REACT_APP_API_LOCAL_SERVER_PORT: port,
 } = process.env;
 
+const btnBehaviorForm = [
+    { text: 'Acceder', action: () => {}, secondary: true },
+];
+
 function Login({ handleClose }) {
     const [userType, setUserType] = useState('usuario');
 
-    function changeUser(userType) {
-        setUserType(userType);
-    }
+    const btnBehavior = useMemo(
+        () => [
+            { text: 'acceso usuarios', action: () => setUserType('usuario') },
+            {
+                text: 'acceso aministradores',
+                action: () => setUserType('administrador'),
+            },
+        ],
+        []
+    );
+
+    const btnBehavior2 = useMemo(
+        () => [{ text: 'cerrar', action: handleClose }],
+        [handleClose]
+    );
 
     return (
-        <article className="login">
+        <article className="dialog">
             <h2 className="login-header">Acceso {userType}</h2>
-            <div className="login-clientBtn">
-                <button onClick={() => changeUser('usuario')}>
-                    acceso asuarios
-                </button>
-                <button onClick={() => changeUser('administrador')}>
-                    acceso administradores
-                </button>
-            </div>
+            <ButtonList
+                btnBehavior={[...btnBehavior]}
+                cssStyle="login-clientBtn"
+            />
             <Form userType={userType} handleClose={handleClose} />
-            <button onClick={handleClose}>Cerrar</button>
+            <ButtonList
+                btnBehavior={[...btnBehavior2]}
+                cssStyle="login-clientBtn"
+            />
         </article>
     );
 }
 
 export default Login;
 
-function Form({ userType, handleClose }) {
+function Form({ userType, handleClose, history }) {
     const [, setClientData] = useClient();
 
     const [email, setEmail] = useState('');
@@ -106,7 +123,11 @@ function Form({ userType, handleClose }) {
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
             />
-            <input type="submit" value="Login" />
+            <ButtonList
+                btnBehavior={[...btnBehaviorForm]}
+                cssStyle="login-clientBtn"
+                secondary={true}
+            />
             {error && <div className="form-error">{error}</div>}
             <hr />
             <div className="form-options">

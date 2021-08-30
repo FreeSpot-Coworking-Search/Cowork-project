@@ -1,31 +1,33 @@
 import './registrationForm.css';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Redirect, useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 import { Dialog } from '@material-ui/core';
 import useDialog from '../../hooks/useDialog';
 
+const {
+    REACT_APP_API_LOCAL_SERVER_HOST: host,
+    REACT_APP_API_LOCAL_SERVER_PORT: port,
+} = process.env;
+
 export default function ModificationFormSpace({ className, spaceData }) {
-    const { open, handleClickOpen, handleClose } = useDialog();
-    const {
-        REACT_APP_API_LOCAL_SERVER_HOST: host,
-        REACT_APP_API_LOCAL_SERVER_PORT: port,
-    } = process.env;
-
     let history = useHistory();
+    const { open, handleClickOpen, handleClose } = useDialog();
 
-    const INITIAL_SPACE_INFO = {
-        nombre: spaceData.nombre,
-        tipo: spaceData.tipo,
-        precio: spaceData.precio,
-        reserva_minima: spaceData.reserva_minima,
-        capacidad_maxima: spaceData.capacidad_maxima,
-        descripcion: spaceData.descripcion,
-        visible: spaceData.visible,
-        servicios: spaceData.servicios,
-        servicios_extra: spaceData.servicios_extra,
-    };
+    const INITIAL_SPACE_INFO = useMemo(() => {
+        return {
+            nombre: spaceData.nombre,
+            tipo: spaceData.tipo,
+            precio: spaceData.precio,
+            reserva_minima: spaceData.reserva_minima,
+            capacidad_maxima: spaceData.capacidad_maxima,
+            descripcion: spaceData.descripcion,
+            visible: spaceData.visible,
+            servicios: spaceData.servicios,
+            servicios_extra: spaceData.servicios_extra,
+        };
+    }, [spaceData]);
 
     const [spaceInfo, setSpaceInfo] = useState(INITIAL_SPACE_INFO);
     const [error, setError] = useState();
@@ -49,14 +51,16 @@ export default function ModificationFormSpace({ className, spaceData }) {
             if (response.status === 200) {
                 setError('Espacio eliminado');
                 setTimeout(() => {
-                    <Redirect to="/" />;
-                }, 5000);
+                    setMessage('');
+                    Redirect('home');
+                }, 2000);
+                setModification(false);
             }
         } catch (error) {
             setError('Ha habido algun error al eliminar el espacio.');
             setTimeout(() => {
                 setError('');
-            }, 5000);
+            }, 3000);
 
             return;
         }
@@ -89,8 +93,8 @@ export default function ModificationFormSpace({ className, spaceData }) {
                 setMessage('Datos del espacio modificados.');
                 setTimeout(() => {
                     setMessage('');
-                    // history.push(0);
-                }, 5000);
+                    history.go(0);
+                }, 2000);
                 setModification(false);
             }
         } catch (error) {
@@ -225,10 +229,9 @@ export default function ModificationFormSpace({ className, spaceData }) {
                     </label>
                 </fieldset>
 
-                {error && <p className="registerForm-error">{error}</p>}
-                {message && <p className="registerForm-message">{message}</p>}
-
                 <hr />
+                {error && <p className="error">{error}</p>}
+                {message && <p className="message">{message}</p>}
 
                 <button disabled={!modification}>Modificar datos</button>
                 <button onClick={handleClickOpen}>Eliminar espacio</button>

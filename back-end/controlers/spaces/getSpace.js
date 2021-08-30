@@ -26,6 +26,8 @@ const getSpace = async (req, res, next) => {
 				AND espacios_servicios.id_espacio = ${id} AND espacios_servicios.precio IS NOT NULL;`
 		);
 
+		const allServices = await getRegistrations('SELECT * FROM servicios;');
+
 		const photos = await getRegistrations('imagenes', {
 			id_espacio: `${id}`,
 		});
@@ -36,7 +38,7 @@ const getSpace = async (req, res, next) => {
 		) {
 			reserves = reserves.map((reserva) => {
 				return {
-					fecha_inicio: reserva.fecha_reserva,
+					fecha_inicio: reserva.fecha_inicio,
 					fecha_fin: reserva.fecha_fin,
 				};
 			});
@@ -59,6 +61,7 @@ const getSpace = async (req, res, next) => {
 				centro: centro,
 				servicios: services,
 				servicios_extra: extraServices,
+				listado_servicios: allServices,
 				imagenes: photos,
 				reserves,
 				incidencias,

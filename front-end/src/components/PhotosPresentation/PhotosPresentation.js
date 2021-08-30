@@ -33,7 +33,7 @@ export default function PhotosPresentation({
     //
     return (
         <article className={className + ' presentation'}>
-            <h3>Imágenes del espacio</h3>
+            <h3 className="presentationName">Imágenes del espacio</h3>
             <ImagePicker className="" {...props} />
             {error && <p className="error">{error}</p>}
             {message && <p className="message">{message}</p>}

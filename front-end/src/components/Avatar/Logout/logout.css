@@ -1,14 +1,13 @@
-.logout {
-    max-width: 500px;
-    padding: 3vw;
-    box-shadow: 1px 1px 10px 0 gba(var(--dark), 0.4);
-    border-radius: 10px;
-
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
 .logout-header {
     text-align: center;
+}
+
+.logout-header + a {
+    text-align: center;
+}
+
+.logout-clientBtn {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
 }

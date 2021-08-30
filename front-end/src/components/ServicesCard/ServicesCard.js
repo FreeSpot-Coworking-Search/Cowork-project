@@ -1,6 +1,6 @@
-import './servicesList.css';
+import './servicesCard.css';
 
-export default function ServicesList({
+export default function ServicesCard({
     listData,
     checkInputAction,
     checkValues,
@@ -84,7 +84,7 @@ export default function ServicesList({
 
     return (
         <section>
-            <h3>{name}</h3>
+            <h3 className="presentationName">{name}</h3>
             {renderedList}
         </section>
     );

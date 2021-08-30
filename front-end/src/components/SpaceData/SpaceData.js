@@ -2,7 +2,7 @@ import './spaceData.css';
 
 import ImageSlide from '../ImageSlide/ImageSlide';
 import DateRangeSelector from '../DateRange/DateRange';
-import ServicesList from '../servicesList/ServicesList';
+import ServicesCard from '../ServicesCard/ServicesCard';
 
 import personIcon from '../../assets/icons/bxs-user.svg';
 import priceIcon from '../../assets/icons/bxs-dollar-circle.svg';
@@ -24,6 +24,7 @@ export function SpaceData({ spaceData, reservation, setReservation }) {
                     setNewSearchObject={setReservation}
                     newSearchObject={reservation}
                     minDate={true}
+                    reserves={spaceData.reserves}
                 />
 
                 <article>
@@ -42,7 +43,7 @@ export function SpaceData({ spaceData, reservation, setReservation }) {
                         </li>
                     </ul>
 
-                    {spaceData?.owner && <ServicesList listData={ownerInfo} />}
+                    {spaceData?.owner && <ServicesCard listData={ownerInfo} />}
                 </article>
             </section>
 
