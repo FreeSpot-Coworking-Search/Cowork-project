@@ -12,12 +12,11 @@ import spaceOccupied from '../../helpers/spaceOccupied';
 export default function MyCenterSpaceCard({ space, day }) {
   let cleaning = false;
   const occupied = spaceOccupied(space, day);
-  console.log(occupied);
   if (space.estado === 1) cleaning = true;
 
   return (
     <li className="myCenterSpaceCard">
-      <p>{space.id}</p>
+      <p>{space.nombre}</p>
       <ul>
         <li className="tooltip">
           {occupied ? (

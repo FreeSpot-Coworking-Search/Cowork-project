@@ -23,7 +23,7 @@ function nextWeek(week) {
   return thisWeek(addDate(week[6], 1));
 }
 function prevWeek(week) {
-  return thisWeek(addDate(week[0], -1));
+  return thisWeek(addDate(week[0], -2));
 }
 
 export { thisWeek, addDate, nextWeek, prevWeek };

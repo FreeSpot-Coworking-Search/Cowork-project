@@ -2,20 +2,17 @@
     width: 100%;
 }
 .spaceCardNotificationDisplay>ul{
-    border-radius: 40px;
-    background-color: rgba(var(--clear),0.4);
     width: 100%;
     list-style: none;
     display: flex;
     justify-content:flex-end;
     align-items: center;
     gap: 0.2vw;
-    padding: 0.2vh 0.2vw;
-    margin-bottom: 00.3vh;
+ 
 }
 .spaceCardNotificationDisplay>ul>li>img{
     height: 2.7vh;
-    background-color: rgba(255, 0, 0, 0.7);
+    background-color: rgba(var(--secondary));
     border-radius: 50%;
     padding: 0.3vh;
 }

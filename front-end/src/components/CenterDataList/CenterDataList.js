@@ -1,13 +1,15 @@
 import ImageSlide from '../ImageSlide/ImageSlide';
-import PresentationGoogleMap from '../PresentationGoogleMap/PresentationGoogleMap';
 import Spinner from '../Spinner/Spinner';
 import phoneIcon from '../../assets/icons/bxs-phone.svg';
 import addressIcon from '../../assets/icons/bxs-home.svg';
 import mailIcon from '../../assets/icons/bx-mail-send.svg';
 import './CenterDataList.css';
+import GoogleMapsLocation from '../GoogleMapsLocation/GoogleMapsLocation';
 export default function CenterDataList({ center, className }) {
+  console.log(center);
   return center ? (
     <>
+      <h3 className="presentationName">{center.nombre}</h3>
       <ImageSlide
         images={center.imagenes}
         className="presentationSlide"
@@ -33,7 +35,7 @@ export default function CenterDataList({ center, className }) {
           <p className="presentationDescription">{center.descripcion}</p>
         </li>
         <li>
-          <PresentationGoogleMap />
+          <GoogleMapsLocation center={center} />
         </li>
       </ul>
     </>

@@ -1,4 +1,5 @@
 import './ScoreList.css';
+import '../../css/presentation.css';
 import { useState } from 'react';
 import Spinner from '../Spinner/Spinner';
 import StarsDisplay from '../StarsDisplay/StarsDisplay';
@@ -37,13 +38,13 @@ export default function ScoreList({ scores, className }) {
   };
 
   return scores ? (
-    <div className={className + ' presentationList'}>
+    <div className={className + ' presentation presentationList'}>
+      <h3>Valoraciones</h3>
       <OrderByLocal
         state={state}
         setState={setState}
         initialManagementCriteria={initialManagementCriteria}
       />
-      {/* <div className="presentationStart" /> */}
       <ul>
         {state.scores.map((score) => (
           <ScoreCard score={score} />

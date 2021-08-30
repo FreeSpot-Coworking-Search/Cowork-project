@@ -12,12 +12,31 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 1vh;
+    position: relative;
   }
   .MyCenterMiniSelector nav>button{
     border:none;
-    width: 8vw;
     background-color: transparent;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -4.5vh;
+    padding: 1vw;
+    color: rgba(var(--dark));
+    font-weight: bold;
+    font-size: 32px;
+    transition: 0.6s ease;
+    border-radius: 20px 20px 20px 20px;
+    user-select: none;
   }
+  .MyCenterMiniSelector nav>button:nth-child(1){
+    left: 0;
+  }
+  .MyCenterMiniSelector nav>button:nth-child(2){
+    right: 0;
+  }
+
   .MyCenterMiniSelector nav>div{
     display: flex;
     flex-direction: column;

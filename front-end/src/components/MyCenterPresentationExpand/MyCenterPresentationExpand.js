@@ -28,7 +28,7 @@ export default function MyCenterPresentationExpand({
           day={day}
           setDay={setDay}
         />
-        <MyCenterListExpand listSpaces={listSpaces} />
+        <MyCenterListExpand listSpaces={listSpaces} rangeDays={rangeDays} />
         <MyCenterWeekCalendar
           day={day}
           rangeDays={rangeDays}

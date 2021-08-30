@@ -6,7 +6,7 @@ import personIcon from '../../assets/icons/bxs-user.svg';
 import priceIcon from '../../assets/icons/bxs-dollar-circle.svg';
 import ascIcon from '../../assets/icons/bx-chevron-up.svg';
 import Spinner from '../Spinner/Spinner';
-import OrderByNavigation from '../OrderByNavigationn/OrderByNavigation';
+import OrderByNavigation from '../OrderByNavigation/OrderByNavigation';
 import spaceTypeToPlural from '../../helpers/spaceTypeToPlural';
 import spaceTyping from '../../helpers/spaceTyping';
 
@@ -53,11 +53,15 @@ export default function ListSpacesSearch({
 
   return results.length !== 0 ? (
     <article className={className + ' listSpaces'}>
-      <OrderByNavigation
-        searchObject={searchObject}
-        setSearchObject={setSearchObject}
-        initialManagementCriteria={initialManagementCriteria}
-      />
+      {setSearchObject ? (
+        <OrderByNavigation
+          searchObject={searchObject}
+          setSearchObject={setSearchObject}
+          initialManagementCriteria={initialManagementCriteria}
+        />
+      ) : (
+        <div className="presentationStart" />
+      )}
       <ul>
         {Object.keys(listSpaces).map((type) => {
           return (

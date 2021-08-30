@@ -5,7 +5,7 @@ import { useState } from 'react';
 import ListCentersSearch from '../../components/ListCentersSearch/ListCentersSearch';
 import SearchForm from '../../components/SearchForm/SearchForm';
 import MainNavigation from '../../components/MainNavigation/MainNavigation';
-import GoogleMap from '../../components/CustomGoogleMap/CustomGoogleMap';
+import GoogleMap from '../../components/GoogleMapsSearch/GoogleMapsSearch';
 
 import locationIcon from '../../assets/icons/bxs-location-plus 1.png';
 import mapIcon from '../../assets/icons/bxs-map-pin.svg';

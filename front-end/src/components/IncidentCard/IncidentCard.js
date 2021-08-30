@@ -4,7 +4,7 @@ export default function IncidentCard({ space }) {
   return (
     <li className="incidentCard">
       <header>
-        <p>{space.id}</p>
+        <p>{space.nombre}</p>
         <p>{space.tipo}</p>
       </header>
       <ul>

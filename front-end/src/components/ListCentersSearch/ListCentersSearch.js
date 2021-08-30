@@ -8,7 +8,7 @@ import descIcon from '../../assets/icons/bx-chevron-down.svg';
 import priceIcon from '../../assets/icons/bxs-dollar-circle.svg';
 import aToZAlfabeticIcon from '../../assets/icons/bx-sort-a-z.svg';
 import zToAAlfabeticIcon from '../../assets/icons/bx-sort-z-a.svg';
-import OrderByNavigation from '../OrderByNavigationn/OrderByNavigation';
+import OrderByNavigation from '../OrderByNavigation/OrderByNavigation';
 
 export default function ListCentersSearch({
   results,

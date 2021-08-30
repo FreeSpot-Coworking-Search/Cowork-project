@@ -14,7 +14,7 @@ const adminOwnsCenter = require('../../middlewares/centers/adminOwnsCenter');
 const whoIs = require('../../middlewares/admins/whoIs');
 
 router.get('/', whoIs, entityExists, getCenter);
-router.post('/', adminIsLogged, postCenter, getCenter);
+router.post('/', adminIsLogged, postCenter);
 router.put(
 	'/',
 	entityExists,
@@ -25,14 +25,7 @@ router.put(
 );
 router.delete('/', entityExists, adminIsLogged, adminOwnsCenter, deleteCenter);
 
-router.post(
-	'/photo/',
-	entityExists,
-	adminIsLogged,
-	adminOwnsCenter,
-	postPhoto,
-	getCenter
-);
+router.post('/photo/', entityExists, adminIsLogged, adminOwnsCenter, postPhoto);
 
 router.delete('/photo/', adminIsLogged, deletePhoto);
 

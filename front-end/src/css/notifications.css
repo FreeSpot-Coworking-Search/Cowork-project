@@ -3,13 +3,13 @@
 } 
 .notificationBubble { 
     position:absolute; 
-    top: -0.5vh;
-    right:0.5vw;
-    padding:0.2vh 0.4vh ; 
-    background-color:red;
+    top: -0.5rem;
+    right:0.1rem;
+    padding: 0.6rem; 
+    background-color:rgba(var(--secondary),1);
     color:white; 
     font-weight:bold; 
-    font-size:1vh;
+    font-size:0.8rem;
     border-radius:30px;
 }
 

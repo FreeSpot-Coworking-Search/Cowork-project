@@ -261,7 +261,7 @@ const createSearchCentersQuerry = (searchObject) => {
 };
 
 const createSearchSpacesQuerry = (searchObject) => {
-	let query = `SELECT  espacios.id, espacios.tipo, espacios.estado, espacios.visible, espacios.descripcion, espacios.capacidad_maxima, espacios.reserva_minima, espacios.precio, espacios.id_centro
+	let query = `SELECT  espacios.id, espacios.tipo, espacios.nombre, espacios.estado, espacios.visible, espacios.descripcion, espacios.capacidad_maxima, espacios.reserva_minima, espacios.precio, espacios.id_centro
 	FROM espacios 
 	INNER JOIN reservas ON reservas.id_espacio = espacios.id `;
 	const whereString = [];

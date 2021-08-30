@@ -9,7 +9,9 @@ export default function MyCenterSelector({
   return (
     <div className="myCenterSelector">
       <nav>
-        <a href="#">{centers[selectedCenter].nombre}</a>
+        <a href={`/center/${centers[selectedCenter].id}`}>
+          {centers[selectedCenter].nombre}
+        </a>
         <ul>
           {centers.map((center, index) =>
             index !== selectedCenter ? (

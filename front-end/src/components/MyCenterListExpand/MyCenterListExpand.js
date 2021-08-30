@@ -1,7 +1,15 @@
 import './MyCenterListExpand.css';
 import spaceTypeToPlural from '../../helpers/spaceTypeToPlural';
 
-export default function MyCenterListExpand({ className, listSpaces }) {
+import infoIcon from '../../assets/icons/bx-info-circle.svg';
+import incidentsIcon from '../../assets/icons/bx-message-square-error.svg';
+import cleaningIcon from '../../assets/icons/carbon_clean.svg';
+import MyCenterListExpandElement from '../MyCenterListExpandElement/MyCenterListExpandElement';
+export default function MyCenterListExpand({
+  className,
+  listSpaces,
+  rangeDays,
+}) {
   return (
     <div className={className + ' myCenterListExpand'}>
       <div className="myCenterListLimit" />
@@ -12,7 +20,10 @@ export default function MyCenterListExpand({ className, listSpaces }) {
               <h3>{spaceTypeToPlural(type)}</h3>
               <ul>
                 {listSpaces[type].map((space) => (
-                  <li key={space.id}>{space.id}</li>
+                  <MyCenterListExpandElement
+                    space={space}
+                    rangeDays={rangeDays}
+                  />
                 ))}
               </ul>
             </li>

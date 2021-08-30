@@ -19,7 +19,7 @@ export default function SpaceCard({ space, searchObject, name }) {
         />
       </div>
       <div className="spaceCardRightColumn">
-        {space.owner ? <SpaceCardNotificationDisplay space={space} /> : ''}
+        <h4>{space.nombre}</h4>
         <Link
           to={objectToQuerryParamsString(
             '/space',
@@ -40,6 +40,13 @@ export default function SpaceCard({ space, searchObject, name }) {
             <li className="spaceCardDays">
               <img src={calendarIcon} alt="Calendar icon" />
               <p>{`Min. ${space.reserva_minima} días`}</p>
+            </li>
+            <li>
+              {space.owner ? (
+                <SpaceCardNotificationDisplay space={space} />
+              ) : (
+                ''
+              )}
             </li>
           </ul>
         </Link>

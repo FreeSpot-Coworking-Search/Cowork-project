@@ -21,8 +21,8 @@ body {
 
     grid-template-columns:
         2vw
-        48vw
-        48vw
+        20vw
+        76vw
         2vw;
     /* minmax(30px, 50px)
         minmax(280px, 650px)

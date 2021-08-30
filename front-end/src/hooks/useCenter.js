@@ -12,5 +12,14 @@ export default function useCenter(centerId) {
       setLoading(false);
     });
   }, [centerId]);
-  return [center, loading];
+
+  const reload = () => {
+    setLoading(true);
+    getData('/api/centers/', { id: centerId }).then((data) => {
+      setCenter(data.center);
+      setLoading(false);
+    });
+  };
+
+  return [center, loading, reload];
 }

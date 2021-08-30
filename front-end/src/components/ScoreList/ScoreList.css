@@ -1,3 +1,7 @@
+.scoreList{
+    padding-left: 1.3vw;
+    padding-right: 1.3vw;
+}
 .scoreList>ul{
     display: flex;
     flex-direction: column;

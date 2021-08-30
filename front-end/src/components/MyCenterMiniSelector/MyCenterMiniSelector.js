@@ -1,4 +1,3 @@
-import { isTomorrow } from 'date-fns';
 import nextDay from '../../helpers/nextDay';
 import prevDay from '../../helpers/prevDay';
 import './MyCenterMiniSelector.css';
@@ -13,7 +12,8 @@ export default function MyCenterMiniSelector({
   return (
     <div className="MyCenterMiniSelector">
       <nav>
-        <button onClick={() => setDay(prevDay(day))}>-</button>
+        <button onClick={() => setDay(prevDay(day))}>&#10094;</button>
+        <button onClick={() => setDay(nextDay(day))}>&#10095;</button>
         <div>
           <p>{centers[selectedCenter].nombre}</p>
           <p>{day?.toLocaleDateString()}</p>
@@ -31,7 +31,6 @@ export default function MyCenterMiniSelector({
             )
           )}
         </ul>
-        <button onClick={() => setDay(nextDay(day))}>+</button>
       </nav>
     </div>
   );

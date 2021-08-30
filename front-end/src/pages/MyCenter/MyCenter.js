@@ -1,23 +1,24 @@
 import './MyCenter.css';
 
 import { useState } from 'react';
-
+import RegistrationFormCenter from '../../components/Formularies/RegistrationFormCenter';
 import MainNavigation from '../../components/MainNavigation/MainNavigation';
 import Spinner from '../../components/Spinner/Spinner';
-
 import locationIcon from '../../assets/icons/bxs-location-plus 1.png';
+import formIllustration from '../../assets/illustrations/undraw_fill_form_re_cwyf.svg';
 import useFullView from '../../hooks/useFullView';
 import useMyCenter from '../../hooks/useMyCenter';
-import RetrieveQueryParams from '../../helpers/RetriveQueryParams';
 import MyCenterPresentation from '../../components/MyCenterPresentation/MyCenterPresentation';
 import MyCenterPresentationExpand from '../../components/MyCenterPresentationExpand/MyCenterPresentationExpand';
+import { useParams } from 'react-router-dom';
+import HelpPresentation from '../../components/HelpPresentation/HelpPresentation';
 
 export default function MyCenter({ className }) {
-  const centerId = RetrieveQueryParams(['id_administrador']).id_administrador;
-  const [centers, loading] = useMyCenter(centerId);
+  const { idAdmin } = useParams();
+  const [centers, loading] = useMyCenter(idAdmin);
   const [selectedCenter, setSelectedCenter] = useState(0);
   const [day, setDay] = useState(new Date());
-  const [visualization, setVisualization] = useState('list');
+  const [visualization, setVisualization] = useState('expand');
   const [fullView] = useFullView();
 
   // ****************************
@@ -29,26 +30,30 @@ export default function MyCenter({ className }) {
     icon: locationIcon,
     text: 'Mensaje ayuda',
   };
+  const newCenterButton = {
+    action: () => setVisualization('newCenter'),
+    icon: locationIcon,
+    text: 'Nuevo centro',
+  };
+
   let Links = [];
 
   switch (visualization) {
     case 'list':
-      if (fullView) Links = [genericButton, genericButton, genericButton];
-      else Links = [genericButton, genericButton, genericButton, genericButton];
-      break;
-    case 2:
-      if (fullView) Links = [genericButton, genericButton, genericButton];
-      else Links = [genericButton, genericButton, genericButton, genericButton];
-
-      break;
-    case 3:
-      if (fullView) Links = [genericButton, genericButton, genericButton];
-      else Links = [genericButton, genericButton, genericButton, genericButton];
+      if (fullView) Links = [newCenterButton, genericButton, genericButton];
+      else
+        Links = [newCenterButton, genericButton, genericButton, genericButton];
       break;
 
     case 'expand':
-      if (fullView) Links = [genericButton, genericButton, genericButton];
-      else Links = [genericButton, genericButton, genericButton, genericButton];
+      if (fullView) Links = [newCenterButton, genericButton, genericButton];
+      else
+        Links = [newCenterButton, genericButton, genericButton, genericButton];
+      break;
+    case 'newCenter':
+      if (fullView) Links = [newCenterButton, genericButton, genericButton];
+      else
+        Links = [newCenterButton, genericButton, genericButton, genericButton];
       break;
 
     default:
@@ -62,9 +67,7 @@ export default function MyCenter({ className }) {
   const fullViewJSX = {
     list: (
       <div className={className + ' mainSectionFullView'}>
-        <div className="mainSectionLeftArticle Borrame">
-          <p>1</p>
-        </div>
+        <div className="mainSectionLeftArticle Borrame"></div>
 
         <MainNavigation
           links={Links}
@@ -78,34 +81,20 @@ export default function MyCenter({ className }) {
         />
       </div>
     ),
-    2: (
+    newCenter: (
       <div className={className + ' mainSectionFullView'}>
-        <div className="mainSectionLeftArticle Borrame">
-          <p>1</p>
+        <div className="mainSectionLeftArticle presentation">
+          <RegistrationFormCenter />
         </div>
-
         <MainNavigation
           links={Links}
           className="mainSectionNavigation"
         ></MainNavigation>
-        <div className="mainSectionRightArticle Borrame">
-          <p>2</p>
-        </div>
-      </div>
-    ),
-    3: (
-      <div className={className + ' mainSectionFullView'}>
-        <div className="mainSectionLeftArticle Borrame">
-          <p>1</p>
-        </div>
-
-        <MainNavigation
-          links={Links}
-          className="mainSectionNavigation"
-        ></MainNavigation>
-        <div className="mainSectionRightArticle Borrame">
-          <p>3</p>
-        </div>
+        <HelpPresentation
+          className="mainSectionRightArticle"
+          image={formIllustration}
+          text="Cubramos los datos de su centro"
+        />
       </div>
     ),
     expand: (
@@ -138,23 +127,20 @@ export default function MyCenter({ className }) {
         setDay={setDay}
       />
     ),
-    2: (
-      <div className="mainSectionLeftArticle Borrame">
-        <p>2</p>
-      </div>
-    ),
-    3: (
-      <div className="mainSectionLeftArticle Borrame">
-        <p>3</p>
-      </div>
-    ),
   };
 
   const responsiveChangeJSX = {
-    true: <>{fullViewJSX[visualization]}</>,
+    true: fullViewJSX[visualization],
     false: (
       <div className={className + ' mainSectionSingleView'}>
-        {singleViewJSX[visualization]}
+        <MyCenterPresentation
+          className="mainSectionLeftArticle"
+          centers={centers}
+          selectedCenter={selectedCenter}
+          setSelectedCenter={setSelectedCenter}
+          day={day}
+          setDay={setDay}
+        />
         <MainNavigation
           links={Links}
           className="mainSectionNavigation"

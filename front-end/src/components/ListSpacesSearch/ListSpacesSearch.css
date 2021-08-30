@@ -1,6 +1,4 @@
 .listSpaces{
-    padding-left: 1.3vw;
-    padding-right: 1.3vw;
     display:flex;
     justify-content: flex-start;
     align-items: center;
@@ -23,16 +21,20 @@
     display: none;
 }
 .listSpacesType {
-    background-color: rgba(var(--secondary),0.5);
-    height: 6vh;
+    background-color: rgba(var(--clear),0.4);
+    color: rgba(var(--dark),1);
+    height: 5vh;
     width: 100%;
     text-align: center;
     padding-top: 1vh;
     font-size: 3vh;
     margin-bottom: 1vh;
+    font-size: var(--presentationSubTittle);
 }
+
 .listSpaces>ul>li{
     width: 100%;
+    margin-bottom: 2vh;
     
 }
 .listSpaces>ul>li>ul{
@@ -47,5 +49,4 @@
 
 .listSpaces>ul>li>ul>li {
     width: 100%;
-    height: 15vh;
 }

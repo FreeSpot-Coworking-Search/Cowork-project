@@ -1,0 +1,19 @@
+.helpPresentation{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.helpPresentation>img{
+    background-color: rgba(var(--primary),0.6);
+    border-radius: 20px;
+    padding: 1vh 2vw;
+    margin-bottom: 2vh;
+}
+.helpPresentation p{
+    
+    background-color: rgba(var(--clear),0.6);
+    border-radius: 20px;
+    text-align: center;
+    font-size: var(--presentationTittle);
+
+}

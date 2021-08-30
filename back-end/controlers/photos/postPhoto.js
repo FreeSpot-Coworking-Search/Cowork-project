@@ -7,6 +7,7 @@ const { MAX_CENTER_PHOTOS, MAX_SPACE_PHOTOS } = process.env;
 
 const postPhoto = async (req, res, next) => {
 	try {
+		console.log('hola');
 		const { id } = req.query;
 		const { description } = req.body;
 

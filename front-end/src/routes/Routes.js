@@ -53,7 +53,7 @@ const routes = [
 
   // EJEMPLO RUTA PRIVADA
   {
-    path: '/mycenter',
+    path: '/mycenter/:idAdmin',
     Page: MyCenter,
     typeRequired: 'administrador',
   },
@@ -75,7 +75,7 @@ const routes = [
     typeRequired: '',
   },
   {
-    path: '/center',
+    path: '/center/:centerId',
     Page: Center,
     typeRequired: '',
   },

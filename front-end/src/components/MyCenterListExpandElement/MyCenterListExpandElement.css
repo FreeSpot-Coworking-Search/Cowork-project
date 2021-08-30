@@ -1,0 +1,69 @@
+.myCenterListExpandElement{
+    width: 100%;
+    height: 8vh;
+    background-color:rgba(var(--primary),0.3);
+    border-radius: 20px 0  0 20px;
+    display:grid;
+    grid-template-columns: 20vw 1fr;
+  }
+  .myCenterListExpandElement>p{
+    width: 100%;
+  }
+  .myCenterListExpandElement>div{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+  }
+  .myCenterListExpandElement>div>h4{
+    align-self: flex-start;
+    margin-left: 1.5vw;
+    font-size: var(--presentationText);
+  }
+  .myCenterListExpandElement>div>ul{
+    display:flex;
+    list-style: none;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(var(--clear),0.3);
+    border-radius: 20px;
+    height: 4vh;
+    margin-left: 0.8vw;
+  }
+  .myCenterListExpandElement>div>ul>li{
+    width: 4vw;
+    height: 4vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .myCenterListExpandElement>div>ul>li img{
+    height: 4vh;
+  }
+  .myCenterListExpandElement>ul{
+    list-style: none;
+    display: flex;
+    justify-content: stretch;
+    list-style: none;
+    height: 100%;
+  }
+  .myCenterListExpandElement>ul>li{
+    width: 100%;
+    display:flex;
+    flex-direction: column;
+    justify-content:flex-end;
+    align-items: center;
+    background-color:transparent;
+    margin-bottom: 0.6vh;
+  }
+  .reserveChart{
+    width: 100%;
+    height: 2vh;
+    background-color: rgba(var(--secondary),0.5);
+  }
+  .reserveChartEnd{
+    background-color: royalblue;
+  }
+  .reserveChartStart{
+    background-color: royalblue;
+  }

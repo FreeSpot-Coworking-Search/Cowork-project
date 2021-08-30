@@ -10,7 +10,7 @@ const postCenterSchema = Joi.object().keys({
 	telefono: Joi.string().max(15),
 	email: Joi.string().required().email().max(50),
 	equipamiento: Joi.string().max(1000),
-	descripcion: Joi.any(),
+	descripcion: Joi.string().max(1000),
 });
 
 const putCenterSchema = Joi.object().keys({
@@ -23,7 +23,7 @@ const putCenterSchema = Joi.object().keys({
 	telefono: Joi.string().max(15),
 	email: Joi.string().email().max(50),
 	equipamiento: Joi.string().max(1000),
-	descripcion: Joi.any(),
+	descripcion: Joi.string().max(1000),
 });
 
 module.exports = { postCenterSchema, putCenterSchema };

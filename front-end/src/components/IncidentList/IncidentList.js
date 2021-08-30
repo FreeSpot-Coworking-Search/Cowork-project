@@ -3,7 +3,8 @@ import './IncidentList.css';
 
 export default function IncidentList({ incidents }) {
   return (
-    <div className="presentationList">
+    <div className="presentation presentationList">
+      <h3>Incidencias</h3>
       <div className="presentationStart" />
       <ul className="incidentList">
         {incidents
