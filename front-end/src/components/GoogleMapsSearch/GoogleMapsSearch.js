@@ -15,7 +15,7 @@ const { REACT_APP_GOOGLE_MAPS_API_KEY } = process.env;
 const GoogleMap = ({ markers }) => (
   <div style={{ height: '100%', width: '100%' }}>
     <GoogleMapReact
-      bootstrapURLKeys={{ key: 'AIzaSyAGaha6kvv2kfM94x8ScnXt9PIG2KOH2cs' }}
+      bootstrapURLKeys={{ key: REACT_APP_GOOGLE_MAPS_API_KEY }}
       defaultCenter={defaultProps.center}
       defaultZoom={defaultProps.zoom}
     >

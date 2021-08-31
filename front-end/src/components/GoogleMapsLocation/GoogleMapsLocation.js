@@ -17,7 +17,7 @@ export default function GoogleMapsLocation({ center }) {
   return (
     <div className="map">
       <GoogleMapReact
-        bootstrapURLKeys={{ key: 'AIzaSyAGaha6kvv2kfM94x8ScnXt9PIG2KOH2cs' }}
+        bootstrapURLKeys={{ key: REACT_APP_GOOGLE_MAPS_API_KEY }}
         defaultCenter={centerPosition.mapCenter}
         defaultZoom={7}
       >
