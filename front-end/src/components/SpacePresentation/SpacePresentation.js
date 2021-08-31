@@ -9,54 +9,54 @@ import infoIcon from '../../assets/icons/bx-info-circle.svg';
 import editIcon from '../../assets/icons/bx-edit-alt.svg';
 
 const ModificationFormSpace = lazy(() =>
-    import('../Formularies/ModificationFormSpace')
+  import('../Formularies/ModificationFormSpace')
 );
 
 export default function SpacePresentation({
-    spaceData,
-    className,
-    reservation,
-    setReservation,
+  spaceData,
+  className,
+  reservation,
+  setReservation,
 }) {
-    const [visualization, setVisualization] = useState('data');
+  const [visualization, setVisualization] = useState('data');
 
-    const visualizationsButtons = useMemo(() => {
-        return spaceData.owner
-            ? [
-                  {
-                      value: 'data',
-                      icon: infoIcon,
-                      text: 'visualizar datos',
-                  },
-                  {
-                      value: 'edit',
-                      icon: editIcon,
-                      text: 'modificar datos',
-                  },
-              ]
-            : [];
-    }, [spaceData]);
+  const visualizationsButtons = useMemo(() => {
+    return spaceData.owner
+      ? [
+          {
+            value: 'data',
+            icon: infoIcon,
+            text: 'visualizar datos',
+          },
+          {
+            value: 'edit',
+            icon: editIcon,
+            text: 'modificar datos',
+          },
+        ]
+      : [];
+  }, [spaceData]);
 
-    const visualizations = {
-        data: (
-            <SpaceData
-                spaceData={spaceData}
-                reservation={reservation}
-                setReservation={setReservation}
-            />
-        ),
-        edit: <ModificationFormSpace spaceData={spaceData} />,
-    };
+  const visualizations = {
+    data: (
+      <SpaceData
+        spaceData={spaceData}
+        reservation={reservation}
+        setReservation={setReservation}
+      />
+    ),
+    edit: <ModificationFormSpace spaceData={spaceData} />,
+  };
 
-    return (
-        <article className={className + ' presentation'}>
-            <h3 className="presentationName">{`${spaceData.nombre} - ${spaceData.tipo} `}</h3>
-            <DisplaySelector
-                visualizationsButtons={visualizationsButtons}
-                setVisualization={setVisualization}
-                visualization={visualization}
-            />
-            {visualizations[visualization]}
-        </article>
-    );
+  return (
+    <article className={className + ' presentation'}>
+      <DisplaySelector
+        visualizationsButtons={visualizationsButtons}
+        setVisualization={setVisualization}
+        visualization={visualization}
+      />
+      <h3 className="presentationName">{`${spaceData.nombre} - ${spaceData.tipo} `}</h3>
+      {visualizations[visualization]}
+    </article>
+  );
 }

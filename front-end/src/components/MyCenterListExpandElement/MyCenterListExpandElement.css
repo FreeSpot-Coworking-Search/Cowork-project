@@ -20,26 +20,7 @@
     margin-left: 1.5vw;
     font-size: var(--presentationText);
   }
-  .myCenterListExpandElement>div>ul{
-    display:flex;
-    list-style: none;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(var(--clear),0.3);
-    border-radius: 20px;
-    height: 4vh;
-    margin-left: 0.8vw;
-  }
-  .myCenterListExpandElement>div>ul>li{
-    width: 4vw;
-    height: 4vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .myCenterListExpandElement>div>ul>li img{
-    height: 4vh;
-  }
+  
   .myCenterListExpandElement>ul{
     list-style: none;
     display: flex;

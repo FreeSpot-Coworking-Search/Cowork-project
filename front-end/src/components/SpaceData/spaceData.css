@@ -1,20 +1,14 @@
-.spaceCard {
-    margin-bottom: 1rem;
-    height: 100%;
-    width: 100%;
-
+.spaceData {
     display: flex;
-    flex-wrap: wrap;
-    gap: 2vw;
-    justify-content: flex-end;
-    align-items: flex-start;
+    flex-direction: column;
+}
+.spaceData>article{
+    margin-bottom: 1vh;
 }
 
-.spaceCard > * {
-    flex: 1 1 200px;
-}
 
-.spaceCard-list {
+
+.spaceData-list {
     display: flex;
     flex-direction: column;
     gap: 1vh;
@@ -23,20 +17,19 @@
     margin-right: 0.3vw;
     background-color: rgba(var(--clear), 0.4);
     border-radius: 20px;
+    padding: 1vh 1vw;
 }
 
-.spaceCard ul {
-    padding: 1vh 1vw;
+.spaceData>article>ul {
     list-style: none;
 }
 
-.spaceCard li {
+.spaceData>article>ul>li {
     display: flex;
     justify-content: space-between;
     gap: 0.5vw;
-    margin-right: 1vw;
+
 }
 
-.spaceCard img {
-    width: 2.5vh;
-}
+
+

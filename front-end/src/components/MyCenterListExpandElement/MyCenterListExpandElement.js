@@ -6,61 +6,44 @@ import cleaningIcon from '../../assets/icons/carbon_clean.svg';
 import visionIcon from '../../assets/icons/bx-low-vision.svg';
 import '../../css/notifications.css';
 import '../../css/tooltip.css';
+import { Link } from 'react-router-dom';
+import SpaceAlertDisplay from '../SpaceAlertDisplay/SpaceAlertDisplay';
 
 export default function MyCenterListExpandElement({ space, rangeDays }) {
   return (
-    <li className="myCenterListExpandElement" key={space.id}>
-      <div>
-        <h4>{space.nombre}</h4>
+    <li>
+      <Link
+        className="myCenterListExpandElement"
+        key={space.id}
+        to={`/space/${space.id}`}
+      >
+        <div>
+          <h4>{space.nombre}</h4>
+          <SpaceAlertDisplay space={space} />
+        </div>
         <ul>
-          <li>
-            {space.visible === 1 ? (
-              <img src={visionIcon} alt="Icono de limpieza" />
+          {rangeDays.map((day) => {
+            const reservation = spaceOccupied(space, day);
+            return reservation ? (
+              <li>
+                <div
+                  className={`reserveChart${
+                    new Date(reservation.fecha_fin).getTime() === day.getTime()
+                      ? ' reserveChartEnd'
+                      : ''
+                  }${
+                    new Date(reservation.fecha_inicio) === day
+                      ? ' reserveChartStart'
+                      : ''
+                  }`}
+                ></div>
+              </li>
             ) : (
-              ''
-            )}
-          </li>
-          <li>
-            {space.estado === 1 ? (
-              <img src={cleaningIcon} alt="Icono de limpieza" />
-            ) : (
-              ''
-            )}
-          </li>
-          <li>
-            {space.incidencias.length !== 0 ? (
-              <div className="notificationContainer">
-                <img src={incidentsIcon} alt="Icono de incidencia" />
-                <p className="notificationBubble">{space.incidencias.length}</p>
-              </div>
-            ) : (
-              ''
-            )}
-          </li>
+              <li></li>
+            );
+          })}
         </ul>
-      </div>
-      <ul>
-        {rangeDays.map((day) => {
-          const reservation = spaceOccupied(space, day);
-          return reservation ? (
-            <li>
-              <div
-                className={`reserveChart${
-                  new Date(reservation.fecha_fin).getTime() === day.getTime()
-                    ? ' reserveChartEnd'
-                    : ''
-                }${
-                  new Date(reservation.fecha_inicio) === day
-                    ? ' reserveChartStart'
-                    : ''
-                }`}
-              ></div>
-            </li>
-          ) : (
-            <li></li>
-          );
-        })}
-      </ul>
+      </Link>
     </li>
   );
 }

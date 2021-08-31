@@ -50,7 +50,7 @@ export default function ListSpacesSearch({
       },
     ],
   };
-
+  console.log(searchObject);
   return results.length !== 0 ? (
     <article className={className + ' listSpaces'}>
       {setSearchObject ? (
@@ -72,7 +72,6 @@ export default function ListSpacesSearch({
                   <SpaceCard
                     key={space.id}
                     space={space}
-                    linksRoute="/space"
                     searchObject={searchObject}
                     name={space.id}
                   />

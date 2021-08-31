@@ -1,4 +1,5 @@
 export default function objectToQuerryParamsString(urlBase, object1, object2) {
+  console.log(urlBase);
   let finalString = urlBase;
   const arrayString = [];
   if (object1.length !== 0) {
@@ -11,7 +12,7 @@ export default function objectToQuerryParamsString(urlBase, object1, object2) {
     for (const key in object2) {
       arrayString.push(`${key}=${object2[key]}`);
     }
-    finalString += arrayString.join('&');
   }
+  finalString += arrayString.join('&');
   return finalString;
 }

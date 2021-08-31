@@ -65,7 +65,7 @@ const routes = [
     typeRequired: '',
   },
   {
-    path: '/space',
+    path: '/space/:spaceId',
     Page: Space,
     typeRequired: '',
   },

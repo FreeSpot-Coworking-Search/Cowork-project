@@ -1,0 +1,19 @@
+.spaceAlertDisplay{
+    display:flex;
+    list-style: none;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgba(var(--clear),0.3);
+    border-radius: 20px;
+    height: 4vh;
+  }
+  .spaceAlertDisplay>li{
+    width: 4vw;
+    height: 4vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .spaceAlertDisplay>li img{
+    height: 4vh;
+  }

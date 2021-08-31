@@ -10,7 +10,7 @@ export default function Header() {
 
   const btnBehavior = [
     { text: 'Home', route: '/' },
-    { text: 'My center', action: buttonAction },
+    { text: 'Admin', action: buttonAction },
     { text: 'My center', route: '/mycenter/3' },
   ];
 

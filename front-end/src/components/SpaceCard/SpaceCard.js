@@ -21,11 +21,11 @@ export default function SpaceCard({ space, searchObject, name }) {
       <div className="spaceCardRightColumn">
         <h4>{space.nombre}</h4>
         <Link
-          to={objectToQuerryParamsString(
-            '/space',
-            { id: space.id },
+          to={
             searchObject
-          )}
+              ? objectToQuerryParamsString(`/space/${space.id}/`, searchObject)
+              : `/space/${space.id}`
+          }
           className="spaceCardRightColumnInfo"
         >
           <ul>

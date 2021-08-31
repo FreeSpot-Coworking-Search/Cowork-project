@@ -19,256 +19,237 @@ import centersIcon from '../../assets/icons/centers-solid.png';
 import spaceIcon from '../../assets/icons/bxs-home.svg';
 import servicesIcon from '../../assets/icons/plus-solid.png';
 import imageIcon from '../../assets/icons/image-solid.png';
+import { useParams } from 'react-router-dom';
 
 const ConfirmationDialog = lazy(() =>
-    import('../../components/SpacePresentation/ConfirmationDialog')
+  import('../../components/SpacePresentation/ConfirmationDialog')
 );
 const ServicesPresentation = lazy(() =>
-    import('../../components/ServicesPresentation/ServicesPresentation')
+  import('../../components/ServicesPresentation/ServicesPresentation')
 );
 const PhotosPresentation = lazy(() =>
-    import('../../components/PhotosPresentation/PhotosPresentation')
+  import('../../components/PhotosPresentation/PhotosPresentation')
 );
 
 export default function Space({ className }) {
-    const [fullView] = useFullView();
-    const query = RetrieveQueryParams(['id', 'fecha_entrada', 'fecha_salida']);
+  const { spaceId } = useParams();
+  const [fullView] = useFullView();
+  const query = RetrieveQueryParams(['id', 'fecha_entrada', 'fecha_salida']);
+  const [spaceData, loading] = useSpace(spaceId);
+  const owner = spaceData.owner;
+  console.log(spaceId);
+  const [visualization, setVisualization] = useState('space');
+  const [reservation, setReservation] = useState(query);
+  const { open, handleClickOpen, handleClose } = useDialog();
 
-    const [spaceData, loading] = useSpace(query.id);
-    const owner = spaceData.owner;
+  // ****************************
+  // ** MAIN NAVIGATION CONFIG **
+  // ****************************
+  const submitButton = {
+    action: handleClickOpen,
+    icon: submitIcon,
+    text: 'Reservar',
+  };
 
-    const [visualization, setVisualization] = useState('space');
-    const [reservation, setReservation] = useState(query);
-    const { open, handleClickOpen, handleClose } = useDialog();
+  const photosVisualizationBtn = {
+    action: () => setVisualization('photos'),
+    icon: imageIcon,
+    text: 'Cambiar fotos',
+  };
 
-    // ****************************
-    // ** MAIN NAVIGATION CONFIG **
-    // ****************************
-    const submitButton = {
-        action: handleClickOpen,
-        icon: submitIcon,
-        text: 'Reservar',
-    };
+  const spaceVisualizationBtn = {
+    action: () => setVisualization('space'),
+    icon: spaceIcon,
+    text: 'Informacion espacio',
+  };
 
-    const photosVisualizationBtn = {
-        action: () => setVisualization('photos'),
-        icon: imageIcon,
-        text: 'Cambiar fotos',
-    };
+  const centerVisualizationBtn = {
+    action: () => setVisualization('center'),
+    icon: centersIcon,
+    text: 'Informacion centro',
+  };
 
-    const spaceVisualizationBtn = {
-        action: () => setVisualization('space'),
-        icon: spaceIcon,
-        text: 'Informacion espacio',
-    };
+  const servicesVisualizationBtn = {
+    action: () => setVisualization('services'),
+    icon: servicesIcon,
+    text: 'Informacion servicios',
+  };
 
-    const centerVisualizationBtn = {
-        action: () => setVisualization('center'),
-        icon: centersIcon,
-        text: 'Informacion centro',
-    };
+  const firstButton = !owner ? submitButton : photosVisualizationBtn;
 
-    const servicesVisualizationBtn = {
-        action: () => setVisualization('services'),
-        icon: servicesIcon,
-        text: 'Informacion servicios',
-    };
+  let Links = [];
 
-    const firstButton = !owner ? submitButton : photosVisualizationBtn;
+  switch (visualization) {
+    case 'space':
+      if (fullView) Links = [firstButton, centerVisualizationBtn];
+      else
+        Links = [firstButton, centerVisualizationBtn, servicesVisualizationBtn];
+      break;
+    case 'center':
+      if (fullView) Links = [firstButton, servicesVisualizationBtn];
+      else
+        Links = [firstButton, spaceVisualizationBtn, servicesVisualizationBtn];
 
-    let Links = [];
+      break;
+    case 'services':
+      if (fullView) Links = [firstButton, centerVisualizationBtn];
+      else Links = [firstButton, spaceVisualizationBtn, centerVisualizationBtn];
 
-    switch (visualization) {
-        case 'space':
-            if (fullView) Links = [firstButton, centerVisualizationBtn];
-            else
-                Links = [
-                    firstButton,
-                    centerVisualizationBtn,
-                    servicesVisualizationBtn,
-                ];
-            break;
-        case 'center':
-            if (fullView) Links = [firstButton, servicesVisualizationBtn];
-            else
-                Links = [
-                    firstButton,
-                    spaceVisualizationBtn,
-                    servicesVisualizationBtn,
-                ];
+      break;
 
-            break;
-        case 'services':
-            if (fullView) Links = [firstButton, centerVisualizationBtn];
-            else
-                Links = [
-                    firstButton,
-                    spaceVisualizationBtn,
-                    centerVisualizationBtn,
-                ];
+    case 'photos':
+      if (fullView) Links = [firstButton, servicesVisualizationBtn];
+      else
+        Links = [firstButton, spaceVisualizationBtn, servicesVisualizationBtn];
+      break;
 
-            break;
+    default:
+      break;
+  }
 
-        case 'photos':
-            if (fullView) Links = [firstButton, servicesVisualizationBtn];
-            else
-                Links = [
-                    firstButton,
-                    spaceVisualizationBtn,
-                    servicesVisualizationBtn,
-                ];
-            break;
+  // *********
+  // ** JSX **
+  // *********
 
-        default:
-            break;
-    }
+  const fullViewJSX = {
+    space: (
+      <main className={className + ' mainSectionFullView'}>
+        <SpacePresentation
+          className="mainSectionLeftArticle"
+          spaceData={spaceData}
+          reservation={reservation}
+          setReservation={setReservation}
+        />
 
-    // *********
-    // ** JSX **
-    // *********
+        <MainNavigation
+          links={Links}
+          className="mainSectionNavigation"
+        ></MainNavigation>
 
-    const fullViewJSX = {
-        space: (
-            <main className={className + ' mainSectionFullView'}>
-                <SpacePresentation
-                    className="mainSectionLeftArticle"
-                    spaceData={spaceData}
-                    reservation={reservation}
-                    setReservation={setReservation}
-                />
+        <ServicesPresentation
+          className="mainSectionRightArticle"
+          spaceData={spaceData}
+          reservation={reservation}
+          setReservation={setReservation}
+        />
+      </main>
+    ),
+    center: (
+      <main className={className + ' mainSectionFullView'}>
+        <SpacePresentation
+          className="mainSectionLeftArticle"
+          spaceData={spaceData}
+          reservation={reservation}
+          setReservation={setReservation}
+        />
+        <MainNavigation
+          links={Links}
+          className="mainSectionNavigation"
+        ></MainNavigation>
 
-                <MainNavigation
-                    links={Links}
-                    className="mainSectionNavigation"
-                ></MainNavigation>
+        <article className="mainSectionRightArticle Borrame">
+          <p>centro</p>
+        </article>
+      </main>
+    ),
+    services: (
+      <main className={className + ' mainSectionFullView'}>
+        <SpacePresentation
+          className="mainSectionLeftArticle"
+          spaceData={spaceData}
+          reservation={reservation}
+          setReservation={setReservation}
+        />
 
-                <ServicesPresentation
-                    className="mainSectionRightArticle"
-                    spaceData={spaceData}
-                    reservation={reservation}
-                    setReservation={setReservation}
-                />
-            </main>
-        ),
-        center: (
-            <main className={className + ' mainSectionFullView'}>
-                <SpacePresentation
-                    className="mainSectionLeftArticle"
-                    spaceData={spaceData}
-                    reservation={reservation}
-                    setReservation={setReservation}
-                />
-                <MainNavigation
-                    links={Links}
-                    className="mainSectionNavigation"
-                ></MainNavigation>
+        <MainNavigation
+          links={Links}
+          className="mainSectionNavigation"
+        ></MainNavigation>
 
-                <article className="mainSectionRightArticle Borrame">
-                    <p>centro</p>
-                </article>
-            </main>
-        ),
-        services: (
-            <main className={className + ' mainSectionFullView'}>
-                <SpacePresentation
-                    className="mainSectionLeftArticle"
-                    spaceData={spaceData}
-                    reservation={reservation}
-                    setReservation={setReservation}
-                />
+        <ServicesPresentation
+          className="mainSectionRightArticle"
+          spaceData={spaceData}
+          reservation={reservation}
+          setReservation={setReservation}
+        />
+      </main>
+    ),
+    photos: (
+      <main className={className + ' mainSectionFullView'}>
+        <SpacePresentation
+          className="mainSectionLeftArticle"
+          spaceData={spaceData}
+          reservation={reservation}
+          setReservation={setReservation}
+        />
 
-                <MainNavigation
-                    links={Links}
-                    className="mainSectionNavigation"
-                ></MainNavigation>
+        <MainNavigation
+          links={Links}
+          className="mainSectionNavigation"
+        ></MainNavigation>
 
-                <ServicesPresentation
-                    className="mainSectionRightArticle"
-                    spaceData={spaceData}
-                    reservation={reservation}
-                    setReservation={setReservation}
-                />
-            </main>
-        ),
-        photos: (
-            <main className={className + ' mainSectionFullView'}>
-                <SpacePresentation
-                    className="mainSectionLeftArticle"
-                    spaceData={spaceData}
-                    reservation={reservation}
-                    setReservation={setReservation}
-                />
+        <PhotosPresentation
+          className="mainSectionRightArticle"
+          data={spaceData}
+        />
+      </main>
+    ),
+  };
 
-                <MainNavigation
-                    links={Links}
-                    className="mainSectionNavigation"
-                ></MainNavigation>
+  const singleViewJSX = {
+    space: (
+      <SpacePresentation
+        className="mainSectionLeftArticle"
+        spaceData={spaceData}
+        reservation={reservation}
+        setReservation={setReservation}
+      />
+    ),
+    center: (
+      <article className="mainSectionLeftArticle Borrame">
+        <p>centro</p>
+      </article>
+    ),
+    services: (
+      <ServicesPresentation
+        className="mainSectionLeftArticle"
+        spaceData={spaceData}
+        reservation={reservation}
+        setReservation={setReservation}
+      />
+    ),
+    photos: (
+      <PhotosPresentation className="mainSectionLeftArticle" data={spaceData} />
+    ),
+  };
 
-                <PhotosPresentation
-                    className="mainSectionRightArticle"
-                    data={spaceData}
-                />
-            </main>
-        ),
-    };
+  const responsiveChangeJSX = {
+    true: <>{fullViewJSX[visualization]}</>,
+    false: (
+      <main className={className + ' mainSectionSingleView'}>
+        {singleViewJSX[visualization]}
+        <MainNavigation
+          links={Links}
+          className="mainSectionNavigation"
+        ></MainNavigation>
+      </main>
+    ),
+  };
 
-    const singleViewJSX = {
-        space: (
-            <SpacePresentation
-                className="mainSectionLeftArticle"
-                spaceData={spaceData}
-                reservation={reservation}
-                setReservation={setReservation}
-            />
-        ),
-        center: (
-            <article className="mainSectionLeftArticle Borrame">
-                <p>centro</p>
-            </article>
-        ),
-        services: (
-            <ServicesPresentation
-                className="mainSectionLeftArticle"
-                spaceData={spaceData}
-                reservation={reservation}
-                setReservation={setReservation}
-            />
-        ),
-        photos: (
-            <PhotosPresentation
-                className="mainSectionLeftArticle"
-                data={spaceData}
-            />
-        ),
-    };
-
-    const responsiveChangeJSX = {
-        true: <>{fullViewJSX[visualization]}</>,
-        false: (
-            <main className={className + ' mainSectionSingleView'}>
-                {singleViewJSX[visualization]}
-                <MainNavigation
-                    links={Links}
-                    className="mainSectionNavigation"
-                ></MainNavigation>
-            </main>
-        ),
-    };
-
-    return loading ? (
-        <CircularProgress />
-    ) : (
-        <>
-            {responsiveChangeJSX[fullView]}
-            <CircularSuspense>
-                <Dialog open={open} onClose={handleClose}>
-                    <ConfirmationDialog
-                        reservation={reservation}
-                        handleClose={handleClose}
-                        spaceData={spaceData}
-                    />
-                </Dialog>
-            </CircularSuspense>
-        </>
-    );
+  return loading ? (
+    <CircularProgress />
+  ) : (
+    <>
+      {responsiveChangeJSX[fullView]}
+      <CircularSuspense>
+        <Dialog open={open} onClose={handleClose}>
+          <ConfirmationDialog
+            reservation={reservation}
+            handleClose={handleClose}
+            spaceData={spaceData}
+          />
+        </Dialog>
+      </CircularSuspense>
+    </>
+  );
 }
