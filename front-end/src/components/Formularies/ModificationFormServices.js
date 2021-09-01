@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { useHistory } from 'react-router';
 
-import { arrangeServices } from '../../helpers/servicesHelper';
+//import { arrangeServices } from '../../helpers/servicesHelper';
 import axios from 'axios';
 
 const {
@@ -11,10 +11,7 @@ const {
 
 export default function ModificationFormSpace({ className, spaceData }) {
     const history = useHistory();
-    const arrangedServices = useMemo(
-        () => arrangeServices(spaceData),
-        [spaceData]
-    );
+    const arrangedServices = useMemo(() => spaceData, [spaceData]);
 
     const [services, setServices] = useState(arrangedServices);
 
@@ -105,7 +102,7 @@ export default function ModificationFormSpace({ className, spaceData }) {
     return (
         <article className={`${className} presentation`}>
             <h3 className="presentationName">Modificación de servicios</h3>
-            <form className="registerForm" onSubmit={(e) => performSubmit(e)}>
+            {/* <form className="registerForm" onSubmit={(e) => performSubmit(e)}>
                 <h1 className="registerForm-title">Servicios a incluir</h1>
                 <hr />
                 <fieldset>
@@ -150,7 +147,7 @@ export default function ModificationFormSpace({ className, spaceData }) {
                 {error && <p className="error">{error}</p>}
                 {message && <p className="message">{message}</p>}
                 <button disabled={!modification}>Modificar datos</button>
-            </form>
+            </form> */}
         </article>
     );
 }

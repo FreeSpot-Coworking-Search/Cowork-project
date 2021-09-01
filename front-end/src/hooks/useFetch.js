@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react';
 import getData from '../helpers/getData';
 
-export default function useSpace(spaceId) {
-    const [space, setSpace] = useState({});
+export default function useFetch(endpoint, id) {
+    const [data, setData] = useState({});
     const [loading, setLoading] = useState(false);
 
     useEffect(
         function () {
             setLoading(true);
-            getData('/api/spaces/', { id: spaceId }).then((data) => {
-                setSpace(data.space);
+            getData(`/api/${endpoint}`, { id: id }).then((data) => {
+                setData(data.space);
                 setLoading(false);
             });
         },
-        [spaceId]
+        [endpoint, id]
     );
-    return [space, loading];
+    return { data, loading, setData };
 }

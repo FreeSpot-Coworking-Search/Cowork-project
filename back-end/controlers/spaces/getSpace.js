@@ -12,21 +12,20 @@ const getSpace = async (req, res, next) => {
 			id_espacio: `${id}`,
 		});
 
-		const services = await getRegistrations(
-			`SELECT servicios.nombre, servicios.id 
-				FROM servicios 
-				INNER JOIN espacios_servicios ON servicios.id = espacios_servicios.id_servicio
-				AND espacios_servicios.id_espacio = ${id} AND espacios_servicios.precio IS NULL;`
+		const includedServices = await getRegistrations(
+			`SELECT S.id, S.nombre, ES.id_espacio, ES.precio
+			FROM servicios S
+			LEFT JOIN espacios_servicios ES
+			ON S.id = ES.id_servicio
+			WHERE ES.id_espacio = ${id};`
 		);
 
-		const extraServices = await getRegistrations(
-			`SELECT servicios.nombre, servicios.id, espacios_servicios.precio 
-				FROM servicios 
-				INNER JOIN espacios_servicios ON servicios.id = espacios_servicios.id_servicio
-				AND espacios_servicios.id_espacio = ${id} AND espacios_servicios.precio IS NOT NULL;`
+		const services = includedServices.filter(
+			(service) => service.precio === null
 		);
-
-		const allServices = await getRegistrations('SELECT * FROM servicios;');
+		const extraServices = includedServices.filter(
+			(service) => service.precio !== null
+		);
 
 		const photos = await getRegistrations('imagenes', {
 			id_espacio: `${id}`,
@@ -52,6 +51,31 @@ const getSpace = async (req, res, next) => {
 				owner: false,
 			};
 		} else {
+			const allServices = await getRegistrations(
+				'SELECT * FROM servicios;'
+			);
+
+			const mergedServices = [];
+			allServices.forEach((service) => {
+				const finded = includedServices.find(
+					(includedService) => includedService.id === service.id
+				);
+
+				if (finded !== undefined) {
+					mergedServices.push({
+						...service,
+						precio: finded.precio,
+						included: true,
+					});
+				} else {
+					mergedServices.push({
+						...service,
+						precio: null,
+						included: false,
+					});
+				}
+			});
+
 			const incidencias = await getRegistrations(`SELECT incidencias.*
 						FROM incidencias
 						INNER JOIN 	reservas ON reservas.id = incidencias.id_reserva
@@ -61,7 +85,7 @@ const getSpace = async (req, res, next) => {
 				centro: centro,
 				servicios: services,
 				servicios_extra: extraServices,
-				listado_servicios: allServices,
+				listado_servicios: mergedServices,
 				imagenes: photos,
 				reserves,
 				incidencias,

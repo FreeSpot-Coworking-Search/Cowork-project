@@ -6,16 +6,27 @@ import axios from 'axios';
 import { Dialog } from '@material-ui/core';
 import useDialog from '../../hooks/useDialog';
 
+import {
+    getIncludedServices,
+    getExtraServices,
+} from '../../helpers/servicesHelper';
+
 const {
     REACT_APP_API_LOCAL_SERVER_HOST: host,
     REACT_APP_API_LOCAL_SERVER_PORT: port,
 } = process.env;
 
-export default function ModificationFormSpace({ className, spaceData }) {
+export default function ModificationFormSpace({
+    className,
+    spaceData,
+    setSpace,
+}) {
     let history = useHistory();
     const { open, handleClickOpen, handleClose } = useDialog();
 
-    const INITIAL_SPACE_INFO = useMemo(() => {
+    console.log(spaceData);
+
+    const INITIAL_FORM_INFO = useMemo(() => {
         return {
             nombre: spaceData.nombre,
             tipo: spaceData.tipo,
@@ -24,22 +35,20 @@ export default function ModificationFormSpace({ className, spaceData }) {
             capacidad_maxima: spaceData.capacidad_maxima,
             descripcion: spaceData.descripcion,
             visible: spaceData.visible,
-            servicios: spaceData.servicios,
-            servicios_extra: spaceData.servicios_extra,
         };
     }, [spaceData]);
 
-    const [spaceInfo, setSpaceInfo] = useState(INITIAL_SPACE_INFO);
+    const [formData, setFormData] = useState(INITIAL_FORM_INFO);
     const [error, setError] = useState();
     const [message, setMessage] = useState();
     const [modification, setModification] = useState(false);
 
     const handleInputChange = (event, prop) => {
-        setSpaceInfo({
-            ...spaceInfo,
+        setFormData({
+            ...formData,
             [prop]: event.target.value,
         });
-        setModification(true);
+        if (modification === false) setModification(true);
     };
 
     async function deleteSpace(e) {
@@ -83,17 +92,22 @@ export default function ModificationFormSpace({ className, spaceData }) {
 
             const route = `${host}:${port}/api/spaces/?id=${spaceData.id}`;
 
-            const spaceInfoObject = {
-                ...spaceInfo,
-                visible: Number(spaceInfo.visible),
+            const formDataObject = {
+                ...formData,
+                visible: Number(formData.visible),
+                servicios: getIncludedServices(spaceData.listado_servicios),
+                servicios_extra: getExtraServices(spaceData.listado_servicios),
             };
 
-            const response = await axios.put(route, spaceInfoObject);
+            const response = await axios.put(route, formDataObject);
             if (response.status === 200) {
                 setMessage('Datos del espacio modificados.');
+                setSpace({
+                    ...spaceData,
+                    ...formData,
+                });
                 setTimeout(() => {
                     setMessage('');
-                    history.go(0);
                 }, 2000);
                 setModification(false);
             }
@@ -128,7 +142,7 @@ export default function ModificationFormSpace({ className, spaceData }) {
                             required
                             maxLength="20"
                             minLength="1"
-                            value={spaceInfo.nombre}
+                            value={formData.nombre}
                         />
                     </label>
 
@@ -136,7 +150,7 @@ export default function ModificationFormSpace({ className, spaceData }) {
                         Tipo
                         <select
                             id="tipo"
-                            value={spaceInfo.tipo}
+                            value={formData.tipo}
                             onChange={(event) =>
                                 handleInputChange(event, 'tipo')
                             }
@@ -162,7 +176,7 @@ export default function ModificationFormSpace({ className, spaceData }) {
                             required
                             step="0.50"
                             min="1"
-                            value={spaceInfo.precio}
+                            value={formData.precio}
                         />
                         €/dia
                     </label>
@@ -178,7 +192,7 @@ export default function ModificationFormSpace({ className, spaceData }) {
                             required
                             step="1"
                             min="1"
-                            value={spaceInfo.reserva_minima}
+                            value={formData.reserva_minima}
                         />
                         dias
                     </label>
@@ -194,7 +208,7 @@ export default function ModificationFormSpace({ className, spaceData }) {
                             required
                             step="1"
                             min="1"
-                            value={spaceInfo.capacidad_maxima}
+                            value={formData.capacidad_maxima}
                         />
                         personas
                     </label>
@@ -203,7 +217,7 @@ export default function ModificationFormSpace({ className, spaceData }) {
                         Visibilidad
                         <select
                             htmlFor="visible"
-                            value={spaceInfo.visible}
+                            value={formData.visible}
                             onChange={(event) =>
                                 handleInputChange(event, 'visible')
                             }
@@ -217,7 +231,7 @@ export default function ModificationFormSpace({ className, spaceData }) {
                     <label>
                         Descripción
                         <textarea
-                            value={spaceInfo.descripcion}
+                            value={formData.descripcion}
                             onChange={(event) =>
                                 handleInputChange(event, 'descripcion')
                             }
