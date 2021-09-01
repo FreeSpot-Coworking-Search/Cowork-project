@@ -6,45 +6,50 @@ import axios from 'axios';
 import { Dialog } from '@material-ui/core';
 import useDialog from '../../hooks/useDialog';
 
+import {
+    getIncludedServices,
+    getExtraServices,
+} from '../../helpers/servicesHelper';
+
 const {
   REACT_APP_API_LOCAL_SERVER_HOST: host,
   REACT_APP_API_LOCAL_SERVER_PORT: port,
 } = process.env;
 
 export default function ModificationFormSpace({
-  className,
-  spaceData,
-  setSpace,
+    className,
+    spaceData,
+    setSpace,
 }) {
-  let history = useHistory();
-  const { open, handleClickOpen, handleClose } = useDialog();
+    let history = useHistory();
+    const { open, handleClickOpen, handleClose } = useDialog();
 
-  const INITIAL_SPACE_INFO = useMemo(() => {
-    return {
-      nombre: spaceData.nombre,
-      tipo: spaceData.tipo,
-      precio: spaceData.precio,
-      reserva_minima: spaceData.reserva_minima,
-      capacidad_maxima: spaceData.capacidad_maxima,
-      descripcion: spaceData.descripcion,
-      visible: spaceData.visible,
-      servicios: spaceData.servicios,
-      servicios_extra: spaceData.servicios_extra,
+    console.log(spaceData);
+
+    const INITIAL_FORM_INFO = useMemo(() => {
+        return {
+            nombre: spaceData.nombre,
+            tipo: spaceData.tipo,
+            precio: spaceData.precio,
+            reserva_minima: spaceData.reserva_minima,
+            capacidad_maxima: spaceData.capacidad_maxima,
+            descripcion: spaceData.descripcion,
+            visible: spaceData.visible,
+        };
+    }, [spaceData]);
+
+    const [formData, setFormData] = useState(INITIAL_FORM_INFO);
+    const [error, setError] = useState();
+    const [message, setMessage] = useState();
+    const [modification, setModification] = useState(false);
+
+    const handleInputChange = (event, prop) => {
+        setFormData({
+            ...formData,
+            [prop]: event.target.value,
+        });
+        if (modification === false) setModification(true);
     };
-  }, [spaceData]);
-
-  const [spaceInfo, setSpaceInfo] = useState(INITIAL_SPACE_INFO);
-  const [error, setError] = useState();
-  const [message, setMessage] = useState();
-  const [modification, setModification] = useState(false);
-
-  const handleInputChange = (event, prop) => {
-    setSpaceInfo({
-      ...spaceInfo,
-      [prop]: event.target.value,
-    });
-    setModification(true);
-  };
 
   async function deleteSpace(e) {
     e.preventDefault();
@@ -92,33 +97,54 @@ export default function ModificationFormSpace({
         visible: Number(spaceInfo.visible),
       };
 
-      const response = await axios.put(route, spaceInfoObject);
-      if (response.status === 200) {
-        setMessage('Datos del espacio modificados.');
-        setSpace((space) => {
-          console.log(space);
-          console.log(response.data);
-          return {
-            ...space,
-            ...response.data.space,
-          };
-        });
-        setTimeout(() => {
-          setMessage('');
-        }, 2000);
-        setModification(false);
-      }
-    } catch (error) {
-      setMessage('');
+    async function performSubmit(e) {
+        e.preventDefault();
+        try {
+            if (!modification) {
+                setError(
+                    'Debes tener habilitada la modificación antes de poder guardar los cambios.'
+                );
+                setTimeout(() => {
+                    setError('');
+                }, 5000);
+                return;
+            }
 
-      const {
-        data: { message },
-      } = error.response;
+            setMessage('Enviando datos');
 
-      message ? setError(message) : setError(error.message);
-      setTimeout(() => {
-        setError('');
-      }, 5000);
+            const route = `${host}:${port}/api/spaces/?id=${spaceData.id}`;
+
+            const formDataObject = {
+                ...formData,
+                visible: Number(formData.visible),
+                servicios: getIncludedServices(spaceData.listado_servicios),
+                servicios_extra: getExtraServices(spaceData.listado_servicios),
+            };
+
+            const response = await axios.put(route, formDataObject);
+            if (response.status === 200) {
+                setMessage('Datos del espacio modificados.');
+                setSpace({
+                    ...spaceData,
+                    ...formData,
+                });
+                setTimeout(() => {
+                    setMessage('');
+                }, 2000);
+                setModification(false);
+            }
+        } catch (error) {
+            setMessage('');
+
+            const {
+                data: { message },
+            } = error.response;
+
+            message ? setError(message) : setError(error.message);
+            setTimeout(() => {
+                setError('');
+            }, 5000);
+        }
     }
   }
 

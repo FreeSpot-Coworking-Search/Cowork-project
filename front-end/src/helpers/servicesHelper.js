@@ -1,4 +1,4 @@
-function arrangeServices(spaceData) {
+/* function arrangeServices(spaceData) {
     let {
         listado_servicios: allServices,
         servicios: includedServices,
@@ -33,6 +33,18 @@ function arrangeServices(spaceData) {
     });
 
     return allServices;
+} */
+
+function getIncludedServices(allServices) {
+    return allServices.filter(
+        (service) => service.included === true && service.precio === null
+    );
 }
 
-export { arrangeServices };
+function getExtraServices(allServices) {
+    return allServices.filter(
+        (service) => service.included === true && service.precio !== null
+    );
+}
+
+export { getIncludedServices, getExtraServices };
