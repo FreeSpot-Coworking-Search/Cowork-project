@@ -19,6 +19,7 @@ import centersIcon from '../../assets/icons/centers-solid.png';
 import spaceIcon from '../../assets/icons/bxs-home.svg';
 import servicesIcon from '../../assets/icons/plus-solid.png';
 import imageIcon from '../../assets/icons/image-solid.png';
+
 import { useParams } from 'react-router-dom';
 
 const ConfirmationDialog = lazy(() =>
@@ -35,12 +36,12 @@ export default function Space({ className }) {
   const { spaceId } = useParams();
   const [fullView] = useFullView();
   const query = RetrieveQueryParams(['id', 'fecha_entrada', 'fecha_salida']);
-  const [spaceData, loading] = useSpace(spaceId);
+  const [spaceData, loading, setSpace] = useSpace(spaceId);
   const owner = spaceData.owner;
-  console.log(spaceId);
   const [visualization, setVisualization] = useState('space');
   const [reservation, setReservation] = useState(query);
   const { open, handleClickOpen, handleClose } = useDialog();
+  console.log(spaceData);
 
   // ****************************
   // ** MAIN NAVIGATION CONFIG **
@@ -119,6 +120,7 @@ export default function Space({ className }) {
           spaceData={spaceData}
           reservation={reservation}
           setReservation={setReservation}
+          setSpace={setSpace}
         />
 
         <MainNavigation

@@ -1,7 +1,11 @@
-.list {
+.servicesCard {
     background-color: rgba(var(--clear), 0.4);
     padding: 1vh 1vw;
     border-radius: 20px;
+    margin-bottom: 1vh;
+}
+
+.list {
     padding: 1vw;
     overflow: auto;
 }
@@ -17,7 +21,6 @@
 .list-checked li {
     display: flex;
     flex-wrap: wrap;
-
     flex-direction: row;
     justify-content: space-between;
 }

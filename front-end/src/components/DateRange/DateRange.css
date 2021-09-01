@@ -1,0 +1,10 @@
+.dateRange {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(var(--clear),0.5);
+    border-radius: 20px;
+    padding: 1vh 0vw;
+    margin-bottom: 1vh;
+
+}

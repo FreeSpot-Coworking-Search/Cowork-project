@@ -6,7 +6,7 @@ export default function MainNavigationButton({ link }) {
   return path ? (
     <li className="mainNavigationButton notificationContainer">
       <Link to={path} className="tooltip">
-        <img src={icon} alt="Icon" className="mainNavigationButtonIcon" />
+        {icon}
         <p className="tooltiptext">{text}</p>
         {alert > 0 ? <p className="notificationBubble">{alert}</p> : ''}
       </Link>
@@ -14,7 +14,7 @@ export default function MainNavigationButton({ link }) {
   ) : (
     <li className="mainNavigationButton notificationContainer">
       <button onClick={action} className="tooltip">
-        <img src={icon} alt="Icon" className="mainNavigationButtonIcon" />
+        {icon}
         <p className="tooltiptext">{text}</p>
         {alert > 0 ? <p className="notificationBubble">{alert}</p> : ''}
       </button>

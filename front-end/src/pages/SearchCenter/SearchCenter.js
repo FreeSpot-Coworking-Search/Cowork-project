@@ -9,7 +9,7 @@ import GoogleMap from '../../components/GoogleMapsSearch/GoogleMapsSearch';
 
 import locationIcon from '../../assets/icons/bxs-location-plus 1.png';
 import mapIcon from '../../assets/icons/bxs-map-pin.svg';
-import filterIcon from '../../assets/icons/bxs-filter-alt.svg';
+import { FilterIcon } from '../../components/Icons/Icons';
 import resetIcon from '../../assets/icons/bx-reset.svg';
 import listIcon from '../../assets/icons/bx-list-ul.svg';
 import RetrieveQueryParams from '../../helpers/RetriveQueryParams';
@@ -52,7 +52,7 @@ export default function SearchCenter({ className }) {
   };
   const filterButton = {
     action: () => setVisualization('filter'),
-    icon: filterIcon,
+    icon: <FilterIcon className="mainNavigationButtonIcon" />,
     text: 'Filtrar',
   };
   const listButton = {

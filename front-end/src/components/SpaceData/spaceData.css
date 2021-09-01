@@ -1,6 +1,12 @@
 .spaceData {
     display: flex;
     flex-direction: column;
+    list-style: none;
+    overflow-x: hidden;
+}
+
+.spaceData::-webkit-scrollbar {
+    display: none;
 }
 .spaceData>article{
     margin-bottom: 1vh;

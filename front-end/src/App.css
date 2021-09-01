@@ -1,1 +1,5 @@
 
+.generic-icon {
+    fill: currentColor;
+    color: rgba(var(--dark),0.8);
+}

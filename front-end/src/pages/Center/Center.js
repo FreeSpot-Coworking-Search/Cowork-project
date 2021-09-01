@@ -4,12 +4,7 @@ import { useState } from 'react';
 
 import CenterPresentation from '../../components/CenterPresentation/CenterPresentation';
 import MainNavigation from '../../components/MainNavigation/MainNavigation';
-import listIcon from '../../assets/icons/bx-list-ul.svg';
 import locationIcon from '../../assets/icons/bxs-location-plus 1.png';
-import infoIcon from '../../assets/icons/bx-info-circle.svg';
-import incidentsIcon from '../../assets/icons/bx-message-square-error.svg';
-import cleaningIcon from '../../assets/icons/carbon_clean.svg';
-import scoresIcon from '../../assets/icons/bxs-star.svg';
 import useFullView from '../../hooks/useFullView';
 import ListSpacesSearch from '../../components/ListSpacesSearch/ListSpacesSearch';
 import useCenter from '../../hooks/useCenter';
@@ -17,11 +12,19 @@ import Spinner from '../../components/Spinner/Spinner';
 import ScoreList from '../../components/ScoreList/ScoreList';
 import IncidentList from '../../components/IncidentList/IncidentList';
 import CleaningList from '../../components/CleaningList/CleaningList';
+import {
+  ListIcon,
+  IncidentsIcon,
+  InfoIcon,
+  CleaningIcon,
+  ScoresIcon,
+} from '../../components/Icons/Icons';
+
 import { useParams } from 'react-router-dom';
 
 export default function Center({ className }) {
   const { centerId } = useParams();
-  const [center, loading, reload] = useCenter(centerId);
+  const [center, loading, setCenter] = useCenter(centerId);
   const [visualization, setVisualization] = useState('spacesList');
   const [fullView] = useFullView();
 
@@ -41,29 +44,29 @@ export default function Center({ className }) {
     };
     const scoresButton = {
       action: () => setVisualization('scores'),
-      icon: scoresIcon,
+      icon: <ScoresIcon className="mainNavigationButtonIcon" />,
       text: 'Ver puntuaciones',
     };
     const spacesButton = {
       action: () => setVisualization('spacesList'),
-      icon: listIcon,
+      icon: <ListIcon className="mainNavigationButtonIcon" />,
       text: 'Ver espacios',
     };
     const incidentsButton = {
       action: () => setVisualization('incidents'),
-      icon: incidentsIcon,
+      icon: <IncidentsIcon className="mainNavigationButtonIcon" />,
       text: 'Ver incidencias',
       alert: incidentAlert(center),
     };
     const cleaningButton = {
       action: () => setVisualization('cleaning'),
-      icon: cleaningIcon,
+      icon: <CleaningIcon className="mainNavigationButtonIcon" />,
       text: 'Ver limpieza',
       alert: cleaningAlert(center),
     };
     const infoButton = {
       action: () => setVisualization('info'),
-      icon: infoIcon,
+      icon: <InfoIcon className="mainNavigationButtonIcon" />,
       text: 'Ver limpieza',
     };
 
@@ -150,7 +153,7 @@ export default function Center({ className }) {
           <CenterPresentation
             center={center}
             loading={loading}
-            reload={reload}
+            setCenter={setCenter}
             className="mainSectionRightArticle"
           />
         </div>

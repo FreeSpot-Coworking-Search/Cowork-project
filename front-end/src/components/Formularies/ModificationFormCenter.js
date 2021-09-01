@@ -1,12 +1,15 @@
-import './registrationForm.css';
-import infoIcon from '../../assets/icons/bx-info-circle.svg';
 import { Redirect } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
 import { Dialog } from '@material-ui/core';
 import useDialog from '../../hooks/useDialog';
+import '../Formularies/Form.css';
 
-export default function ModificationFormCenter({ className, center }) {
+export default function ModificationFormCenter({
+  className,
+  center,
+  setCenter,
+}) {
   const { open, handleClickOpen, handleClose } = useDialog();
   const {
     REACT_APP_API_LOCAL_SERVER_HOST: host,
@@ -78,10 +81,17 @@ export default function ModificationFormCenter({ className, center }) {
 
       const response = await axios.put(route, centerInfo);
       if (response.status === 200) {
-        setMessage('Datos del centro modificados.');
+        setMessage(
+          'Datos del centro modificados. Veamos si todo esta correcto.'
+        );
+        setCenter((center) => {
+          return {
+            ...center,
+            ...response.data.center,
+          };
+        });
         setTimeout(() => {
           setMessage('');
-          <Redirect to={`/center?id_centro=${center.id}`} />;
         }, 2000);
         setModification(false);
       }
@@ -100,133 +110,190 @@ export default function ModificationFormCenter({ className, center }) {
   }
 
   return (
-    <form
-      className={`${className} registerForm`}
-      onSubmit={(e) => performSubmit(e)}
-    >
-      <fieldset>
-        <label>
-          <img src={infoIcon} alt="Nombre del centro" />
-          <input
-            type="text"
-            onChange={(event) => handleOnChange(event, 'nombre')}
-            placeholder="Nombre del centro"
-            required
-            maxLength="20"
-            minLength="1"
-            value={centerInfo.nombre}
-          />
-        </label>
-        <label>
-          <img src={infoIcon} alt="Nombre fiscal" />
-          <input
-            type="text"
-            onChange={(event) => handleOnChange(event, 'nombre_fiscal')}
-            placeholder="Nombre Fiscal"
-            maxLength="50"
-            minLength="1"
-            value={centerInfo.nombre_fiscal}
-          />
-        </label>
-        <label>
-          <img src={infoIcon} alt="Direccion" />
-          <input
-            type="text"
-            onChange={(event) => handleOnChange(event, 'direccion')}
-            placeholder="Direccion"
-            maxLength="50"
-            minLength="1"
-            value={centerInfo.direccion}
-          />
-        </label>
-        <label>
-          <img src={infoIcon} alt="Localidad" />
-          <input
-            type="text"
-            onChange={(event) => handleOnChange(event, 'localidad')}
-            placeholder="Localidad"
-            maxLength="70"
-            minLength="1"
-            value={centerInfo.localidad}
-          />
-        </label>
-        <label>
-          <img src={infoIcon} alt="Codigo Postal" />
-          <input
-            type="number"
-            onChange={(event) => handleOnChange(event, 'codigo_postal')}
-            placeholder="codigo_postal"
-            maxLength="5"
-            minLength="5"
-            value={centerInfo.codigo_postal}
-          />
-        </label>
-        <label>
-          <img src={infoIcon} alt="IBAN" />
-          <input
-            type="number"
-            onChange={(event) => handleOnChange(event, 'iban')}
-            placeholder="IBAN"
-            maxLength="34"
-            minLength="1"
-            value={centerInfo.iban}
-          />
-        </label>
-        <label>
-          <img src={infoIcon} alt="Telefono" />
-          <input
-            type="string"
-            onChange={(event) => handleOnChange(event, 'telefono')}
-            placeholder="Telefono"
-            maxLength="12"
-            minLength="9"
-            value={centerInfo.telefono}
-          />
-        </label>
-        <label>
-          <img src={infoIcon} alt="email" />
-          <input
-            type="email"
-            onChange={(event) => handleOnChange(event, 'email')}
-            placeholder="email"
-            maxLength="20"
-            value={centerInfo.email}
-          />
-        </label>
-        <label>
-          <img src={infoIcon} alt="Equipamiento" />
-          <input
-            type="text"
-            onChange={(event) => handleOnChange(event, 'equipamiento')}
-            placeholder="Equipamiento"
-            maxLength="1000"
-            value={centerInfo.equipamiento}
-          />
-        </label>
-        <label>
-          <img src={infoIcon} alt="Descripcion" />
-          <input
-            type="text"
-            onChange={(event) => handleOnChange(event, 'descripcion')}
-            placeholder="Descripcion"
-            maxLength="1000"
-            value={centerInfo.descripcion}
-          />
-        </label>
-      </fieldset>
-      {error && <p className="registerForm-error">{error}</p>}
-      {message && <p className="registerForm-message">{message}</p>}
-      <button>Enviar</button>
-      <button onClick={handleClickOpen}>Eliminar centro</button>
+    <>
+      <div className="registerForm-limit" />
+      <form
+        className={`${className} registerForm`}
+        onSubmit={(e) => performSubmit(e)}
+      >
+        <fieldset>
+          <div class="form-element form-input">
+            <input
+              id="nombreCentro"
+              class="form-element-field"
+              placeholder="Introduce el nombre del centro"
+              type="input"
+              required
+              onChange={(event) => handleOnChange(event, 'nombre')}
+              maxLength="20"
+              minLength="1"
+              value={centerInfo.nombre}
+            />
+            <div class="form-element-bar"></div>
+            <label class="form-element-label" for="nombreCentro">
+              Nombre del centro
+            </label>
+          </div>
+          <div class="form-element form-input">
+            <input
+              id="nombre_fiscal"
+              class="form-element-field"
+              placeholder="Ahora el nombre de la sociedad"
+              type="text"
+              required
+              onChange={(event) => handleOnChange(event, 'nombre_fiscal')}
+              maxLength="50"
+              minLength="1"
+              value={centerInfo.nombre_fiscal}
+            />
+            <div class="form-element-bar"></div>
+            <label class="form-element-label" for="nombre_fiscal">
+              Nombre Fiscal
+            </label>
+          </div>
 
-      <Dialog open={open} onClose={handleClose}>
-        <div className="modificationForm-dialog">
-          ¡Al eliminar el centro perderá toda la información sobre su actividad!
-          <button onClick={deleteCenter}>Eliminar</button>
-          <button onClick={handleClose}>Cancelar</button>
-        </div>
-      </Dialog>
-    </form>
+          <div class="form-element form-input">
+            <input
+              id="direccion"
+              class="form-element-field"
+              placeholder="Seguimos con la dirección del centro"
+              type="text"
+              onChange={(event) => handleOnChange(event, 'direccion')}
+              maxLength="50"
+              minLength="1"
+              value={centerInfo.direccion}
+            />
+            <div class="form-element-bar"></div>
+            <label class="form-element-label" for="direccion">
+              Dirección
+            </label>
+          </div>
+
+          <div class="form-element form-input">
+            <input
+              id="localidad"
+              class="form-element-field"
+              placeholder="Es turno de la localidad"
+              type="text"
+              onChange={(event) => handleOnChange(event, 'localidad')}
+              maxLength="70"
+              minLength="1"
+              value={centerInfo.localidad}
+            />
+            <div class="form-element-bar"></div>
+            <label class="form-element-label" for="localidad">
+              Localidad
+            </label>
+          </div>
+          <div class="form-element form-input">
+            <input
+              id="codigo_postal"
+              class="form-element-field"
+              placeholder="Bien, el codigo postal"
+              onChange={(event) => handleOnChange(event, 'codigo_postal')}
+              maxLength="5"
+              minLength="5"
+              value={centerInfo.codigo_postal}
+            />
+            <div class="form-element-bar"></div>
+            <label class="form-element-label" for="codigo_postal">
+              Codigo Postal
+            </label>
+          </div>
+          <div class="form-element form-input">
+            <input
+              id="iban"
+              class="form-element-field"
+              placeholder="El IBAN de la cuenta donde ingresaran los pagos"
+              type="number"
+              onChange={(event) => handleOnChange(event, 'iban')}
+              maxLength="34"
+              minLength="1"
+              value={centerInfo.iban}
+            />
+            <div class="form-element-bar"></div>
+            <label class="form-element-label" for="iban">
+              IBAN
+            </label>
+          </div>
+          <div class="form-element form-input">
+            <input
+              id="telefono"
+              class="form-element-field"
+              placeholder="Queda poco! El telefono de contacto."
+              type="string"
+              onChange={(event) => handleOnChange(event, 'telefono')}
+              maxLength="12"
+              minLength="9"
+              value={centerInfo.telefono}
+            />
+            <div class="form-element-bar"></div>
+            <label class="form-element-label" for="telefono">
+              Telefono
+            </label>
+          </div>
+          <div class="form-element form-input">
+            <input
+              id="email"
+              class="form-element-field"
+              placeholder="Seguimos con el correo electronico"
+              type="email"
+              onChange={(event) => handleOnChange(event, 'email')}
+              maxLength="20"
+              value={centerInfo.email}
+            />
+            <div class="form-element-bar"></div>
+            <label class="form-element-label" for="email">
+              Email
+            </label>
+          </div>
+          <div class="form-element form-input">
+            <textarea
+              id="equipamiento"
+              class="form-element-field"
+              placeholder="Describe a tu futuros clientes de que servicios dispondran"
+              onChange={(event) => handleOnChange(event, 'equipamiento')}
+              maxLength="1000"
+              rows="3"
+              value={centerInfo.equipamiento}
+            />
+            <div class="form-element-bar"></div>
+            <label class="form-element-label" for="equipamiento">
+              Equipamiento
+            </label>
+          </div>
+          <div class="form-element form-input">
+            <textarea
+              id="descripcion"
+              class="form-element-field"
+              placeholder="Dinos porque nos va a encantar tu centro"
+              onChange={(event) => handleOnChange(event, 'descripcion')}
+              maxLength="1000"
+              rows="3"
+              value={centerInfo.descripcion}
+            />
+            <div class="form-element-bar"></div>
+            <label class="form-element-label" for="descripcion">
+              Descripción
+            </label>
+          </div>
+        </fieldset>
+        {error && <p className="registerForm-error">{error}</p>}
+        {message && <p className="registerForm-message">{message}</p>}
+        <button>Enviar</button>
+        <button onClick={handleClickOpen}>Eliminar centro</button>
+
+        <Dialog open={open} onClose={handleClose}>
+          <div className="modificationForm-dialog">
+            ¡Al eliminar el centro perderá toda la información sobre su
+            actividad!
+            <button onClick={deleteCenter}>Eliminar</button>
+            <button onClick={handleClose}>Cancelar</button>
+          </div>
+        </Dialog>
+      </form>
+      <div className="registerForm-limit" />
+    </>
   );
 }
 

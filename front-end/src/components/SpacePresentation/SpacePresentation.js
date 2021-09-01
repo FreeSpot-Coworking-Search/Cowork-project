@@ -7,7 +7,13 @@ import DisplaySelector from '../DisplaySelector/DisplaySelector';
 
 import infoIcon from '../../assets/icons/bx-info-circle.svg';
 import editIcon from '../../assets/icons/bx-edit-alt.svg';
+import photoIcon from '../../assets/icons/bx-camera.svg';
+import servicesIcon from '../../assets/icons/bxs-drink.svg';
+import PhotosPresentation from '../PhotosPresentation/PhotosPresentation';
 
+const ModificationFormServices = lazy(() =>
+  import('../Formularies/ModificationFormServices')
+);
 const ModificationFormSpace = lazy(() =>
   import('../Formularies/ModificationFormSpace')
 );
@@ -17,6 +23,7 @@ export default function SpacePresentation({
   className,
   reservation,
   setReservation,
+  setSpace,
 }) {
   const [visualization, setVisualization] = useState('data');
 
@@ -26,12 +33,22 @@ export default function SpacePresentation({
           {
             value: 'data',
             icon: infoIcon,
-            text: 'visualizar datos',
+            text: 'Visualizar datos',
           },
           {
             value: 'edit',
             icon: editIcon,
-            text: 'modificar datos',
+            text: 'Modificar datos',
+          },
+          {
+            value: 'photo',
+            icon: photoIcon,
+            text: 'Modificar fotos',
+          },
+          {
+            value: 'services',
+            icon: servicesIcon,
+            text: 'Modificar servicios',
           },
         ]
       : [];
@@ -45,7 +62,11 @@ export default function SpacePresentation({
         setReservation={setReservation}
       />
     ),
-    edit: <ModificationFormSpace spaceData={spaceData} />,
+    edit: <ModificationFormSpace spaceData={spaceData} setSpace={setSpace} />,
+    photo: <PhotosPresentation data={spaceData} setSpace={setSpace} />,
+    services: (
+      <ModificationFormServices spaceData={spaceData} setSpace={setSpace} />
+    ),
   };
 
   return (
@@ -55,7 +76,6 @@ export default function SpacePresentation({
         setVisualization={setVisualization}
         visualization={visualization}
       />
-      <h3 className="presentationName">{`${spaceData.nombre} - ${spaceData.tipo} `}</h3>
       {visualizations[visualization]}
     </article>
   );

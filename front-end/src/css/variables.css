@@ -13,7 +13,9 @@
     --clear: 247, 255, 247;
     --alert: 220, 121, 90;
 
-	--origin: 1vw;
+    /* clamp(tamaño minimo, tamaño, tamaño máximo) */
+
+	--origin: clamp(0.88rem, 0.83rem + 0.25vw, 1.5rem);
 	--presentationTittle: calc(var(--origin) * 2);
 	--presentationSubTittle: calc(var(--origin) * 1.5);
 	--presentationText: calc(var(--origin) * 1);

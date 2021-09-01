@@ -6,7 +6,7 @@ import addIcon from '../../assets/icons/plus-solid.png';
 import { Fragment } from 'react';
 import { useState } from 'react';
 
-export default function ImagePicker({
+export default function SpaceImagePicker({
   className,
   images,
   idUser,
@@ -14,8 +14,7 @@ export default function ImagePicker({
   actionsRoute,
   setMessage,
   setError,
-  setImages,
-  setCenter,
+  setSpace,
 }) {
   const [input, setInput] = useState('');
 
@@ -23,20 +22,16 @@ export default function ImagePicker({
     console.log(imageId);
     try {
       setMessage('Eliminando imagen');
-      const index = images.findIndex((image) => image.id === imageId);
 
       const route = `${actionsRoute}?id=${imageId}`;
       const response = await axios.delete(route);
 
       if (response.status === 200) {
         setMessage('Imagen eliminada.');
-        setCenter((center) => {
+        setSpace((space) => {
           return {
-            ...center,
-            info: {
-              ...center.info,
-              imagenes: center.info.imagenes.filter((i) => i.id !== imageId),
-            },
+            ...space,
+            imagenes: space.imagenes.filter((i) => i.id !== imageId),
           };
         });
         setTimeout(() => {
@@ -61,7 +56,7 @@ export default function ImagePicker({
 
     async function perfomSubmit(photo) {
       try {
-        setMessage('enviando imagen...');
+        setMessage('Enviando imagen...');
         setInput('');
 
         let data = new FormData();
@@ -74,24 +69,20 @@ export default function ImagePicker({
         if (response.status === 200) {
           setMessage('Imagen cargada.');
 
-          setCenter((center) => {
+          setSpace((space) => {
             return {
-              ...center,
-              info: {
-                ...center.info,
-                imagenes: [
-                  ...center.info.imagenes,
-                  {
-                    ...response.data,
-                  },
-                ],
-              },
+              ...space,
+              imagenes: [
+                ...space.imagenes,
+                {
+                  ...response.data,
+                },
+              ],
             };
           });
 
           setTimeout(() => {
             setMessage('');
-            // setCenter();
           }, 3000);
         }
       } catch (error) {

@@ -11,11 +11,9 @@ const {
 export default function CenterPhotosPresentation({
   imagenes,
   id,
-  reload,
+  setCenter,
   className,
 }) {
-  const [images, setImages] = useState(imagenes);
-
   const [message, setMessage] = useState(false);
   const [error, setError] = useState(false);
 
@@ -23,14 +21,13 @@ export default function CenterPhotosPresentation({
   const actionsRoute = `${host}:${port}/api/centers/photo/`;
 
   const props = {
-    images,
-    setImages,
+    images: imagenes,
     setMessage,
     setError,
     baseImageURL,
     actionsRoute,
     idUser: id,
-    reload,
+    setCenter,
   };
   //
   return (

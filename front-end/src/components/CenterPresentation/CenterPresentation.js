@@ -9,7 +9,7 @@ import photoIcon from '../../assets/icons/bx-camera.svg';
 import scoresIcon from '../../assets/icons/bxs-star.svg';
 import DisplaySelector from '../DisplaySelector/DisplaySelector';
 import CenterDataList from '../CenterDataList/CenterDataList';
-import ModificationFormCenter from '../Formularies/ModificationFormCenter2';
+import ModificationFormCenter from '../Formularies/ModificationFormCenter';
 import IncidentList from '../IncidentList/IncidentList';
 import CleaningList from '../CleaningList/CleaningList';
 import CenterPhotosPresentation from '../CenterPhotosPresentation/CenterPhotosPresentation';
@@ -17,7 +17,7 @@ import CenterPhotosPresentation from '../CenterPhotosPresentation/CenterPhotosPr
 export default function CenterPresentation({
   center,
   loading,
-  reload,
+  setCenter,
   className,
 }) {
   const [visualization, setVisualization] = useState('data');
@@ -41,12 +41,12 @@ export default function CenterPresentation({
   const visualizations = {
     data: <CenterDataList center={center.info} className="presentationSlide" />,
     scores: <ScoreList scores={center.valoraciones} />,
-    edit: <ModificationFormCenter center={center.info} reload={reload} />,
+    edit: <ModificationFormCenter center={center.info} setCenter={setCenter} />,
     photos: (
       <CenterPhotosPresentation
         id={center.info.id}
         imagenes={center.info.imagenes}
-        reload={reload}
+        setCenter={setCenter}
       />
     ),
     incidents: <IncidentList incidents={center.espacios} />,
