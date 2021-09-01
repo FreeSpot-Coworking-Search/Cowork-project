@@ -1,8 +1,12 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { useHistory } from 'react-router';
 import '../Formularies/Form.css';
 
-//import { arrangeServices } from '../../helpers/servicesHelper';
+import {
+    getIncludedServices,
+    getExtraServices,
+} from '../../helpers/servicesHelper';
+
 import axios from 'axios';
 
 const {
@@ -12,9 +16,8 @@ const {
 
 export default function ModificationFormSpace({ className, spaceData }) {
     const history = useHistory();
-    const arrangedServices = useMemo(() => spaceData, [spaceData]);
 
-    const [services, setServices] = useState(arrangedServices);
+    const [services, setServices] = useState(spaceData.listado_servicios);
 
     const [error, setError] = useState();
     const [message, setMessage] = useState();
@@ -27,24 +30,6 @@ export default function ModificationFormSpace({ className, spaceData }) {
 
             const route = `${host}:${port}/api/spaces/?id=${spaceData.id}`;
 
-            const servicios = services
-                .filter(
-                    (service) =>
-                        service.checked === true && Number(service.precio) === 0
-                )
-                .map((servicio) => ({ id: servicio.id }));
-            console.log(servicios);
-            const servicios_extra = services
-                .filter(
-                    (service) =>
-                        service.checked === true && Number(service.precio) !== 0
-                )
-                .map((servicio) => ({
-                    id: servicio.id,
-                    precio: servicio.precio,
-                }));
-            console.log(servicios_extra);
-
             const updateObject = {
                 nombre: spaceData.nombre,
                 tipo: spaceData.tipo,
@@ -53,8 +38,8 @@ export default function ModificationFormSpace({ className, spaceData }) {
                 capacidad_maxima: spaceData.capacidad_maxima,
                 descripcion: spaceData.descripcion,
                 visible: spaceData.visible,
-                servicios,
-                servicios_extra,
+                servicios: getIncludedServices(services),
+                servicios_extra: getExtraServices(services),
             };
 
             console.log(updateObject);
@@ -84,7 +69,7 @@ export default function ModificationFormSpace({ className, spaceData }) {
 
     function changeCheckBox(index) {
         const changingService = services[index];
-        changingService.checked = !changingService.checked;
+        changingService.included = !changingService.included;
         const newArray = services;
         newArray.splice(index, 1, changingService);
         if (modification === false) setModification(true);
@@ -116,7 +101,7 @@ export default function ModificationFormSpace({ className, spaceData }) {
                                         <input
                                             type="checkbox"
                                             id={service.name}
-                                            checked={service.checked}
+                                            checked={service.included}
                                             onChange={() =>
                                                 changeCheckBox(index)
                                             }
@@ -134,9 +119,13 @@ export default function ModificationFormSpace({ className, spaceData }) {
                                         onChange={(event) =>
                                             handleInputChange(event, index)
                                         }
-                                        disabled={!service.checked}
+                                        disabled={!service.included}
+                                        placeholder={
+                                            service.included &&
+                                            'servicio incluido gratuitamente'
+                                        }
                                     />
-                                    <span>€/dia</span>
+                                    <span> €/dia</span>
                                 </li>
                             );
                         })}

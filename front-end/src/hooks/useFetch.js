@@ -15,5 +15,5 @@ export default function useFetch(endpoint, id) {
         },
         [endpoint, id]
     );
-    return { data, loading, setData };
+    return [data, setData, loading];
 }
