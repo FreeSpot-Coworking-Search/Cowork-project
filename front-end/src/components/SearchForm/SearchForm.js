@@ -36,7 +36,7 @@ export default function SearchForm({
       <fieldset className="searchFormFieldset">
         {type !== 'space' ? (
           <>
-            <div class="search">
+            <div className="search">
               <input
                 id="texto"
                 className="search-txt"
@@ -50,7 +50,7 @@ export default function SearchForm({
                 }
               />
 
-              <button class="search-btn">
+              <button className="search-btn">
                 <img src={filterIcon} alt="Icono de busqueda" />
               </button>
             </div>
@@ -88,12 +88,12 @@ export default function SearchForm({
             />
           </label>
         </div>
-        <DoubleRangeInput
+        {/* <DoubleRangeInput
           min={formLimits.minPrice}
           max={formLimits.maxPrice}
           setNewSearchObject={setNewSearchObject}
           newSearchObject={newSearchObject}
-        />
+        /> */}
         <DateRange
           setNewSearchObject={setNewSearchObject}
           newSearchObject={newSearchObject}

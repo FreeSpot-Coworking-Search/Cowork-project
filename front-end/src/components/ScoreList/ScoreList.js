@@ -2,7 +2,6 @@ import './ScoreList.css';
 import '../../css/presentation.css';
 import { useState } from 'react';
 import Spinner from '../Spinner/Spinner';
-import StarsDisplay from '../StarsDisplay/StarsDisplay';
 import OrderByLocal from '../OrderByLocal/OrderByLocal';
 import descIcon from '../../assets/icons/bx-chevron-down.svg';
 import calendarIcon from '../../assets/icons/bxs-calendar.svg';
@@ -23,7 +22,10 @@ export default function ScoreList({ scores, className }) {
           [starIcon, ascIcon],
         ],
         text: ['Puntuación descendente', 'Puntuación ascendente'],
-        order: ['puntuacion_usuario desc', 'puntuacion_usuario asc'],
+        order: [
+          'puntuacion_usuario descendente',
+          'puntuacion_usuario ascendente',
+        ],
       },
       {
         position: 0,
@@ -32,7 +34,7 @@ export default function ScoreList({ scores, className }) {
           [calendarIcon, ascIcon],
         ],
         text: ['Fecha descendente', 'Fecha ascendente'],
-        order: ['fecha_inicio desc', 'fecha_inicio asc'],
+        order: ['fecha_inicio descendente', 'fecha_inicio ascendente'],
       },
     ],
   };

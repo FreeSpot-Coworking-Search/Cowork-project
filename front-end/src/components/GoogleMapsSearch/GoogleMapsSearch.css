@@ -1,25 +1,8 @@
-.map{
-    height: 400px;
+.googleMapsSearch{
+  height: 100%;
   width: 100%;
+  padding: 1vh 1vw;
 }
 .mark{
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  margin-left: 115px;
-  border-radius: 50%;
-  border: 8px solid #fff;
-  width: 8px;
-  height: 8px;
-}
-
-.mark::after {
-  position: absolute;
-  content: '';
-  width: 0px;
-  height: 0px;
-  bottom: -30px;
-  left: -6px;
-  border: 10px solid transparent;
-  border-top: 17px solid #fff;
+ width: 2vw;
 }

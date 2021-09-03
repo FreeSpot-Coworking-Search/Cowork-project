@@ -50,7 +50,6 @@ export default function ListSpacesSearch({
       },
     ],
   };
-  console.log(searchObject);
   return results.length !== 0 ? (
     <article className={className + ' listSpaces'}>
       {setSearchObject ? (

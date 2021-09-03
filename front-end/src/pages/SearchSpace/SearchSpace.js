@@ -14,9 +14,12 @@ import locationIcon from '../../assets/icons/bxs-location-plus 1.png';
 import CenterPresentation from '../../components/CenterPresentation/CenterPresentation';
 import RetrieveQueryParams from '../../helpers/RetriveQueryParams';
 
-import listIcon from '../../assets/icons/bx-list-ul.svg';
-import filterIcon from '../../assets/icons/bxs-filter-alt.svg';
-import resetIcon from '../../assets/icons/bx-reset.svg';
+import {
+  FilterIcon,
+  ResetIcon,
+  ListIcon,
+  PresentationIcon,
+} from '../../components/Icons/Icons';
 import presentationIcon from '../../assets/icons/bxs-home.svg';
 import useCenter from '../../hooks/useCenter';
 
@@ -44,24 +47,25 @@ export default function SearchSpace({ className }) {
   // ** MAIN NAVIGATION CONFIG **
   // ****************************
 
-  const filterButton = {
-    action: () => setVisualization('filter'),
-    icon: filterIcon,
-    text: 'Filtrar',
-  };
   const presentationButton = {
     action: () => setVisualization('presentation'),
-    icon: presentationIcon,
+    icon: <PresentationIcon className="mainNavigationButtonIcon" />,
     text: 'Presentacion',
+  };
+
+  const filterButton = {
+    action: () => setVisualization('filter'),
+    icon: <FilterIcon className="mainNavigationButtonIcon" />,
+    text: 'Filtrar',
   };
   const listButton = {
     action: () => setVisualization('list'),
-    icon: listIcon,
+    icon: <ListIcon className="mainNavigationButtonIcon" />,
     text: 'Lista',
   };
   const resetButton = {
-    action: () => resetSearchObject(),
-    icon: resetIcon,
+    action: resetSearchObject,
+    icon: <ResetIcon className="mainNavigationButtonIcon" />,
     text: 'Resetear busqueda',
   };
 
@@ -72,17 +76,16 @@ export default function SearchSpace({ className }) {
 
   switch (visualization) {
     case 'presentation':
-      if (fullView) Links = [filterButton, resetButton, genericButton];
-      else Links = [filterButton, listButton, resetButton, genericButton];
+      if (fullView) Links = [presentationButton, filterButton, resetButton];
+      else Links = [listButton, presentationButton, filterButton, resetButton];
       break;
     case 'filter':
-      if (fullView) Links = [presentationButton, resetButton, genericButton];
-      else Links = [presentationButton, listButton, resetButton, genericButton];
+      if (fullView) Links = [presentationButton, filterButton, resetButton];
+      else Links = [listButton, presentationButton, filterButton, resetButton];
       break;
     case 'list':
-      if (fullView) Links = [presentationButton, resetButton, genericButton];
-      else
-        Links = [presentationButton, filterButton, resetButton, genericButton];
+      if (fullView) Links = [presentationButton, filterButton, resetButton];
+      else Links = [listButton, presentationButton, filterButton, resetButton];
       break;
 
     default:

@@ -20,8 +20,8 @@ export default function Layout() {
       <BackGroundLeft />
       <BackGroundRight />
       <Header></Header>
-      <div className="decorationLeft"></div>
-      <div className="decorationRight"></div>
+      {/* <div className="decorationLeft"></div>
+      <div className="decorationRight"></div> */}
       <DecorationHeader className="decorationTop" />
       <Switch>
         <Routes />

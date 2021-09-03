@@ -21,7 +21,7 @@ export default function ListCentersSearch({
     state: 0,
     criterias: [
       {
-        position: true,
+        position: 1,
         icons: [
           [puntuationIcon, descIcon],
           [puntuationIcon, ascIcon],
@@ -30,7 +30,7 @@ export default function ListCentersSearch({
         value: ['puntuacion_media descendente', 'puntuacion_media ascendente'],
       },
       {
-        position: true,
+        position: 1,
         icons: [
           [priceIcon, descIcon],
           [priceIcon, ascIcon],
@@ -39,7 +39,7 @@ export default function ListCentersSearch({
         value: ['precio_minimo descendente', 'precio_minimo ascendente'],
       },
       {
-        position: true,
+        position: 1,
         icons: [[aToZAlfabeticIcon], [zToAAlfabeticIcon]],
         text: ['Alfabetico', 'Alfabetico inverso'],
         value: ['centros.nombre ascendente', 'centros.nombre descendente'],

@@ -159,7 +159,7 @@ const createDeleteQuerry = (table, searchObject) => {
 	return query;
 };
 const createSearchCentersQuerry = (searchObject) => {
-	let query = `SELECT  centros.id, centros.nombre, centros.direccion, centros.localidad, centros.codigo_postal, centros.telefono, centros.email, centros.equipamiento, centros.descripcion, MIN(espacios.precio) AS precio_minimo , 
+	let query = `SELECT  centros.id, centros.latitud, centros.longitud, centros.nombre, centros.direccion, centros.localidad, centros.codigo_postal, centros.telefono, centros.email, centros.equipamiento, centros.descripcion, MIN(espacios.precio) AS precio_minimo , 
 	MAX(espacios.precio) AS precio_maximo , AVG(reservas.puntuacion_usuario) AS puntuacion_media , COUNT(espacios.id) AS espacios_disponibles 
 	FROM centros 
 	INNER JOIN espacios ON centros.id = espacios.id_centro

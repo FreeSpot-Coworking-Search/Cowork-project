@@ -1,6 +1,6 @@
 export default function orderBy(array, order) {
   const orderParams = order.split(' ');
-  if (orderParams[1] === 'desc') {
+  if (orderParams[1] === 'descendente') {
     return array.sort((a, b) => {
       if (a[orderParams[0]] > b[orderParams[0]]) return 1;
       if (a[orderParams[0]] < b[orderParams[0]]) return -1;
@@ -8,7 +8,7 @@ export default function orderBy(array, order) {
     });
   }
 
-  if (orderParams[1] === 'asc') {
+  if (orderParams[1] === 'ascendente') {
     return array.sort((a, b) => {
       if (a[orderParams[0]] < b[orderParams[0]]) return 1;
       if (a[orderParams[0]] > b[orderParams[0]]) return -1;

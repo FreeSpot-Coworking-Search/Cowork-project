@@ -5,13 +5,16 @@ import { useState } from 'react';
 import ListCentersSearch from '../../components/ListCentersSearch/ListCentersSearch';
 import SearchForm from '../../components/SearchForm/SearchForm';
 import MainNavigation from '../../components/MainNavigation/MainNavigation';
-import GoogleMap from '../../components/GoogleMapsSearch/GoogleMapsSearch';
+import GoogleMapSearch from '../../components/GoogleMapsSearch/GoogleMapsSearch';
+import Spinner from '../../components/Spinner/Spinner';
 
-import locationIcon from '../../assets/icons/bxs-location-plus 1.png';
-import mapIcon from '../../assets/icons/bxs-map-pin.svg';
-import { FilterIcon } from '../../components/Icons/Icons';
-import resetIcon from '../../assets/icons/bx-reset.svg';
-import listIcon from '../../assets/icons/bx-list-ul.svg';
+import {
+  FilterIcon,
+  ResetIcon,
+  MapIcon,
+  ListIcon,
+} from '../../components/Icons/Icons';
+
 import RetrieveQueryParams from '../../helpers/RetriveQueryParams';
 import useFullView from '../../hooks/useFullView';
 import useSearchCenter from '../../hooks/useSearchCenter';
@@ -47,7 +50,7 @@ export default function SearchCenter({ className }) {
 
   const mapButton = {
     action: () => setVisualization('map'),
-    icon: mapIcon,
+    icon: <MapIcon className="mainNavigationButtonIcon" />,
     text: 'Mapa',
   };
   const filterButton = {
@@ -57,30 +60,29 @@ export default function SearchCenter({ className }) {
   };
   const listButton = {
     action: () => setVisualization('list'),
-    icon: listIcon,
+    icon: <ListIcon className="mainNavigationButtonIcon" />,
     text: 'Lista',
   };
   const resetButton = {
     action: resetSearchObject,
-    icon: resetIcon,
+    icon: <ResetIcon className="mainNavigationButtonIcon" />,
     text: 'Resetear busqueda',
   };
-  const genericButton = { path: '/', icon: locationIcon, text: 'Uno' };
   let Links = [];
 
   switch (visualization) {
     case 'list':
-      if (fullView) Links = [filterButton, resetButton, genericButton];
-      else Links = [mapButton, filterButton, resetButton, genericButton];
+      if (fullView) Links = [mapButton, filterButton, resetButton];
+      else Links = [listButton, mapButton, filterButton, resetButton];
       break;
     case 'map':
-      if (fullView) Links = [filterButton, resetButton, genericButton];
-      else Links = [listButton, filterButton, resetButton, genericButton];
+      if (fullView) Links = [mapButton, filterButton, resetButton];
+      else Links = [listButton, mapButton, filterButton, resetButton];
 
       break;
     case 'filter':
-      if (fullView) Links = [mapButton, resetButton, genericButton];
-      else Links = [listButton, mapButton, resetButton, genericButton];
+      if (fullView) Links = [mapButton, filterButton, resetButton];
+      else Links = [listButton, mapButton, filterButton, resetButton];
 
       break;
 
@@ -92,7 +94,51 @@ export default function SearchCenter({ className }) {
   // ** JSX **
   // *********
 
-  return (
+  const fullViewJSX = {
+    filter: (
+      <SearchForm
+        searchObject={searchObject}
+        setSearchObject={setSearchObject}
+        services={[]}
+        results={results}
+        className="mainSectionRightArticle"
+      />
+    ),
+    list: (
+      <SearchForm
+        searchObject={searchObject}
+        setSearchObject={setSearchObject}
+        services={[]}
+        results={results}
+        className="mainSectionRightArticle"
+      />
+    ),
+    map: <GoogleMapSearch markers={results} />,
+  };
+
+  const singleViewJSX = {
+    filter: (
+      <SearchForm
+        searchObject={searchObject}
+        setSearchObject={setSearchObject}
+        services={[]}
+        results={results}
+        className="mainSectionLeftArticle"
+      />
+    ),
+    list: (
+      <ListCentersSearch
+        results={results}
+        searchObject={cleanSearchObject(searchObject)}
+        setSearchObjet={setSearchObject}
+        linksRoute={linksRoute}
+        className="listCentersSingleView"
+      ></ListCentersSearch>
+    ),
+    map: <GoogleMapSearch markers={results} />,
+  };
+
+  return !loading ? (
     <>
       {fullView ? (
         <div className={className + ' mainSectionFullView'}>
@@ -104,42 +150,18 @@ export default function SearchCenter({ className }) {
             className="listCentersFullView"
           ></ListCentersSearch>
           <MainNavigation links={Links}></MainNavigation>
-          {visualization === 'filter' ? (
-            <SearchForm
-              searchObject={searchObject}
-              setSearchObject={setSearchObject}
-              services={[]}
-              results={results}
-              className="mainSectionRightArticle"
-            />
-          ) : (
-            <GoogleMap></GoogleMap>
-          )}
+          {fullViewJSX[visualization]}
         </div>
       ) : (
         <div className={className + ' mainSectionSingleView'}>
-          {visualization === 'list' ? (
-            <ListCentersSearch
-              results={results}
-              searchObject={cleanSearchObject(searchObject)}
-              setSearchObjet={setSearchObject}
-              linksRoute={linksRoute}
-              className="listCentersSingleView"
-            ></ListCentersSearch>
-          ) : visualization === 'map' ? (
-            <GoogleMap></GoogleMap>
-          ) : (
-            <SearchForm
-              searchObject={searchObject}
-              setSearchObject={setSearchObject}
-              services={[]}
-              results={results}
-              className="mainSectionLeftArticle"
-            />
-          )}
+          {singleViewJSX[visualization]}
           <MainNavigation links={Links}></MainNavigation>
         </div>
       )}
     </>
+  ) : (
+    <div className={className + ' mainSectionFullView'}>
+      <Spinner />
+    </div>
   );
 }

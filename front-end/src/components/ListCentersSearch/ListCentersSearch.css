@@ -1,6 +1,4 @@
 .listCenters{
-    padding-left: 1.3vw;
-    padding-right: 1.3vw;
     display:flex;
     justify-content: flex-start;
     align-items: center;
