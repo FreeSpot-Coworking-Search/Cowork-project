@@ -1,0 +1,33 @@
+.reservesPresentation {
+    color: rgba(var(--dark));
+    background-color: rgba(var(--primary), 0.4);
+    border-radius: 20px;
+    padding: 2vw;
+}
+
+.reservesPresentation-presentationName {
+    font-size: var(--presentationTittle);
+    text-align: center;
+    margin-bottom: 1vh;
+    background-color: rgba(var(--secondary), 0.6);
+    border-radius: 40px;
+}
+
+.reservesPresentation-info {
+    background-color: rgba(var(--clear), 1);
+    border-radius: 20px;
+    padding: 1vw;
+}
+
+.buttonList {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.buttonList-singleView {
+    flex-direction: row;
+    gap: 0px;
+}

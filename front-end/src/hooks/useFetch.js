@@ -9,7 +9,7 @@ export default function useFetch(endpoint, id) {
         function () {
             setLoading(true);
             getData(`/api/${endpoint}`, { id: id }).then((data) => {
-                setData(data.space);
+                setData(data);
                 setLoading(false);
             });
         },

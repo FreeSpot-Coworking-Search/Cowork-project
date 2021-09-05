@@ -1,3 +1,16 @@
+.buttonList-default {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 2vw;
+}
+
+.buttonList-default > * {
+    flex: 0 1 150px;
+    height: 5vh;
+}
+
 .shadow-wrap {
     filter: drop-shadow(2px 2px 5px rgba(var(--dark), 0.6));
 }
@@ -49,4 +62,16 @@
 
 .secondary > *:hover {
     background-color: rgba(var(--secondary), 1);
+}
+
+.alert {
+    background-color: rgba(var(--alert), 0.8);
+}
+
+.alert:hover {
+    background-color: rgba(var(--alert), 1);
+}
+
+.alert > *:hover {
+    background-color: rgba(var(--alert), 1);
 }

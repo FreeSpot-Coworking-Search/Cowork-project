@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const getReserves = require('./getReserves');
+const getAllReserves = require('./getAllReserves');
 const postReserve = require('./postReserve');
 const putRate = require('./putRate');
 const getPayment = require('./getPayment');
@@ -11,7 +12,7 @@ const entityExists = require('../../middlewares/centers/entityExists');
 const userIsLogin = require('../../middlewares/users/userIsLogin');
 const userOwnsReserve = require('../../middlewares/reserves/userOwnsReserve');
 
-router.get('/allreserves/', userIsLogin, getReserves);
+router.get('/allreserves/', userIsLogin, getAllReserves);
 router.get('/', entityExists, userIsLogin, userOwnsReserve, getReserves);
 router.post('/', userIsLogin, postReserve);
 router.put(

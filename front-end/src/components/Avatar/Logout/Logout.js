@@ -17,7 +17,7 @@ function Logout({ handleClose }) {
         {
             text: 'cerrar sesión',
             action: () => performLogout(),
-            secondary: true,
+            type: 'secondary',
         },
         { text: 'cerrar', action: () => handleClose() },
     ];
