@@ -3,15 +3,10 @@ import './reservesPresentation.css';
 import { useRef, lazy } from 'react';
 import { Dialog } from '@material-ui/core';
 
-import ServicesCard from '../ServicesCard/ServicesCard';
-import ButtonList from '../ButtonList/ButtonList';
 import CircularSuspense from '../../components/CircularSuspense/CircularSuspense';
+import ReservesList from '../ReservesList/ReservesList';
 
-import { isTodayBetween } from '../../helpers/dateHelper';
-import {
-    getReservesList,
-    findActiveIncidence,
-} from '../../helpers/reservesHelpers';
+import { isBetween, isPrevious, isFuture } from '../../helpers/dateHelper';
 
 import useDialog from '../../hooks/useDialog';
 
@@ -26,76 +21,57 @@ export default function ReservesPresentation({
     fullView,
 }) {
     const { open, handleClickOpen, handleClose } = useDialog();
-    const refDialog = useRef(null);
+    const refDialog = useRef({});
 
-    console.log('reservations: ', reservations);
-
-    const [activeReservation] =
-        Object.entries(reservations).length !== 0
-            ? reservations.filter((reserve) =>
-                  isTodayBetween(reserve.fecha_inicio, reserve.fecha_fin)
-              )
-            : [];
-
-    const btnBehavior = [
-        {
-            text: '$',
-            action: () => {
-                activeReservation.pagado === 1
-                    ? (refDialog.current = 'paymentDialogPagado')
-                    : (refDialog.current = 'paymentDialogPendiente');
-                handleClickOpen();
-            },
-            type: activeReservation?.pagado === 0 ? 'alert' : 'main',
-        },
-        {
-            text: '!',
-            action: () => {
-                refDialog.current = 'incidencesDialog';
-                handleClickOpen();
-            },
-            type: findActiveIncidence(activeReservation?.incidencias)
-                ? 'alert'
-                : 'main',
-        },
-        {
-            text: '+',
-            action: () => {
-                refDialog.current = 'servicesDialog';
-                handleClickOpen();
-            },
-        },
-    ];
-
-    console.log('activeReservation: ', activeReservation);
     return (
         <article className={`${className} reservesPresentation`}>
             <section>
                 <h3 className="reservesPresentation-presentationName">
-                    reserva activa
+                    Reserva Activa
                 </h3>
-                <section className="reservesPresentation-info">
-                    <ServicesCard
-                        listData={getReservesList(activeReservation)}
-                    />
-                    <nav>
-                        <ButtonList
-                            btnBehavior={[...btnBehavior]}
-                            cssStyle={
-                                fullView
-                                    ? 'buttonList'
-                                    : 'buttonList buttonList-singleView'
-                            }
-                        />
-                    </nav>
-                </section>
+                <ReservesList
+                    reservesList={reservations.filter((reserve) =>
+                        isBetween(reserve.fecha_inicio, reserve.fecha_fin)
+                    )}
+                    fullView={fullView}
+                    refDialog={refDialog}
+                    handleClickOpen={handleClickOpen}
+                />
+            </section>
+
+            <section>
+                <h3 className="reservesPresentation-presentationName">
+                    Reservas Finalizadas
+                </h3>
+                <ReservesList
+                    reservesList={reservations?.filter((reserve) =>
+                        isPrevious(reserve?.fecha_inicio)
+                    )}
+                    fullView={fullView}
+                    refDialog={refDialog}
+                    handleClickOpen={handleClickOpen}
+                />
+            </section>
+
+            <section>
+                <h3 className="reservesPresentation-presentationName">
+                    Reservas Futuras
+                </h3>
+                <ReservesList
+                    reservesList={reservations?.filter((reserve) =>
+                        isFuture(reserve?.fecha_inicio)
+                    )}
+                    fullView={fullView}
+                    refDialog={refDialog}
+                    handleClickOpen={handleClickOpen}
+                />
             </section>
 
             <CircularSuspense>
                 <Dialog open={open} onClose={handleClose}>
                     <ReservesDialogs
-                        choosedDialog={refDialog.current}
-                        reservation={activeReservation}
+                        choosedDialog={refDialog.current.dialog}
+                        reservation={refDialog.current.reservation}
                         handleClose={handleClose}
                     />
                 </Dialog>

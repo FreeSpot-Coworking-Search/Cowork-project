@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import getData from '../helpers/getData';
 
 export default function useFetch(endpoint, id) {
-    const [data, setData] = useState({});
+    const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
 
     useEffect(

@@ -5,11 +5,19 @@ function toFormDate(date) {
     return format(newDate, 'yyyy-MM-dd');
 }
 
-function isTodayBetween(startDate, endDate) {
+function isBetween(startDate, endDate) {
     return isWithinInterval(new Date(), {
         start: new Date(startDate),
         end: new Date(endDate),
     });
 }
 
-export { toFormDate, isTodayBetween };
+function isPrevious(endDate) {
+    return new Date(endDate) < new Date();
+}
+
+function isFuture(startDate) {
+    return new Date(startDate) > new Date();
+}
+
+export { toFormDate, isBetween, isPrevious, isFuture };

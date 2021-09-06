@@ -1,14 +1,10 @@
-import './servicesCard.css';
+import './itemList.css';
 
-export default function ServicesCard({
-    listData,
-    checkInputAction,
-    checkValues,
-}) {
+export default function ItemList({ listData, checkInputAction, checkValues }) {
     const { name, data, type } = listData;
 
     function addPrice(name) {
-        return name?.includes('precio') ? 'priceItem' : '';
+        return name?.toLowerCase().includes('precio') ? 'priceItem' : '';
     }
 
     let renderedList;
@@ -83,7 +79,7 @@ export default function ServicesCard({
     }
 
     return (
-        <section className="servicesCard">
+        <section className="itemList">
             <h3>{name}</h3>
             {renderedList}
         </section>

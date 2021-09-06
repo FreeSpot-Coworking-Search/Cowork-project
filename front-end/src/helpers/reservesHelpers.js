@@ -1,9 +1,5 @@
 import { toFormDate } from '../helpers/dateHelper';
 
-function findActiveIncidence(incidences) {
-    return incidences?.some((incidence) => incidence.estado === 1);
-}
-
 function getReservesList(reservation) {
     return {
         name: `${reservation?.nombre}: ${toFormDate(
@@ -12,7 +8,7 @@ function getReservesList(reservation) {
         data: {
             Dirección: reservation?.direccion,
             Teléfono: reservation?.telefono,
-            'precio total': reservation?.precio,
+            'Precio total': reservation?.precio,
         },
         type: 'object',
     };
@@ -31,4 +27,57 @@ function getIncidenceList(incidence) {
     };
 }
 
-export { getReservesList, getIncidenceList, findActiveIncidence };
+function getBtnBehavior(reservation, refDialog, handleClickOpen) {
+    return [
+        {
+            text: '$',
+            action: () => {
+                reservation.pagado === 1
+                    ? (refDialog.current = {
+                          reservation: reservation,
+                          dialog: 'paymentDialogPagado',
+                      })
+                    : (refDialog.current = {
+                          reservation: reservation,
+                          dialog: 'paymentDialogPendiente',
+                      });
+                handleClickOpen();
+            },
+            type: reservation?.pagado === 0 ? 'alert' : 'main',
+        },
+        {
+            text: '!',
+            action: () => {
+                refDialog.current = {
+                    reservation: reservation,
+                    dialog: 'incidencesDialog',
+                };
+                handleClickOpen();
+            },
+            type: findActiveIncidence(reservation.incidencias)
+                ? 'alert'
+                : 'main',
+        },
+        {
+            text: '+',
+            action: () => {
+                refDialog.current = {
+                    reservation: reservation,
+                    dialog: 'servicesDialog',
+                };
+                handleClickOpen();
+            },
+        },
+    ];
+}
+
+function findActiveIncidence(incidences) {
+    return incidences?.some((incidence) => incidence.estado === 0);
+}
+
+export {
+    getReservesList,
+    getIncidenceList,
+    findActiveIncidence,
+    getBtnBehavior,
+};

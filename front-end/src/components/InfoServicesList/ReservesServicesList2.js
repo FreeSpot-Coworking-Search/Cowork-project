@@ -1,8 +1,9 @@
 import { Fragment } from 'react';
 
-import ServicesCard from '../ServicesCard/ServicesCard';
+import ItemList from '../ItemList/ItemList';
 
 export default function InfoServicesList({ servicesArray, uniqueId }) {
+    console.log('se ejecuta');
     const servicesGroup = [
         {
             name: 'Servicios incluidos',
@@ -19,10 +20,7 @@ export default function InfoServicesList({ servicesArray, uniqueId }) {
     return (
         <Fragment>
             {servicesGroup.map((list) => (
-                <ServicesCard
-                    key={`${list.name}-${uniqueId}`}
-                    listData={list}
-                />
+                <ItemList key={`${list.name}-${uniqueId}`} listData={list} />
             ))}
         </Fragment>
     );

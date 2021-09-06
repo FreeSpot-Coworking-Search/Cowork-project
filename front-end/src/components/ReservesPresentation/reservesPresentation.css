@@ -3,6 +3,11 @@
     background-color: rgba(var(--primary), 0.4);
     border-radius: 20px;
     padding: 2vw;
+    overflow: auto;
+
+    display: flex;
+    flex-direction: column;
+    gap: clamp(10px, 2vh, 20px);
 }
 
 .reservesPresentation-presentationName {
@@ -13,10 +18,22 @@
     border-radius: 40px;
 }
 
-.reservesPresentation-info {
+.reservesPresentation-info-fullView,
+.reservesPresentation-info-singleView {
     background-color: rgba(var(--clear), 1);
     border-radius: 20px;
     padding: 1vw;
+    margin-bottom: clamp(5px, 1vh, 10px);
+}
+
+.reservesPresentation-info-fullView {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.reservesPresentation-info-fullView:first-child {
+    flex: 1 0 200px;
 }
 
 .buttonList {
