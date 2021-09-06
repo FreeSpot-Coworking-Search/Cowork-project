@@ -13,8 +13,6 @@ import {
     IncidentsIcon,
 } from '../../components/Icons/Icons';
 
-import { requestClean } from '../../helpers/reservesHelpers';
-
 const IncidenceForm = lazy(() =>
     import('../../components/Formularies/IncidenceForm')
 );
@@ -52,7 +50,7 @@ export default function MyCenter({ className }) {
     };
 
     const cleaningBtn = {
-        action: () => requestClean(reservations, setReservations),
+        action: () => alert('cambialo!!'),
         icon: <CleaningIcon className="mainNavigationButtonIcon" />,
         text: 'Solicitar limpieza',
     };

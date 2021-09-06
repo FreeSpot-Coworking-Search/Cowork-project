@@ -1,5 +1,11 @@
 import { toFormDate, isBetween } from '../helpers/dateHelper';
 
+import axios from 'axios';
+const {
+    REACT_APP_API_LOCAL_SERVER_HOST: host,
+    REACT_APP_API_LOCAL_SERVER_PORT: port,
+} = process.env;
+
 function getReservesList(reservation) {
     return {
         name: `${reservation?.nombre}: ${toFormDate(
@@ -75,26 +81,9 @@ function findActiveIncidence(incidences) {
     return incidences?.some((incidence) => incidence.estado === 0);
 }
 
-async function requestClean(reservations, setReservations) {
-    const index = reservations.findIndex((reserve) =>
-        isBetween(reserve.fecha_inicio, reserve.fecha_fin)
-    );
-    if (index === -1) {
-        console.log('No se encuentra reserva activa al día de hoy.');
-        return;
-    }
-    if (reservations[index].estado === 1) {
-        console.log(
-            `El pedido de limpieza del espacio ${reservations[index].nombre} ya se encuentra efectuado.`
-        );
-        return;
-    }
-}
-
 export {
     getReservesList,
     getIncidenceList,
     findActiveIncidence,
     getBtnBehavior,
-    requestClean,
 };

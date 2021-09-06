@@ -35,6 +35,7 @@ export default function ReservesPresentation({
                     fullView={fullView}
                     refDialog={refDialog}
                     handleClickOpen={handleClickOpen}
+                    active={true}
                 />
             </section>
 

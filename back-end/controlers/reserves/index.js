@@ -7,6 +7,7 @@ const postReserve = require('./postReserve');
 const putRate = require('./putRate');
 const getPayment = require('./getPayment');
 const validatePayment = require('./validatePayment');
+const putCleaning = require('./putCleaning');
 
 const entityExists = require('../../middlewares/centers/entityExists');
 const userIsLogin = require('../../middlewares/users/userIsLogin');
@@ -22,6 +23,13 @@ router.put(
 	userOwnsReserve,
 	putRate,
 	getReserves
+);
+router.put(
+	'/cleaning/',
+	entityExists,
+	userIsLogin,
+	userOwnsReserve,
+	putCleaning
 );
 router.get(
 	'/payment/',

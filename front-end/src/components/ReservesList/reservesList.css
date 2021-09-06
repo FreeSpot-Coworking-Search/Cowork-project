@@ -25,6 +25,10 @@
     justify-content: space-between;
 }
 
-.reservesList-fullView:first-child {
+.reservesList-information {
     flex: 1 0 200px;
+}
+
+.reservesList-information > p {
+    padding: 1vh 1vw;
 }
