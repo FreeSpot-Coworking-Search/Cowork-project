@@ -17,7 +17,6 @@ const ReservesDialogs = lazy(() =>
 export default function ReservesPresentation({
     className,
     reservations,
-    setReservations,
     fullView,
 }) {
     const { open, handleClickOpen, handleClose } = useDialog();

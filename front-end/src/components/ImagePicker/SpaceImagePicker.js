@@ -7,143 +7,151 @@ import { Fragment } from 'react';
 import { useState } from 'react';
 
 export default function SpaceImagePicker({
-  className,
-  images,
-  idUser,
-  baseImageURL,
-  actionsRoute,
-  setMessage,
-  setError,
-  setSpace,
+    className,
+    images,
+    idUser,
+    baseImageURL,
+    actionsRoute,
+    setMessage,
+    setError,
+    setSpace,
 }) {
-  const [input, setInput] = useState('');
+    const [input, setInput] = useState('');
 
-  async function deleteImage(imageId) {
-    console.log(imageId);
-    try {
-      setMessage('Eliminando imagen');
+    async function deleteImage(imageId) {
+        console.log(imageId);
+        try {
+            setMessage('Eliminando imagen');
 
-      const route = `${actionsRoute}?id=${imageId}`;
-      const response = await axios.delete(route);
+            const route = `${actionsRoute}?id=${imageId}`;
+            const response = await axios.delete(route);
 
-      if (response.status === 200) {
-        setMessage('Imagen eliminada.');
-        setSpace((space) => {
-          return {
-            ...space,
-            imagenes: space.imagenes.filter((i) => i.id !== imageId),
-          };
-        });
-        setTimeout(() => {
-          setMessage('');
-        }, 3000);
-      }
-    } catch (error) {
-      setMessage('');
-      const {
-        data: { message },
-      } = error.response;
-
-      message ? setError(message) : setError(error.message);
-      setTimeout(() => {
-        setError('');
-      }, 3000);
-    }
-  }
-
-  function submitImage(event) {
-    const file = event.target.files[0];
-
-    async function perfomSubmit(photo) {
-      try {
-        setMessage('Enviando imagen...');
-        setInput('');
-
-        let data = new FormData();
-        data.append('photo', photo);
-        data.append('description', input);
-
-        const route = `${actionsRoute}?id=${idUser}`;
-        const response = await axios.post(route, data);
-
-        if (response.status === 200) {
-          setMessage('Imagen cargada.');
-
-          setSpace((space) => {
-            return {
-              ...space,
-              imagenes: [
-                ...space.imagenes,
-                {
-                  ...response.data,
-                },
-              ],
-            };
-          });
-
-          setTimeout(() => {
+            if (response.status === 200) {
+                setMessage('Imagen eliminada.');
+                setSpace((space) => {
+                    return {
+                        ...space,
+                        imagenes: space.imagenes.filter(
+                            (i) => i.id !== imageId
+                        ),
+                    };
+                });
+                setTimeout(() => {
+                    setMessage('');
+                }, 3000);
+            }
+        } catch (error) {
             setMessage('');
-          }, 3000);
-        }
-      } catch (error) {
-        setMessage('');
-        const {
-          data: { message },
-        } = error.response;
+            const {
+                data: { message },
+            } = error.response;
 
-        message ? setError(message) : setError(error.message);
-        setTimeout(() => {
-          setError('');
-        }, 3000);
-      }
+            message ? setError(message) : setError(error.message);
+            setTimeout(() => {
+                setError('');
+            }, 3000);
+        }
     }
 
-    perfomSubmit(file);
-  }
+    function submitImage(event) {
+        const file = event.target.files[0];
 
-  return (
-    <Fragment className={className}>
-      <ul className="imagePresentation">
-        {images.map((image) => (
-          <li key={image.URL}>
-            <figure>
-              <button onClick={() => deleteImage(image.id)}>X</button>
-              <img
-                src={`${baseImageURL}${image.URL}`}
-                alt="space center image"
-                id="imagePresentation-mainImage"
-              />
-              <figcaption className="imagePresentation-text">
-                {image.descripcion === 'undefined'
-                  ? '(Sin descripción)'
-                  : image.descripcion}
-              </figcaption>
-            </figure>
-          </li>
-        ))}
+        async function perfomSubmit(photo) {
+            try {
+                setMessage('Enviando imagen...');
+                setInput('');
 
-        <li>
-          <form className="photoUpload" onSubmit={(e) => e.preventDefault()}>
-            <label htmlFor="fileUpload" className="fileUpload">
-              <input
-                type="file"
-                id="fileUpload"
-                name="fileUpload"
-                accept="image/*"
-                onChange={submitImage}
-              />
-              <img src={addIcon} alt="addIcon" />
-            </label>
-            <input
-              type="text"
-              id="text"
-              placeholder="   Descripción"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-            />
-          </form>
-        </li>
-      </ul>
-    </Fragment>
-  );
+                let data = new FormData();
+                data.append('photo', photo);
+                data.append('description', input);
+
+                const route = `${actionsRoute}?id=${idUser}`;
+                const response = await axios.post(route, data);
+
+                if (response.status === 200) {
+                    setMessage('Imagen cargada.');
+
+                    setSpace((space) => {
+                        console.log('space:', space);
+                        return {
+                            ...space,
+                            imagenes: [
+                                ...space.imagenes,
+                                {
+                                    ...response.data,
+                                },
+                            ],
+                        };
+                    });
+
+                    setTimeout(() => {
+                        setMessage('');
+                    }, 3000);
+                }
+            } catch (error) {
+                setMessage('');
+                const {
+                    data: { message },
+                } = error.response;
+
+                message ? setError(message) : setError(error.message);
+                setTimeout(() => {
+                    setError('');
+                }, 3000);
+            }
+        }
+
+        perfomSubmit(file);
+    }
+
+    return (
+        <Fragment className={className}>
+            <ul className="imagePresentation">
+                {images.map((image) => (
+                    <li key={image.URL}>
+                        <figure>
+                            <button onClick={() => deleteImage(image.id)}>
+                                X
+                            </button>
+                            <img
+                                src={`${baseImageURL}${image.URL}`}
+                                alt="space center image"
+                                id="imagePresentation-mainImage"
+                            />
+                            <figcaption className="imagePresentation-text">
+                                {image.descripcion === 'undefined'
+                                    ? '(Sin descripción)'
+                                    : image.descripcion}
+                            </figcaption>
+                        </figure>
+                    </li>
+                ))}
+
+                <li>
+                    <form
+                        className="photoUpload"
+                        onSubmit={(e) => e.preventDefault()}
+                    >
+                        <label htmlFor="fileUpload" className="fileUpload">
+                            <input
+                                type="file"
+                                id="fileUpload"
+                                name="fileUpload"
+                                accept="image/*"
+                                onChange={submitImage}
+                            />
+                            <img src={addIcon} alt="addIcon" />
+                        </label>
+                        <input
+                            type="text"
+                            id="text"
+                            placeholder="   Descripción"
+                            value={input}
+                            onChange={(e) => setInput(e.target.value)}
+                        />
+                    </form>
+                </li>
+            </ul>
+        </Fragment>
+    );
 }

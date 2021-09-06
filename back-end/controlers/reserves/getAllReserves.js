@@ -5,7 +5,7 @@ const getReservation = async (req, res, next) => {
 		const { idUser } = req.userAuth;
 
 		const reserves = await getRegistrations(
-			`SELECT R.*, E.nombre, C.direccion, C.telefono
+			`SELECT R.*, E.nombre, E.estado, C.direccion, C.telefono
 			FROM reservas R
 			JOIN espacios E ON R.id_espacio = E.id
 			JOIN centros C ON E.id_centro = C.id

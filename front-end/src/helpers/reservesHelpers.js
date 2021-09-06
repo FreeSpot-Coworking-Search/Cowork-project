@@ -1,4 +1,4 @@
-import { toFormDate } from '../helpers/dateHelper';
+import { toFormDate, isBetween } from '../helpers/dateHelper';
 
 function getReservesList(reservation) {
     return {
@@ -75,9 +75,26 @@ function findActiveIncidence(incidences) {
     return incidences?.some((incidence) => incidence.estado === 0);
 }
 
+async function requestClean(reservations, setReservations) {
+    const index = reservations.findIndex((reserve) =>
+        isBetween(reserve.fecha_inicio, reserve.fecha_fin)
+    );
+    if (index === -1) {
+        console.log('No se encuentra reserva activa al día de hoy.');
+        return;
+    }
+    if (reservations[index].estado === 1) {
+        console.log(
+            `El pedido de limpieza del espacio ${reservations[index].nombre} ya se encuentra efectuado.`
+        );
+        return;
+    }
+}
+
 export {
     getReservesList,
     getIncidenceList,
     findActiveIncidence,
     getBtnBehavior,
+    requestClean,
 };

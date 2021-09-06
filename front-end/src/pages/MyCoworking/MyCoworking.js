@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, lazy } from 'react';
 import { CircularProgress } from '@material-ui/core';
 
 import useFullView from '../../hooks/useFullView';
@@ -13,14 +13,22 @@ import {
     IncidentsIcon,
 } from '../../components/Icons/Icons';
 
+import { requestClean } from '../../helpers/reservesHelpers';
+
+const IncidenceForm = lazy(() =>
+    import('../../components/Formularies/IncidenceForm')
+);
+
 export default function MyCenter({ className }) {
     const [fullView] = useFullView();
     const [visualization, setVisualization] = useState('reserves');
 
     const [reservations, setReservations, loading] = useFetch(
         'reserves/allreserves/',
-        '0'
+        'foo'
     );
+    console.log(reservations);
+
     // ****************************
     // ** MAIN NAVIGATION CONFIG **
     // ****************************
@@ -38,13 +46,13 @@ export default function MyCenter({ className }) {
     };
 
     const incidenceBtn = {
-        action: () => alert('nueva incidencia'),
+        action: () => setVisualization('incidence'),
         icon: <IncidentsIcon className="mainNavigationButtonIcon" />,
         text: 'Nueva incidencia',
     };
 
     const cleaningBtn = {
-        action: () => alert('solicitar limpieza'),
+        action: () => requestClean(reservations, setReservations),
         icon: <CleaningIcon className="mainNavigationButtonIcon" />,
         text: 'Solicitar limpieza',
     };
@@ -70,7 +78,6 @@ export default function MyCenter({ className }) {
                 <ReservesPresentation
                     className="mainSectionLeftArticle"
                     reservations={reservations}
-                    setReservations={setReservations}
                     fullView={fullView}
                 />
 
@@ -98,6 +105,25 @@ export default function MyCenter({ className }) {
                 </div>
             </div>
         ),
+        incidence: (
+            <div className={className + ' mainSectionFullView'}>
+                <ReservesPresentation
+                    className="mainSectionLeftArticle"
+                    reservations={reservations}
+                    fullView={fullView}
+                />
+
+                <MainNavigation
+                    links={Links}
+                    className="mainSectionNavigation"
+                ></MainNavigation>
+                <IncidenceForm
+                    className="mainSectionRightArticle"
+                    reservations={reservations}
+                    setReservations={setReservations}
+                />
+            </div>
+        ),
     };
 
     const singleViewJSX = {
@@ -105,13 +131,20 @@ export default function MyCenter({ className }) {
             <ReservesPresentation
                 className="mainSectionLeftArticle"
                 reservations={reservations}
-                setReservations={setReservations}
+                fullView={fullView}
             />
         ),
         space: (
             <div className="mainSectionLeftArticle Borrame">
                 <p>space</p>
             </div>
+        ),
+        incidence: (
+            <IncidenceForm
+                className="mainSectionLeftArticle"
+                reservations={reservations}
+                setReservations={setReservations}
+            />
         ),
     };
 
