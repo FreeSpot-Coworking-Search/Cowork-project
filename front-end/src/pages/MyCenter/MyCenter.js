@@ -2,6 +2,7 @@ import './MyCenter.css';
 
 import { useState } from 'react';
 import RegistrationFormCenter from '../../components/Formularies/RegistrationFormCenter';
+import RegistrationFormSpace from '../../components/Formularies/RegistrationFormSpace';
 import MainNavigation from '../../components/MainNavigation/MainNavigation';
 import Spinner from '../../components/Spinner/Spinner';
 import locationIcon from '../../assets/icons/bxs-location-plus 1.png';
@@ -12,6 +13,7 @@ import MyCenterPresentation from '../../components/MyCenterPresentation/MyCenter
 import MyCenterPresentationExpand from '../../components/MyCenterPresentationExpand/MyCenterPresentationExpand';
 import { useParams } from 'react-router-dom';
 import HelpPresentation from '../../components/HelpPresentation/HelpPresentation';
+import { NewCenterIcon, NewSpaceIcon } from '../../components/Icons/Icons';
 
 export default function MyCenter({ className }) {
   const { idAdmin } = useParams();
@@ -32,28 +34,34 @@ export default function MyCenter({ className }) {
   };
   const newCenterButton = {
     action: () => setVisualization('newCenter'),
-    icon: locationIcon,
+    icon: <NewCenterIcon className="mainNavigationButtonIcon" />,
     text: 'Nuevo centro',
+  };
+  const newSpaceButton = {
+    action: () => setVisualization('newSpace'),
+    icon: <NewSpaceIcon className="mainNavigationButtonIcon" />,
+    text: 'Nuevo Espacio',
   };
 
   let Links = [];
 
   switch (visualization) {
     case 'list':
-      if (fullView) Links = [newCenterButton, genericButton, genericButton];
-      else
-        Links = [newCenterButton, genericButton, genericButton, genericButton];
+      if (fullView) Links = [newCenterButton, newSpaceButton];
+      else Links = [newCenterButton, newSpaceButton];
       break;
 
     case 'expand':
-      if (fullView) Links = [newCenterButton, genericButton, genericButton];
-      else
-        Links = [newCenterButton, genericButton, genericButton, genericButton];
+      if (fullView) Links = [newCenterButton, newSpaceButton];
+      else Links = [newCenterButton, newSpaceButton];
       break;
     case 'newCenter':
-      if (fullView) Links = [newCenterButton, genericButton, genericButton];
-      else
-        Links = [newCenterButton, genericButton, genericButton, genericButton];
+      if (fullView) Links = [newCenterButton, newSpaceButton];
+      else Links = [newCenterButton, newSpaceButton];
+      break;
+    case 'newSpace':
+      if (fullView) Links = [newCenterButton, newSpaceButton];
+      else Links = [newCenterButton, newSpaceButton];
       break;
 
     default:
@@ -85,6 +93,25 @@ export default function MyCenter({ className }) {
       <div className={className + ' mainSectionFullView'}>
         <div className="mainSectionLeftArticle presentation">
           <RegistrationFormCenter />
+        </div>
+        <MainNavigation
+          links={Links}
+          className="mainSectionNavigation"
+        ></MainNavigation>
+        <HelpPresentation
+          className="mainSectionRightArticle"
+          image={formIllustration}
+          text="Cubramos los datos de su centro"
+        />
+      </div>
+    ),
+    newSpace: (
+      <div className={className + ' mainSectionFullView'}>
+        <div className="mainSectionLeftArticle presentation">
+          <RegistrationFormSpace
+            centers={centers}
+            selectedCenter={selectedCenter}
+          />
         </div>
         <MainNavigation
           links={Links}

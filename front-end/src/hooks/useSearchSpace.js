@@ -5,6 +5,9 @@ export default function useSearchSpace(INITIAL_SEARCH_OBJECT) {
   const [searchObject, setSearchObject] = useState(INITIAL_SEARCH_OBJECT);
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState([]);
+  const RESET_SEARCH_OBJECT = {
+    id_centro: INITIAL_SEARCH_OBJECT.id_centro,
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -15,7 +18,7 @@ export default function useSearchSpace(INITIAL_SEARCH_OBJECT) {
   }, [searchObject]);
 
   const resetSearchObject = () => {
-    setSearchObject(INITIAL_SEARCH_OBJECT);
+    setSearchObject(RESET_SEARCH_OBJECT);
   };
   return [loading, results, searchObject, setSearchObject, resetSearchObject];
 }

@@ -1,5 +1,6 @@
 .displaySelector{
     align-self: flex-end;
+    margin-bottom: 1vh;
 }
 .displaySelector>ul{
     display:flex;
@@ -10,7 +11,7 @@
 }
 .displaySelector ul li button{
     border: none;
-    width: 4vw;
+    width: clamp(2rem, 4vw, 4rem);
     height: 3vh;
 }
 .displaySelector ul li button:hover{

@@ -25,10 +25,10 @@ export default function DateRangeSelector({
   };
   const [selectionRange, setSelectionRange] = useState({
     startDate: newSearchObject.fecha_entrada
-      ? newSearchObject.fecha_entrada
+      ? new Date(newSearchObject.fecha_entrada)
       : new Date(),
     endDate: newSearchObject.fecha_salida
-      ? newSearchObject.fecha_salida
+      ? new Date(newSearchObject.fecha_salida)
       : new Date(),
     key: 'selection',
   });
@@ -51,7 +51,7 @@ export default function DateRangeSelector({
         ranges={[selectionRange]}
         rangeColors={['rgba(var(--primary),0.6)']}
         onChange={(event) => handleSelect(event)}
-        minDate={minDate ? new Date() : ''}
+        minDate={minDate ? new Date(minDate) : new Date()}
         disabledDates={disabledDates}
       />
     </div>

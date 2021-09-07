@@ -123,7 +123,8 @@ export default function Center({ className }) {
 
         break;
       case 'info':
-        if (fullView) Links = [genericButton, genericButton, genericButton];
+        if (fullView)
+          Links = [spacesButton, scoresButton, cleaningButton, incidentsButton];
         else
           Links = Links = [
             infoButton,
@@ -139,6 +140,25 @@ export default function Center({ className }) {
     }
 
     fullViewJSX = {
+      info: (
+        <div className={className + ' mainSectionFullView'}>
+          <ListSpacesSearch
+            className="mainSectionLeftArticle"
+            results={center.espacios}
+          />
+          <MainNavigation
+            links={Links}
+            className="mainSectionNavigation"
+          ></MainNavigation>
+
+          <CenterPresentation
+            center={center}
+            loading={loading}
+            setCenter={setCenter}
+            className="mainSectionRightArticle"
+          />
+        </div>
+      ),
       spacesList: (
         <div className={className + ' mainSectionFullView'}>
           <ListSpacesSearch

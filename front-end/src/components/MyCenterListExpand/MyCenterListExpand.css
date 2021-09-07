@@ -14,27 +14,28 @@
 }
 
 .myCenterListExpand>ul>li{
-    text-align:left;
-    background-color: rgba(var(--clear),0.5);
-    margin-bottom: 0.75vh;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+  text-align:left;
+  background-color: rgba(var(--clear),0.5);
     
   }
-  .myCenterListExpand>ul>li>h3{
-    margin-left: 1.5vw;
-    font-size: var(--presentationSubTittle);
-  }
-  .myCenterListExpand>ul>li>ul{
-    display:flex;
-    flex-direction: column;
-    justify-content:start;
-    list-style: none;
-    gap: 1vh;
-  }
-  .myCenterListLimit{
-    background-color: rgba(var(--secondary),0.5);
-    height: 1vh;
-    width: 100%;
-  }
+.myCenterListExpand>ul>li>h3{
+  margin-left: 1.5vw;
+  font-size: var(--presentationSubTittle);
+}
+.myCenterListExpand>ul>li>ul{
+  display:flex;
+  flex-direction: column;
+  justify-content:start;
+  list-style: none;
+  gap: 1vh;
+}
+.myCenterListLimit{
+  background-color: rgba(var(--secondary),0.5);
+  height: 1vh;
+  width: 100%;
+}
   
 
 

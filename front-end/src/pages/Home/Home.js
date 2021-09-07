@@ -1,14 +1,23 @@
 import './Home.css';
-import { useParams } from 'react-router-dom';
+import { useState } from 'react';
+import HomeSearch from '../../components/HomeSearch/HomeSearch';
 
 export default function Home() {
-  const Params = useParams();
-  console.log(Params);
-  console.log('hola');
+  const INITIAL_SEARCH_OBJECT = {
+    tipo: '',
+    texto: '',
+    fecha_entrada: '',
+    fecha_salida: '',
+  };
 
+  const [searchObject, setSearchObject] = useState(INITIAL_SEARCH_OBJECT);
+  console.log(searchObject);
   return (
-    <div className="mainSection">
-      <h1>Home</h1>
+    <div className="mainSection mainSectionFullView">
+      <HomeSearch
+        searchObject={searchObject}
+        setSearchObject={setSearchObject}
+      />
     </div>
   );
 }

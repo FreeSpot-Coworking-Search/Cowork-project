@@ -24,6 +24,23 @@ cursor: pointer;
 .calendarNext {
     right: 0;
 }
+.monthDisplay{
+    position: absolute;
+    top: 10%;
+    background-color: rgba(var(--clear),0.5);
+    padding: 1vh 1vw;
+    border-radius: 10px;
+}
+
+.monthDisplayOnly{
+right: 50%;
+}
+.monthDisplayOne{
+right: 10%;
+}
+.monthDisplayTwo{
+left: 10%;
+}
 
 .calendarPrev:hover, .calendarNext:hover {
     background-color: rgba(var(--clear),0.7);

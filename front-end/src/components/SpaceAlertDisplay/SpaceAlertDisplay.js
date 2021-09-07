@@ -7,14 +7,14 @@ export default function SpaceAlertDisplay({ space }) {
   return (
     <ul className="spaceAlertDisplay">
       <li>
-        {space.visible === 1 ? (
+        {space.visible === 0 ? (
           <img src={visionIcon} alt="Icono de limpieza" />
         ) : (
           ''
         )}
       </li>
       <li>
-        {space.estado === 1 ? (
+        {space.estado === 0 ? (
           <img src={cleaningIcon} alt="Icono de limpieza" />
         ) : (
           ''

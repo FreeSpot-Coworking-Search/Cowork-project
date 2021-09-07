@@ -19,7 +19,6 @@ export default function SpaceCard({ space, searchObject, name }) {
         />
       </div>
       <div className="spaceCardRightColumn">
-        <h4>{space.nombre}</h4>
         <Link
           to={
             searchObject
@@ -28,6 +27,7 @@ export default function SpaceCard({ space, searchObject, name }) {
           }
           className="spaceCardRightColumnInfo"
         >
+          <h4>{space.nombre}</h4>
           <ul>
             <li className="spaceCardCapacity">
               <img src={personIcon} alt="Person icon" />

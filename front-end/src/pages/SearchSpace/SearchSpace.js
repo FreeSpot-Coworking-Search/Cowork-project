@@ -20,7 +20,6 @@ import {
   ListIcon,
   PresentationIcon,
 } from '../../components/Icons/Icons';
-import presentationIcon from '../../assets/icons/bxs-home.svg';
 import useCenter from '../../hooks/useCenter';
 
 export default function SearchSpace({ className }) {
@@ -64,7 +63,7 @@ export default function SearchSpace({ className }) {
     text: 'Lista',
   };
   const resetButton = {
-    action: resetSearchObject,
+    action: () => resetSearchObject(),
     icon: <ResetIcon className="mainNavigationButtonIcon" />,
     text: 'Resetear busqueda',
   };

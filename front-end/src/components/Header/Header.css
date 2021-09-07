@@ -1,9 +1,8 @@
 .header {
     grid-row: 1/2;
-    grid-column: 2/4;
+    grid-column: 2/5;
     order: 2;
     height: 14vh;
-
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -11,22 +10,17 @@
 }
 .header-logo {
     padding: 5px;
-    background-color: var(--black);
     display: block;
-    max-height: 50px;
-    max-width: 50px;
+    margin-left: 4vw;
+    margin-top: 1vh;
     flex: 0 0 auto;
 }
-
 .header-logo img {
-    max-width: 100%;
-    height: auto;
+    max-height: 9vh;
 }
 .header>nav{
     display:flex;
 }
-
-
 .header-links {
     align-self: stretch;
     flex: 1 1 auto;
@@ -37,5 +31,4 @@
 }
 .header-links>span>li {
     height: 13vh;
-
 }

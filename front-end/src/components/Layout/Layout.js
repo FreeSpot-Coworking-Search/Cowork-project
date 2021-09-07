@@ -13,23 +13,18 @@ import Routes from '../../routes/Routes';
 import Footer from '../../components/Footer/Footer';
 
 import TemplateMainSection from '../Templates/TemplateMainSection/TemplateMainSection';
+import Decoration from '../Decoration/Decoration';
 
 export default function Layout() {
   return (
     <section className="mainPage">
       <BackGroundLeft />
       <BackGroundRight />
-      <Header></Header>
-      {/* <div className="decorationLeft"></div>
-      <div className="decorationRight"></div> */}
-      <DecorationHeader className="decorationTop" />
+      <Decoration />
+      <Header />
       <Switch>
         <Routes />
-        <Route exact path="/template">
-          <TemplateMainSection className="mainSection" />
-        </Route>
       </Switch>
-      <Footer />
     </section>
   );
 }

@@ -30,8 +30,14 @@
     font-size: 2vh;
 }
 
-#imagePresentation-mainImage {
+#imagePresentation-mainImage-full {
     width: 10vw;
+    height: 11vh;
+    object-fit:cover;
+    border-radius: 10px;
+}
+#imagePresentation-mainImage-single {
+    width: 21vw;
     height: 11vh;
     object-fit:cover;
     border-radius: 10px;
@@ -63,6 +69,9 @@ input[type='file'] {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.fileUpload>img{
+    width: 2vw;
 }
 
 .photoUpload>input{

@@ -1,5 +1,4 @@
 export default function objectToQuerryParamsString(urlBase, object1, object2) {
-  console.log(urlBase);
   let finalString = urlBase;
   const arrayString = [];
   if (object1.length !== 0) {

@@ -1,4 +1,73 @@
+.centerDataList{
+    display:flex;
+    flex-direction: column;
+    list-style: none;
+    overflow-x: hidden;
+}
+.centerDataList::-webkit-scrollbar {
+    display: none;
+}
 .centerDataList>li:last-child{
     width: 100%;
     height: 100%;
+}
+
+.centerDataListName{
+    font-size: var(--presentationTittle);
+    text-align: center;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    background-color: rgba(var(--secondary), 0.4);
+    border-radius: 10px;
+}
+.centerDataListCity {
+    font-size: var(--presentationSubTittle);
+    text-align: left;
+    padding-bottom: 1vh;
+}
+.centerDataListSlide {
+    padding-bottom: 3vh;
+}
+
+.centerDataListSlide {
+    height: 23vh;
+    margin-bottom: 2vh;
+}
+
+.centerDataListInfo{
+    padding: 1vh 1vw;
+    background-color: rgba(var(--clear), 0.4);
+    border-radius: 10px;
+    margin-bottom: 1vh;
+}
+.centerDataListCity {
+    font-size: var(--presentationSubTittle);
+    text-align: start;
+    font-weight: bold;
+}
+
+.centerDataListElement {
+    display: flex;
+    font-size: var(--presentationText);
+    justify-content: space-between;
+}
+
+.centerDataListElement>img{
+    width: 2vw;
+}
+
+
+.centerDataListDescription {
+    font-size: var(--presentationText);
+    padding: 1vh;
+    text-align: justify;
+}
+
+.centerDataListDescription>p:first-child {
+    font-weight: bold;
+}
+
+.centerDataListDescription::first-letter,
+p::first-letter {
+    text-transform: uppercase;
 }

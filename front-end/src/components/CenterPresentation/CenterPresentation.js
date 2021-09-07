@@ -19,6 +19,7 @@ export default function CenterPresentation({
   loading,
   setCenter,
   className,
+  fullView,
 }) {
   const [visualization, setVisualization] = useState('data');
 
@@ -47,6 +48,7 @@ export default function CenterPresentation({
         id={center.info.id}
         imagenes={center.info.imagenes}
         setCenter={setCenter}
+        fullView={fullView}
       />
     ),
     incidents: <IncidentList incidents={center.espacios} />,

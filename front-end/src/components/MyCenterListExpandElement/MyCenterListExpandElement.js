@@ -11,35 +11,42 @@ import SpaceAlertDisplay from '../SpaceAlertDisplay/SpaceAlertDisplay';
 
 export default function MyCenterListExpandElement({ space, rangeDays }) {
   return (
-    <li>
+    <li key={space.id}>
       <Link
         className="myCenterListExpandElement"
         key={space.id}
         to={`/space/${space.id}`}
       >
-        <div>
+        <article>
           <h4>{space.nombre}</h4>
           <SpaceAlertDisplay space={space} />
-        </div>
+        </article>
         <ul>
           {rangeDays.map((day) => {
             const reservation = spaceOccupied(space, day);
             return reservation ? (
-              <li>
+              <li key={day}>
                 <div
-                  className={`reserveChart${
-                    new Date(reservation.fecha_fin).getTime() === day.getTime()
-                      ? ' reserveChartEnd'
+                  className={`reserveChart 
+                  ${
+                    new Date(reservation.fecha_fin).toLocaleDateString() ===
+                    day.toLocaleDateString()
+                      ? 'reserveChartEnd'
                       : ''
-                  }${
-                    new Date(reservation.fecha_inicio) === day
-                      ? ' reserveChartStart'
+                  }
+                  ${
+                    new Date(reservation.fecha_inicio).toLocaleDateString() ===
+                    day.toLocaleDateString()
+                      ? 'reserveChartStart'
                       : ''
-                  }`}
+                  }
+                  `}
                 ></div>
               </li>
             ) : (
-              <li></li>
+              <li key={day}>
+                <div className="noReserveChart"></div>
+              </li>
             );
           })}
         </ul>

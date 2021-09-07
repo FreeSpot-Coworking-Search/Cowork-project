@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react';
 import './StarsDisplay.css';
-import halfStar from '../../assets/stars/bxs-star-half.svg';
-import star from '../../assets/stars/bxs-star.svg';
-import noStar from '../../assets/stars/bx-star.svg';
+import { FullStartIcon, HalfStartIcon, EmptyStartIcon } from '../Icons/Icons';
 
 export default function StarsDisplay({ puntuation, className }) {
-  const [stars, setStars] = useState(Array(5).fill('bx-star.svg'));
+  const [stars, setStars] = useState(Array(5).fill(0));
 
   useEffect(() => analyzeStars(), [puntuation]);
 
@@ -18,17 +16,16 @@ export default function StarsDisplay({ puntuation, className }) {
     });
     setStars(newStars);
   };
+
+  const starsIcons = {
+    0: (index) => <EmptyStartIcon key={index} className="StarDisplayStar" />,
+    1: (index) => <HalfStartIcon key={index} className="StarDisplayStar" />,
+    2: (index) => <FullStartIcon key={index} className="StarDisplayStar" />,
+  };
   return (
     <div className={className}>
       {stars.map((imagen, index) => {
-        return (
-          <img
-            key={index}
-            src={imagen === 0 ? noStar : imagen === 1 ? halfStar : star}
-            className="StarDisplayStar"
-            alt="*"
-          ></img>
-        );
+        return starsIcons[imagen](index);
       })}
     </div>
   );

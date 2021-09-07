@@ -22,15 +22,10 @@ import cleanSearchObject from '../../helpers/cleanSearchObject';
 
 export default function SearchCenter({ className }) {
   const INITIAL_SEARCH_OBJECT = RetrieveQueryParams([
+    'texto',
     'tipo',
-    'aforo',
-    'dias_estancia',
-    'precio_maximo',
-    'precio_minimo',
     'fecha_entrada',
     'fecha_salida',
-    'puntuacion_minima',
-    'ordenado_por',
   ]);
   const {
     REACT_APP_API_LOCAL_SERVER_HOST: host,
@@ -43,7 +38,7 @@ export default function SearchCenter({ className }) {
 
   const [loading, results, searchObject, setSearchObject, resetSearchObject] =
     useSearchCenter(INITIAL_SEARCH_OBJECT);
-
+  console.log(searchObject);
   // ****************************
   // ** MAIN NAVIGATION CONFIG **
   // ****************************

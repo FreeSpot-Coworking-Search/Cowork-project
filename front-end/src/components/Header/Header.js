@@ -1,7 +1,7 @@
 import './Header.css';
 import { Link } from 'react-router-dom';
 
-import logo from '../../assets/logos/lincolnSquare.png';
+import logo from '../../assets/logos/COWORKproject.png';
 import Avatar from '../Avatar/Avatar';
 import ButtonList from '../ButtonList/ButtonList';
 
@@ -11,7 +11,7 @@ export default function Header() {
   const btnBehavior = [
     { text: 'Home', route: '/' },
     { text: 'Admin', action: buttonAction },
-    { text: 'My center', route: '/mycenter/3' },
+    { text: 'My center', route: '/mycenter/1' },
   ];
 
   return (

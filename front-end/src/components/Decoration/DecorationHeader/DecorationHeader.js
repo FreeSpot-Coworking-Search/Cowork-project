@@ -40,6 +40,18 @@ export default function DecorationHeader({ className }) {
             />
           </svg>
           <div className="decorationHeaderAdjustment"></div>
+          <svg
+            height="14vh"
+            className="decorationHeaderAvatar"
+            viewBox="0 0 176 96"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0 0H176V37C176 37 176 65 176 80.5C176 96 176 96 161 96C146 96 70 96 55 96C40 96 40.3521 90.4463 40 80.5C39.6479 70.5537 40 52.5 40 52.5C40 52.5 40 37 27.5 37C15 37 0 37 0 37V0Z"
+              fill="rgba(var(--dark)"
+            />
+          </svg>
         </>
       ) : (
         <div className="decorationHeaderAdjustmentSingleView"></div>

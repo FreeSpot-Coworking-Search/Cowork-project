@@ -1,9 +1,5 @@
 import './MyCenterListExpand.css';
 import spaceTypeToPlural from '../../helpers/spaceTypeToPlural';
-
-import infoIcon from '../../assets/icons/bx-info-circle.svg';
-import incidentsIcon from '../../assets/icons/bx-message-square-error.svg';
-import cleaningIcon from '../../assets/icons/carbon_clean.svg';
 import MyCenterListExpandElement from '../MyCenterListExpandElement/MyCenterListExpandElement';
 export default function MyCenterListExpand({
   className,

@@ -1,8 +1,5 @@
 .starsSelector > button{
     border: none;
     background-color: transparent;
-    width: 4vw;
-}
-.starsSelector > button > img {
-    width: 4vw;
+    width: clamp(1.5rem, 0.83rem + 0.25vw, 2rem) ;
 }

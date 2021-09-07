@@ -33,6 +33,9 @@ export default function SearchForm({
 
   return (
     <form onSubmit={onSubmitForm} className={className + ' searchForm'}>
+      <button>
+        <img src={filterIcon} alt="Icono de busqueda" />
+      </button>
       <fieldset className="searchFormFieldset">
         {type !== 'space' ? (
           <>
@@ -41,6 +44,7 @@ export default function SearchForm({
                 id="texto"
                 className="search-txt"
                 type="text"
+                placeholder="Filtra por palabras clave.."
                 value={newSearchObject.texto}
                 onChange={(event) =>
                   setNewSearchObject({
@@ -49,57 +53,53 @@ export default function SearchForm({
                   })
                 }
               />
-
-              <button className="search-btn">
-                <img src={filterIcon} alt="Icono de busqueda" />
-              </button>
             </div>
-            <StarsSelector
-              setNewSearchObject={setNewSearchObject}
-              newSearchObject={newSearchObject}
-            />
+            <label className="searchFormLabel">
+              <p>Valoración minima</p>
+              <StarsSelector
+                setNewSearchObject={setNewSearchObject}
+                newSearchObject={newSearchObject}
+              />
+            </label>
           </>
         ) : (
           ''
-        )}{' '}
-        <TypeSpaceSelector
-          setNewSearchObject={setNewSearchObject}
-          newSearchObject={newSearchObject}
-        />
-        <div className="inputNumbers">
-          <label className="searchFormLabel">
-            Aforo minimo
-            <InputNumber
-              min={0}
-              max={10}
-              prop="aforo"
-              setNewSearchObject={setNewSearchObject}
-              newSearchObject={newSearchObject}
-            />
-          </label>
-          <label className="searchFormLabel">
-            Dias de estancia
-            <InputNumber
-              min={0}
-              max={10}
-              prop="dias_estancia"
-              setNewSearchObject={setNewSearchObject}
-              newSearchObject={newSearchObject}
-            />
-          </label>
-        </div>
+        )}
+        <label className="searchFormLabel">
+          <p>Aforo minimo</p>
+          <InputNumber
+            min={0}
+            max={10}
+            prop="aforo"
+            setNewSearchObject={setNewSearchObject}
+            newSearchObject={newSearchObject}
+          />
+        </label>
+        <label className="searchFormLabel">
+          <p>Dias de estancia</p>
+          <InputNumber
+            min={0}
+            max={10}
+            prop="dias_estancia"
+            setNewSearchObject={setNewSearchObject}
+            newSearchObject={newSearchObject}
+          />
+        </label>
         {/* <DoubleRangeInput
           min={formLimits.minPrice}
           max={formLimits.maxPrice}
           setNewSearchObject={setNewSearchObject}
           newSearchObject={newSearchObject}
         /> */}
+        <TypeSpaceSelector
+          setNewSearchObject={setNewSearchObject}
+          newSearchObject={newSearchObject}
+        />
         <DateRange
           setNewSearchObject={setNewSearchObject}
           newSearchObject={newSearchObject}
         />
       </fieldset>
-      <button>Enviar</button>
     </form>
   );
 }

@@ -1,0 +1,40 @@
+.decorationBottom{
+    display: grid;
+    align-items: baseline;
+    grid-template-columns: 
+    auto auto auto;
+    grid-template-rows: 
+    4vh;
+}
+.decorationBottomAdjustment{
+    height: 2vh;
+    width: 100%;
+    grid-column: 1/4;
+    grid-row: 1/2;
+    order: -1;
+    align-self: end;
+    background:rgba(var(--dark));
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+}
+.decorationBottomAdjustmentSingleView{
+    height: 12vh;
+    width: 100%;
+    grid-column: 1/5;
+    grid-row: 1/2;
+    order: -1;
+    background:rgba(var(--dark));
+}
+.decorationBottomLogo{
+    grid-column: 1/2;
+    grid-row: 1/2;
+    height:14vh; 
+}
+.decorationBottomAvatar{
+    grid-column: 3/4;
+    grid-row: 1/2;
+    height:10.7vh; 
+    justify-self: right;
+}

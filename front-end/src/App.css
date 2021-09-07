@@ -1,5 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;500&display=swap');
 
 .generic-icon {
     fill: currentColor;
     color: rgba(var(--dark),0.8);
+}
+.star-icon {
+    fill: currentColor;
+    color: rgba(var(--secondary),0.8);
+}
+body{
+    font-family: 'Montserrat', sans-serif;
 }

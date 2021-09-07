@@ -16,6 +16,7 @@ export default function ImagePicker({
   setError,
   setImages,
   setCenter,
+  fullView,
 }) {
   const [input, setInput] = useState('');
 
@@ -120,7 +121,11 @@ export default function ImagePicker({
               <img
                 src={`${baseImageURL}${image.URL}`}
                 alt="space center image"
-                id="imagePresentation-mainImage"
+                id={
+                  fullView === false
+                    ? 'imagePresentation-mainImage-full'
+                    : 'imagePresentation-mainImage-single'
+                }
               />
               <figcaption className="imagePresentation-text">
                 {image.descripcion === 'undefined'

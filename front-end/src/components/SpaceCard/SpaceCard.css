@@ -1,6 +1,4 @@
-
-  
-  .spaceCard {
+    .spaceCard {
     margin-bottom:0.25rem;
     height: 100%;
     width: 100%;
@@ -8,22 +6,24 @@
     grid-template-columns: 1fr 1fr;
     gap: 2vw;
     color:rgba(var(--dark));
-    
+  }
+  .spaceCardRightColumnInfo>h4{
+    text-align: center;
+    font-size: var(--cardTittle);
+  }
+  .spaceCardLeftColumn
+  {  
+    height: 100%;
+    width: 100%;
+    display:flex;
   }
   .spaceCardRightColumn{
     display:flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-  }
-  .spaceCardRightColumn>h4{
-
-  }
-  .spaceCardLeftColumn
-  {  
-    height: 100%;
-     width: 100%;
-    display:flex;
+    background-color:rgba(var(--clear),0.4);
+    border-radius: 20px 0 0 20px;
   }
   
   .spaceCardRightColumnInfo
@@ -40,7 +40,6 @@
     margin-right: 0.3vw;
   }
   .spaceCardRightColumnInfo>ul{
-    background-color:rgba(var(--clear),0.4);
     padding: 1vh 1vw;
     border-radius: 20px;
     list-style: none;
@@ -55,7 +54,7 @@
     width: 2.5vh;
   }
   .imageSlide{
-    height: 15vh;
+    height: 17vh;
     width: 100%;
 
   }

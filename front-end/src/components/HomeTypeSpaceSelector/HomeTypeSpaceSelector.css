@@ -1,0 +1,21 @@
+.homeTypeSpaceSelector{
+    height: 100%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.homeTypeSpace{
+    border-radius: 40px;
+    background-color: rgba(var(--secondary),0.4);
+    border:none;
+    padding: 0.5vw;
+    font-size: var(--cardSubTittle);
+}
+.clickedHomeTypeSpace{
+    border-radius: 40px;
+    background-color: rgba(var(--secondary),0.9);
+    border:none;
+    padding: 0.5vw;
+    font-size: var(--cardSubTittle);
+}

@@ -13,6 +13,7 @@ export default function CenterPhotosPresentation({
   id,
   setCenter,
   className,
+  fullView,
 }) {
   const [message, setMessage] = useState(false);
   const [error, setError] = useState(false);
@@ -32,7 +33,7 @@ export default function CenterPhotosPresentation({
   //
   return (
     <>
-      <ImagePicker className="" {...props} />
+      <ImagePicker className="" {...props} fullView={fullView} />
       {error && <p className="error">{error}</p>}
       {message && <p className="message">{message}</p>}
     </>

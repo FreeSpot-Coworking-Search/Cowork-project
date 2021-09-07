@@ -4,38 +4,62 @@
     flex-direction: column;
     justify-content:stretch;
     align-items: center;
-    background-color: rgba(var(--primary),0.2);
+    background-color: rgba(var(--primary),0.4);
     border-radius: 30px;
     padding: 3vw;
     font-size: var(--cardText);
     text-align: center; 
-    overflow-x: hidden;
+    
   }
-  .searchForm > fieldset::-webkit-scrollbar {
-  display: none;
-  }  
+  
+  .searchForm>button{
+    border: none;
+    background-color: rgba(var(--secondary),0.6);
+    border-radius: 20px;
+    font-size: var(--presentationSubTittle);
+    padding-left: 1vw;
+    padding-right: 1vw;
+    margin-bottom: 1vh;
+    width: 100%;
+    min-height: 5vh;
+}
 
-
-.searchFormFieldset{
+.searchForm>fieldset{
     display: flex;
     flex-direction: column;
-    margin-left: 5vw;
-    margin-right: 5vw;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    width: 100%;
     border:none;
-    
     gap: 2vh;
+    overflow-x: hidden;
+    padding-top: 1vh;
+    background-color: rgba(var(--clear),0.6);
+    border-radius: 20px;
 }
-.searchFormFieldset input[type='checkbox']{
+.searchForm>fieldset::-webkit-scrollbar {
+    display: none;
+    }  
+.searchForm>fieldset input[type='checkbox']{
     text-align:start;
 }
-
 .searchFormLabel{
+    display: flex;
     color:rgba(var(--dark));
-    display:flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
     gap: 1vh;
     align-items: center;
-    font-size: var(--presentationSubTittle);
+    font-size: var(--presentationText);
+    background-color: rgba(var(--primary),0.6) ;
+    min-height: 5vh;
+    border-radius: 30px;
+}
+.searchFormLabel>p{
+    margin-left: 2vw;
+}
+.searchFormLabel>*:last-child{
+    margin-right: 2vw;
 }
 .search{
     background: rgba(var(--primary),0.6) ;
@@ -43,15 +67,6 @@
     border-radius: 40px;
 }
 
-.inputNumbers{
-    display:flex;
-    justify-content: space-around;
-}
-.inputNumbers > label{
-    background-color: rgba(var(--primary),0.6) ;
-    padding:1vh;
-    border-radius: 30px;
-}
 .search:hover {
     background: rgba(var(--primary),0.4) ;
 }
