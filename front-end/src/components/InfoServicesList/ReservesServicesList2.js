@@ -2,16 +2,17 @@ import { Fragment } from 'react';
 
 import ItemList from '../ItemList/ItemList';
 
-export default function InfoServicesList({ spaceData }) {
+export default function InfoServicesList({ servicesArray, uniqueId }) {
+    console.log('se ejecuta');
     const servicesGroup = [
         {
             name: 'Servicios incluidos',
-            data: spaceData?.servicios,
+            data: servicesArray?.filter((service) => service.precio === null),
             type: 'standar',
         },
         {
             name: 'Servicios extra',
-            data: spaceData?.servicios_extra,
+            data: servicesArray?.filter((service) => service.precio !== null),
             type: 'standar',
         },
     ];
@@ -19,7 +20,7 @@ export default function InfoServicesList({ spaceData }) {
     return (
         <Fragment>
             {servicesGroup.map((list) => (
-                <ItemList key={list.name} listData={list} />
+                <ItemList key={`${list.name}-${uniqueId}`} listData={list} />
             ))}
         </Fragment>
     );

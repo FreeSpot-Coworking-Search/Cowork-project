@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 
-import ServicesCard from '../ServicesCard/ServicesCard';
+import ItemList from '../ItemList/ItemList';
 
 export default function ServicesList({
     spaceData,
@@ -38,7 +38,7 @@ export default function ServicesList({
     return (
         <Fragment>
             {servicesGroup.map((list) => (
-                <ServicesCard
+                <ItemList
                     key={list.name}
                     listData={list}
                     checkInputAction={addService}

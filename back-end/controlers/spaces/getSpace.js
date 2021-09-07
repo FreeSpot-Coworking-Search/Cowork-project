@@ -95,9 +95,7 @@ const getSpace = async (req, res, next) => {
 
 		console.log('Mostandro espacio requerido, Id:', id);
 		res.status(200);
-		res.send({
-			space: results,
-		});
+		res.send(results);
 	} catch (error) {
 		next(error);
 	}

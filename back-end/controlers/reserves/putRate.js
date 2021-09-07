@@ -34,10 +34,14 @@ const putRate = async (req, res, next) => {
 			throw error;
 		}
 
-		await updateRegistration('reservas', id, rate);
-
-		console.log('Reserva puntuada, id reserva:', id);
-		next();
+		const response = await updateRegistration('reservas', id, rate);
+		if (typeof response !== 'boolean' && response !== true) {
+			const error = new Error('Hubo un error al realizar tu puntuación.');
+			error.httpStatus = 400;
+			throw error;
+		}
+		res.httpStatus = 200;
+		res.send(response);
 	} catch (error) {
 		next(error);
 	}

@@ -1,8 +1,8 @@
-.scoreList{
+.scoreList {
     padding-left: 1.3vw;
     padding-right: 1.3vw;
 }
-.scoreList>ul{
+.scoreList > ul {
     display: flex;
     flex-direction: column;
     list-style: none;
@@ -10,11 +10,11 @@
     overflow-x: hidden;
     height: 80%;
 }
-.scoreList>ul::-webkit-scrollbar {
+.scoreList > ul::-webkit-scrollbar {
     display: none;
 }
-.scoreList{
-    display:flex;
+.scoreList {
+    display: flex;
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;

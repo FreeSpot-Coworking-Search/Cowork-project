@@ -25,6 +25,7 @@ const userOwnsReserve = async (req, res, next) => {
 			fecha_fin: result[0].fecha_fin,
 			puntuacion_usuario: result[0].puntuacion_usuario,
 			pagado: result[0].pagado,
+			id_espacio: result[0].id_espacio,
 		};
 
 		req.infoReserve = infoReserve;

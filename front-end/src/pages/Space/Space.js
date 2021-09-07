@@ -37,7 +37,7 @@ export default function Space({ className }) {
     const [fullView] = useFullView();
     const query = RetrieveQueryParams(['fecha_entrada', 'fecha_salida']);
     const [spaceData, setSpace, loading] = useFetch('spaces', spaceId);
-    const owner = spaceData.owner;
+    const owner = spaceData?.owner;
     const [visualization, setVisualization] = useState('space');
     const [reservation, setReservation] = useState(query);
     const { open, handleClickOpen, handleClose } = useDialog();

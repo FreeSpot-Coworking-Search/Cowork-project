@@ -3,8 +3,21 @@ const { getRegistrations } = require('../../helpers/dbHelpers');
 const getReservation = async (req, res, next) => {
 	try {
 		const { id } = req.query;
+		const { idUser: id_usuario } = req.userAuth;
+		const url = req.originalUrl;
 
-		const reserves = await getRegistrations('reservas', { id });
+		let searchObject = {};
+		if (url.includes('allreserves')) {
+			searchObject = {
+				id_usuario,
+			};
+		} else {
+			searchObject = {
+				id,
+			};
+		}
+
+		const reserves = await getRegistrations('reservas', searchObject);
 
 		let result = [];
 		for (const reservation of reserves) {
@@ -36,7 +49,7 @@ const getReservation = async (req, res, next) => {
 			});
 		}
 
-		console.log('Mostrando reserva requerida id:', id);
+		console.log('Mostrando reservas requeridas:', searchObject);
 		res.httpStatus = 200;
 		res.send(result);
 	} catch (error) {
