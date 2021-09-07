@@ -50,15 +50,11 @@ const routes = [
         Page: Admin,
         typeRequired: 'administrador',
     },
-
-    // EJEMPLO RUTA PRIVADA
     {
-        path: '/mycenter/:idAdmin',
+        path: '/mycenter/',
         Page: MyCenter,
         typeRequired: 'administrador',
     },
-    // EJEMPLO RUTA PRIVADA
-
     {
         path: '/search/space',
         Page: SearchSpaces,
