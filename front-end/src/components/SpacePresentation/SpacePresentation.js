@@ -12,71 +12,76 @@ import servicesIcon from '../../assets/icons/bxs-drink.svg';
 import PhotosPresentation from '../PhotosPresentation/PhotosPresentation';
 
 const ModificationFormServices = lazy(() =>
-  import('../Formularies/ModificationFormServices')
+    import('../Formularies/ModificationFormServices')
 );
 const ModificationFormSpace = lazy(() =>
-  import('../Formularies/ModificationFormSpace')
+    import('../Formularies/ModificationFormSpace')
 );
 
 export default function SpacePresentation({
-  spaceData,
-  className,
-  reservation,
-  setReservation,
-  setSpace,
+    spaceData,
+    className,
+    reservation,
+    setReservation,
+    setSpace,
 }) {
-  const [visualization, setVisualization] = useState('data');
+    const [visualization, setVisualization] = useState('data');
 
-  const visualizationsButtons = useMemo(() => {
-    return spaceData.owner
-      ? [
-          {
-            value: 'data',
-            icon: infoIcon,
-            text: 'Visualizar datos',
-          },
-          {
-            value: 'edit',
-            icon: editIcon,
-            text: 'Modificar datos',
-          },
-          {
-            value: 'photo',
-            icon: photoIcon,
-            text: 'Modificar fotos',
-          },
-          {
-            value: 'services',
-            icon: servicesIcon,
-            text: 'Modificar servicios',
-          },
-        ]
-      : [];
-  }, [spaceData]);
+    const visualizationsButtons = useMemo(() => {
+        return spaceData.owner
+            ? [
+                  {
+                      value: 'data',
+                      icon: infoIcon,
+                      text: 'Visualizar datos',
+                  },
+                  {
+                      value: 'edit',
+                      icon: editIcon,
+                      text: 'Modificar datos',
+                  },
+                  {
+                      value: 'photo',
+                      icon: photoIcon,
+                      text: 'Modificar fotos',
+                  },
+                  {
+                      value: 'services',
+                      icon: servicesIcon,
+                      text: 'Modificar servicios',
+                  },
+              ]
+            : [];
+    }, [spaceData]);
 
-  const visualizations = {
-    data: (
-      <SpaceData
-        spaceData={spaceData}
-        reservation={reservation}
-        setReservation={setReservation}
-      />
-    ),
-    edit: <ModificationFormSpace spaceData={spaceData} setSpace={setSpace} />,
-    photo: <PhotosPresentation data={spaceData} setSpace={setSpace} />,
-    services: (
-      <ModificationFormServices spaceData={spaceData} setSpace={setSpace} />
-    ),
-  };
+    const visualizations = {
+        data: (
+            <SpaceData
+                spaceData={spaceData}
+                reservation={reservation}
+                setReservation={setReservation}
+            />
+        ),
+        edit: (
+            <ModificationFormSpace spaceData={spaceData} setSpace={setSpace} />
+        ),
+        photo: <PhotosPresentation data={spaceData} setSpace={setSpace} />,
+        services: (
+            <ModificationFormServices
+                spaceData={spaceData}
+                setSpace={setSpace}
+            />
+        ),
+    };
 
-  return (
-    <article className={className + ' presentation'}>
-      <DisplaySelector
-        visualizationsButtons={visualizationsButtons}
-        setVisualization={setVisualization}
-        visualization={visualization}
-      />
-      {visualizations[visualization]}
-    </article>
-  );
+    return (
+        <article className={className + ' presentation'}>
+            <DisplaySelector
+                visualizationsButtons={visualizationsButtons}
+                setVisualization={setVisualization}
+                visualization={visualization}
+            />
+            {visualizations[visualization]}
+        </article>
+    );
 }
