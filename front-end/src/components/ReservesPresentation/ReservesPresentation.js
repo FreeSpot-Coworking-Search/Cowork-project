@@ -18,6 +18,8 @@ export default function ReservesPresentation({
     className,
     reservations,
     fullView,
+    setVisualization,
+    setRefReservation,
 }) {
     const { open, handleClickOpen, handleClose } = useDialog();
     const refDialog = useRef({});
@@ -50,6 +52,9 @@ export default function ReservesPresentation({
                     fullView={fullView}
                     refDialog={refDialog}
                     handleClickOpen={handleClickOpen}
+                    finished={true}
+                    setVisualization={setVisualization}
+                    setRefReservation={setRefReservation}
                 />
             </section>
 

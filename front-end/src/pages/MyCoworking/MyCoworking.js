@@ -21,6 +21,9 @@ const ResevesCalendar = lazy(() =>
 const IncidenceForm = lazy(() =>
     import('../../components/Formularies/IncidenceForm')
 );
+const ReservesScoreForm = lazy(() =>
+    import('../../components/Formularies/ReservesScoreForm')
+);
 const ScoreList = lazy(() =>
     import('../../components/ScoreList/ScoreListUser')
 );
@@ -29,12 +32,13 @@ export default function MyCenter({ className }) {
     const [fullView] = useFullView();
     const [visualization, setVisualization] = useState('reserves');
 
+    //const refReservation = useRef({});
+    const [refReservation, setRefReservation] = useState({})
+
     const [reservations, setReservations, loading] = useFetch(
         'reserves/allreserves/',
         'foo'
     );
-    console.log(reservations);
-
     // ****************************
     // ** MAIN NAVIGATION CONFIG **
     // ****************************
@@ -66,6 +70,8 @@ export default function MyCenter({ className }) {
     let Links = [];
     switch (visualization) {
         case 'reserves':
+            if (fullView) Links = [listBtn, incidenceBtn, scoreBtn];
+            else
             Links = [calendarBtn, incidenceBtn, scoreBtn];
             break;
 
@@ -85,6 +91,8 @@ export default function MyCenter({ className }) {
                     className="mainSectionLeftArticle"
                     reservations={reservations}
                     fullView={fullView}
+                    setVisualization={setVisualization}
+                    setRefReservation={setRefReservation}
                 />
 
                 <MainNavigation
@@ -120,6 +128,8 @@ export default function MyCenter({ className }) {
                     className="mainSectionLeftArticle"
                     reservations={reservations}
                     fullView={fullView}
+                    setVisualization={setVisualization}
+                    setRefReservation={setRefReservation}
                 />
 
                 <MainNavigation
@@ -141,6 +151,8 @@ export default function MyCenter({ className }) {
                     className="mainSectionLeftArticle"
                     reservations={reservations}
                     fullView={fullView}
+                    setVisualization={setVisualization}
+                    setRefReservation={setRefReservation}
                 />
 
                 <MainNavigation
@@ -155,15 +167,41 @@ export default function MyCenter({ className }) {
                 </CircularSuspense>
             </div>
         ),
+        newScore: (
+            <div className={className + ' mainSectionFullView'}>
+                <ReservesPresentation
+                    className="mainSectionLeftArticle"
+                    reservations={reservations}
+                    fullView={fullView}
+                    setVisualization={setVisualization}
+                    setRefReservation={setRefReservation}
+                />
+
+                <MainNavigation
+                    links={Links}
+                    className="mainSectionNavigation"
+                ></MainNavigation>
+                <CircularSuspense className="mainSectionRightArticle">
+                    <ReservesScoreForm
+                            className="mainSectionRightArticle"
+                            reservations={reservations}
+                            setReservations={setReservations}
+                            refReservation={refReservation}
+                    />
+                </CircularSuspense>
+            </div>
+        ),
     };
 
     const singleViewJSX = {
         reserves: (
             <ReservesPresentation
-                className="mainSectionLeftArticle"
-                reservations={reservations}
-                fullView={fullView}
-            />
+                    className="mainSectionLeftArticle"
+                    reservations={reservations}
+                    fullView={fullView}
+                    setVisualization={setVisualization}
+                    setRefReservation={setRefReservation}
+                />
         ),
         calendar: (
             <CircularSuspense className="mainSectionLeftArticle">
@@ -190,6 +228,16 @@ export default function MyCenter({ className }) {
                 />
             </CircularSuspense>
         ),
+        newScore: (
+            <CircularSuspense className="mainSectionLeftArticle">
+                <ReservesScoreForm
+                            className="mainSectionLeftArticle"
+                            reservations={reservations}
+                            setReservations={setReservations}
+                            refReservation={refReservation}
+                    />
+            </CircularSuspense>
+        )
     };
 
     const responsiveChangeJSX = {

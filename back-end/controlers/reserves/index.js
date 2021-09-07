@@ -16,14 +16,7 @@ const userOwnsReserve = require('../../middlewares/reserves/userOwnsReserve');
 router.get('/allreserves/', userIsLogin, getAllReserves);
 router.get('/', entityExists, userIsLogin, userOwnsReserve, getReserves);
 router.post('/', userIsLogin, postReserve);
-router.put(
-	'/rate/',
-	entityExists,
-	userIsLogin,
-	userOwnsReserve,
-	putRate,
-	getReserves
-);
+router.put('/rate/', entityExists, userIsLogin, userOwnsReserve, putRate);
 router.put(
 	'/cleaning/',
 	entityExists,

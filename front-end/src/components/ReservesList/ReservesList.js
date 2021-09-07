@@ -12,6 +12,9 @@ export default function ReservesList({
     refDialog,
     handleClickOpen,
     active,
+    finished,
+    setVisualization,
+    setRefReservation,
 }) {
     return (
         <>
@@ -48,7 +51,10 @@ export default function ReservesList({
                                             btnBehavior={getBtnBehavior(
                                                 reservation,
                                                 refDialog,
-                                                handleClickOpen
+                                                handleClickOpen,
+                                                finished,
+                                                setVisualization,
+                                                setRefReservation
                                             )}
                                             cssStyle={
                                                 fullView

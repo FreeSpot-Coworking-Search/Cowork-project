@@ -1,10 +1,4 @@
-import { toFormDate, isBetween } from '../helpers/dateHelper';
-
-import axios from 'axios';
-const {
-    REACT_APP_API_LOCAL_SERVER_HOST: host,
-    REACT_APP_API_LOCAL_SERVER_PORT: port,
-} = process.env;
+import { toFormDate } from '../helpers/dateHelper';
 
 function getReservesList(reservation) {
     return {
@@ -33,23 +27,44 @@ function getIncidenceList(incidence) {
     };
 }
 
-function getBtnBehavior(reservation, refDialog, handleClickOpen) {
+function getBtnBehavior(
+    reservation,
+    refDialog,
+    handleClickOpen,
+    finished,
+    setVisualization,
+    setRefReservation
+) {
     return [
         {
-            text: '$',
-            action: () => {
-                reservation.pagado === 1
-                    ? (refDialog.current = {
-                          reservation: reservation,
-                          dialog: 'paymentDialogPagado',
-                      })
-                    : (refDialog.current = {
-                          reservation: reservation,
-                          dialog: 'paymentDialogPendiente',
-                      });
-                handleClickOpen();
-            },
-            type: reservation?.pagado === 0 ? 'alert' : 'main',
+            text: finished ? '★' : '$',
+            action: finished
+                ? () => {
+                      setVisualization('newScore');
+                      /* refReservation.current = {
+                          ...reservation,
+                      }; */
+                      setRefReservation({ ...reservation });
+                  }
+                : () => {
+                      reservation.pagado === 1
+                          ? (refDialog.current = {
+                                reservation: reservation,
+                                dialog: 'paymentDialogPagado',
+                            })
+                          : (refDialog.current = {
+                                reservation: reservation,
+                                dialog: 'paymentDialogPendiente',
+                            });
+                      handleClickOpen();
+                  },
+            type: finished
+                ? reservation?.puntuacion_usuario !== null
+                    ? 'main'
+                    : 'alert'
+                : reservation?.pagado === 1
+                ? 'main'
+                : 'alert',
         },
         {
             text: '!',
