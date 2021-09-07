@@ -18,14 +18,6 @@
     border-radius: 40px;
 }
 
-.reservesPresentation-info-fullView,
-.reservesPresentation-info-singleView {
-    background-color: rgba(var(--clear), 1);
-    border-radius: 20px;
-    padding: 1vw;
-    margin-bottom: clamp(5px, 1vh, 10px);
-}
-
 .reservesPresentation-info-fullView {
     display: flex;
     flex-direction: row;

@@ -6,15 +6,23 @@ import useFetch from '../../hooks/useFetch';
 
 import MainNavigation from '../../components/MainNavigation/MainNavigation';
 import ReservesPresentation from '../../components/ReservesPresentation/ReservesPresentation';
+import CircularSuspense from '../../components/CircularSuspense/CircularSuspense';
 
 import {
     ListIcon,
-    CleaningIcon,
+    CalendarIcon,
     IncidentsIcon,
+    StarIcon,
 } from '../../components/Icons/Icons';
 
+const ResevesCalendar = lazy(() =>
+    import('../../components/ReservesCalendar/ReservesCalendar')
+);
 const IncidenceForm = lazy(() =>
     import('../../components/Formularies/IncidenceForm')
+);
+const ScoreList = lazy(() =>
+    import('../../components/ScoreList/ScoreListUser')
 );
 
 export default function MyCenter({ className }) {
@@ -32,37 +40,37 @@ export default function MyCenter({ className }) {
     // ****************************
 
     const listBtn = {
-        action: () => setVisualization('space'),
-        icon: <ListIcon className="mainNavigationButtonIcon" />,
-        text: 'Ver espacio',
-    };
-
-    const spaceBtn = {
         action: () => setVisualization('reserves'),
         icon: <ListIcon className="mainNavigationButtonIcon" />,
         text: 'Ver reservas',
     };
 
+    const calendarBtn = {
+        action: () => setVisualization('calendar'),
+        icon: <CalendarIcon className="mainNavigationButtonIcon" />,
+        text: 'Ver calendario',
+    };
+
     const incidenceBtn = {
         action: () => setVisualization('incidence'),
         icon: <IncidentsIcon className="mainNavigationButtonIcon" />,
-        text: 'Nueva incidencia',
+        text: 'Nueva incidencia / limpieza',
     };
 
-    const cleaningBtn = {
-        action: () => alert('cambialo!!'),
-        icon: <CleaningIcon className="mainNavigationButtonIcon" />,
-        text: 'Solicitar limpieza',
+    const scoreBtn = {
+        action: () => setVisualization('scores'),
+        icon: <StarIcon className="mainNavigationButtonIcon" />,
+        text: 'Mis puntuaciones',
     };
 
     let Links = [];
     switch (visualization) {
-        case 'space':
-            Links = [spaceBtn, cleaningBtn, incidenceBtn];
+        case 'reserves':
+            Links = [calendarBtn, incidenceBtn, scoreBtn];
             break;
 
         default:
-            Links = [listBtn, cleaningBtn, incidenceBtn];
+            Links = [listBtn, incidenceBtn, scoreBtn];
             break;
     }
 
@@ -83,15 +91,18 @@ export default function MyCenter({ className }) {
                     links={Links}
                     className="mainSectionNavigation"
                 ></MainNavigation>
-                <div className="mainSectionRightArticle Borrame">
-                    <p>space</p>
-                </div>
+                <CircularSuspense className="mainSectionRightArticle">
+                    <ResevesCalendar
+                        className="mainSectionRightArticle"
+                        reservations={reservations}
+                    />
+                </CircularSuspense>
             </div>
         ),
-        space: (
+        calendar: (
             <div className={className + ' mainSectionFullView'}>
                 <div className="mainSectionLeftArticle Borrame">
-                    <p>1</p>
+                    <p></p>
                 </div>
 
                 <MainNavigation
@@ -115,11 +126,33 @@ export default function MyCenter({ className }) {
                     links={Links}
                     className="mainSectionNavigation"
                 ></MainNavigation>
-                <IncidenceForm
-                    className="mainSectionRightArticle"
+                <CircularSuspense className="mainSectionRightArticle">
+                    <IncidenceForm
+                        className="mainSectionRightArticle"
+                        reservations={reservations}
+                        setReservations={setReservations}
+                    />
+                </CircularSuspense>
+            </div>
+        ),
+        scores: (
+            <div className={className + ' mainSectionFullView'}>
+                <ReservesPresentation
+                    className="mainSectionLeftArticle"
                     reservations={reservations}
-                    setReservations={setReservations}
+                    fullView={fullView}
                 />
+
+                <MainNavigation
+                    links={Links}
+                    className="mainSectionNavigation"
+                ></MainNavigation>
+                <CircularSuspense className="mainSectionRightArticle">
+                    <ScoreList
+                        className="mainSectionRightArticle"
+                        reservations={reservations}
+                    />
+                </CircularSuspense>
             </div>
         ),
     };
@@ -132,17 +165,30 @@ export default function MyCenter({ className }) {
                 fullView={fullView}
             />
         ),
-        space: (
-            <div className="mainSectionLeftArticle Borrame">
-                <p>space</p>
-            </div>
+        calendar: (
+            <CircularSuspense className="mainSectionLeftArticle">
+                <ResevesCalendar
+                    className="mainSectionLeftArticle"
+                    reservations={reservations}
+                />
+            </CircularSuspense>
         ),
         incidence: (
-            <IncidenceForm
-                className="mainSectionLeftArticle"
-                reservations={reservations}
-                setReservations={setReservations}
-            />
+            <CircularSuspense className="mainSectionLeftArticle">
+                <IncidenceForm
+                    className="mainSectionLeftArticle"
+                    reservations={reservations}
+                    setReservations={setReservations}
+                />
+            </CircularSuspense>
+        ),
+        scores: (
+            <CircularSuspense className="mainSectionLeftArticle">
+                <ScoreList
+                    className="mainSectionLeftArticle"
+                    reservations={reservations}
+                />
+            </CircularSuspense>
         ),
     };
 
