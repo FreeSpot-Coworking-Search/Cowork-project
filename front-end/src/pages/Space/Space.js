@@ -41,7 +41,6 @@ export default function Space({ className }) {
     const [visualization, setVisualization] = useState('space');
     const [reservation, setReservation] = useState(query);
     const { open, handleClickOpen, handleClose } = useDialog();
-    console.log(spaceData);
 
     // ****************************
     // ** MAIN NAVIGATION CONFIG **

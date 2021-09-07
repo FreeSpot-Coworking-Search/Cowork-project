@@ -20,7 +20,6 @@ export default function ImagePicker({
     const [input, setInput] = useState('');
 
     async function deleteImage(imageId) {
-        console.log(imageId);
         try {
             setMessage('Eliminando imagen');
 

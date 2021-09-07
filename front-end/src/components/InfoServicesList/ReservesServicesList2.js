@@ -3,7 +3,6 @@ import { Fragment } from 'react';
 import ItemList from '../ItemList/ItemList';
 
 export default function InfoServicesList({ servicesArray, uniqueId }) {
-    console.log('se ejecuta');
     const servicesGroup = [
         {
             name: 'Servicios incluidos',

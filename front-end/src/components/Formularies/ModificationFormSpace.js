@@ -21,10 +21,7 @@ export default function ModificationFormSpace({
     spaceData,
     setSpace,
 }) {
-    let history = useHistory();
     const { open, handleClickOpen, handleClose } = useDialog();
-
-    console.log(spaceData);
 
     const INITIAL_FORM_INFO = useMemo(() => {
         return {

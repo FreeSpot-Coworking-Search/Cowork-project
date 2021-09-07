@@ -70,8 +70,6 @@ export default function ReservesScoreForm({
 
             setMessage('Enviando solicitud.');
             const route = `${host}:${port}/api/reserves/rate/?id=${reservations[index].id}`;
-            console.log(feedBack.puntuacion_usuario);
-            console.log(feedBack.comentario_usuario);
 
             const response = await axios.put(route, {
                 puntuacion_usuario: Number(feedBack.puntuacion_usuario),

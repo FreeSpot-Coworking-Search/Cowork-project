@@ -42,8 +42,6 @@ export default function ModificationFormSpace({ className, spaceData }) {
                 servicios_extra: getExtraServices(services),
             };
 
-            console.log(updateObject);
-
             const response = await axios.put(route, updateObject);
             if (response.status === 200) {
                 setMessage('Datos del espacio modificados.');
