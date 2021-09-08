@@ -1,0 +1,28 @@
+.reservesCalendar {
+    color: rgba(var(--dark));
+    background-color: rgba(var(--primary), 0.4);
+    border-radius: 20px;
+    padding: 2vw;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    gap: clamp(10px, 2vh, 20px);
+}
+
+.reservesCalendar-presentationName {
+    font-size: var(--presentationTittle);
+    text-align: center;
+    margin-bottom: 1vh;
+    background-color: rgba(var(--secondary), 0.6);
+    border-radius: 40px;
+}
+
+.dateRange {
+    text-align: center;
+    background-color: rgba(var(--clear), 0.6);
+    border-radius: 20px;
+    padding: 1vh 5vw;
+    margin-bottom: 1vh;
+    overflow: auto;
+}

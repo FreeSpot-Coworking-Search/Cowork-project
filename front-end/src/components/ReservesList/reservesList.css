@@ -1,0 +1,34 @@
+.reservesList-buttonList {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.reservesList-buttonList-singleView {
+    flex-direction: row;
+    gap: 0px;
+}
+
+.reservesList-fullView,
+.reservesList-singleView {
+    background-color: rgba(var(--clear), 1);
+    border-radius: 20px;
+    padding: 1vw;
+    margin-bottom: clamp(5px, 1vh, 10px);
+}
+
+.reservesList-fullView {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.reservesList-information {
+    flex: 1 0 200px;
+}
+
+.reservesList-information > p {
+    padding: 1vh 1vw;
+}
