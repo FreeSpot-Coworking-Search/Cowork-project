@@ -36,12 +36,6 @@ export default function Center({ className }) {
   let singleViewJSX = {};
 
   if (!loading) {
-    const genericButton = {
-      action: () =>
-        setVisualization(visualization === 3 ? 1 : visualization + 1),
-      icon: locationIcon,
-      text: 'Mensaje ayuda',
-    };
     const scoresButton = {
       action: () => setVisualization('scores'),
       icon: <ScoresIcon className="mainNavigationButtonIcon" />,

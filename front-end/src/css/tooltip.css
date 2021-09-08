@@ -6,14 +6,11 @@
 
 .tooltip .tooltiptext {
     visibility: hidden;
-    background-color: rgba(var(--primary));
     color: rgba(var(--clear));
     text-align: center;
-    padding: 1vh 1vw;
-    border-radius: 6px;
     position: absolute;
-    bottom: -4vh;
-    right: 0vw;
+    bottom: -2vh;
+    right: 1vw;
   }
   
 .tooltip:hover .tooltiptext {

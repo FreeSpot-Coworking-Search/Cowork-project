@@ -15,7 +15,7 @@
   }
   .myCenterSelector nav>a{
   color: rgba(var(--dark));
-  font-size: var(--presentationSubTittle);
+  font-size: var(--cardTittle);
   margin: 1vw; 
   text-align: center;
   }
@@ -24,12 +24,13 @@
 .myCenterSelector ul {
   position: absolute;
   top: 10vh;
-  left: 3vw;
+  left: 1vw;
   opacity: 0;
   background: rgba(var(--clear),0.9);
   border-radius: 0 0 5px 5px;
   transition: opacity .20s ease .1s;
   list-style: none;
+  font-size: var(--cardText);
 }
 
 
@@ -42,7 +43,7 @@
 }
 
 .myCenterSelector nav:hover > ul li {
-  height: 3vh;
+  height: 4vh;
   min-width: 100%;
   overflow: visible;
   padding: 0;

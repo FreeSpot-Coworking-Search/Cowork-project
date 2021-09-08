@@ -12,5 +12,16 @@
     font-size:0.8rem;
     border-radius:30px;
 }
+.miniNotificationBubble { 
+    position:absolute; 
+    top: -0.5rem;
+    right:0.1rem;
+    padding: 0.4rem; 
+    background-color:rgba(var(--secondary),1);
+    color:white; 
+    font-weight:bold; 
+    font-size:0.6rem;
+    border-radius:30px;
+}
 
 

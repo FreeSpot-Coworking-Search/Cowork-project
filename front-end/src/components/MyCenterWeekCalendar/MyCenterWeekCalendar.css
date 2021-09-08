@@ -27,13 +27,10 @@ cursor: pointer;
 .monthDisplay{
     position: absolute;
     top: 10%;
-    background-color: rgba(var(--clear),0.5);
-    padding: 1vh 1vw;
-    border-radius: 10px;
 }
 
 .monthDisplayOnly{
-right: 50%;
+right: 40%;
 }
 .monthDisplayOne{
 right: 10%;

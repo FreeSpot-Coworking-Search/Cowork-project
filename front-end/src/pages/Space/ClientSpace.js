@@ -1,7 +1,11 @@
 import { Dialog } from '@material-ui/core';
 import { useState, lazy } from 'react';
 import CircularSuspense from '../../components/CircularSuspense/CircularSuspense';
-import { CalendarIcon } from '../../components/Icons/Icons';
+import {
+  CalendarIcon,
+  CheckIcon,
+  InfoIcon,
+} from '../../components/Icons/Icons';
 import MainNavigation from '../../components/MainNavigation/MainNavigation';
 import SpacePresentation from '../../components/SpacePresentation/SpacePresentation';
 import RetrieveQueryParams from '../../helpers/RetriveQueryParams';
@@ -28,13 +32,18 @@ export default function ClientSpace({ spaceData, setSpace, className }) {
 
   const submitButton = {
     action: handleClickOpen,
-    icon: <CalendarIcon className="mainNavigationButtonIcon" />,
+    icon: <CheckIcon className="mainNavigationButtonIcon" />,
     text: 'Reservar',
   };
 
   const calendarButton = {
     action: () => setVisualization('reserve'),
     icon: <CalendarIcon className="mainNavigationButtonIcon" />,
+    text: 'Haz tu reserva',
+  };
+  const infoButton = {
+    action: () => setVisualization('info'),
+    icon: <InfoIcon className="mainNavigationButtonIcon" />,
     text: 'Haz tu reserva',
   };
   let Links = [];
@@ -46,7 +55,7 @@ export default function ClientSpace({ spaceData, setSpace, className }) {
 
     case 'reserve':
       if (fullView) Links = [submitButton];
-      else Links = [submitButton];
+      else Links = [infoButton, submitButton];
       break;
     default:
       break;

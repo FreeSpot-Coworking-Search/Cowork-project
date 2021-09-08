@@ -5,7 +5,6 @@ import ImageSlide from '../ImageSlide/ImageSlide';
 import personIcon from '../../assets/icons/bxs-user.svg';
 import priceIcon from '../../assets/icons/bxs-dollar-circle.svg';
 import calendarIcon from '../../assets/icons/bxs-calendar.svg';
-import SpaceAlertDisplay from '../SpaceAlertDisplay/SpaceAlertDisplay';
 import InfoServicesList from '../InfoServicesList/InfoServicesList';
 
 export function SpaceData({ spaceData, reservation, setReservation }) {
@@ -18,10 +17,6 @@ export function SpaceData({ spaceData, reservation, setReservation }) {
           tag={'presentationSpace'}
           className="presentationSlide"
         />
-        <article>
-          {spaceData?.owner && <SpaceAlertDisplay space={spaceData} />}
-        </article>
-
         <article>
           <ul className="spaceData-list">
             <li>

@@ -1,0 +1,38 @@
+.incidentList {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    overflow-x: hidden;
+}
+
+.incident {
+    background-color: rgba(var(--clear),0.4);
+    border-radius: 20px;
+    padding: 1vh 1vw;
+    display: flex;
+    flex-direction: column;
+}
+.incident>p:first-child{
+    align-self: flex-end;
+    font-weight: bold;
+    font-size: var(--presentationText);
+    margin-bottom: 0.25vh
+}
+.incident>p:nth-child(2){
+    font-size: var(--presentationText);
+}
+.incident>p:nth-child(3){
+    align-self: flex-end;
+    font-size: var(--cardText);
+    margin-bottom: 0.5vh;
+}
+.incident>p:nth-child(5){
+    align-self: flex-end;
+    font-size: var(--cardText);
+    font-weight: bold;
+    margin-bottom: 0.5vh
+}
+.incident>form{
+    border-radius: 20px;
+}
+

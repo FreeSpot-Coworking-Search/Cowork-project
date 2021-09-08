@@ -1,5 +1,10 @@
 
-.myCenterSpaceCard>ul{
+.myCenterSpaceCard>a{
+  text-decoration: none;
+  color: rgba(var(--dark));
+  font-size: var(--cardTittle);
+}
+.myCenterSpaceCard>a>ul{
     list-style: none;
     display: flex;
     flex-wrap: wrap;
@@ -7,7 +12,7 @@
   
   }
   
-  .myCenterSpaceCard>ul>li{
+  .myCenterSpaceCard>a>ul>li{
     width: 8vw;
     height: 4vh;
     background-color: rgba(var(--secondary),0.5);
@@ -15,19 +20,19 @@
     justify-content: center;
     align-items: center;
   }
-  .myCenterSpaceCard>ul>li:nth-child(1){
+  .myCenterSpaceCard>a>ul>li:nth-child(1){
     border-top-left-radius:15px;
   }
-  .myCenterSpaceCard>ul>li:nth-child(2){
+  .myCenterSpaceCard>a>ul>li:nth-child(2){
     border-top-right-radius:15px;
   }
-  .myCenterSpaceCard>ul>li:nth-child(3){
+  .myCenterSpaceCard>a>ul>li:nth-child(3){
     border-bottom-left-radius:15px;
   }
-  .myCenterSpaceCard>ul>li:nth-child(4){
+  .myCenterSpaceCard>a>ul>li:nth-child(4){
     border-bottom-right-radius: 15px;
   }
-  .myCenterSpaceCard>ul>li img{
+  .myCenterSpaceCard>a>ul>li img{
     width: 7vw;
     max-height: 4vh;
   }

@@ -1,53 +1,60 @@
 import { Dialog } from '@material-ui/core';
 import { useState, lazy } from 'react';
 import CircularSuspense from '../../components/CircularSuspense/CircularSuspense';
-import { CalendarIcon } from '../../components/Icons/Icons';
+import {
+  CalendarIcon,
+  IncidentsIcon,
+  InfoIcon,
+} from '../../components/Icons/Icons';
 import MainNavigation from '../../components/MainNavigation/MainNavigation';
+import { SpaceIncidents } from '../../components/SpaceIncidents/SpaceIncidents';
 import SpacePresentation from '../../components/SpacePresentation/SpacePresentation';
-import RetrieveQueryParams from '../../helpers/RetriveQueryParams';
-import useDialog from '../../hooks/useDialog';
+import SpaceReservesCalendar from '../../components/SpaceReservesCalendar/SpaceReservesCalendar';
+import Spinner from '../../components/Spinner/Spinner';
 import useFullView from '../../hooks/useFullView';
 import './Space.css';
-const ConfirmationDialog = lazy(() =>
-  import('../../components/SpacePresentation/ConfirmationDialog')
-);
-const ServicesPresentation = lazy(() =>
-  import('../../components/ServicesPresentation/ServicesPresentation')
-);
 
 export default function OwnerSpace({ spaceData, setSpace, className }) {
-  const query = RetrieveQueryParams(['fecha_entrada', 'fecha_salida']);
-  const [reservation, setReservation] = useState(query);
-  const { open, handleClickOpen, handleClose } = useDialog();
   const [visualization, setVisualization] = useState('info');
   const [fullView] = useFullView();
+  console.log(spaceData.reserves);
 
   // ****************************
   // ** MAIN NAVIGATION CONFIG **
   // ****************************
 
-  const submitButton = {
-    action: handleClickOpen,
-    icon: <CalendarIcon className="mainNavigationButtonIcon" />,
-    text: 'Reservar',
-  };
-
   const calendarButton = {
-    action: () => setVisualization('reserve'),
+    action: () => setVisualization('reserves'),
     icon: <CalendarIcon className="mainNavigationButtonIcon" />,
-    text: 'Haz tu reserva',
+    text: 'Estado',
+  };
+  const infoButton = {
+    action: () => setVisualization('info'),
+    icon: <InfoIcon className="mainNavigationButtonIcon" />,
+    text: 'Información',
+  };
+  const incidentsButton = {
+    action: () => setVisualization('incidents'),
+    icon: <IncidentsIcon className="mainNavigationButtonIcon" />,
+    text: 'Incidencias',
   };
   let Links = [];
   switch (visualization) {
     case 'info':
-      if (fullView) Links = [submitButton];
-      else Links = [calendarButton];
+      if (fullView) Links = [calendarButton, incidentsButton];
+      else Links = [infoButton, calendarButton, incidentsButton];
       break;
 
-    case 'reserve':
-      if (fullView) Links = [submitButton];
-      else Links = [submitButton];
+    case 'reserves':
+      if (fullView) Links = [calendarButton, incidentsButton];
+      else Links = [infoButton, calendarButton, incidentsButton];
       break;
+
+    case 'incidents':
+      if (fullView) Links = [calendarButton, incidentsButton];
+      else Links = [infoButton, calendarButton, incidentsButton];
+      break;
+
     default:
       break;
   }
@@ -56,17 +63,42 @@ export default function OwnerSpace({ spaceData, setSpace, className }) {
       <SpacePresentation
         className="mainSectionLeftArticle"
         spaceData={spaceData}
-        reservation={reservation}
-        setReservation={setReservation}
         setSpace={setSpace}
       />
     ),
-    reserve: (
-      <ServicesPresentation
+    reserves: (
+      <SpaceReservesCalendar
         className="mainSectionLeftArticle"
         spaceData={spaceData}
-        reservation={reservation}
-        setReservation={setReservation}
+      />
+    ),
+    incidents: (
+      <SpaceIncidents
+        className="mainSectionLeftArticle"
+        spaceData={spaceData}
+        setSpaceData={setSpace}
+      />
+    ),
+  };
+
+  const fullViewJSX = {
+    info: (
+      <SpaceReservesCalendar
+        className="mainSectionRightArticle"
+        spaceData={spaceData}
+      />
+    ),
+    reserves: (
+      <SpaceReservesCalendar
+        className="mainSectionRightArticle"
+        spaceData={spaceData}
+      />
+    ),
+    incidents: (
+      <SpaceIncidents
+        className="mainSectionRightArticle"
+        spaceData={spaceData}
+        setSpaceData={setSpace}
       />
     ),
   };
@@ -77,20 +109,13 @@ export default function OwnerSpace({ spaceData, setSpace, className }) {
         <SpacePresentation
           className="mainSectionLeftArticle"
           spaceData={spaceData}
-          reservation={reservation}
-          setReservation={setReservation}
           setSpace={setSpace}
         />
         <MainNavigation
           links={Links}
           className="mainSectionNavigation"
         ></MainNavigation>
-        <ServicesPresentation
-          className="mainSectionRightArticle"
-          spaceData={spaceData}
-          reservation={reservation}
-          setReservation={setReservation}
-        />
+        {fullViewJSX[visualization]}
       </main>
     ),
     false: (
@@ -104,18 +129,5 @@ export default function OwnerSpace({ spaceData, setSpace, className }) {
     ),
   };
 
-  return (
-    <>
-      {responsiveChangeJSX[fullView]}
-      <CircularSuspense>
-        <Dialog open={open} onClose={handleClose}>
-          <ConfirmationDialog
-            reservation={reservation}
-            handleClose={handleClose}
-            spaceData={spaceData}
-          />
-        </Dialog>
-      </CircularSuspense>
-    </>
-  );
+  return spaceData ? <>{responsiveChangeJSX[fullView]}</> : <Spinner />;
 }

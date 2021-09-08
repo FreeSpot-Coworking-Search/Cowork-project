@@ -24,7 +24,7 @@ export default function SpaceAlertDisplay({ space }) {
         {space.incidencias.length !== 0 ? (
           <div className="notificationContainer">
             <img src={incidentsIcon} alt="Icono de incidencia" />
-            <p className="notificationBubble">{space.incidencias.length}</p>
+            <p className="miniNotificationBubble">{space.incidencias.length}</p>
           </div>
         ) : (
           ''
