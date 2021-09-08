@@ -1,0 +1,9 @@
+.presentation {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    color: rgba(var(--dark));
+    border-radius: 20px;
+    background-color: rgba(var(--primary), 0.6);
+    padding: 2vw;
+}

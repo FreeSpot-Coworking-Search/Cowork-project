@@ -5,6 +5,7 @@ import PrivateRoute from '../components/PrivateRoute/PrivateRoute';
 import CircularSuspense from '../components/CircularSuspense/CircularSuspense';
 
 const Home = lazy(() => import('../pages/Home/Home'));
+const NoMatch = lazy(() => import('../pages/NoMatch/NoMatch'));
 
 const User = lazy(() => import('../pages/User/User'));
 const UserRegistration = lazy(() =>
@@ -25,6 +26,11 @@ const Center = lazy(() => import('../pages/Center/Center'));
 const SearchCenter = lazy(() => import('../pages/SearchCenter/SearchCenter'));
 
 const routes = [
+    {
+        path: '/',
+        Page: Home,
+        typeRequired: '',
+    },
     {
         path: '/users/register',
         Page: UserRegistration,
@@ -76,8 +82,8 @@ const routes = [
         typeRequired: '',
     },
     {
-        path: '/',
-        Page: Home,
+        path: '/nomatch',
+        Page: NoMatch,
         typeRequired: '',
     },
 ];
@@ -108,6 +114,11 @@ export default function Routes() {
                     );
                 }
             })}
+            {/*             <CircularSuspense className="mainSection">
+                <Route>
+                    <NoMatch />
+                </Route>
+            </CircularSuspense> */}
         </>
     );
 }

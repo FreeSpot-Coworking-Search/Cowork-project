@@ -23,7 +23,6 @@ function Avatar() {
     };
 
     const avatarPath = clientData ? getPath(clientData) : null;
-    console.log(avatarPath);
 
     useEffect(() => {
         (function () {
