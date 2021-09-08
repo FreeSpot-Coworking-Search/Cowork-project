@@ -7,7 +7,7 @@
     4vh;
 }
 .decorationBottomAdjustment{
-    height: 2vh;
+    height: 1.7vh;
     width: 100%;
     grid-column: 1/4;
     grid-row: 1/2;
@@ -17,12 +17,11 @@
     display:flex;
     flex-direction: column;
     justify-content: flex-end;
-
 }
 .decorationBottomAdjustmentSingleView{
     height: 12vh;
     width: 100%;
-    grid-column: 1/5;
+    grid-column: 2/3;
     grid-row: 1/2;
     order: -1;
     background:rgba(var(--dark));
@@ -30,11 +29,11 @@
 .decorationBottomLogo{
     grid-column: 1/2;
     grid-row: 1/2;
-    height:14vh; 
+    height: 4vh; 
 }
 .decorationBottomAvatar{
     grid-column: 3/4;
     grid-row: 1/2;
-    height:10.7vh; 
+    height:4vh; 
     justify-self: right;
 }

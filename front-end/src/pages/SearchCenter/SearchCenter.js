@@ -59,7 +59,7 @@ export default function SearchCenter({ className }) {
     text: 'Lista',
   };
   const resetButton = {
-    action: resetSearchObject,
+    action: () => resetSearchObject(),
     icon: <ResetIcon className="mainNavigationButtonIcon" />,
     text: 'Resetear busqueda',
   };

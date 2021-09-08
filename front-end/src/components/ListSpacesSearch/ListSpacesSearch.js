@@ -5,10 +5,11 @@ import calendarIcon from '../../assets/icons/bxs-calendar.svg';
 import personIcon from '../../assets/icons/bxs-user.svg';
 import priceIcon from '../../assets/icons/bxs-dollar-circle.svg';
 import ascIcon from '../../assets/icons/bx-chevron-up.svg';
-import Spinner from '../Spinner/Spinner';
+import noResultsIllustration from '../../assets/illustrations/undraw_searching_p5ux.svg';
 import OrderByNavigation from '../OrderByNavigation/OrderByNavigation';
 import spaceTypeToPlural from '../../helpers/spaceTypeToPlural';
 import spaceTyping from '../../helpers/spaceTyping';
+import HelpPresentation from '../HelpPresentation/HelpPresentation';
 
 export default function ListSpacesSearch({
   results,
@@ -83,6 +84,10 @@ export default function ListSpacesSearch({
       <div className="presentationEnd" />
     </article>
   ) : (
-    <Spinner />
+    <HelpPresentation
+      className="mainSectionLeftArticle"
+      image={noResultsIllustration}
+      text="No se han encontrado resultados"
+    />
   );
 }

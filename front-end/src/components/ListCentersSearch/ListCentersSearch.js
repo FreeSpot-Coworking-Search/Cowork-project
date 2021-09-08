@@ -1,6 +1,6 @@
 import './ListCentersSearch.css';
 import CenterCard from '../CenterCard/CenterCard';
-import Spinner from '../Spinner/Spinner';
+import noResultsIllustration from '../../assets/illustrations/undraw_searching_p5ux.svg';
 
 import ascIcon from '../../assets/icons/bx-chevron-up.svg';
 import puntuationIcon from '../../assets/icons/bxs-star.svg';
@@ -9,6 +9,7 @@ import priceIcon from '../../assets/icons/bxs-dollar-circle.svg';
 import aToZAlfabeticIcon from '../../assets/icons/bx-sort-a-z.svg';
 import zToAAlfabeticIcon from '../../assets/icons/bx-sort-z-a.svg';
 import OrderByNavigation from '../OrderByNavigation/OrderByNavigation';
+import HelpPresentation from '../HelpPresentation/HelpPresentation';
 
 export default function ListCentersSearch({
   results,
@@ -67,6 +68,10 @@ export default function ListCentersSearch({
       <div className="presentationEnd" />
     </article>
   ) : (
-    <Spinner />
+    <HelpPresentation
+      className="mainSectionLeftArticle"
+      image={noResultsIllustration}
+      text="No se han encontrado resultados"
+    />
   );
 }
