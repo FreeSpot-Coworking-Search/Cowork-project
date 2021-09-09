@@ -9,9 +9,14 @@ import BackGroundRight from '../BackGroundRight/BackGroundRight';
 import Header from '../Header/Header';
 import Routes from '../../routes/Routes';
 
-import Footer from '../../components/Footer/Footer';
+//import Footer from '../../components/Footer/Footer';
 
 import Decoration from '../Decoration/Decoration';
+
+import {
+    ErrorHeader,
+    ErrorMain,
+} from '../../components/ErrorBoundaries/ErrorBoundaries';
 
 export default function Layout() {
     return (
@@ -19,10 +24,14 @@ export default function Layout() {
             <BackGroundLeft />
             <BackGroundRight />
             <Decoration />
-            <Header />
-            <Switch>
-                <Routes />
-            </Switch>
+            <ErrorHeader>
+                <Header />
+            </ErrorHeader>
+            <ErrorMain>
+                <Switch>
+                    <Routes />
+                </Switch>
+            </ErrorMain>
         </section>
     );
 }
