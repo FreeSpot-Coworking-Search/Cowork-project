@@ -3,6 +3,8 @@ const {
 	getRegistrations,
 } = require('../../helpers/dbHelpers');
 
+const path = require('path');
+
 const validatePayment = async (req, res, next) => {
 	try {
 		const { code: codigo_pago } = req.query;
@@ -30,14 +32,12 @@ const validatePayment = async (req, res, next) => {
 			pagado: 1,
 		};
 		await updateRegistration('reservas', id, updateObject);
+		const filePath = path.join(__dirname, '../../', './static/html');
 
 		console.log('Pago validado en reserva id:', id, 'usuario:', id_usuario);
 
 		res.status(200);
-		res.send({
-			status: 'ok',
-			data: 'reserva pagada',
-		});
+		res.sendFile(filePath + '/validatedPayment.html');
 	} catch (error) {
 		next(error);
 	}
