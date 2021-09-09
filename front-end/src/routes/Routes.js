@@ -1,7 +1,8 @@
 import { lazy } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import PrivateRoute from '../components/PrivateRoute/PrivateRoute';
+import NoMatch from '../pages/NoMatch/NoMatch';
 import CircularSuspense from '../components/CircularSuspense/CircularSuspense';
 
 const Home = lazy(() => import('../pages/Home/Home'));
@@ -25,6 +26,11 @@ const Center = lazy(() => import('../pages/Center/Center'));
 const SearchCenter = lazy(() => import('../pages/SearchCenter/SearchCenter'));
 
 const routes = [
+    {
+        path: '/',
+        Page: Home,
+        typeRequired: '',
+    },
     {
         path: '/users/register',
         Page: UserRegistration,
@@ -50,15 +56,11 @@ const routes = [
         Page: Admin,
         typeRequired: 'administrador',
     },
-
-    // EJEMPLO RUTA PRIVADA
     {
-        path: '/mycenter/:idAdmin',
+        path: '/mycenter/',
         Page: MyCenter,
         typeRequired: 'administrador',
     },
-    // EJEMPLO RUTA PRIVADA
-
     {
         path: '/search/space',
         Page: SearchSpaces,
@@ -79,16 +81,11 @@ const routes = [
         Page: Center,
         typeRequired: '',
     },
-    {
-        path: '/',
-        Page: Home,
-        typeRequired: '',
-    },
 ];
 
 export default function Routes() {
     return (
-        <>
+        <Switch>
             {routes.map((route) => {
                 if (route.typeRequired === '') {
                     return (
@@ -112,6 +109,9 @@ export default function Routes() {
                     );
                 }
             })}
-        </>
+            <Route>
+                <NoMatch className="mainSection" />
+            </Route>
+        </Switch>
     );
 }

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import './GoogleMapsSearch.css';
 import GoogleMapReact from 'google-map-react';
 import '../../css/presentation.css';

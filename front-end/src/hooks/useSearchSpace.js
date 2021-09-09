@@ -25,7 +25,7 @@ export default function useSearchSpace(INITIAL_SEARCH_OBJECT) {
       );
       setLoading(false);
     });
-  }, [searchObject]);
+  }, [searchObject, history]);
 
   const resetSearchObject = () => {
     setSearchObject(RESET_SEARCH_OBJECT);
