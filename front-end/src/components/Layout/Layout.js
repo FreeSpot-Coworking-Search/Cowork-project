@@ -14,6 +14,10 @@ import Routes from '../../routes/Routes';
 import Decoration from '../Decoration/Decoration';
 
 import CircularSuspense from '../CircularSuspense/CircularSuspense';
+import {
+    ErrorHeader,
+    ErrorMain,
+} from '../../components/ErrorBoundaries/ErrorBoundaries';
 
 export default function Layout() {
     return (
@@ -21,12 +25,16 @@ export default function Layout() {
             <BackGroundLeft />
             <BackGroundRight />
             <Decoration />
-            <Header />
-            <CircularSuspense className="mainSection">
-                <Switch>
-                    <Routes />
-                </Switch>
-            </CircularSuspense>
+            <ErrorHeader>
+                <Header />
+            </ErrorHeader>
+            <ErrorMain>
+                <CircularSuspense className="mainSection">
+                    <Switch>
+                        <Routes />
+                    </Switch>
+                </CircularSuspense>
+            </ErrorMain>
         </section>
     );
 }
