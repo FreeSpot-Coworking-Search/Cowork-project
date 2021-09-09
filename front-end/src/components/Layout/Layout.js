@@ -9,9 +9,11 @@ import BackGroundRight from '../BackGroundRight/BackGroundRight';
 import Header from '../Header/Header';
 import Routes from '../../routes/Routes';
 
-import Footer from '../../components/Footer/Footer';
+//import Footer from '../../components/Footer/Footer';
 
 import Decoration from '../Decoration/Decoration';
+
+import CircularSuspense from '../CircularSuspense/CircularSuspense';
 
 export default function Layout() {
     return (
@@ -20,9 +22,11 @@ export default function Layout() {
             <BackGroundRight />
             <Decoration />
             <Header />
-            <Switch>
-                <Routes />
-            </Switch>
+            <CircularSuspense className="mainSection">
+                <Switch>
+                    <Routes />
+                </Switch>
+            </CircularSuspense>
         </section>
     );
 }

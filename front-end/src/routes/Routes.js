@@ -1,11 +1,10 @@
 import { lazy } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 
 import PrivateRoute from '../components/PrivateRoute/PrivateRoute';
-import CircularSuspense from '../components/CircularSuspense/CircularSuspense';
+import NoMatch from '../pages/NoMatch/NoMatch';
 
 const Home = lazy(() => import('../pages/Home/Home'));
-const NoMatch = lazy(() => import('../pages/NoMatch/NoMatch'));
 
 const User = lazy(() => import('../pages/User/User'));
 const UserRegistration = lazy(() =>
@@ -81,11 +80,6 @@ const routes = [
         Page: Center,
         typeRequired: '',
     },
-    {
-        path: '/nomatch',
-        Page: NoMatch,
-        typeRequired: '',
-    },
 ];
 
 export default function Routes() {
@@ -95,9 +89,7 @@ export default function Routes() {
                 if (route.typeRequired === '') {
                     return (
                         <Route exact path={route.path} key={route.path}>
-                            <CircularSuspense className="mainSection">
                                 <route.Page className="mainSection" />
-                            </CircularSuspense>
                         </Route>
                     );
                 } else {
@@ -107,18 +99,15 @@ export default function Routes() {
                             key={route.path}
                             typeRequired={route.typeRequired}
                         >
-                            <CircularSuspense className="mainSection">
                                 <route.Page className="mainSection" />
-                            </CircularSuspense>
                         </PrivateRoute>
                     );
                 }
             })}
-            {/*             <CircularSuspense className="mainSection">
-                <Route>
-                    <NoMatch />
-                </Route>
-            </CircularSuspense> */}
+            <Route exact path='/404'>
+                <NoMatch className="mainSection" />
+            </Route>
+            <Redirect from='*' to="/404" />
         </>
     );
 }

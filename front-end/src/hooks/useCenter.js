@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 export default function useCenter(centerId) {
     const [center, setCenter] = useState({});
     const [loading, setLoading] = useState(true);
+    //const [error, setError] = useState(false);
     let history = useHistory();
 
     useEffect(() => {
@@ -17,10 +18,12 @@ export default function useCenter(centerId) {
                 setLoading(false);
             })
             .catch((error) => {
-                //<Redirect to="/nomatch" />;
+                //EJEMPLO PARA REDIRECCIONAR DENTRO DE UN COMPONENTE
+                //setError(true);
+                //AQUI REDIRECCIONAMOS DESDE EL HOOK
                 history.replace('/nomatch');
             });
     }, [centerId, history]);
 
-    return [center, loading, setCenter];
+    return [center, loading, setCenter /* error */];
 }
