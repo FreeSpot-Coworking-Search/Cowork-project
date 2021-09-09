@@ -3,6 +3,8 @@ const {
 	getRegistrations,
 } = require('../../helpers/dbHelpers');
 
+const path = require('path');
+
 const validateUser = async (req, res, next) => {
 	try {
 		const { code } = req.query;
@@ -32,11 +34,9 @@ const validateUser = async (req, res, next) => {
 				codigo_registro: null,
 			});
 		}
+		const filePath = path.join(__dirname, '../../.', './static/html');
 		res.status(200);
-		res.send({
-			status: 'ok',
-			data: 'Usuario validado!',
-		});
+		res.sendFile(filePath + '/validatedUser.html');
 	} catch (error) {
 		next(error);
 	}

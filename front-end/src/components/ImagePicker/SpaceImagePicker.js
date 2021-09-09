@@ -19,7 +19,6 @@ export default function SpaceImagePicker({
     const [input, setInput] = useState('');
 
     async function deleteImage(imageId) {
-        console.log(imageId);
         try {
             setMessage('Eliminando imagen');
 
@@ -72,7 +71,6 @@ export default function SpaceImagePicker({
                     setMessage('Imagen cargada.');
 
                     setSpace((space) => {
-                        console.log('space:', space);
                         return {
                             ...space,
                             imagenes: [

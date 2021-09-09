@@ -9,10 +9,10 @@ import GoogleMapSearch from '../../components/GoogleMapsSearch/GoogleMapsSearch'
 import Spinner from '../../components/Spinner/Spinner';
 
 import {
-  FilterIcon,
-  ResetIcon,
-  MapIcon,
-  ListIcon,
+    FilterIcon,
+    ResetIcon,
+    MapIcon,
+    ListIcon,
 } from '../../components/Icons/Icons';
 
 import RetrieveQueryParams from '../../helpers/RetriveQueryParams';
@@ -21,142 +21,141 @@ import useSearchCenter from '../../hooks/useSearchCenter';
 import cleanSearchObject from '../../helpers/cleanSearchObject';
 
 export default function SearchCenter({ className }) {
-  const INITIAL_SEARCH_OBJECT = RetrieveQueryParams([
-    'texto',
-    'tipo',
-    'fecha_entrada',
-    'fecha_salida',
-  ]);
-  const {
-    REACT_APP_API_LOCAL_SERVER_HOST: host,
-    REACT_APP_API_LOCAL_SERVER_PORT: port,
-  } = process.env;
-  const linksRoute = `${host}:${port}/api/search/space`;
+    const INITIAL_SEARCH_OBJECT = RetrieveQueryParams([
+        'texto',
+        'tipo',
+        'fecha_entrada',
+        'fecha_salida',
+    ]);
+    const {
+        REACT_APP_API_LOCAL_SERVER_HOST: host,
+        REACT_APP_API_LOCAL_SERVER_PORT: port,
+    } = process.env;
+    const linksRoute = `${host}:${port}/api/search/space`;
 
-  const [visualization, setVisualization] = useState('list');
-  const [fullView] = useFullView();
+    const [visualization, setVisualization] = useState('list');
+    const [fullView] = useFullView();
 
-  const [loading, results, searchObject, setSearchObject, resetSearchObject] =
-    useSearchCenter(INITIAL_SEARCH_OBJECT);
-  console.log(searchObject);
-  // ****************************
-  // ** MAIN NAVIGATION CONFIG **
-  // ****************************
+    const [loading, results, searchObject, setSearchObject, resetSearchObject] =
+        useSearchCenter(INITIAL_SEARCH_OBJECT);
+    // ****************************
+    // ** MAIN NAVIGATION CONFIG **
+    // ****************************
 
-  const mapButton = {
-    action: () => setVisualization('map'),
-    icon: <MapIcon className="mainNavigationButtonIcon" />,
-    text: 'Mapa',
-  };
-  const filterButton = {
-    action: () => setVisualization('filter'),
-    icon: <FilterIcon className="mainNavigationButtonIcon" />,
-    text: 'Filtrar',
-  };
-  const listButton = {
-    action: () => setVisualization('list'),
-    icon: <ListIcon className="mainNavigationButtonIcon" />,
-    text: 'Lista',
-  };
-  const resetButton = {
-    action: () => resetSearchObject(),
-    icon: <ResetIcon className="mainNavigationButtonIcon" />,
-    text: 'Resetear busqueda',
-  };
-  let Links = [];
+    const mapButton = {
+        action: () => setVisualization('map'),
+        icon: <MapIcon className="mainNavigationButtonIcon" />,
+        text: 'Mapa',
+    };
+    const filterButton = {
+        action: () => setVisualization('filter'),
+        icon: <FilterIcon className="mainNavigationButtonIcon" />,
+        text: 'Filtrar',
+    };
+    const listButton = {
+        action: () => setVisualization('list'),
+        icon: <ListIcon className="mainNavigationButtonIcon" />,
+        text: 'Lista',
+    };
+    const resetButton = {
+        action: resetSearchObject,
+        icon: <ResetIcon className="mainNavigationButtonIcon" />,
+        text: 'Resetear busqueda',
+    };
+    let Links = [];
 
-  switch (visualization) {
-    case 'list':
-      if (fullView) Links = [mapButton, filterButton, resetButton];
-      else Links = [listButton, mapButton, filterButton, resetButton];
-      break;
-    case 'map':
-      if (fullView) Links = [mapButton, filterButton, resetButton];
-      else Links = [listButton, mapButton, filterButton, resetButton];
+    switch (visualization) {
+        case 'list':
+            if (fullView) Links = [mapButton, filterButton, resetButton];
+            else Links = [listButton, mapButton, filterButton, resetButton];
+            break;
+        case 'map':
+            if (fullView) Links = [mapButton, filterButton, resetButton];
+            else Links = [listButton, mapButton, filterButton, resetButton];
 
-      break;
-    case 'filter':
-      if (fullView) Links = [mapButton, filterButton, resetButton];
-      else Links = [listButton, mapButton, filterButton, resetButton];
+            break;
+        case 'filter':
+            if (fullView) Links = [mapButton, filterButton, resetButton];
+            else Links = [listButton, mapButton, filterButton, resetButton];
 
-      break;
+            break;
 
-    default:
-      break;
-  }
+        default:
+            break;
+    }
 
-  // *********
-  // ** JSX **
-  // *********
+    // *********
+    // ** JSX **
+    // *********
 
-  const fullViewJSX = {
-    filter: (
-      <SearchForm
-        searchObject={searchObject}
-        setSearchObject={setSearchObject}
-        services={[]}
-        results={results}
-        className="mainSectionRightArticle"
-      />
-    ),
-    list: (
-      <SearchForm
-        searchObject={searchObject}
-        setSearchObject={setSearchObject}
-        services={[]}
-        results={results}
-        className="mainSectionRightArticle"
-      />
-    ),
-    map: <GoogleMapSearch markers={results} />,
-  };
+    const fullViewJSX = {
+        filter: (
+            <SearchForm
+                searchObject={searchObject}
+                setSearchObject={setSearchObject}
+                services={[]}
+                results={results}
+                className="mainSectionRightArticle"
+            />
+        ),
+        list: (
+            <SearchForm
+                searchObject={searchObject}
+                setSearchObject={setSearchObject}
+                services={[]}
+                results={results}
+                className="mainSectionRightArticle"
+            />
+        ),
+        map: <GoogleMapSearch markers={results} />,
+    };
 
-  const singleViewJSX = {
-    filter: (
-      <SearchForm
-        searchObject={searchObject}
-        setSearchObject={setSearchObject}
-        services={[]}
-        results={results}
-        className="mainSectionLeftArticle"
-      />
-    ),
-    list: (
-      <ListCentersSearch
-        results={results}
-        searchObject={cleanSearchObject(searchObject)}
-        setSearchObjet={setSearchObject}
-        linksRoute={linksRoute}
-        className="listCentersSingleView"
-      ></ListCentersSearch>
-    ),
-    map: <GoogleMapSearch markers={results} />,
-  };
+    const singleViewJSX = {
+        filter: (
+            <SearchForm
+                searchObject={searchObject}
+                setSearchObject={setSearchObject}
+                services={[]}
+                results={results}
+                className="mainSectionLeftArticle"
+            />
+        ),
+        list: (
+            <ListCentersSearch
+                results={results}
+                searchObject={cleanSearchObject(searchObject)}
+                setSearchObjet={setSearchObject}
+                linksRoute={linksRoute}
+                className="listCentersSingleView"
+            ></ListCentersSearch>
+        ),
+        map: <GoogleMapSearch markers={results} />,
+    };
 
-  return !loading ? (
-    <>
-      {fullView ? (
+    return !loading ? (
+        <>
+            {fullView ? (
+                <div className={className + ' mainSectionFullView'}>
+                    <ListCentersSearch
+                        results={results}
+                        searchObject={cleanSearchObject(searchObject)}
+                        setSearchObjet={setSearchObject}
+                        linksRoute={linksRoute}
+                        className="listCentersFullView"
+                    ></ListCentersSearch>
+                    <MainNavigation links={Links}></MainNavigation>
+                    {fullViewJSX[visualization]}
+                </div>
+            ) : (
+                <div className={className + ' mainSectionSingleView'}>
+                    {singleViewJSX[visualization]}
+                    <MainNavigation links={Links}></MainNavigation>
+                </div>
+            )}
+        </>
+    ) : (
         <div className={className + ' mainSectionFullView'}>
-          <ListCentersSearch
-            results={results}
-            searchObject={cleanSearchObject(searchObject)}
-            setSearchObjet={setSearchObject}
-            linksRoute={linksRoute}
-            className="listCentersFullView"
-          ></ListCentersSearch>
-          <MainNavigation links={Links}></MainNavigation>
-          {fullViewJSX[visualization]}
+            <Spinner />
         </div>
-      ) : (
-        <div className={className + ' mainSectionSingleView'}>
-          {singleViewJSX[visualization]}
-          <MainNavigation links={Links}></MainNavigation>
-        </div>
-      )}
-    </>
-  ) : (
-    <div className={className + ' mainSectionFullView'}>
-      <Spinner />
-    </div>
-  );
+    );
 }
