@@ -26,9 +26,8 @@ function Avatar() {
 
     useEffect(() => {
         (function () {
-            const { authorization } = JSON.parse(
-                localStorage.getItem('client')
-            );
+            const { authorization } =
+                JSON.parse(localStorage.getItem('client')) || {};
             if (authorization) {
                 axios.defaults.headers.common['Authorization'] = authorization;
             } else {

@@ -1,7 +1,6 @@
 import './Layout.css';
 import '../../css/mainSection.css';
 import '../../css/tooltip.css';
-import { Switch } from 'react-router-dom';
 
 import BackGroundLeft from '../BackGroundLeft/BackGroundLeft';
 import BackGroundRight from '../BackGroundRight/BackGroundRight';
@@ -14,10 +13,12 @@ import Routes from '../../routes/Routes';
 import Decoration from '../Decoration/Decoration';
 
 import CircularSuspense from '../CircularSuspense/CircularSuspense';
+
 import {
     ErrorHeader,
     ErrorMain,
 } from '../../components/ErrorBoundaries/ErrorBoundaries';
+import { BrowserRouter } from 'react-router-dom';
 
 export default function Layout() {
     return (
@@ -25,16 +26,16 @@ export default function Layout() {
             <BackGroundLeft />
             <BackGroundRight />
             <Decoration />
-            <ErrorHeader>
-                <Header />
-            </ErrorHeader>
-            <ErrorMain>
-                <CircularSuspense className="mainSection">
-                    <Switch>
+            <BrowserRouter>
+                <ErrorHeader>
+                    <Header />
+                </ErrorHeader>
+                <ErrorMain>
+                    <CircularSuspense className="mainSection">
                         <Routes />
-                    </Switch>
-                </CircularSuspense>
-            </ErrorMain>
+                    </CircularSuspense>
+                </ErrorMain>
+            </BrowserRouter>
         </section>
     );
 }

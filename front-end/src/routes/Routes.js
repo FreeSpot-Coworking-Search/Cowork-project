@@ -1,8 +1,9 @@
 import { lazy } from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import PrivateRoute from '../components/PrivateRoute/PrivateRoute';
 import NoMatch from '../pages/NoMatch/NoMatch';
+import CircularSuspense from '../components/CircularSuspense/CircularSuspense';
 
 const Home = lazy(() => import('../pages/Home/Home'));
 
@@ -84,12 +85,14 @@ const routes = [
 
 export default function Routes() {
     return (
-        <>
+        <Switch>
             {routes.map((route) => {
                 if (route.typeRequired === '') {
                     return (
                         <Route exact path={route.path} key={route.path}>
+                            <CircularSuspense className="mainSection">
                                 <route.Page className="mainSection" />
+                            </CircularSuspense>
                         </Route>
                     );
                 } else {
@@ -99,15 +102,16 @@ export default function Routes() {
                             key={route.path}
                             typeRequired={route.typeRequired}
                         >
+                            <CircularSuspense className="mainSection">
                                 <route.Page className="mainSection" />
+                            </CircularSuspense>
                         </PrivateRoute>
                     );
                 }
             })}
-            <Route exact path='/404'>
+            <Route>
                 <NoMatch className="mainSection" />
             </Route>
-            <Redirect from='*' to="/404" />
-        </>
+        </Switch>
     );
 }

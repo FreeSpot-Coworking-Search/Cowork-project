@@ -21,6 +21,7 @@ export default function Header() {
             setMiddleBtn({ text: 'Registrate', route: '/users/register' });
         }
     }, [clientData]);
+    //throw new Error('error');
 
     const btnBehavior = [
         { text: 'Home', route: '/' },
