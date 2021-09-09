@@ -22,7 +22,6 @@ export default function CenterPresentation({
   fullView,
 }) {
   const [visualization, setVisualization] = useState('data');
-
   const visualizationsButtons = center.owner
     ? [
         { value: 'data', icon: infoIcon, text: 'Info', alert: 0 },
@@ -39,21 +38,29 @@ export default function CenterPresentation({
         },
       ];
 
-  const visualizations = {
-    data: <CenterDataList center={center.info} className="presentationSlide" />,
-    scores: <ScoreList scores={center.valoraciones} />,
-    edit: <ModificationFormCenter center={center.info} setCenter={setCenter} />,
-    photos: (
-      <CenterPhotosPresentation
-        id={center.info.id}
-        imagenes={center.info.imagenes}
-        setCenter={setCenter}
-        fullView={fullView}
-      />
-    ),
-    incidents: <IncidentList incidents={center.espacios} />,
-    cleaning: <CleaningList spaces={center.espacios} />,
-  };
+  let visualizations;
+
+  if (!loading) {
+    visualizations = {
+      data: (
+        <CenterDataList center={center.info} className="presentationSlide" />
+      ),
+      scores: <ScoreList scores={center.valoraciones} />,
+      edit: (
+        <ModificationFormCenter center={center.info} setCenter={setCenter} />
+      ),
+      photos: (
+        <CenterPhotosPresentation
+          id={center.info.id}
+          imagenes={center.info.imagenes}
+          setCenter={setCenter}
+          fullView={fullView}
+        />
+      ),
+      incidents: <IncidentList incidents={center.espacios} />,
+      cleaning: <CleaningList spaces={center.espacios} />,
+    };
+  }
 
   return loading ? (
     <Spinner />

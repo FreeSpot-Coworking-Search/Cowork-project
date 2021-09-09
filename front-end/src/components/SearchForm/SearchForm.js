@@ -24,13 +24,13 @@ export default function SearchForm({
   }, [searchObject]);
   useEffect(() => {
     setFormLimits(searchFormLimits(results));
-  }, [results]);
+  }, [results, searchObject]);
 
   const onSubmitForm = (event) => {
     event.preventDefault();
     setSearchObject(cleanSearchObject(newSearchObject));
   };
-
+  console.log(newSearchObject);
   return (
     <form onSubmit={onSubmitForm} className={className + ' searchForm'}>
       <button>

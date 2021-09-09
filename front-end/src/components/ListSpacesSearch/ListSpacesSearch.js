@@ -51,7 +51,7 @@ export default function ListSpacesSearch({
       },
     ],
   };
-  return results.length !== 0 ? (
+  return (
     <article className={className + ' listSpaces'}>
       {setSearchObject ? (
         <OrderByNavigation
@@ -83,11 +83,12 @@ export default function ListSpacesSearch({
       </ul>
       <div className="presentationEnd" />
     </article>
-  ) : (
-    <HelpPresentation
-      className="mainSectionLeftArticle"
-      image={noResultsIllustration}
-      text="No se han encontrado resultados"
-    />
   );
+  // ) : (
+  //   <HelpPresentation
+  //     className="mainSectionLeftArticle"
+  //     image={noResultsIllustration}
+  //     text="No se han encontrado resultados"
+  //   />
+  // );
 }

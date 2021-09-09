@@ -16,10 +16,6 @@ export default function CardImageSlide({ images, className, tag }) {
     showSlides((slideIndex += n));
   }
 
-  function currentSlide(n) {
-    showSlides((slideIndex = n));
-  }
-
   function showSlides(n) {
     let i;
     const slides = document.getElementsByClassName(`myCardSlides ${tag}`);

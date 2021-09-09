@@ -27,14 +27,12 @@ export default function MyCenterListExpandElement({ space, rangeDays }) {
             return reservation ? (
               <li key={day}>
                 <div
-                  className={`reserveChart 
-                  ${
+                  className={`reserveChart ${
                     new Date(reservation.fecha_fin).toLocaleDateString() ===
                     day.toLocaleDateString()
                       ? 'reserveChartEnd'
                       : ''
-                  }
-                  ${
+                  }${
                     new Date(reservation.fecha_inicio).toLocaleDateString() ===
                     day.toLocaleDateString()
                       ? 'reserveChartStart'

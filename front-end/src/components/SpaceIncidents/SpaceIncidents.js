@@ -2,7 +2,6 @@ import AdminIncidenceForm from '../Formularies/AdminIncidenceForm';
 import './SpaceIncidents.css';
 
 export function SpaceIncidents({ spaceData, setSpace, className }) {
-  console.log(spaceData);
   return (
     <section className={className + ' presentation'}>
       <div className="presentationLimit" />

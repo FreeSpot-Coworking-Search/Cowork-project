@@ -12,7 +12,6 @@ export default function GoogleMapsLocation({ center }) {
     },
     zoom: 11,
   };
-  console.log(centerPosition);
 
   return (
     <div className="map">

@@ -54,8 +54,6 @@ export default function AdminIncidenceForm({
           incidencias: [...spaceData.incidencias],
         };
         newSpace.incidencias[index] = incidence;
-        console.log(spaceData);
-        console.log(newSpace);
         setSpace(newSpace);
         setTimeout(() => {
           setMessage('');

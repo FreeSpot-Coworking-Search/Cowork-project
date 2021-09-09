@@ -20,7 +20,6 @@ const AnyReactComponent = ({ text }) => (
 const { REACT_APP_GOOGLE_MAPS_API_KEY } = process.env;
 
 export default function GoogleMapSearch({ markers }) {
-  console.log(markers);
   return (
     <div className="googleMapsSearch presentation">
       <GoogleMapReact
@@ -29,7 +28,6 @@ export default function GoogleMapSearch({ markers }) {
         defaultZoom={defaultProps.zoom}
       >
         {markers.map((center) => {
-          console.log(center.nombre);
           return (
             <AnyReactComponent
               lat={Number(center.latitud)}

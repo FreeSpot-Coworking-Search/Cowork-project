@@ -1,6 +1,4 @@
-import { Dialog } from '@material-ui/core';
-import { useState, lazy } from 'react';
-import CircularSuspense from '../../components/CircularSuspense/CircularSuspense';
+import { useState } from 'react';
 import {
   CalendarIcon,
   IncidentsIcon,
@@ -17,7 +15,6 @@ import './Space.css';
 export default function OwnerSpace({ spaceData, setSpace, className }) {
   const [visualization, setVisualization] = useState('info');
   const [fullView] = useFullView();
-  console.log(spaceData.reserves);
 
   // ****************************
   // ** MAIN NAVIGATION CONFIG **

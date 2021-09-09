@@ -17,7 +17,6 @@ export default function MyCenterPresentationExpand({
 }) {
   const [rangeDays, setRangeDays] = useState(thisWeek(day));
   const listSpaces = spaceTyping(centers[selectedCenter].espacios);
-  console.log(rangeDays);
   return (
     <>
       <section className="presentation myCenterPresentationExpand">

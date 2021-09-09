@@ -23,8 +23,6 @@
   
 }
 
-
-
 .prev, .next {
   clip-path: polygon(20% 0%, 100% 0, 80% 100%, 0% 100%);
   cursor: pointer;
@@ -33,7 +31,7 @@
   width: auto;
   margin-top: -22px;
   padding: 16px;
-  color: rgba(var(--clear));
+  color: rgba(var(--secondary));
   font-weight: bold;
   font-size: 32px;
   transition: 0.6s ease;
@@ -49,7 +47,7 @@
 
 
 .prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
+  background-color: rgba(var(--primary),0.6);
 }
 
 
@@ -62,8 +60,6 @@
   width: 100%;
   text-align: center;
 }
-
-
 
 
 .dot {

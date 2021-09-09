@@ -38,7 +38,6 @@ export default function SearchCenter({ className }) {
 
   const [loading, results, searchObject, setSearchObject, resetSearchObject] =
     useSearchCenter(INITIAL_SEARCH_OBJECT);
-  console.log(searchObject);
   // ****************************
   // ** MAIN NAVIGATION CONFIG **
   // ****************************
@@ -133,30 +132,22 @@ export default function SearchCenter({ className }) {
     map: <GoogleMapSearch markers={results} />,
   };
 
-  return !loading ? (
-    <>
-      {fullView ? (
-        <div className={className + ' mainSectionFullView'}>
-          <ListCentersSearch
-            results={results}
-            searchObject={cleanSearchObject(searchObject)}
-            setSearchObjet={setSearchObject}
-            linksRoute={linksRoute}
-            className="listCentersFullView"
-          ></ListCentersSearch>
-          <MainNavigation links={Links}></MainNavigation>
-          {fullViewJSX[visualization]}
-        </div>
-      ) : (
-        <div className={className + ' mainSectionSingleView'}>
-          {singleViewJSX[visualization]}
-          <MainNavigation links={Links}></MainNavigation>
-        </div>
-      )}
-    </>
-  ) : (
+  return fullView ? (
     <div className={className + ' mainSectionFullView'}>
-      <Spinner />
+      <ListCentersSearch
+        results={results}
+        searchObject={cleanSearchObject(searchObject)}
+        setSearchObjet={setSearchObject}
+        linksRoute={linksRoute}
+        className="listCentersFullView"
+      ></ListCentersSearch>
+      <MainNavigation links={Links}></MainNavigation>
+      {fullViewJSX[visualization]}
+    </div>
+  ) : (
+    <div className={className + ' mainSectionSingleView'}>
+      {singleViewJSX[visualization]}
+      <MainNavigation links={Links}></MainNavigation>
     </div>
   );
 }

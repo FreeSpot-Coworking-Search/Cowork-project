@@ -92,7 +92,11 @@ export default function SearchSpace({ className }) {
   }
   const fullViewJSX = {
     presentation: (
-      <CenterPresentation className="mainSectionRightArticle" center={center} />
+      <CenterPresentation
+        className="mainSectionRightArticle"
+        center={center}
+        loading={loading}
+      />
     ),
     filter: (
       <SearchForm
@@ -114,6 +118,7 @@ export default function SearchSpace({ className }) {
         <CenterPresentation
           className="mainSectionLeftArticle"
           center={center}
+          loading={loading}
         />
         <MainNavigation links={Links}></MainNavigation>
       </div>
@@ -148,24 +153,18 @@ export default function SearchSpace({ className }) {
   // ** JSX **
   // *********
 
-  return loading || loading2 ? (
-    <Spinner />
+  return fullView ? (
+    <div className={className + ' mainSectionFullView'}>
+      <ListSpacesSearch
+        results={results}
+        searchObject={cleanSearchObject(searchObject)}
+        setSearchObject={setSearchObject}
+        className="mainSectionLeftArticle"
+      ></ListSpacesSearch>
+      <MainNavigation links={Links}></MainNavigation>
+      {fullViewJSX[visualization]}
+    </div>
   ) : (
-    <>
-      {fullView ? (
-        <div className={className + ' mainSectionFullView'}>
-          <ListSpacesSearch
-            results={results}
-            searchObject={cleanSearchObject(searchObject)}
-            setSearchObject={setSearchObject}
-            className="mainSectionLeftArticle"
-          ></ListSpacesSearch>
-          <MainNavigation links={Links}></MainNavigation>
-          {fullViewJSX[visualization]}
-        </div>
-      ) : (
-        <>{singleViewJSX[visualization]}</>
-      )}
-    </>
+    <>{singleViewJSX[visualization]}</>
   );
 }

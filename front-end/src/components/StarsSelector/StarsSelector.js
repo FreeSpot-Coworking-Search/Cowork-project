@@ -8,8 +8,6 @@ export default function StarsSelector({ newSearchObject, setNewSearchObject }) {
       ? Array(5).fill(false).fill(true, 0, newSearchObject.puntuacion_minima)
       : Array(5).fill(false)
   );
-  console.log(newSearchObject);
-  console.log(starsButtons);
   const onClick = (e, value) => {
     e.preventDefault();
     const newStarsButtons = Array(5).fill(false);

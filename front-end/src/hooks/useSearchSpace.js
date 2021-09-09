@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import cleanSearchObject from '../helpers/cleanSearchObject';
 import getData from '../helpers/getData';
+import { useHistory } from 'react-router';
 import objectToQuerryParamsString from '../helpers/objectToQuerryParamsString';
 
 export default function useSearchSpace(INITIAL_SEARCH_OBJECT) {
   const [searchObject, setSearchObject] = useState(INITIAL_SEARCH_OBJECT);
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState([]);
+  const history = useHistory();
   const RESET_SEARCH_OBJECT = {
     id_centro: INITIAL_SEARCH_OBJECT.id_centro,
   };
@@ -15,9 +17,7 @@ export default function useSearchSpace(INITIAL_SEARCH_OBJECT) {
     setLoading(true);
     getData('/api/search/space', searchObject).then((data) => {
       setResults(data.results);
-      window.history.pushState(
-        '',
-        'New Page Title',
+      history.replace(
         objectToQuerryParamsString(
           '/search/space/',
           cleanSearchObject(searchObject)

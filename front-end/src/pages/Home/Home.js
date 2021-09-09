@@ -11,7 +11,6 @@ export default function Home() {
   };
 
   const [searchObject, setSearchObject] = useState(INITIAL_SEARCH_OBJECT);
-  console.log(searchObject);
   return (
     <div className="mainSection mainSectionFullView">
       <HomeSearch

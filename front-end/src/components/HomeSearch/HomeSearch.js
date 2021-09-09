@@ -4,7 +4,7 @@ import objectToQuerryParamsString from '../../helpers/objectToQuerryParamsString
 import {
   LocationIcon,
   CalendarIcon,
-  HomeIcon,
+  DesktopIcon,
 } from '../../components/Icons/Icons';
 import './HomeSearch.css';
 export default function HomeSearch({ searchObject, setSearchObject }) {
@@ -36,7 +36,7 @@ export default function HomeSearch({ searchObject, setSearchObject }) {
         <li>
           <div className="homeSearchSpace">
             <div className="homeSearchElementCenter">
-              <LocationIcon className="mainNavigationButtonIcon" />
+              <DesktopIcon className="mainNavigationButtonIcon" />
               <div className="homeSearchElement">
                 <select
                   id="tipo"
@@ -66,7 +66,7 @@ export default function HomeSearch({ searchObject, setSearchObject }) {
                 <input
                   type="date"
                   id="fecha_inicio"
-                  placeHolder="Fecha de entrada"
+                  placeholder="Fecha de entrada"
                   className="homeSearch-txt"
                   value={searchObject.fecha_inicio}
                   onChange={(event) =>

@@ -8,7 +8,6 @@ import '../../css/presentation.css';
 
 import GoogleMapsLocation from '../GoogleMapsLocation/GoogleMapsLocation';
 export default function CenterDataList({ center, className }) {
-  console.log(center);
   return center ? (
     <>
       <div className="presentationLimit" />
