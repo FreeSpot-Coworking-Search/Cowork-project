@@ -11,6 +11,8 @@ const postCenterSchema = Joi.object().keys({
 	email: Joi.string().required().email().max(50),
 	equipamiento: Joi.string().max(1000),
 	descripcion: Joi.string().max(1000),
+	latitud: Joi.string().required().min(1).max(34),
+	longitud: Joi.string().required().min(1).max(34),
 });
 
 const putCenterSchema = Joi.object().keys({
@@ -24,6 +26,8 @@ const putCenterSchema = Joi.object().keys({
 	email: Joi.string().email().max(50),
 	equipamiento: Joi.string().max(1000),
 	descripcion: Joi.string().max(1000),
+	latitud: Joi.string().required().min(1).max(34),
+	longitud: Joi.string().required().min(1).max(34),
 });
 
 module.exports = { postCenterSchema, putCenterSchema };

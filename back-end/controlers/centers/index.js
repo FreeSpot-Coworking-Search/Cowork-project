@@ -14,7 +14,7 @@ const adminOwnsCenter = require('../../middlewares/centers/adminOwnsCenter');
 const whoIs = require('../../middlewares/admins/whoIs');
 
 router.get('/', whoIs, entityExists, getCenter);
-router.post('/', adminIsLogged, postCenter);
+router.post('/', adminIsLogged, postCenter, getCenter);
 router.put(
 	'/',
 	entityExists,

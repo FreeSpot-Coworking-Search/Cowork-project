@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useClient } from '../../hooks/useClient';
 
 import { NoCameraIcon } from '../../components/Icons/Icons';
+import NoPhoto from '../NoPhoto/NoPhoto';
 
 const {
   REACT_APP_API_LOCAL_SERVER_HOST: host,
@@ -86,9 +87,7 @@ export default function ImageCard({ className }) {
         </>
       ) : (
         <>
-          <div>
-            <NoCameraIcon className="mainNavigationButtonIcon" />
-          </div>
+          <NoPhoto />
           <label
             htmlFor="imageCard-fileUpload"
             className="imageCard-fileUpload"

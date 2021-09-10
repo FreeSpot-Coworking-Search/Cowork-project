@@ -5,7 +5,6 @@ import useSearchSpace from '../../hooks/useSearchSpace';
 import useFullView from '../../hooks/useFullView';
 import cleanSearchObject from '../../helpers/cleanSearchObject';
 
-import Spinner from '../../components/Spinner/Spinner';
 import SearchForm from '../../components/SearchForm/SearchForm';
 import MainNavigation from '../../components/MainNavigation/MainNavigation';
 import ListSpacesSearch from '../../components/ListSpacesSearch/ListSpacesSearch';
@@ -99,15 +98,22 @@ export default function SearchSpace({ className }) {
       />
     ),
     filter: (
-      <SearchForm
-        type="space"
-        searchObject={searchObject}
-        setSearchObject={setSearchObject}
-        services={[]}
-        results={results}
-        className="mainSectionRightArticle"
-      />
+      <>
+        {loading2 ? (
+          <p>.</p>
+        ) : (
+          <SearchForm
+            type="space"
+            searchObject={searchObject}
+            setSearchObject={setSearchObject}
+            services={[]}
+            results={results}
+            className="mainSectionRightArticle"
+          />
+        )}
+      </>
     ),
+
     list: (
       <CenterPresentation className="mainSectionRightArticle" center={center} />
     ),
@@ -125,14 +131,19 @@ export default function SearchSpace({ className }) {
     ),
     filter: (
       <div className={className + ' mainSectionSingleView'}>
-        <SearchForm
-          type="space"
-          searchObject={searchObject}
-          setSearchObject={setSearchObject}
-          services={[]}
-          results={results}
-          className="mainSectionLeftArticle"
-        />
+        {loading2 ? (
+          <p>.</p>
+        ) : (
+          <SearchForm
+            type="space"
+            searchObject={searchObject}
+            setSearchObject={setSearchObject}
+            services={[]}
+            results={results}
+            className="mainSectionLeftArticle"
+          />
+        )}
+
         <MainNavigation links={Links}></MainNavigation>
       </div>
     ),

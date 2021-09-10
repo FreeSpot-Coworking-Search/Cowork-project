@@ -75,10 +75,7 @@ export default function AdminIncidenceForm({
   }
 
   return (
-    <form
-      className={`${className} registerForm`}
-      onSubmit={(e) => performSubmit(e)}
-    >
+    <form className={`${className} form`} onSubmit={(e) => performSubmit(e)}>
       <fieldset>
         <div className="form-element form-input">
           <textarea
@@ -99,8 +96,8 @@ export default function AdminIncidenceForm({
         </div>
       </fieldset>
 
-      {error && <p className="registerForm-error">{error}</p>}
-      {message && <p className="registerForm-message">{message}</p>}
+      {error && <p className="form-error">{error}</p>}
+      {message && <p className="form-message">{message}</p>}
       <button>Actualizar</button>
     </form>
   );

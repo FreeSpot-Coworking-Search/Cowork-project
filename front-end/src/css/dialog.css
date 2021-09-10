@@ -1,5 +1,5 @@
 .dialog {
-    background-color: rgba(var(--clear), 0.6);
+    background-color: rgba(var(--primary), 0.6);
     color: rgba(var(--dark), 1);
     max-width: 500px;
     padding: 3vw;

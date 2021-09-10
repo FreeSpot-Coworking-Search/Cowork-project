@@ -694,6 +694,49 @@ async function populateDB() {
 
 		// ********************** CREANDO CONTENIDO CENTROS *********************
 
+		const locations = [
+			{
+				lat: 43.22,
+				long: -5.5,
+			},
+			{
+				lat: 43.22,
+				long: -8.23,
+			},
+			{
+				lat: 40.24,
+				long: -3.41,
+			},
+			{
+				lat: 40.3,
+				long: -4.54,
+			},
+			{
+				lat: 42.34,
+				long: -7.86464,
+			},
+			{
+				lat: 40.57,
+				long: -5.4,
+			},
+			{
+				lat: 39.32,
+				long: -5.05,
+			},
+			{
+				lat: 40.48,
+				long: -1.2,
+			},
+			{
+				lat: 39.3,
+				long: -1.26,
+			},
+			{
+				lat: 41.17,
+				long: -4.41,
+			},
+		];
+
 		console.log('Creando centros');
 
 		for (let i = 0; i < centros; i++) {
@@ -708,8 +751,8 @@ async function populateDB() {
 			const descripcion = faker.lorem.words(25);
 			const equipamiento = faker.lorem.words(25);
 			const idAdministrador = i < 175 ? i : random(1, 175);
-			const latitud = 42.34;
-			const longitud = -7.86464;
+			const latitud = locations[i].lat;
+			const longitud = locations[i].long;
 
 			await connection.query(
 				`INSERT INTO centros(

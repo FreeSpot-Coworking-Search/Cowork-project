@@ -1,0 +1,9 @@
+.noPhoto{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 40px;
+    border: solid rgba(var(--dark),0.6)
+  }

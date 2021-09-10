@@ -1,7 +1,6 @@
 .registerForm {
     background-color: rgba(var(--primary), 0.6);
     border-radius: 40px;
-    overflow-x: hidden;
     color: rgba(var(--dark), 1);
     display: flex;
     flex-direction: column;
@@ -9,6 +8,8 @@
     padding: 2vw;
     align-items: center;
     height: 100%;
+    overflow: hidden;
+    
 }
 .registerForm button{
     border: none;
@@ -35,6 +36,7 @@
     flex-direction: column;
     width: 100%;
 }
+
 .personalData  input{
    margin-bottom: 1vh;
 }

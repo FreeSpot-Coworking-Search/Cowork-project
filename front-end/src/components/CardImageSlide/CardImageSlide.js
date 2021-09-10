@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import NoPhoto from '../NoPhoto/NoPhoto';
 import Spinner from '../Spinner/Spinner';
 import './CardImageSlide.css';
 
@@ -34,7 +35,7 @@ export default function CardImageSlide({ images, className, tag }) {
     }
   }
 
-  return images ? (
+  return images && images.length !== 0 ? (
     <div className={className}>
       <div className="slideshow-container">
         {slide.map((image, index) => {
@@ -61,6 +62,6 @@ export default function CardImageSlide({ images, className, tag }) {
       </div>
     </div>
   ) : (
-    <Spinner></Spinner>
+    <NoPhoto />
   );
 }

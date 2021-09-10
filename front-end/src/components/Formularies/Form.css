@@ -1,4 +1,4 @@
-.registerForm {
+.form {
     background-color: rgba(var(--clear), 0.4);
     overflow: auto;
     width: 100%;
@@ -10,10 +10,10 @@
     padding: 2vw;
     overflow-x: hidden;
 }
-.registerForm::-webkit-scrollbar {
+.form::-webkit-scrollbar {
     display: none;
     }
-.registerForm > fieldset {
+.form > fieldset {
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;
@@ -39,23 +39,23 @@
     font-size: var(--presentationText);
 }
 
-.registerForm-limit {
+.form-limit {
     height: 1vh;
     width: 100%;
     background-color: rgba(var(--secondary), 0.7);
 }
 
-.registerForm-error {
+.form-error {
     color: rgba(var(--alert), 1);
     font-size: var(--cardText);
 }
 
-.registerForm-message {
+.form-message {
     color: rgba(var(--dark), 1);
     font-size: var(--cardText);
 }
 
-.registerForm button {
+.form button {
     border: none;
     background-color: rgba(var(--secondary), 0.7);
     padding: 1vh;

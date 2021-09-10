@@ -7,16 +7,17 @@
     background-color: rgba(var(--primary),0.4);
     border-radius: 30px;
     padding: 3vw;
-    font-size: var(--cardText);
     text-align: center; 
-    
+}
+.searchForm input{
+      font-size: var(--cardText);
   }
   
   .searchForm>button{
     border: none;
     background-color: rgba(var(--secondary),0.6);
     border-radius: 20px;
-    font-size: var(--presentationSubTittle);
+    font-size: var(--cardSubTittle);
     padding-left: 1vw;
     padding-right: 1vw;
     margin-bottom: 1vh;

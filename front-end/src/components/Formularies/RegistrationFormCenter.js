@@ -34,8 +34,9 @@ export default function RegistrationFormCenter({ className }) {
   };
 
   async function performSubmit(e) {
-    e.preventDefaul();
+    e.preventDefault();
     try {
+      console.log('hola');
       setMessage('Enviando datos');
       const route = `${host}:${port}/api/centers/`;
 
@@ -62,11 +63,8 @@ export default function RegistrationFormCenter({ className }) {
 
   return (
     <>
-      <div className="registerForm-limit" />
-      <form
-        onSubmit={(e) => performSubmit(e)}
-        className={`${className} registerForm`}
-      >
+      <div className="form-limit" />
+      <form onSubmit={(e) => performSubmit(e)} className={`${className} form`}>
         <h3>Crea tu nuevo centro</h3>
         <fieldset>
           <div className="form-element form-input">
@@ -204,6 +202,40 @@ export default function RegistrationFormCenter({ className }) {
             </label>
           </div>
           <div className="form-element form-input">
+            <input
+              id="lat"
+              className="form-element-field"
+              placeholder="Localicemos el centro. Primero la latitud."
+              type="number"
+              onChange={(event) => handleOnChange(event, 'latitud')}
+              maxLength="34"
+              required
+              minLength="1"
+              value={centerInfo.latitud}
+            />
+            <div className="form-element-bar"></div>
+            <label className="form-element-label" for="iban">
+              Latitud
+            </label>
+          </div>
+          <div className="form-element form-input">
+            <input
+              id="long"
+              className="form-element-field"
+              placeholder="Ahora la longitud"
+              type="number"
+              onChange={(event) => handleOnChange(event, 'longitud')}
+              maxLength="34"
+              required
+              minLength="1"
+              value={centerInfo.longitud}
+            />
+            <div className="form-element-bar"></div>
+            <label className="form-element-label" for="iban">
+              Longitud
+            </label>
+          </div>
+          <div className="form-element form-input">
             <textarea
               id="equipamiento"
               className="form-element-field"
@@ -235,12 +267,12 @@ export default function RegistrationFormCenter({ className }) {
           </div>
         </fieldset>
 
-        {error && <p className="registerForm-error">{error}</p>}
-        {message && <p className="registerForm-message">{message}</p>}
+        {error && <p className="form-error">{error}</p>}
+        {message && <p className="form-message">{message}</p>}
 
         <button>Crear</button>
       </form>
-      <div className="registerForm-limit" />
+      <div className="form-limit" />
     </>
   );
 }
