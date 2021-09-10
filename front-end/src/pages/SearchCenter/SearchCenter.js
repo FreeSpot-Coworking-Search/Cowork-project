@@ -90,13 +90,19 @@ export default function SearchCenter({ className }) {
 
   const fullViewJSX = {
     filter: (
-      <SearchForm
-        searchObject={searchObject}
-        setSearchObject={setSearchObject}
-        services={[]}
-        results={results}
-        className="mainSectionRightArticle"
-      />
+      <>
+        {loading ? (
+          <p>hola</p>
+        ) : (
+          <SearchForm
+            searchObject={searchObject}
+            setSearchObject={setSearchObject}
+            services={[]}
+            results={results}
+            className="mainSectionRightArticle"
+          />
+        )}
+      </>
     ),
     list: (
       <SearchForm

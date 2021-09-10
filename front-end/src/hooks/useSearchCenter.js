@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import getData from '../helpers/getData';
-import { useHistory } from 'react-router';
+
 import objectToQuerryParamsString from '../helpers/objectToQuerryParamsString';
 import cleanSearchObject from '../helpers/cleanSearchObject';
 
