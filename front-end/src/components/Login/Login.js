@@ -4,7 +4,7 @@ import './form.css';
 
 import { useState, useMemo } from 'react';
 import { useClient } from '../../hooks/useClient';
-import { Link } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import ButtonList from '../ButtonList/ButtonList';
 const axios = require('axios');
 
@@ -54,12 +54,14 @@ function Login({ handleClose }) {
 
 export default Login;
 
-function Form({ userType, handleClose, history }) {
+function Form({ userType, handleClose }) {
     const [, setClientData] = useClient();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    let history = useHistory();
+    let { pathname } = useLocation();
 
     function onSubmitLogin(event) {
         event.preventDefault();
@@ -91,7 +93,13 @@ function Form({ userType, handleClose, history }) {
                 name,
                 ...tokenInfo,
             });
-
+            if (
+                pathname.includes('/space/') ||
+                pathname.includes('/center/') ||
+                pathname.includes('search/space/?id_centro')
+            ) {
+                history.go(0);
+            }
             handleClose();
         } catch (error) {
             setError(error.response.data.message);

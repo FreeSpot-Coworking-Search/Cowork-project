@@ -1,6 +1,6 @@
 import '../Formularies/Form.css';
 import { useState, useMemo } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 import { Dialog } from '@material-ui/core';
@@ -123,7 +123,7 @@ export default function ModificationFormSpace({
     }
 
     return (
-        <article className={`${className}`}>
+        <article className={`${className} overflow`}>
             <form className="registerForm" onSubmit={(e) => performSubmit(e)}>
                 <fieldset>
                     <div class="form-element form-input">

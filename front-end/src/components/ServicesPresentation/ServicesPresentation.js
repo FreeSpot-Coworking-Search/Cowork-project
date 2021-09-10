@@ -11,17 +11,21 @@ export default function ServicesPresentation({
 }) {
   return (
     <article className={className + ' presentation'}>
-      <DateRangeSelector
-        setNewSearchObject={setReservation}
-        newSearchObject={reservation}
-        minDate={true}
-        reserves={spaceData.reserves}
-      />
-      <ReservationServicesList
-        spaceData={spaceData}
-        reservation={reservation}
-        setReservation={setReservation}
-      />
+      <section className="separator">
+        <DateRangeSelector
+          setNewSearchObject={setReservation}
+          newSearchObject={reservation}
+          minDate={true}
+          reserves={spaceData.reserves}
+        />
+      </section>
+      <section className="separator">
+        <ReservationServicesList
+          spaceData={spaceData}
+          reservation={reservation}
+          setReservation={setReservation}
+        />
+      </section>
     </article>
   );
 }

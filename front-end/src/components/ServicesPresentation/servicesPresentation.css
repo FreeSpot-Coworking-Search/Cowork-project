@@ -1,1 +1,4 @@
-
+.separator {
+    overflow: auto;
+    padding: 1vw;
+}

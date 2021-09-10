@@ -161,7 +161,7 @@ export default function IncidenceForm({
                 Requerir limpieza de espacio
             </h3>
             <form
-                className={`${className} registerForm`}
+                className="registerForm overflow"
                 onSubmit={(e) => requestCleaning(e)}
             >
                 <p>
@@ -177,7 +177,7 @@ export default function IncidenceForm({
                 Reportar nueva incidencia
             </h3>
             <form
-                className={`${className} registerForm`}
+                className="registerForm overflow"
                 onSubmit={(e) => performSubmit(e)}
             >
                 <fieldset>

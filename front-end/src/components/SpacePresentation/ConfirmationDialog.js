@@ -18,6 +18,7 @@ export default function ConfirmationDialog({
     reservation,
     handleClose,
 }) {
+    console.log('reservation: ', reservation);
     const [error, setError] = useState(false);
     const [message, setMessage] = useState(false);
     const [enabledBtn, setEnabledBtn] = useState(false);
@@ -49,7 +50,8 @@ export default function ConfirmationDialog({
             const response = await axios.post(route, submitObject);
             if (response.status === 200) {
                 setMessage(
-                    'Reserva realizada, falta abonar la misma. Para ello, hemos enviado un mail a su correo con el enlace de pago. Muchas gracias.'
+                    `Reserva realizada, para abonar la misma accede a MyCoworking y sigue los pasos!
+                    Muchas gracias!`
                 );
                 setTimeout(() => {
                     history.push('/');
