@@ -1,5 +1,12 @@
 import { toFormDate } from '../helpers/dateHelper';
 
+import axios from 'axios';
+
+const {
+    REACT_APP_API_LOCAL_SERVER_HOST: host,
+    REACT_APP_API_LOCAL_SERVER_PORT: port,
+} = process.env;
+
 function getReservesList(reservation) {
     return {
         name: `${reservation?.nombre}: ${toFormDate(
@@ -41,9 +48,6 @@ function getBtnBehavior(
             action: finished
                 ? () => {
                       setVisualization('newScore');
-                      /* refReservation.current = {
-                          ...reservation,
-                      }; */
                       setRefReservation({ ...reservation });
                   }
                 : () => {
@@ -94,6 +98,16 @@ function getBtnBehavior(
 
 function findActiveIncidence(incidences) {
     return incidences?.some((incidence) => incidence.estado === 0);
+}
+
+async function sendPaymentMail(reservation) {
+    try {
+        const route = `${host}:${port}/api/reserves/payment/?id=${reservation.id}`;
+        const response = await axios.get(route);
+        return response;
+    } catch (error) {
+        return error;
+    }
 }
 
 export {
