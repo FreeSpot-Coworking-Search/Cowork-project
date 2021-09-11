@@ -8,7 +8,7 @@ import visionIcon from '../../assets/icons/bx-low-vision.svg';
 export default function SpaceCardNotificationDisplay({ space }) {
   let cleaning = false;
   let incident = false;
-  if (space.estado === 1) cleaning = true;
+  if (space.estado === 0) cleaning = true;
   if (space.incidencias.length > 0) incident = true;
 
   return (

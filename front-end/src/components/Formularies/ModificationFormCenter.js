@@ -27,6 +27,8 @@ export default function ModificationFormCenter({
     email: center.email,
     equipamiento: center.equipamiento,
     descripcion: center.descripcion,
+    latitud: center.latitud,
+    longitud: center.longitud,
   };
   const handleOnChange = (event, prop) => {
     setCenterInfo({
@@ -111,11 +113,8 @@ export default function ModificationFormCenter({
 
   return (
     <>
-      <div className="registerForm-limit" />
-      <form
-        className={`${className} registerForm`}
-        onSubmit={(e) => performSubmit(e)}
-      >
+      <div className="form-limit" />
+      <form className={`${className} form`} onSubmit={(e) => performSubmit(e)}>
         <fieldset>
           <div class="form-element form-input">
             <input
@@ -247,6 +246,40 @@ export default function ModificationFormCenter({
               Email
             </label>
           </div>
+          <div className="form-element form-input">
+            <input
+              id="lat"
+              className="form-element-field"
+              placeholder="Localicemos el centro. Primero la latitud."
+              type="number"
+              onChange={(event) => handleOnChange(event, 'latitud')}
+              maxLength="34"
+              required
+              minLength="1"
+              value={centerInfo.latitud}
+            />
+            <div className="form-element-bar"></div>
+            <label className="form-element-label" for="iban">
+              Latitud
+            </label>
+          </div>
+          <div className="form-element form-input">
+            <input
+              id="long"
+              className="form-element-field"
+              placeholder="Ahora la longitud"
+              type="number"
+              onChange={(event) => handleOnChange(event, 'longitud')}
+              maxLength="34"
+              required
+              minLength="1"
+              value={centerInfo.longitud}
+            />
+            <div className="form-element-bar"></div>
+            <label className="form-element-label" for="iban">
+              Longitud
+            </label>
+          </div>
           <div class="form-element form-input">
             <textarea
               id="equipamiento"
@@ -278,8 +311,8 @@ export default function ModificationFormCenter({
             </label>
           </div>
         </fieldset>
-        {error && <p className="registerForm-error">{error}</p>}
-        {message && <p className="registerForm-message">{message}</p>}
+        {error && <p className="form-error">{error}</p>}
+        {message && <p className="form-message">{message}</p>}
         <button>Enviar</button>
         <button onClick={handleClickOpen}>Eliminar centro</button>
 
@@ -292,7 +325,7 @@ export default function ModificationFormCenter({
           </div>
         </Dialog>
       </form>
-      <div className="registerForm-limit" />
+      <div className="form-limit" />
     </>
   );
 }

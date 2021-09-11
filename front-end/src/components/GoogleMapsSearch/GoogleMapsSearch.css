@@ -3,6 +3,8 @@
   width: 100%;
   padding: 1vh 1vw;
 }
-.mark{
- width: 2vw;
+
+.searchPointer {
+  fill: currentColor;
+  color: rgba(var(--dark),0.8);
 }

@@ -1,14 +1,52 @@
 .registerForm {
-    background-color: rgba(var(--clear), 0.9);
+    background-color: rgba(var(--primary), 0.6);
     border-radius: 40px;
-    overflow: hidden;
-
     color: rgba(var(--dark), 1);
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding: 20px;
-    padding-left: 50px;
+    gap: 2vh;
+    padding: 2vw;
+    align-items: center;
+    height: 100%;
+    overflow: hidden;
+    
+}
+.registerForm button{
+    border: none;
+    padding: 1vw;
+    background-color: rgb(192, 53, 53);
+    border-radius: 20px;
+    align-self: center;
+
+}
+.passwordChange{
+    background-color: rgba(var(--clear), 0.6);
+    padding: 2vh 2vw;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+}
+.personalData{
+    background-color: rgba(var(--clear), 0.6);
+    padding: 2vh 2vw;
+    border-radius: 20px;
+    margin-bottom: 3vh;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.personalData  input{
+   margin-bottom: 1vh;
+}
+.registerForm-submit{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: var(--cardText);
+    gap: 1vh;
+    margin-top: 1vh;
 }
 
 .registerForm > fieldset {
@@ -23,126 +61,29 @@
 }
 
 .registerForm-title {
-    font-size: var(--tittle);
+    font-size: var(--presentationTittle);
     text-align: center;
-    text-transform: capitalize;
 }
 
 .registerForm-list {
     overflow: auto;
 }
 
-/* .registerForm {
-    background-color: rgba(var(--clear), 0.9);
-    border-radius: 40px;
-    overflow: auto;
-    width: 100%;
-    height: 100%;
-
-    color: rgba(var(--dark), 1);
-    display: flex;
+.modificationForm-dialog{
+    width: 30vw;
+    height: 20vh;
+    background-color: rgba(var(--primary), 0.6);
+    color:rgba(var(--dark));
+    display:flex;
     flex-direction: column;
-    gap: 20px;
-    padding: 20px;
-}
-
-.registerForm-title {
-    font-size: var(--tittle);
-    text-align: center;
-    text-transform: capitalize;
-}
-
-.registerForm-subtitle {
-    font-size: var(--cardTittle);
-    text-align: justify;
-    text-transform: lowercase;
-}
-
-.registerForm-subtitle::first-letter {
-    text-transform: capitalize;
-}
-
-hr {
-    opacity: 0.3;
-}
-
-.registerForm-inputs {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.registerForm-inputs > * {
-    flex: 1 1 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.registerForm-error {
-    color: rgba(var(--alert), 1);
-    font-size: var(--cardText);
-}
-
-.registerForm-message {
-    color: rgba(var(--dark), 1);
-    font-size: var(--cardText);
-}
-
-.registerForm-submit {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    gap: 10px;
-    text-align: justify;
-    font-size: var(--cardText);
+    text-align: center;
 }
-
-.modificationForm-dialog {
-    max-width: 500px;
-    padding: 3vw;
-    box-shadow: 1px 1px 10px 0 gba(var(--dark), 0.4);
-    border-radius: 10px;
-
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-/* *********************************************************** */
-/*
-.registerForm > fieldset {
-    flex: 1 1 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+.modificationForm-dialog>button{
     border: none;
+    padding: 1vw;
+    background-color: rgba(var(--secondary), 0.6);
+    border-radius: 20px;
+    align-self: center;
 }
-
-.registerForm > fieldset > label {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: stretch;
-}
-
-.registerForm > fieldset > label > img {
-    flex: 0 0 auto;
-    height: 100%;
-    width: 20px;
-    color: rgba(var(--dark), 1);
-    margin-right: 2px;
-}
-.registerForm > fieldset > label > input {
-    width: 100%;
-    font-size: var(--cardText);
-    margin-right: 2vw;
-}
-
-/* *********************************************************** */
-/*
-.registerForm-checkbox {
-    flex: 0 0 auto;
-}
- */

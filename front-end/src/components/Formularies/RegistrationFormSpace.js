@@ -74,7 +74,7 @@ export default function ModificationFormSpace({
 
   return (
     <article className={`${className}`}>
-      <form className="registerForm" onSubmit={(e) => performSubmit(e)}>
+      <form className="form" onSubmit={(e) => performSubmit(e)}>
         <fieldset>
           <div className="form-element form-input">
             <input

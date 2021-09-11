@@ -2,7 +2,7 @@
 import './GoogleMapsSearch.css';
 import GoogleMapReact from 'google-map-react';
 import '../../css/presentation.css';
-import locationIcon from '../../assets/icons/pngkey.com-dot-icon-png-2444382.png';
+import SearchPointer from './SearchPointer';
 
 const defaultProps = {
   center: {
@@ -12,15 +12,9 @@ const defaultProps = {
   zoom: 5,
 };
 
-const AnyReactComponent = ({ text }) => (
-  <div className="mark">
-    <img src={locationIcon} className="mark" />
-    {text}
-  </div>
-);
 const { REACT_APP_GOOGLE_MAPS_API_KEY } = process.env;
 
-export default function GoogleMapSearch({ markers }) {
+export default function GoogleMapSearch({ markers, searchObject }) {
   return (
     <div className="googleMapsSearch presentation">
       <GoogleMapReact
@@ -30,10 +24,12 @@ export default function GoogleMapSearch({ markers }) {
       >
         {markers.map((center) => {
           return (
-            <AnyReactComponent
+            <SearchPointer
               lat={Number(center.latitud)}
               lng={Number(center.longitud)}
               text={center.nombre}
+              id={center.id}
+              searchObject={searchObject}
             />
           );
         })}

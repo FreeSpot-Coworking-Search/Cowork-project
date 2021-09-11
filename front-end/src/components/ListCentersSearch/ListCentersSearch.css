@@ -8,6 +8,7 @@
   .listCenters>ul{
     background-color: rgba(var(--primary),0.4);
     display:flex;
+    width: 100%;
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;

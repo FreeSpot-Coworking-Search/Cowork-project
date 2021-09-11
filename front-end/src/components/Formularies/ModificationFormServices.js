@@ -84,10 +84,11 @@ export default function ModificationFormSpace({ className, spaceData }) {
     };
 
     return (
-        <article className={`${className} overflow`}>
-            <form className="registerForm" onSubmit={(e) => performSubmit(e)}>
+        <article className={className}>
+            <div className="form-limit" />
+            <form className="form" onSubmit={(e) => performSubmit(e)}>
                 <fieldset>
-                    <ol className="registerForm-list">
+                    <ol className="form-list">
                         {services.map((service, index) => {
                             return (
                                 <li>
@@ -132,6 +133,7 @@ export default function ModificationFormSpace({ className, spaceData }) {
                 {message && <p className="message">{message}</p>}
                 <button disabled={!modification}>Modificar datos</button>
             </form>
+            <div className="form-limit" />
         </article>
     );
 }

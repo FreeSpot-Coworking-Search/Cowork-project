@@ -123,8 +123,8 @@ export default function ModificationFormSpace({
     }
 
     return (
-        <article className={`${className} overflow`}>
-            <form className="registerForm" onSubmit={(e) => performSubmit(e)}>
+        <article className={`${className}`}>
+            <form className="form" onSubmit={(e) => performSubmit(e)}>
                 <fieldset>
                     <div class="form-element form-input">
                         <input

@@ -30,7 +30,6 @@ export default function SearchForm({
     event.preventDefault();
     setSearchObject(cleanSearchObject(newSearchObject));
   };
-  console.log(newSearchObject);
   return (
     <form onSubmit={onSubmitForm} className={className + ' searchForm'}>
       <button>

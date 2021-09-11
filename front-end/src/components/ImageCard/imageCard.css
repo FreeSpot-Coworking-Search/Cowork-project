@@ -1,22 +1,28 @@
 .imageCard {
-    background-color: rgba(var(--clear), 0.9);
+    background-color: rgba(var(--primary), 0.5);
     border-radius: 40px;
     overflow: auto;
     width: 100%;
     height: 100%;
-
     color: rgba(var(--dark), 1);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
-    padding: 50px;
+    gap: 15vh;
+    padding: 3vw;
 }
+
+.imageCard label {
+    background-color: rgba(var(--secondary), 0.6);
+    padding: 1vw;
+    border-radius: 20px;
+}
+
 
 .imageCard-img {
     width: 100%;
     height: auto;
-    border-radius: 50px;
+    border-radius: 40px;
     box-shadow: 1px 1px 10px 0 rgba(var(--dark), 0.6);
 }
 .imageCard-error {
@@ -32,12 +38,4 @@
 input[type='file'] {
     display: none;
 }
-.fileUpload {
-    border: 2px solid rgba(var(--dark), 1);
-    border-radius: 10px;
-    box-shadow: 1px 1px 10px 0 rgba(var(--dark), 0.6);
-    background-color: rgba(var(--primary), 1);
-    display: inline-block;
-    padding: 6px 8px;
-    cursor: pointer;
-}
+

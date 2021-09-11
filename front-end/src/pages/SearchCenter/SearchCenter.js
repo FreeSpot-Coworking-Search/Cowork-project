@@ -90,35 +90,39 @@ export default function SearchCenter({ className }) {
 
   const fullViewJSX = {
     filter: (
-      <SearchForm
-        searchObject={searchObject}
-        setSearchObject={setSearchObject}
-        services={[]}
-        results={results}
-        className="mainSectionRightArticle"
-      />
+      <>
+        {loading ? (
+          <p>.</p>
+        ) : (
+          <SearchForm
+            searchObject={searchObject}
+            setSearchObject={setSearchObject}
+            services={[]}
+            results={results}
+            className="mainSectionRightArticle"
+          />
+        )}
+      </>
     ),
-    list: (
-      <SearchForm
-        searchObject={searchObject}
-        setSearchObject={setSearchObject}
-        services={[]}
-        results={results}
-        className="mainSectionRightArticle"
-      />
-    ),
-    map: <GoogleMapSearch markers={results} />,
+    list: <GoogleMapSearch markers={results} searchObject={searchObject} />,
+    map: <GoogleMapSearch markers={results} searchObject={searchObject} />,
   };
 
   const singleViewJSX = {
     filter: (
-      <SearchForm
-        searchObject={searchObject}
-        setSearchObject={setSearchObject}
-        services={[]}
-        results={results}
-        className="mainSectionLeftArticle"
-      />
+      <>
+        {loading ? (
+          <p>.</p>
+        ) : (
+          <SearchForm
+            searchObject={searchObject}
+            setSearchObject={setSearchObject}
+            services={[]}
+            results={results}
+            className="mainSectionLeftArticle"
+          />
+        )}
+      </>
     ),
     list: (
       <ListCentersSearch
@@ -129,7 +133,7 @@ export default function SearchCenter({ className }) {
         className="listCentersSingleView"
       ></ListCentersSearch>
     ),
-    map: <GoogleMapSearch markers={results} />,
+    map: <GoogleMapSearch markers={results} searchObject={searchObject} />,
   };
 
   return fullView ? (
