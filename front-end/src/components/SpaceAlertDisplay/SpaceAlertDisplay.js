@@ -4,32 +4,34 @@ import visionIcon from '../../assets/icons/bx-low-vision.svg';
 import './SpaceAlertDisplay.css';
 
 export default function SpaceAlertDisplay({ space }) {
-  return (
-    <ul className="spaceAlertDisplay">
-      <li>
-        {space.visible === 0 ? (
-          <img src={visionIcon} alt="Icono de limpieza" />
-        ) : (
-          ''
-        )}
-      </li>
-      <li>
-        {space.estado === 0 ? (
-          <img src={cleaningIcon} alt="Icono de limpieza" />
-        ) : (
-          ''
-        )}
-      </li>
-      <li>
-        {space.incidencias.length !== 0 ? (
-          <div className="notificationContainer">
-            <img src={incidentsIcon} alt="Icono de incidencia" />
-            <p className="miniNotificationBubble">{space.incidencias.length}</p>
-          </div>
-        ) : (
-          ''
-        )}
-      </li>
-    </ul>
-  );
+    return (
+        <ul className="spaceAlertDisplay">
+            <li>
+                {space.visible === 0 ? (
+                    <img src={visionIcon} alt="Icono de limpieza" />
+                ) : (
+                    ''
+                )}
+            </li>
+            <li>
+                {space.estado === 0 ? (
+                    <img src={cleaningIcon} alt="Icono de limpieza" />
+                ) : (
+                    ''
+                )}
+            </li>
+            <li>
+                {space.incidencias.length !== 0 ? (
+                    <div className="notificationContainer">
+                        <img src={incidentsIcon} alt="Icono de incidencia" />
+                        <p className="miniNotificationBubble">
+                            {space.incidencias.length}
+                        </p>
+                    </div>
+                ) : (
+                    ''
+                )}
+            </li>
+        </ul>
+    );
 }

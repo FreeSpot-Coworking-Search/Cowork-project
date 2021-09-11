@@ -24,6 +24,7 @@ import { useParams } from 'react-router-dom';
 export default function Center({ className }) {
     const { centerId } = useParams();
     const [center, loading, setCenter /* error */] = useCenter(centerId);
+    console.log(center);
     const [visualization, setVisualization] = useState('spacesList');
     const [fullView] = useFullView();
 
@@ -237,6 +238,7 @@ export default function Center({ className }) {
                     <CleaningList
                         className="mainSectionLeftArticle"
                         spaces={center.espacios}
+                        setCenter={setCenter}
                     />
                     <MainNavigation
                         links={Links}
@@ -269,6 +271,7 @@ export default function Center({ className }) {
                 <CleaningList
                     className="mainSectionLeftArticle"
                     spaces={center.espacios}
+                    setCenter={setCenter}
                 />
             ),
             incidents: (
