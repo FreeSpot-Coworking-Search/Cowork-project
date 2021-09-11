@@ -1,6 +1,6 @@
 import '../Formularies/Form.css';
 import { useState, useMemo } from 'react';
-import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 import { Dialog } from '@material-ui/core';
@@ -22,6 +22,7 @@ export default function ModificationFormSpace({
     setSpace,
 }) {
     const { open, handleClickOpen, handleClose } = useDialog();
+    let history = useHistory();
 
     const INITIAL_FORM_INFO = useMemo(() => {
         return {
@@ -39,6 +40,7 @@ export default function ModificationFormSpace({
     const [error, setError] = useState();
     const [message, setMessage] = useState();
     const [modification, setModification] = useState(false);
+    const [disabled, setDisabled] = useState(false);
 
     const handleInputChange = (event, prop) => {
         setFormData({
@@ -48,18 +50,19 @@ export default function ModificationFormSpace({
         if (modification === false) setModification(true);
     };
 
-    async function deleteSpace(e) {
-        e.preventDefault();
+    async function deleteSpace() {
+        setDisabled(true);
         try {
+            setMessage('Eliminando espacio');
             const route = `${host}:${port}/api/spaces/?id=${spaceData.id}`;
-            const response = axios.delete(route);
+            const response = await axios.delete(route);
 
             if (response.status === 200) {
-                setError('Espacio eliminado');
+                setMessage('Espacio eliminado');
                 setTimeout(() => {
                     setMessage('');
-                    Redirect('home');
-                }, 2000);
+                    history.push('/mycenter/');
+                }, 3000);
                 setModification(false);
             }
         } catch (error) {
@@ -269,18 +272,34 @@ export default function ModificationFormSpace({
                 {error && <p className="error">{error}</p>}
                 {message && <p className="message">{message}</p>}
 
-                <button disabled={!modification}>Modificar datos</button>
-                <button onClick={handleClickOpen}>Eliminar espacio</button>
-
-                <Dialog open={open} onClose={handleClose}>
-                    <div className="modificationForm-dialog">
-                        ¡Al eliminar el espacio perderá toda la información
-                        sobre su actividad!
-                        <button onClick={deleteSpace}>Eliminar</button>
-                        <button onClick={handleClose}>Cancelar</button>
-                    </div>
-                </Dialog>
+                <button
+                    disabled={!modification}
+                    onClick={(e) => performSubmit(e)}
+                >
+                    Modificar datos
+                </button>
+                <button
+                    onClick={(e) => {
+                        e.preventDefault();
+                        handleClickOpen();
+                    }}
+                >
+                    Eliminar espacio
+                </button>
             </form>
+
+            <Dialog open={open} onClose={handleClose}>
+                <div className="modificationForm-dialog">
+                    ¡Al eliminar el espacio perderá toda la información sobre su
+                    actividad!
+                    {error && <p className="error">{error}</p>}
+                    {message && <p className="message">{message}</p>}
+                    <button onClick={deleteSpace} disabled={disabled}>
+                        Eliminar
+                    </button>
+                    <button onClick={handleClose}>Cancelar</button>
+                </div>
+            </Dialog>
         </article>
     );
 }

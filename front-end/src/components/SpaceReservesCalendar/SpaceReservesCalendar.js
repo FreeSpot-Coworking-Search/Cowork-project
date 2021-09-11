@@ -12,7 +12,6 @@ export default function SpaceReservesCalendar({
     spaceData,
     setSpace,
 }) {
-    console.log(spaceData);
     const reservationsRange = useMemo(
         () =>
             spaceData.reserves.map((reservation, index) => ({
