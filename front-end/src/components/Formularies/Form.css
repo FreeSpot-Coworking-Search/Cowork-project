@@ -12,13 +12,8 @@
 }
 .form::-webkit-scrollbar {
     display: none;
-<<<<<<< HEAD
 }
-.registerForm > fieldset {
-=======
-    }
 .form > fieldset {
->>>>>>> 1a8606509819d1adef3f00a0c0a02de3b53b668c
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;
