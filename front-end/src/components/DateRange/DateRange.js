@@ -45,6 +45,8 @@ export default function DateRangeSelector({
     return dates;
   }, [reserves]);
 
+  console.log(disabledDates);
+
   return (
     <div className="dateRange">
       <DateRange
@@ -53,6 +55,8 @@ export default function DateRangeSelector({
         onChange={(event) => handleSelect(event)}
         minDate={minDate ? new Date(minDate) : new Date()}
         disabledDates={disabledDates}
+        ranges={reservationsRange}
+        showDateDisplay={false}
       />
     </div>
   );
