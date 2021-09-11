@@ -18,6 +18,7 @@ import {
 } from '../../components/Icons/Icons';
 import { useClient } from '../../hooks/useClient';
 import noCentersIllustration from '../../assets/illustrations/undraw_Traveling_re_weve.svg';
+import { useHistory } from 'react-router';
 
 export default function MyCenter({ className }) {
   const [clientData] = useClient();
@@ -26,6 +27,7 @@ export default function MyCenter({ className }) {
   const [day, setDay] = useState(new Date());
   const [visualization, setVisualization] = useState('list');
   const [fullView] = useFullView();
+  let history = useHistory();
 
   // ****************************
   // ** MAIN NAVIGATION CONFIG **
@@ -42,7 +44,7 @@ export default function MyCenter({ className }) {
     text: 'Nuevo Espacio',
   };
   const backButton = {
-    path: '/mycoworking',
+    action: () => history.go(0),
     icon: <BackIcon className="mainNavigationButtonIcon" />,
     text: 'Volver',
   };
@@ -77,22 +79,6 @@ export default function MyCenter({ className }) {
   // *********
 
   const fullViewJSX = {
-    // list: (
-    //   <div className={className + ' mainSectionFullView'}>
-    //     <div className="mainSectionLeftArticle Borrame"></div>
-
-    //     <MainNavigation
-    //       links={Links}
-    //       className="mainSectionNavigation"
-    //     ></MainNavigation>
-    //     <MyCenterPresentation
-    //       className="mainSectionRightArticle"
-    //       centers={centers}
-    //       selectedCenter={selectedCenter}
-    //       setSelectedCenter={setSelectedCenter}
-    //     />
-    //   </div>
-    // ),
     newCenter: (
       <div className={className + ' mainSectionFullView'}>
         <div className="mainSectionLeftArticle presentation">

@@ -71,7 +71,6 @@
 
 .modificationForm-dialog{
     width: 30vw;
-    height: 20vh;
     background-color: rgba(var(--primary), 0.6);
     color:rgba(var(--dark));
     display:flex;

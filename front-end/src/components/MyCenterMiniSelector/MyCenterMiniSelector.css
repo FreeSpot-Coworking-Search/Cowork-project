@@ -14,12 +14,13 @@
     margin-bottom: 1vh;
     position: relative;
   }
+ 
   .MyCenterMiniSelector nav>button{
     border:none;
     background-color: transparent;
     cursor: pointer;
     position: absolute;
-    top: 50%;
+    top: 89%;
     width: auto;
     margin-top: -4.5vh;
     padding: 1vw;
@@ -42,6 +43,7 @@
     flex-direction: column;
   }
   .MyCenterMiniSelector nav>div>p:first-child{
+    text-decoration: none;
   color: rgba(var(--dark));
   font-size: var(--presentationSubTittle);
   margin: 1vw; 
@@ -52,6 +54,9 @@
     font-size: var(--presentationText);
     margin: 1vw; 
     text-align: center;
+    background-color: rgba(var(--clear),0.6);
+    padding: 0.5vw;
+    border-radius: 40px;
   }
 .MyCenterMiniSelector nav:hover > ul {opacity: 1;}
 

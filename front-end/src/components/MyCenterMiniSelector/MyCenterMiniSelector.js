@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import nextDay from '../../helpers/nextDay';
 import prevDay from '../../helpers/prevDay';
 import './MyCenterMiniSelector.css';
@@ -15,7 +16,9 @@ export default function MyCenterMiniSelector({
         <button onClick={() => setDay(prevDay(day))}>&#10094;</button>
         <button onClick={() => setDay(nextDay(day))}>&#10095;</button>
         <div>
-          <p>{centers[selectedCenter].nombre}</p>
+          <Link to={`/center/${centers[selectedCenter].id}`}>
+            {centers[selectedCenter].nombre}
+          </Link>
           <p>{day?.toLocaleDateString()}</p>
         </div>
         <ul>

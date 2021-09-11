@@ -33,17 +33,3 @@ module.exports = {
 	searchCentersSchema,
 	searchSpacesSchema,
 };
-
-// {
-//     "texto": "avalos",
-//     "aforo": 19,
-//     "fecha_entrada": "2021-03-10",
-//     "fecha_salida": "2021-03-13",
-//     "precio_maximo": 10,
-//     "precio_minimo": 4,
-//     "puntuacion_minima": 2,
-//     "dias_estancia": 10,
-//     "servicios": [1,3,5,6,7,8,9,10,11,12,13,14,15,2,16,17],
-//     "ordenado_por": "precio",
-//     "orden": "descendente"
-// }

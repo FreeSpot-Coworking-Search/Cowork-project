@@ -2,18 +2,18 @@
     display:flex;
     flex-direction: column;
     justify-content: center;
+    /* background-color: rgba(var(--primary),0.6); */
 }
 .helpPresentation>img{
-    background-color: rgba(var(--primary),0.6);
-    border-radius: 20px;
+    max-height: 30vh;
     padding: 1vh 2vw;
     margin-bottom: 2vh;
 }
 .helpPresentation p{
     
-    background-color: rgba(var(--clear),0.6);
+    background-color: rgba(var(--dark),0.4);
     border-radius: 20px;
     text-align: center;
-    font-size: var(--presentationTittle);
+    font-size: var(--presentationSubTittle);
 
 }

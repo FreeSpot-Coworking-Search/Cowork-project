@@ -5,11 +5,11 @@ import calendarIcon from '../../assets/icons/bxs-calendar.svg';
 import personIcon from '../../assets/icons/bxs-user.svg';
 import priceIcon from '../../assets/icons/bxs-dollar-circle.svg';
 import ascIcon from '../../assets/icons/bx-chevron-up.svg';
-import noResultsIllustration from '../../assets/illustrations/undraw_searching_p5ux.svg';
 import OrderByNavigation from '../OrderByNavigation/OrderByNavigation';
 import spaceTypeToPlural from '../../helpers/spaceTypeToPlural';
 import spaceTyping from '../../helpers/spaceTyping';
 import HelpPresentation from '../HelpPresentation/HelpPresentation';
+import noCentersIllustration from '../../assets/illustrations/undraw_Traveling_re_weve.svg';
 
 export default function ListSpacesSearch({
   results,
@@ -62,33 +62,35 @@ export default function ListSpacesSearch({
       ) : (
         <div className="presentationStart" />
       )}
-      <ul>
-        {Object.keys(listSpaces).map((type) => {
-          return (
-            <li key={type}>
-              <h3 className="listSpacesType">{spaceTypeToPlural(type)}</h3>
-              <ul>
-                {listSpaces[type].map((space) => (
-                  <SpaceCard
-                    key={space.id}
-                    space={space}
-                    searchObject={searchObject}
-                    name={space.id}
-                  />
-                ))}
-              </ul>
-            </li>
-          );
-        })}
-      </ul>
+      {listSpaces.length > 0 ? (
+        <ul>
+          {Object.keys(listSpaces).map((type) => {
+            return (
+              <li key={type}>
+                <h3 className="listSpacesType">{spaceTypeToPlural(type)}</h3>
+                <ul>
+                  {listSpaces[type].map((space) => (
+                    <SpaceCard
+                      key={space.id}
+                      space={space}
+                      searchObject={searchObject}
+                      name={space.id}
+                    />
+                  ))}
+                </ul>
+              </li>
+            );
+          })}
+        </ul>
+      ) : (
+        <HelpPresentation
+          className="mainSectionLeftArticle"
+          image={noCentersIllustration}
+          text="No existen espacios"
+        />
+      )}
+
       <div className="presentationEnd" />
     </article>
   );
-  // ) : (
-  //   <HelpPresentation
-  //     className="mainSectionLeftArticle"
-  //     image={noResultsIllustration}
-  //     text="No se han encontrado resultados"
-  //   />
-  // );
 }
