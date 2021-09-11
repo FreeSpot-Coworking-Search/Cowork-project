@@ -213,3 +213,30 @@ select.form-element-field {
 .overflow {
     overflow: auto;
 }
+.ServicesListContainer{
+    
+}
+.servicesForm {
+    
+}
+.servicesForm>fieldset {
+    border: none;
+}
+
+.servicesForm>fieldset>ul{
+    list-style: none;
+
+}
+.servicesForm>fieldset>ul>li{
+display: flex;
+justify-content: space-between;
+}
+
+.servicesForm>fieldset>ul>li>span{
+    display: flex;
+    justify-content: flex-end;
+}
+.servicesForm>fieldset>ul>li>span>input{
+    height: 3vh;
+}
+

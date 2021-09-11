@@ -2,7 +2,7 @@
     justify-self: center;
     display:flex;
     flex-direction: column;
-    justify-content:stretch;
+    justify-content:space-between;
     align-items: center;
     background-color: rgba(var(--primary),0.4);
     border-radius: 30px;
@@ -11,6 +11,8 @@
 }
 .searchForm input{
       font-size: var(--cardText);
+      border: none;
+      background-color: transparent;
   }
   
   .searchForm>button{
@@ -21,8 +23,11 @@
     padding-left: 1vw;
     padding-right: 1vw;
     margin-bottom: 1vh;
-    width: 100%;
+    width: 20vw;
     min-height: 5vh;
+    display: flex;
+    justify-content:center;
+    align-items: center;
 }
 
 .searchForm>fieldset{
@@ -34,7 +39,7 @@
     border:none;
     gap: 2vh;
     overflow-x: hidden;
-    padding-top: 1vh;
+    padding: 1vh 0.5vw;
     background-color: rgba(var(--clear),0.6);
     border-radius: 20px;
 }
@@ -100,3 +105,5 @@
     display: flex;
     justify-content: space-around;
 }
+
+.searchForm>button {}

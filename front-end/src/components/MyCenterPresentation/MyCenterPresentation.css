@@ -60,4 +60,9 @@
   max-height: 4vh;
 }
 
-  
+.miCenterUl{
+  overflow-x: hidden;
+}
+.miCenterUl :: ::-webkit-scrollbar{
+  display: none;
+}

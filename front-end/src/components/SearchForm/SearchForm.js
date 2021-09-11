@@ -30,11 +30,9 @@ export default function SearchForm({
     event.preventDefault();
     setSearchObject(cleanSearchObject(newSearchObject));
   };
+  console.log(newSearchObject);
   return (
     <form onSubmit={onSubmitForm} className={className + ' searchForm'}>
-      <button>
-        <img src={filterIcon} alt="Icono de busqueda" />
-      </button>
       <fieldset className="searchFormFieldset">
         {type !== 'space' ? (
           <>
@@ -94,11 +92,47 @@ export default function SearchForm({
           setNewSearchObject={setNewSearchObject}
           newSearchObject={newSearchObject}
         />
+        <label className="searchFormLabel">
+          <p>Fecha de entrada</p>
+          <input
+            type="date"
+            id="fecha_inicio"
+            placeholder="Fecha de entrada"
+            className="homeSearch-txt"
+            value={newSearchObject.fecha_entrada}
+            onChange={(event) =>
+              setNewSearchObject({
+                ...newSearchObject,
+                fecha_entrada: event.target.value,
+              })
+            }
+          />
+        </label>
+        <label className="searchFormLabel">
+          <p>Fecha de salida</p>
+          <input
+            type="date"
+            id="fecha_inicio"
+            placeholder="Fecha de entrada"
+            className="homeSearch-txt"
+            value={newSearchObject.fecha_salida}
+            onChange={(event) =>
+              setNewSearchObject({
+                ...newSearchObject,
+                fecha_salida: event.target.value,
+              })
+            }
+          />
+        </label>
         <DateRange
           setNewSearchObject={setNewSearchObject}
           newSearchObject={newSearchObject}
         />
       </fieldset>
+      <button>
+        <p>FILTRAR</p>
+        <img src={filterIcon} alt="Icono de busqueda" />
+      </button>
     </form>
   );
 }

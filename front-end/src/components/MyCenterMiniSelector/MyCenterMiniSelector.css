@@ -52,7 +52,7 @@
 .MyCenterMiniSelector nav>div>p:nth-child(2){
     color: rgba(var(--dark));
     font-size: var(--presentationText);
-    margin: 1vw; 
+    margin-top: 2vw; 
     text-align: center;
     background-color: rgba(var(--clear),0.6);
     padding: 0.5vw;

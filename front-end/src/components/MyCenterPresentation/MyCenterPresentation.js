@@ -24,7 +24,7 @@ export default function MyCenterPresentation({
           setDay={setDay}
         />
         <div className="myCenterListLimit" />
-        <ul>
+        <ul className="miCenterUl">
           {Object.keys(listSpaces).map((type) => {
             return (
               <li key={type} className="myCenterTypeCard">

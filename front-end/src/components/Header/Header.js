@@ -6,51 +6,40 @@ import miniLogo from '../../assets/logos/COWORKprojectMini.png';
 import Avatar from '../Avatar/Avatar';
 import ButtonList from '../ButtonList/ButtonList';
 import { useClient } from '../../hooks/useClient';
-import { useEffect, useState } from 'react';
 import useFullView from '../../hooks/useFullView';
 
 export default function Header() {
-    const [clientData] = useClient();
-    const [middleBtn, setMiddleBtn] = useState({});
-    const [rightBtn, setRightBtn] = useState({});
-    const [fullView] = useFullView();
+  const [clientData] = useClient();
+  const [fullView] = useFullView();
 
-    useEffect(() => {
-        if (clientData.tipo === 'usuario') {
-            setMiddleBtn({ text: 'Mi Coworking', route: '/mycoworking' });
-            setRightBtn({ text: 'Mis Datos', route: '/users' });
-        } else if (clientData.tipo === 'administrador') {
-            setMiddleBtn({ text: 'Mis Centros', route: '/mycenter' });
-            setRightBtn({ text: 'Mis Datos', route: '/admins' });
-        } else {
-            setMiddleBtn({ text: 'Registro', route: '/users/register' });
-        }
-    }, [clientData]);
+  let middleBtn;
 
-    const btnBehavior = () => {
-        if (clientData.state) {
-            return [
-                { text: 'Home', route: '/' },
-                { ...middleBtn },
-                { ...rightBtn },
-            ];
-        } else {
-            return [{ text: 'Home', route: '/' }, { ...middleBtn }];
-        }
-    };
+  if (clientData.tipo === 'usuario')
+    middleBtn = { text: 'Mi Coworking', route: '/mycoworking' };
+  else if (clientData.tipo === 'administrador')
+    middleBtn = { text: 'Mis Centros', route: '/mycenter' };
+  else middleBtn = { text: 'Registro', route: '/users/register' };
 
-    return (
-        <header className="header">
-            <Link to="/" className="header-logo">
-                <img src={fullView ? logo : miniLogo} alt="CWO" />
-            </Link>
-            <nav>
-                <ButtonList
-                    btnBehavior={btnBehavior()}
-                    cssStyle="header-links"
-                />
-                <Avatar />
-            </nav>
-        </header>
-    );
+  let rightBtn;
+
+  if (clientData.tipo === 'usuario')
+    rightBtn = { text: 'Mis Datos', route: '/users' };
+  else if (clientData.tipo === 'administrador')
+    rightBtn = { text: 'Mis Datos', route: '/admins' };
+
+  const btnBehavior = clientData.state
+    ? [{ text: 'Home', route: '/' }, { ...middleBtn }, { ...rightBtn }]
+    : [{ text: 'Home', route: '/' }, { ...middleBtn }];
+
+  return (
+    <header className="header">
+      <Link to="/" className="header-logo">
+        <img src={fullView ? logo : miniLogo} alt="CWO" />
+      </Link>
+      <nav>
+        <ButtonList btnBehavior={btnBehavior} cssStyle="header-links" />
+        <Avatar />
+      </nav>
+    </header>
+  );
 }

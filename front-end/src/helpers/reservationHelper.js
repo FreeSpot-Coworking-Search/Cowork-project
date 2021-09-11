@@ -22,33 +22,33 @@ export function reservationHelper(spaceData, reservation) {
 
   const listsGroup = [
     {
-      name: 'informacion espacio',
+      name: 'Informacion espacio',
       data: {
-        nombre,
-        tipo,
-        precio,
-        direccion,
-        localidad,
-        codigo_postal,
+        Nombre: nombre,
+        Tipo: tipo,
+        Precio: precio,
+        Direccion: direccion,
+        Localidad: localidad,
+        'Codigo postal': codigo_postal,
       },
       type: 'object',
     },
     {
-      name: 'fechas de reserva',
+      name: 'Fechas',
       data: {
-        'fecha entrada': formatedFE,
-        'fecha salida': formatedFS,
+        Entrada: formatedFE,
+        Salida: formatedFS,
       },
       type: 'object',
     },
     {
-      name: 'servicios agregados',
+      name: 'Servicios agregados',
       data: serviciosAgregados,
       type: 'standar',
     },
 
     {
-      name: 'servicios gratuitos',
+      name: 'Servicios gratuitos',
       data: servicios,
       type: 'standar',
     },

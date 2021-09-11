@@ -11,14 +11,13 @@
     padding: 1vw;
     border-radius: 20px;
     text-align: justify;
-    ;
+    width: 100%;
 }
 .imagePresentation > li > figure{
     position: relative;
     display: flex;
     flex-direction: column;
-    max-width: 10vw;
-    height: 16vh;
+    width: 100%;
 }
 .imagePresentation > li > figure > button {
     position: absolute;
@@ -30,18 +29,12 @@
     font-size: 2vh;
 }
 
-#imagePresentation-mainImage-full {
-    width: 10vw;
-    height: 11vh;
+#imagePresentation-mainImage {
+    width: 100%;
     object-fit:cover;
     border-radius: 10px;
 }
-#imagePresentation-mainImage-single {
-    width: 21vw;
-    height: 11vh;
-    object-fit:cover;
-    border-radius: 10px;
-}
+
 
 .imagePresentation-text {
     width: 100%;
@@ -64,8 +57,7 @@ input[type='file'] {
     display: inline-block;
     padding: 6px 8px;
     cursor: pointer;
-    width: 10vw;
-    height: 11vh;
+    height: 10vh;
     display: flex;
     justify-content: center;
     align-items: center;

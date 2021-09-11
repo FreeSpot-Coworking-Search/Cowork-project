@@ -117,11 +117,7 @@ export default function ImagePicker({
               <img
                 src={`${baseImageURL}${image.URL}`}
                 alt="space center image"
-                id={
-                  fullView === false
-                    ? 'imagePresentation-mainImage-full'
-                    : 'imagePresentation-mainImage-single'
-                }
+                id="imagePresentation-mainImage"
               />
               <figcaption className="imagePresentation-text">
                 {image.descripcion === 'undefined'

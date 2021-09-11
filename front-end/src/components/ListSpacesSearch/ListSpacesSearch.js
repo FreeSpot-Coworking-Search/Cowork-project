@@ -51,6 +51,7 @@ export default function ListSpacesSearch({
       },
     ],
   };
+  console.log(listSpaces);
   return (
     <article className={className + ' listSpaces'}>
       {setSearchObject ? (
@@ -62,7 +63,7 @@ export default function ListSpacesSearch({
       ) : (
         <div className="presentationStart" />
       )}
-      {listSpaces.length > 0 ? (
+      {Object.keys(listSpaces).length > 0 ? (
         <ul>
           {Object.keys(listSpaces).map((type) => {
             return (
