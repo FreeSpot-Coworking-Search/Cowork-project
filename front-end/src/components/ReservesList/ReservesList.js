@@ -37,7 +37,7 @@ export default function ReservesList({
                                             )}
                                             active
                                         />
-                                        <p>
+                                        <p className="error">
                                             <strong>
                                                 {reservation.estado === 1 &&
                                                 active

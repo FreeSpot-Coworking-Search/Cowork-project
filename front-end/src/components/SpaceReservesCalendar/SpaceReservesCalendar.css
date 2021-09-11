@@ -10,7 +10,7 @@
     gap: 1vh;
 }
 
-.spaceReservesCalendar>h3{
+.spaceReservesCalendar > h3 {
     font-size: var(--presentationSubTittle);
     text-align: center;
     margin-bottom: 1vh;
@@ -18,17 +18,15 @@
 }
 
 .spaceDateRange {
-    display:flex;
-    flex-direction: column;
+    text-align: center;
     background-color: rgba(var(--clear), 0.4);
     border-radius: 10px;
     padding: 2vh 1vw;
     margin-bottom: 1vh;
     overflow: auto;
 }
-.spaceDateRange>h4 {
+.spaceDateRange > h4 {
     align-self: flex-start;
     margin-left: 1vw;
     margin-bottom: 1vh;
-
 }

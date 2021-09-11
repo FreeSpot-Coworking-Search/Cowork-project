@@ -22,24 +22,27 @@ const putSpace = async (req, res, next) => {
 		await deleteRegistrations('espacios_servicios', {
 			id_espacio: `${id}`,
 		});
-		const { servicios, servicios_extra } = updateObject;
-		delete updateObject.servicios;
-		delete updateObject.servicios_extra;
 
-		for (const servicio of servicios) {
-			const insertService = {
-				id_espacio: id,
-				id_servicio: servicio.id,
-			};
-			await insertRegistration('espacios_servicios', insertService);
-		}
-		for (const servicio_extra of servicios_extra) {
-			const insertService = {
-				id_espacio: id,
-				id_servicio: servicio_extra.id,
-				precio: servicio_extra.precio,
-			};
-			await insertRegistration('espacios_servicios', insertService);
+		const { servicios, servicios_extra } = updateObject;
+		if (servicios !== undefined && servicios_extra !== undefined) {
+			delete updateObject.servicios;
+			delete updateObject.servicios_extra;
+
+			for (const servicio of servicios) {
+				const insertService = {
+					id_espacio: id,
+					id_servicio: servicio.id,
+				};
+				await insertRegistration('espacios_servicios', insertService);
+			}
+			for (const servicio_extra of servicios_extra) {
+				const insertService = {
+					id_espacio: id,
+					id_servicio: servicio_extra.id,
+					precio: servicio_extra.precio,
+				};
+				await insertRegistration('espacios_servicios', insertService);
+			}
 		}
 
 		await updateRegistration('espacios', id, updateObject);
