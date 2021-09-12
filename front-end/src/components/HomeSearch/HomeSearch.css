@@ -56,7 +56,6 @@
     line-height: 40px;
     width: 100%;
     text-align:center;
-    margin-left: 1vw;
 }
 .homeSearch-txt::placeholder{
     color: rgba(var(--clear));

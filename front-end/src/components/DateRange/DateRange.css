@@ -1,9 +1,3 @@
 .dateRange {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(var(--primary),0.5);
     padding: 1vh 0vw;
-    margin-bottom: 1vh;
-
 }

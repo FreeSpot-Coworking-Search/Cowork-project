@@ -5,6 +5,7 @@
 .typeSpace{
     border-radius: 40px;
     background-color: rgba(var(--primary),0.6);
+    color:rgba(var(--clear));
     border:none;
     padding: 1vw;
     font-size: var(--cardSubTittle);

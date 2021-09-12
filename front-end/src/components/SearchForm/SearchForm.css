@@ -51,9 +51,9 @@
 }
 .searchFormLabel{
     display: flex;
-    color:rgba(var(--dark));
+    color:rgba(var(--clear));
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     gap: 1vh;
     align-items: center;
     font-size: var(--presentationText);
@@ -71,6 +71,12 @@
     background: rgba(var(--primary),0.6) ;
     height: 4vh;
     border-radius: 40px;
+}
+.searchRange{
+    display: grid;
+    grid-row: auto auto auto;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .search:hover {

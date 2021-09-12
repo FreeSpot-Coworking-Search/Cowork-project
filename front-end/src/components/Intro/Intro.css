@@ -8,13 +8,27 @@
   font-size:36px;
   font-weight:bold;
   padding-top:26vh;  
-  padding-left:5vw;  
+  padding-left:1vw;  
   padding-bottom:30vh;
   border-radius: 40px;  
   width:95%;
   display:block;
   background-color: rgba(var(--primary), 0.6);
+  position: relative;
 }
+.contact{
+  position: absolute;
+  background-color: rgba(var(--dark),1);
+  top: 75%;
+  left:5%;
+  width: 50vw;
+  height: 20vh;
+  border-radius: 40px;
+  padding: 3vh 3vw;
+  display:flex;
+  justify-content: space-around;
+}
+
 
 #flip {
   height:50px;

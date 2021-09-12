@@ -1,0 +1,27 @@
+.profileFoto{
+    width: 7vw;
+    border-radius: 50%;
+  }
+  .profileLink {
+    fill: currentColor;
+    color: rgba(var(--clear),0.9);
+    width: 2vw;
+}
+.creatorProfile{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 20vw;
+    gap: 1vh
+}
+.profileLinks{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 12vw;
+}
+.profileText{
+    font-size: var(--cardText);
+}

@@ -1,8 +1,0 @@
-.mainNavigation {
-	background-color: #64b6acab;
-
-	grid-row: 3/4;
-	grid-column: 3/6;
-	order: 2;
-	overflow: hidden;
-}

@@ -1,7 +1,0 @@
-@import '../../variables.css';
-
-.topNavigation {
-	background-color: var(--green);
-
-	order: 2;
-}

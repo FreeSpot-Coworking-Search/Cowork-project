@@ -724,11 +724,11 @@ async function populateDB() {
 				long: -5.05,
 			},
 			{
-				lat: 40.48,
+				lat: 41.48,
 				long: -1.2,
 			},
 			{
-				lat: 39.3,
+				lat: 40.3,
 				long: -1.26,
 			},
 			{

@@ -20,8 +20,8 @@ body {
     grid-template-columns:
         2vw
         2vw
-        50vw
-        44vw
+        60vw
+        34vw
         2vw;
     justify-items: stretch;
     align-items: stretch;
