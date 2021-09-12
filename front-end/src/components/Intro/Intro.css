@@ -9,7 +9,7 @@
   font-weight:bold;
   padding-top:26vh;  
   padding-left:1vw;  
-  padding-bottom:30vh;
+  padding-bottom:15vh;
   border-radius: 40px;  
   width:95%;
   display:block;
@@ -19,10 +19,9 @@
 .contact{
   position: absolute;
   background-color: rgba(var(--dark),1);
-  top: 75%;
+  top: 70%;
   left:5%;
   width: 50vw;
-  height: 20vh;
   border-radius: 40px;
   padding: 3vh 3vw;
   display:flex;
