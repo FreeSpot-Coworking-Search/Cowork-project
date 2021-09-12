@@ -1,5 +1,5 @@
 node_modules
-static/uploads
-*/static/uploads
+*/static/uploads/adminsPhotos
+*/static/uploads/usersPhotos
 .env
 .vscode
