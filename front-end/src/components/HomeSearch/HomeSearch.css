@@ -11,7 +11,7 @@
     list-style: none;
 }
 .homeSearchSpace{
-    background-color: rgba(var(--primary), 0.5);
+    background-color: rgba(var(--primary), 0.7);
     clip-path: polygon(20% 0%, 100% 0, 80% 100%, 0% 100%);
     min-width: 200px;
     border: none;
@@ -24,8 +24,28 @@
     justify-content: center;
     align-items: center;
     height: 20vh;
-    margin: 0 7vw;  
+    margin: 0 9vw;  
 }
+.homeSearchElementDates{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 20vh;
+    margin: 0 9vw;
+    text-align: center;
+}
+.homeSearchElementDates>label{
+    display: flex;
+    flex-direction: column;
+    gap:1vh;
+    color: rgba(var(--dark));
+    font-size: var(--presentationSubTittle);
+}
+.homeSearchElementDates>label>div>input::-webkit-calendar-picker-indicator {
+    color:rgba(var(--clear));
+}
+
 .homeSearch-txt{
     border: none;
     background: none;
@@ -60,6 +80,7 @@
     text-align: center;
     padding: 1vw;
     border-radius: 40px;
+    margin: 0 2vw;
 }
 .homeSearchButton>a{
     text-decoration: none;

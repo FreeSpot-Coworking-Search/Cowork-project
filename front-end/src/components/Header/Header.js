@@ -15,9 +15,9 @@ export default function Header() {
   let middleBtn;
 
   if (clientData.tipo === 'usuario')
-    middleBtn = { text: 'Mi Coworking', route: '/mycoworking' };
+    middleBtn = { text: 'Cowork', route: '/mycoworking' };
   else if (clientData.tipo === 'administrador')
-    middleBtn = { text: 'Mis Centros', route: '/mycenter' };
+    middleBtn = { text: 'Centers', route: '/mycenter' };
   else middleBtn = { text: 'Registro', route: '/users/register' };
 
   let rightBtn;
@@ -37,7 +37,11 @@ export default function Header() {
         <img src={fullView ? logo : miniLogo} alt="CWO" />
       </Link>
       <nav>
-        <ButtonList btnBehavior={btnBehavior} cssStyle="header-links" />
+        <ButtonList
+          fullView={fullView}
+          btnBehavior={btnBehavior}
+          cssStyle="header-links"
+        />
         <Avatar />
       </nav>
     </header>

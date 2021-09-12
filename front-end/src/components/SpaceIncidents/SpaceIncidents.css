@@ -3,6 +3,8 @@
     flex-direction: column;
     gap: 1vh;
     overflow-x: hidden;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
 }
 
 .incident {

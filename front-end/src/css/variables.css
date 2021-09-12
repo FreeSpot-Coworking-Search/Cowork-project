@@ -13,9 +13,8 @@
     --clear: 247, 255, 247;
     --alert: 220, 121, 90;
 
-    /* clamp(tamaño minimo, tamaño, tamaño máximo) */
-
-	--origin: clamp(0.88rem, 0.83rem + 0.25vw, 1.5rem);
+    
+	--origin: calc((2vw + 4vh)/4);
 	--presentationTittle: calc(var(--origin) * 2);
 	--presentationSubTittle: calc(var(--origin) * 1.5);
 	--presentationText: calc(var(--origin) * 1);
@@ -24,11 +23,4 @@
 	--cardText: calc(var(--origin) * 0.9);
 }
 
-/* :root {
-    --step--2: clamp(0.61rem, 0.59rem + 0.11vw, 0.72rem);
-    --step--1: clamp(0.73rem, 0.7rem + 0.17vw, 0.9rem);
-    --step-0: clamp(0.88rem, 0.83rem + 0.25vw, 1.13rem);
-    --step-1: clamp(1.05rem, 0.98rem + 0.36vw, 1.41rem);
-    --step-2: clamp(1.26rem, 1.16rem + 0.5vw, 1.76rem);
-    --step-3: clamp(1.51rem, 1.37rem + 0.69vw, 2.2rem);
-} */
+

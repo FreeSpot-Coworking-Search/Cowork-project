@@ -36,7 +36,6 @@ export default function RegistrationFormCenter({ className }) {
   async function performSubmit(e) {
     e.preventDefault();
     try {
-      console.log('hola');
       setMessage('Enviando datos');
       const route = `${host}:${port}/api/centers/`;
 

@@ -14,6 +14,8 @@ export default function MyCenterSpaceCard({ space, day }) {
   const occupied = spaceOccupied(space, day);
   if (space.estado === 0) cleaning = true;
 
+  const openIncidences = openIncidencesNumber(space);
+
   return (
     <li className="myCenterSpaceCard">
       <Link key={space.id} to={`/space/${space.id}`}>
@@ -40,12 +42,10 @@ export default function MyCenterSpaceCard({ space, day }) {
             {cleaning ? <img src={cleaningIcon} alt="Icono de limpieza" /> : ''}
           </li>
           <li>
-            {space.incidencias.length !== 0 ? (
+            {openIncidencesNumber > 0 ? (
               <div className="notificationContainer">
                 <img src={incidentsIcon} alt="Icono de incidencia" />
-                <p className="miniNotificationBubble">
-                  {space.incidencias.length}
-                </p>
+                <p className="miniNotificationBubble">{openIncidences}</p>
               </div>
             ) : (
               ''
@@ -56,3 +56,10 @@ export default function MyCenterSpaceCard({ space, day }) {
     </li>
   );
 }
+const openIncidencesNumber = (space) => {
+  const alerts = space.incidencias.reduce((acc, incidencia) => {
+    if (incidencia.estado === 0) return acc++;
+    else return acc;
+  }, 0);
+  return alerts;
+};

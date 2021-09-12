@@ -3,14 +3,19 @@
     padding: 1vh 0.5vw;
     border-radius: 20px;
 }
+.incidentCard>a{
+    text-decoration: none;
+    color: rgba(var(--dark),1)
 
-.incidentCard>header{
+}
+
+.incidentCard>a>header{
     display:flex;
     justify-content: space-between;
     padding:0 0.5vw;
     margin-bottom: 1vh;
 }
-.incidentCard>ul>li{
+.incidentCard>a>ul>li{
     background-color: rgba(var(--primary),0.4);
     padding: 1vh 1vw;
     border-radius: 20px;

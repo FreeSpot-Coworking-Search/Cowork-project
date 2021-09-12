@@ -35,6 +35,7 @@ export function SpaceData({ spaceData, reservation, setReservation }) {
         </article>
 
         <article className="spaceData-list">
+          <p className="bold">Descripción</p>
           <p>{spaceData.descripcion}</p>
         </article>
         <article>

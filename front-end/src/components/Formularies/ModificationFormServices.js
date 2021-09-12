@@ -84,11 +84,10 @@ export default function ModificationFormSpace({ className, spaceData }) {
   };
 
   return (
-    <article className={className + 'ServicesListContainer'}>
-      <div className="form-limit" />
+    <article className={className + ' ServicesListContainer'}>
       <form className="servicesForm" onSubmit={(e) => performSubmit(e)}>
         <fieldset>
-          <ul className="form-list">
+          <ul className="servicesList">
             {services.map((service, index) => {
               return (
                 <li>
@@ -124,11 +123,11 @@ export default function ModificationFormSpace({ className, spaceData }) {
             })}
           </ul>
         </fieldset>
+
         {error && <p className="error">{error}</p>}
         {message && <p className="message">{message}</p>}
         <button disabled={!modification}>Modificar datos</button>
       </form>
-      <div className="form-limit" />
     </article>
   );
 }

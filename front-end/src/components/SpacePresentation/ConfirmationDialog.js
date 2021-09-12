@@ -18,7 +18,6 @@ export default function ConfirmationDialog({
   reservation,
   handleClose,
 }) {
-  console.log('reservation: ', reservation);
   const [error, setError] = useState(false);
   const [message, setMessage] = useState(false);
   const [enabledBtn, setEnabledBtn] = useState(false);

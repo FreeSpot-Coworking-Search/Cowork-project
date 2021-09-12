@@ -30,7 +30,6 @@ export default function SearchForm({
     event.preventDefault();
     setSearchObject(cleanSearchObject(newSearchObject));
   };
-  console.log(newSearchObject);
   return (
     <form onSubmit={onSubmitForm} className={className + ' searchForm'}>
       <fieldset className="searchFormFieldset">
@@ -92,7 +91,7 @@ export default function SearchForm({
           setNewSearchObject={setNewSearchObject}
           newSearchObject={newSearchObject}
         />
-        <label className="searchFormLabel">
+        {/* <label className="searchFormLabel">
           <p>Fecha de entrada</p>
           <input
             type="date"
@@ -103,7 +102,7 @@ export default function SearchForm({
             onChange={(event) =>
               setNewSearchObject({
                 ...newSearchObject,
-                fecha_entrada: event.target.value,
+                fecha_entrada: new Date(event.target.value),
               })
             }
           />
@@ -119,11 +118,11 @@ export default function SearchForm({
             onChange={(event) =>
               setNewSearchObject({
                 ...newSearchObject,
-                fecha_salida: event.target.value,
+                fecha_salida: new Date(event.target.value),
               })
             }
           />
-        </label>
+        </label> */}
         <DateRange
           setNewSearchObject={setNewSearchObject}
           newSearchObject={newSearchObject}

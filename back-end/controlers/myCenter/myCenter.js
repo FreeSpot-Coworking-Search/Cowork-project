@@ -15,10 +15,10 @@ const myCenter = async (req, res, next) => {
 				espacios = await Promise.all(
 					espacios.map(async (space) => {
 						const incidencias =
-							await getRegistrations(`SELECT incidencias.id, incidencias.descripcion, incidencias.fecha_incidencia, incidencias.categoria
+							await getRegistrations(`SELECT incidencias.id, incidencias.descripcion, incidencias.fecha_incidencia, incidencias.categoria, incidencias.estado
                     FROM incidencias
                     INNER JOIN 	reservas ON reservas.id = incidencias.id_reserva
-                    WHERE incidencias.estado = 1 AND reservas.id_espacio = ${space.id};`);
+                    WHERE incidencias.estado = 0 AND reservas.id_espacio = ${space.id};`);
 
 						// const spaceImages = await getRegistrations('imagenes', {
 						// 	id_espacio: space.id,

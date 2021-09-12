@@ -44,15 +44,16 @@ export default function ScoreList({ reservations: scores, className }) {
       },
     ],
   };
-  console.log(state);
   return state ? (
-    <div className={className + ' presentation presentationList'}>
+    <div className={className + ' presentation  presentationList'}>
       <h3>Valoraciones</h3>
-      <OrderByLocal
+      {/* <OrderByLocal
         state={state}
         setState={setState}
         initialManagementCriteria={initialManagementCriteria}
-      />
+      /> */}
+
+      <div className="presentationStart" />
       <ul>
         {state.scores.map((score) => (
           <ScoreCard score={score} />

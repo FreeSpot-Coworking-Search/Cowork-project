@@ -63,6 +63,6 @@
 .miCenterUl{
   overflow-x: hidden;
 }
-.miCenterUl :: ::-webkit-scrollbar{
+.miCenterUl::-webkit-scrollbar{
   display: none;
 }

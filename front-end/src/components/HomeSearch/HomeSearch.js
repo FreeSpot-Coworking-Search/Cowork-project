@@ -1,15 +1,11 @@
 import { Link } from 'react-router-dom';
 import cleanSearchObject from '../../helpers/cleanSearchObject';
 import objectToQuerryParamsString from '../../helpers/objectToQuerryParamsString';
-import {
-  LocationIcon,
-  CalendarIcon,
-  DesktopIcon,
-} from '../../components/Icons/Icons';
+import { LocationIcon, DesktopIcon } from '../../components/Icons/Icons';
 import './HomeSearch.css';
 export default function HomeSearch({ searchObject, setSearchObject }) {
   return (
-    <form className="mainSectionNavigation">
+    <form className="mainSectionHomeSearchs">
       <ul className="homeSearch">
         <li>
           <div className="homeSearchSpace">
@@ -61,38 +57,43 @@ export default function HomeSearch({ searchObject, setSearchObject }) {
         </li>
         <li>
           <div className="homeSearchSpace">
-            <div className="homeSearchElementCenter">
-              <div className="homeSearchElement">
-                <input
-                  type="date"
-                  id="fecha_inicio"
-                  placeholder="Fecha de entrada"
-                  className="homeSearch-txt"
-                  value={searchObject.fecha_inicio}
-                  onChange={(event) =>
-                    setSearchObject({
-                      ...searchObject,
-                      fecha_entrada: new Date(event.target.value),
-                    })
-                  }
-                />
-              </div>
-              <CalendarIcon className="mainNavigationButtonIcon" />
-              <div className="homeSearchElement">
-                <input
-                  placeholder="Type Date"
-                  type="date"
-                  id="fecha_fin"
-                  className="homeSearch-txt"
-                  value={searchObject.fecha_fin}
-                  onChange={(event) =>
-                    setSearchObject({
-                      ...searchObject,
-                      fecha_salida: new Date(event.target.value),
-                    })
-                  }
-                />
-              </div>
+            <div className="homeSearchElementDates">
+              <label>
+                Entrada
+                <div className="homeSearchElement">
+                  <input
+                    type="date"
+                    id="fecha_inicio"
+                    placeholder="Fecha de entrada"
+                    className="homeSearch-txt"
+                    value={searchObject.fecha_inicio}
+                    onChange={(event) =>
+                      setSearchObject({
+                        ...searchObject,
+                        fecha_entrada: new Date(event.target.value),
+                      })
+                    }
+                  />
+                </div>
+              </label>
+              <label>
+                Salida
+                <div className="homeSearchElement">
+                  <input
+                    placeholder="Type Date"
+                    type="date"
+                    id="fecha_fin"
+                    className="homeSearch-txt"
+                    value={searchObject.fecha_fin}
+                    onChange={(event) =>
+                      setSearchObject({
+                        ...searchObject,
+                        fecha_salida: new Date(event.target.value),
+                      })
+                    }
+                  />
+                </div>
+              </label>
             </div>
           </div>
         </li>

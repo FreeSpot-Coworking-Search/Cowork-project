@@ -16,7 +16,9 @@
     margin-top: 1vh;
 }
 
-
+.bold {
+    font-weight: bold;
+}
 
 .spaceData-list {
     display: flex;

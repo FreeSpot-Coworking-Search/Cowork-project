@@ -38,7 +38,6 @@ export default function ScoreList({ scores, className }) {
       },
     ],
   };
-  console.log(state);
 
   return scores ? (
     <div className={className + ' presentation presentationList'}>

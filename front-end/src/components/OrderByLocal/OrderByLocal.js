@@ -21,7 +21,6 @@ export default function OrderByLocal({
     newManagementCriteria.state = index;
     setManagementCriteria(newManagementCriteria);
   };
-  console.log(state);
   return (
     <nav className="orderByNavigator">
       <ul>

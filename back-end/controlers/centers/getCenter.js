@@ -35,7 +35,7 @@ const getCenter = async (req, res, next) => {
 						await getRegistrations(`SELECT incidencias.id, incidencias.descripcion, incidencias.fecha_incidencia, incidencias.categoria
 					FROM incidencias
 					INNER JOIN 	reservas ON reservas.id = incidencias.id_reserva
-					WHERE incidencias.estado = 1 AND reservas.id_espacio = ${space.id};`);
+					WHERE incidencias.estado = 0 AND reservas.id_espacio = ${space.id};`);
 
 					const spaceImages = await getRegistrations('imagenes', {
 						id_espacio: space.id,

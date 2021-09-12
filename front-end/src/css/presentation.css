@@ -14,14 +14,14 @@
     background-color: rgba(var(--secondary), 0.7);
 }
 
-.presentation > ul {
+/* .presentation > ul {
     list-style: none;
     overflow-x: hidden;
 }
 
 .presentation > ul::-webkit-scrollbar {
     display: none;
-}
+} */
 
 
 .presentationName{

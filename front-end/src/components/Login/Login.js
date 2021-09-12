@@ -19,12 +19,12 @@ function Login({ handleClose }) {
   const btnBehavior = useMemo(
     () => [
       {
-        text: 'acceso usuarios',
+        text: 'usuarios',
         action: () => setUserType('usuario'),
         type: 'secondary',
       },
       {
-        text: 'acceso aministradores',
+        text: 'administradores',
         action: () => setUserType('administrador'),
         type: 'secondary',
       },
@@ -120,7 +120,7 @@ function Form({ userType, handleClose, history }) {
 
       <button>Acceder</button>
       {error && <div className="form-error">{error}</div>}
-      <hr />
+
       <div className="form-options">
         <p>
           Olvidaste tu contraseña?{' '}

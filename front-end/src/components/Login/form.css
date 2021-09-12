@@ -16,3 +16,10 @@
     margin: 10px 0;
     text-align: justify;
 }
+.form>button {
+  border: none;
+  margin-top: 1vh;
+  background-color: rgba(var(--secondary));
+  padding: 1vw;
+  border-radius: 40px;
+}
