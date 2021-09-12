@@ -1,27 +1,27 @@
-.profileFoto{
-    width: 7vw;
+.profileFoto {
+    height: 8vh;
     border-radius: 50%;
-  }
-  .profileLink {
+}
+.profileLink {
     fill: currentColor;
-    color: rgba(var(--clear),0.9);
+    color: rgba(var(--clear), 0.9);
     width: 2vw;
 }
-.creatorProfile{
-    display:flex;
+.creatorProfile {
+    display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
     width: 20vw;
-    gap: 1vh
+    gap: 1vh;
 }
-.profileLinks{
-    display:flex;
+.profileLinks {
+    display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
     width: 12vw;
 }
-.profileText{
+.profileText {
     font-size: var(--cardText);
 }
