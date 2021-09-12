@@ -1,150 +1,509 @@
-# coworking_HAB
+# Coworking Project - Backend
 
-## HELPERS
+## Descripcion:
 
-### dbHelpers
+Esta sección contiene el backend del proyecto, el cual consta de dos partes:
 
--   **getConnection** - Conecta con la base de datos.
--   **insertRegistration** - Ejecuta una sentencia SQL de busqueda sencilla.
-    Recibe ( nombre de la tabla en formato string , objectSearch objeto con las propiedades que han de ser iguales )
--   **getRegistrations** - Ejecuta una sentencia SQL de inserción sencilla.
-    Recibe ( nombre de la tabla en formato string , objectUpdate objeto con las propiedades a buscar )
--   **updateRegistration** - Ejecuta una sentencia SQL de modificacion sencilla.
-    Recibe ( nombre de la tabla en formato string , id del registo a modificar, objectUpdate objeto con las propiedades a modificar )
--   **deleteRegistrations** - Ejecuta una sentencia SQL de borrado sencilla.
-    Recibe ( nombre de la tabla en formato string , objectSearch objeto con las propiedades que se han de cumplir para borrar )
+-   _Base de datos tipo relacional_, utilizando el gestor **MySQL**.
+-   _RestAPI_ que comunica las peticiones de los clientes y les proporciona una respuesta. Para su ejecución se ha utilizado **Node.js** y **Express.js**.
 
--   **createSelectAllWhereQuerry** - Crea una sentencia SQL de busqueda sencilla.
-    Recibe ( nombre de la tabla en formato string , objectSearch objeto con las propiedades que han de ser iguales )
--   **createInsertQuerry** - Crea una sentencia SQL de inserción sencilla.
-    Recibe ( nombre de la tabla en formato string , objectUpdate objeto con las propiedades a insertar )
--   **createUpdateQuerry** - Crea una sentencia SQL de modificacion sencilla.
-    Recibe ( nombre de la tabla en formato string , id del registo a modificar, objectUpdate objeto con las propiedades a modificar )
--   **createDeleteQuerry** - Crea una sentencia SQL de borrao sencilla.
-    Recibe ( nombre de la tabla en formato string , objectSearch objeto con las propiedades que se han de cumplir para borrar )
+## Tabla de contenidos
 
-## ENDPOINTS
+1. [HELPERS](#helpers)
 
-### Users
+    1. [dbHelpers](#dbHelpers)
+    2. [dateHelpers](#dateHelpers)
+    3. [mailHelpers](#mailHelpers)
+    4. [photoHelpers](#photoHelpers)
+    5. [schemaHelpers](#schemaHelpers)
 
--   **POST - [api/users/login/]** - Logea a un usuario retornando un token. ✅
-    **Requiere:** ✅
--   **GET - [api/users/] -** Retorna información de un usuario concreto y su avatar.✅
-    **Requiere:** userIsLogin / userExist / userIsOwner ✅
--   **POST - [api/users] -** Crea un usuario.✅
-    **Requiere:** ✅
--   **PUT - [api/users/] -** Edita un usuario.✅
-    **Requiere:** userIsLogin/userExist/userIsOwner ✅
--   **DELETE - [api/users/] -** Borra un usuario.✅
-    **Requiere:** userIsLogin /userExist / userIsOwner ✅
+2. [MIDDLEWARES](#middlewares)
 
--   **POST - [api/users/photo/]** - Cambia la foto usuario.✅
-    **Requiere:** userIsLogin / userExist / userIsOwner ✅
+    1. [Users](#middlewares-users)
+    2. [Admins](#middlewares-admins)
+    3. [Spaces](#middlewares-spaces)
+    4. [Centers](#middlewares-centers)
+    5. [Reserves](#middlewares-reserves)
 
-#### Middlewares:
+3. [ENDPOINTS](#endpoints)
 
-        - userExists - Comprueba la existencia de un usuario. ✅
-        - userIsLogin - Comprueba si el usuario tiene token valido. ✅
-        - userIsOwner - Comprueba si el usuario accede a sus datos propios. ✅
+    1. [Users](#endpoints-users)
+    2. [Admins](#endpoints-admins)
+    3. [Spaces](#endpoints-spaces)
+    4. [Centers](#endpoints-centers)
+    5. [Reserves](#endpoints-reserves)
+    6. [Incidences](#endpoints-incidences)
+    7. [Search](#endpoints-search)
+    8. [Photos](#endpoints-photos)
+    9. [MyCenter](#endpoints-mycenter)
 
-### Admins
+4. [STATIC](#static)
 
--   **GET - [api/admins/] -** Retorna información de un administrador concreto y avatar.
-    **Requiere:** adminExist / adminIsLogged / adminIsOwner ✅
--   **POST - [api/admins/] -** Crea un administrador.
-    **Requiere:** ✅
--   **PUT - [api/admins/validate/] -** Activa un administrador recién creado.
-    **Requiere:** ✅
--   **POST - [api/admins/login/]** - Logea a un administrador retornando un token.
-    **Requiere:** ✅
--   **DELETE - [api/admins/] -** Borra un administrador.
-    **Requiere:** adminExist / adminIsLogged / adminIsOwner ✅
--   **PUT - [api/admins/] -** Edita un administrador.
-    **Requiere:** adminExist / adminIsLogged / adminIsOwner ✅
--   **POST - [api/admins/photo/]** - Cambia la foto administrador.
-    **Requiere:** adminExist / adminIsLogged / adminIsOwner ✅
+    1. [Html](#static-html)
+    2. [Uploads](#static-uploads)
 
-#### Middlewares utilizados:
+## HELPERS <a name="helpers"></a>
 
-        - adminExists - Comprueba la existencia de un administrador. ✅
-        - adminIsLogged - Comprueba si el administrador tiene token valido. ✅
-        - adminIsOwner - Comprueba si el administrador accede a sus datos propios. ✅
+### dbHelpers <a name="dbHelpers"></a>
 
-### Spaces
+1.  **getConnection** - Genera una nueva conexión activa con la base de datos. Esta función es utilizada como base en las siguientes funciones.
 
--   **GET - [api/spaces/] -** Retorna información de un espacio concreto, sus servicios e imagenes.✅
-    **Requiere:** spaceExists ✅
--   **POST - [api/spaces] -** Crea un espacio, servicios y servicios extra. ✅
-    **Requiere:** adminIsLogged / adminOwnsSpaceCenter ✅
--   **PUT - [api/spaces/] -** Edita un espacio, servicios y servicios extra. ✅
-    **Requiere:** spaceExists / adminIsLogged / adminOwnsSpace ✅
--   **DELETE - [api/spaces/] -** Borra un espacio, servicios y servicios extra. ✅
-    **Requiere:** spaceExists / adminIsLogged / adminOwnsSpace ✅
+2.  **getRegistrations** - Ejecuta una sentencia SQL de búsqueda sencilla.
 
--   **POST - [api/spaces/photo/]** - Añade una foto del espacio.✅
-    **Requiere:** spaceExists / adminIsLogged / adminOwnsSpace ✅
--   **DELETE - [api/spaces/photo/]** - Borra una foto del espacio.✅
-    **Requiere:** adminIsLogged / photoExists / adminIsOwner ✅
+    Recibe:
 
-#### Middlewares:
+    -   nombre de la tabla en formato string.
+    -   Objeto con los pares nombre/valor de los datos a buscar.
+    -   _Opcionalmente, se puede ejecutar una sentencia SQL (cualquier tipo) de manera directa, inyectándola como único parámetro de tipo string._
 
-        - adminIsLogged - Comprueba que se trate de un administrador logueado. ✅
-        - adminIsOwner - Comprueba que el administrador sea propietario. ✅
-        - spaceExists - Comprueba la existencia del espacio. ✅
+    Retorna:
 
-### Centers
+    -   Objeto con los datos buscados.
 
--   **GET - [api/centers/] -** Retorna información de un centro concreto, sus imagenes y los espacios que contiene.
-    **Requiere:** entityExists ✅
--   **POST - [api/centers] -** Crea un centro.
-    **Requiere:** adminIsLogged ✅
--   **PUT - [api/centers/] -** Edita un centro.
-    **Requiere:** entityExists / adminIsLogged / adminOwnsCenter ✅
--   **DELETE - [api/centers/] -** Borra un centro.
-    **Requiere:** entityExists / adminIsLogged / adminOwnsCenter ✅
+3.  **insertRegistration** - Ejecuta una sentencia SQL de inserción sencilla.
 
--   **POST - [api/centers/photo/]** - Añade una foto del centro.
-    **Requiere:** entityExists / adminIsLogged / adminOwnsCenter ✅
--   **DELETE - [api/centers/photo/]** - Borra una foto del centro.
-    **Requiere:** adminIsLogged ✅
+    Recibe:
 
-#### Middlewares utilizados:
+    -   Nombre de la tabla en formato string.
+    -   Objeto con pares nombre/valor del registro a insertar.
 
-        - adminIsLogged - Comprueba que se trate de un administrador logueado. ✅
-        - adminOwnsCenter - Comprueba que el administrador sea propietario del centro. ✅
-        - entityExists - Comprueba la existencia del espacio. ✅
+4.  **updateRegistration** - Ejecuta una sentencia SQL de modificacion sencilla.
 
-### Reserves
+    Recibe:
 
--   **GET - [api/reserves/myreserves] -** Retorna información con las reservas vinculadas a un usuario.
-    **Requiere:** userIsLogin. ✅
--   **GET - [api/reserves/] -** Retorna información de una reserva específica.
-    **Requiere:** entityExists / userIsLogin / userOwnReservation. ✅
--   **POST - [api/reserves/] -** Crea una nueva reserva por parte de un usuario logeado.
-    **Requiere:** userIsLogin. ✅ FALTA VERIFICAR FECHAS
--   **PUT - [api/reserves/rate] -** El usuario puntua una reserva previamente creada.
-    **Requiere:** entityExists / userIsLogin / userOwnReservation. ✅
--   **PUT - [api/reserves/pay/] -** El usuario paga una reserva previamente creada.
-    **Requiere:** entityExists / userIsLogin / userOwnReservation. ❌
-    ❌
+    -   Nombre de la tabla en formato string.
+    -   Id del registo a modificar.
+    -   Objeto con los pares nombre/valor de los datos a modificar.
 
-#### Middlewares utilizados:
+5.  **deleteRegistrations** - Ejecuta una sentencia SQL de borrado sencilla.
 
-    - entityExists - Comprueba la existencia de la reserva. ✅
-    - userIsLogin - Comprueba que se trate de un usuario logueado. ✅
-    - userOwnReservation - Comprueba que el usuario sea el propietario de la reserva ✅
+    Recibe:
 
-### Images
+    -   Nombre de la tabla en formato string
+    -   Objeto con pares nombre/valor con condiciones a cumplir para seleccionar los elementos a borrar.
 
--   **GET - [api/images/adminsPhotos/] -** Retorna el avatar solicitado por el cliente tipo administrador. ✅
-    **Requiere:** userIsLogin. ❌
--   **GET - [api/images/usersPhotos/] -** Retorna el avatar solicitado por el cliente tipo usuario. ✅
-    **Requiere:** userIsLogin. ❌
--   **GET - [api/images/spacesCentersPhotos/] -** Retorna la imagen solicitda por el cliente. ✅
-    **Requiere:** userIsLogin. ❌
+6.  **getSearchCenters** - Ejecuta una sentencia SQL de busqueda de centros.
 
-#### Middlewares utilizados:
+    Recibe:
 
-    - entityExists - Comprueba la existencia de la reserva. ❌
-    - userIsLogin - Comprueba que se trate de un usuario logueado. ❌
-    - userOwnReservation - Comprueba que el usuario sea el propietario de la reserva ❌
+    -   Objeto con pares nombre/valor con condiciones a cumplir para filtrar los centros a buscar.
+
+    Retorna:
+
+    -   Objeto con los centros buscados.
+
+7.  **getSearchSpaces** - Ejecuta una sentencia SQL de busqueda de espacios.
+
+    Recibe:
+
+    -   Objeto con pares nombre/valor con condiciones a cumplir para filtrar los espacios a buscar.
+
+    Retorna:
+
+    -   Objeto con los espacios buscados.
+
+### dateHelpers <a name="dateHelpers"></a>
+
+1. **formatDateToDB** - Devuelve una fecha en formato compatible con MySQL DateTime _'YYYY-MM-DD hh:mm:ss'_.
+
+    Recibe:
+
+    - Variable formato Date.
+
+### mailHelpers <a name="mailHelpers"></a>
+
+1. **sendMail** - Envía de forma asíncrona un mail con la información recibida, mediante la librería sengrid, al usuario requerido.
+
+    Recibe:
+
+    - Correo del destinatario.
+    - Asunto del correo.
+    - Mensaje a enviar.
+
+### photoHelpers <a name="photoHelpers"></a>
+
+1. **saveUserPhoto** - Guarda en el disco local la imagen enviada por el usuario, con un nombre generado aleatoriamente, para ser utilizada como su avatar.
+
+    Recibe:
+
+    - Imagen enviada por el usuario.
+
+    Retorna:
+
+    - Ruta donde se encuentra guardada la nueva imagen.
+
+2. **saveAdminPhoto** - Guarda en el disco local la imagen enviada por un administrador, con un nombre generado aleatoriamente, para ser utilizada como su avatar.
+
+    Recibe:
+
+    - Imagen enviada por el usuario.
+
+    Retorna:
+
+    - Ruta donde se encuentra guardada la nueva imagen.
+
+3. **saveSpacesCentersPhoto** - Guarda en el disco local la imagen enviada por un administrador, con un nombre generado aleatoriamente, para ser utilizada en sus espacios o centros.
+
+    Recibe:
+
+    - Imagen enviada por el usuario.
+
+    Retorna:
+
+    - Ruta donde se encuentra guardada la nueva imagen.
+
+4. **removeUserPhoto** - Elimina la foto de avatar de un usuario.
+
+    Recibe:
+
+    - Ruta de la imagen a eliminar.
+
+5. **removeAdminPhoto** - Elimina la foto de avatar de un administrador.
+
+    Recibe:
+
+    - Ruta de la imagen a eliminar.
+
+6. **removeUserPhoto** - Elimina la foto de espacio o centro requerida por un administrador.
+
+    Recibe:
+
+    - Ruta de la imagen a eliminar.
+
+### schemaHelpers <a name="schemaHelpers"></a>
+
+1. **validation** - Valida que la informacion recibida se ajuste a las condiciones requeridas por los esquemas de validación.
+
+    Recibe:
+
+    - Esquema de validación (provenientes de la carpeta _[schemas]_ )
+    - Objeto con pares nombre/valor que contienen la información a validar.
+
+## MIDDLEWARES <a name="middlewares"></a>
+
+### Users <a name="middlewares-users"></a>
+
+-   **userIsLogin** - Comprueba si el usuario tiene token valido.
+-   **userExists** - Comprueba la existencia de un usuario.
+-   **userIsOwner** - Comprueba si el usuario accede a sus datos propios.
+
+### Admins <a name="middlewares-admins"></a>
+
+-   **adminIsLogged** - Comprueba si el administrador tiene token valido.
+-   **adminExists** - Comprueba la existencia de un administrador.
+-   **adminIsOwner** - Comprueba si el administrador accede a sus datos propios.
+-   **whoIs** - Comprueba el usuario es de tipo administrador o usuario devolviendo la información contenida en el token.
+
+### Spaces <a name="middlewares-spaces"></a>
+
+-   **spaceExist** - Comprueba la existencia de un usuario.
+-   **adminOwnsSpace** - Comprueba que el administrador sea el propietario del espacio.
+-   **adminOwnsSpaceCenter** - Comprueba que el administrador sea el propietario del centro que desea modificar.
+
+### Centers <a name="middlewares-centers"></a>
+
+-   **entityExist** - Comprueba que el id requerido exista en la tabla buscada (centro, espacio, usuario, etc...)
+-   **adminOwnsCenter** - Comprueba que el administrador sea el propietario del centro.
+
+### Reserves <a name="middlewares-reserves"></a>
+
+-   **userOwnsReserva** - Comprueba que el usuario sea propietario de la reserva.
+-   **adminOwnsReserva** - Comprueba que el administrador sea propietario del espacio donde se realizó la reserva.
+
+## ENDPOINTS <a name="endpoints"></a>
+
+### Users <a name="endpoints-users"></a>
+
+1.  **GET - _/api/users/_** - Envía información de un usuario concreto y su avatar.
+
+    Middlewares requeridos:
+
+    -   userIsLogin
+    -   userExist
+    -   userIsOwner
+
+2.  **GET - _/api/users/validate_** - Finaliza el alta de un usuario que recibió el correo de validación al registrarse.
+
+    Middlewares requeridos:
+
+3.  **POST - _/api/users/_** - Crea un nuevo usuario y envía mail de confirmación.
+
+    Middlewares requeridos:
+
+4.  **POST - _/api/users/login_** - Logea a un usuario retornando un token.
+
+    Middlewares requeridos:
+
+5.  **POST - _/api/users/photo_** - Cambia la foto usuario.
+
+    Middlewares requeridos:
+
+    -   userIsLogin
+    -   userExist
+
+6.  **PUT - _/api/users/_** - Edita un usuario.
+
+    Middlewares requeridos:
+
+    -   userIsLogin
+    -   userIsOwner
+    -   userExist
+
+7.  **DELETE - _/api/users/_** - Borra un usuario.
+
+    Middlewares requeridos:
+
+    -   userIsLogin
+    -   userExist
+
+### Admins <a name="endpoints-admins"></a>
+
+1.  **GET - _/api/admins/_** - Envía información de un administrador concreto y su avatar.
+
+    Middlewares requeridos:
+
+    -   adminExists
+    -   adminIsLogged
+    -   adminIsOwner
+
+2.  **GET - _/api/admins/validate_** - Finaliza el alta de un administrador que recibió el correo de validación al registrarse.
+
+    Middlewares requeridos:
+
+3.  **POST - _/api/admins/_** - Crea un nuevo administrador y envía mail de confirmación.
+
+    Middlewares requeridos:
+
+4.  **POST - _/api/admins/login_** - Logea a un administrador retornando un token.
+
+    Middlewares requeridos:
+
+5.  **POST - _/api/admins/photo_** - Cambia la foto de administrador.
+
+    Middlewares requeridos:
+
+    -   adminExists
+    -   adminIsLogged
+    -   adminIsOwner
+
+6.  **PUT - _/api/admins/_** - Edita un administrador.
+
+    Middlewares requeridos:
+
+    -   adminExists
+    -   adminIsLogged
+    -   adminIsOwner
+
+7.  **DELETE - _/api/admins/_** - Borra un administrador.
+
+    Middlewares requeridos:
+
+    -   adminExists
+    -   adminIsLogged
+    -   adminIsOwner
+
+### Spaces <a name="endpoints-spaces"></a>
+
+1.  **GET - _/api/spaces/_** - Envía información del espacio buscado.
+
+    Middlewares requeridos:
+
+    -   spaceExist
+    -   whoIs
+
+2.  **POST - _/api/spaces/_** - Crea un nuevo espacio en el centro asignado.
+
+    Middlewares requeridos:
+
+    -   adminIsLogged
+    -   adminOwnsSpaceCenter
+
+3.  **POST - _/api/spaces/photo_** - Sube una nueva foto al espacio requerido
+
+    Middlewares requeridos:
+
+    -   spaceExists
+    -   adminIsLogged
+    -   adminOwnsSpaceCenter
+
+4.  **PUT - _/api/spaces/_** - Edita un espacio.
+
+    Middlewares requeridos:
+
+    -   spaceExists
+    -   adminIsLogged
+    -   adminOwnsSpace
+
+5.  **DELETE - _/api/spaces/_** - Borra un espacio.
+
+    Middlewares requeridos:
+
+    -   spaceExists
+    -   adminIsLogged
+    -   adminOwnsSpace
+
+### Centers <a name="endpoints-centers"></a>
+
+1.  **GET - _/api/centers/_** - Envía información del centro buscado.
+
+    Middlewares requeridos:
+
+    -   whoIs
+    -   entityExist
+
+2.  **POST - _/api/centers/_** - Crea un nuevo centro para el administrador.
+
+    Middlewares requeridos:
+
+    -   adminIsLogged
+
+3.  **POST - _/api/centers/photo_** - Sube una nueva foto al centro requerido
+
+    Middlewares requeridos:
+
+    -   entityExists
+    -   adminIsLogged
+    -   adminOwnsCenter
+
+4.  **PUT - _/api/centers/_** - Edita un centro.
+
+    Middlewares requeridos:
+
+    -   entityExists
+    -   adminIsLogged
+    -   adminOwnsCenter
+
+5.  **DELETE - _/api/centers/_** - Borra un centro.
+
+    Middlewares requeridos:
+
+    -   entityExists
+    -   adminIsLogged
+    -   adminOwnsCenter
+
+### Reserves <a name="endpoints-reserves"></a>
+
+1.  **GET - _/api/reserves/_** - Envía la información de la reserva solicitada.
+
+    Middlewares requeridos:
+
+    -   entityExists
+    -   userIsLogin
+    -   userOwnsReserve
+
+2.  **GET - _/api/reserves/allreserves_** - Envía un resumen de todas las reservas de un usuario.
+
+    Middlewares requeridos:
+
+    -   userIsLogin
+
+3.  **GET - _/api/reserves/payment_** - Envía un correo al usuario desde el cual puede abonar la reserva especificada.
+
+    Middlewares requeridos:
+
+    -   entityExists
+    -   userIsLogin
+    -   userOwnsReserve
+
+4.  **GET - _/api/reserves/validate_** - Finaliza el abono de una reserva para el usuario que solicitó un correo de pago.
+
+    Middlewares requeridos:
+
+5.  **POST - _/api/reserves/_** - Crea una nueva reserva.
+
+    Middlewares requeridos:
+
+    -   userIsLogin
+
+6.  **PUT - _/api/reserves/cleaning_** - Cambia el estado de limpieza del espacio solicitado
+
+    Middlewares requeridos:
+
+    -   entityExists
+    -   userIsLogin,
+    -   userOwnsReserve
+
+7.  **PUT - _/api/reserves/rate_** - Puntúa la reserva especificada.
+
+    Middlewares requeridos:
+
+    -   entityExists
+    -   userIsLogin,
+    -   userOwnsReserve
+
+### Incidences <a name="endpoints-incidences"></a>
+
+1.  **GET - _/api/incidences/_** - Envía la información de la incidencia solicitada.
+
+    Middlewares requeridos:
+
+    -   entityExists
+    -   userIsLogin
+    -   userOwnsReserve
+
+2.  **GET - _/api/incidences/allincidences_** - Envía un resumen de todas las incidencias de un usuario.
+
+    Middlewares requeridos:
+
+    -   userIsLogin
+
+3.  **POST - _/api/incidences/_** - Crea una nueva incidencia.
+
+    Middlewares requeridos:
+
+    -   userIsLogin
+    -   userOwnsReserve
+
+4.  **PUT - _/api/incidences/_** - Modifica el estado de una incidencia creada por un usuario.
+
+    Middlewares requeridos:
+
+    -   entityExists,
+    -   adminIsLogged,
+    -   adminOwnsReserve,
+
+### Search <a name="endpoints-search"></a>
+
+1.  **GET - _/api/search/center_** - Envía la información de los centros que cumplen con los requisitos solicitados.
+
+    Middlewares requeridos:
+
+2.  **GET - _/api/search/space_** - Envía la información de los espacios que cumplen con los requisitos solicitados.
+
+    Middlewares requeridos:
+
+### Photos <a name="endpoints-photos"></a>
+
+1.  **GET - _api/images/adminsPhotos_** - Retorna el avatar solicitado por el cliente tipo administrador.
+
+    Middlewares requeridos:
+
+2.  **GET - _api/images/usersPhotos_** - Retorna el avatar solicitado por el cliente tipo usuario.
+
+    Middlewares requeridos:
+
+3.  **GET - _api/images/spacesCentersPhotos_** - Retorna la imagen solicitada.
+
+    Middlewares requeridos:
+
+### MyCenter <a name="endpoints-mycenter"></a>
+
+1.  **GET - _api/mycenter/_** - Retorna un resumen con la información de todos los centros de un administrador. Esto incluye reservas, incidencias y valoraciones.
+
+    Middlewares requeridos:
+
+## STATIC <a name="static"></a>
+
+### Html <a name="static-html"></a>
+
+1.  **validatedPayment** - Página estática a la que se redirige al usuario cuando ha realizado exitosamente el pago de su reserva.
+
+2.  **validatedUser** - Página estática a la que se redirige tanto la usuario como al administrador cuando ha dado de alta su cuenta.
+
+### Uploads <a name="static-uploads"></a>
+
+1.  **adminsPhotos** - Espacio de la memoria donde se guardan las imágenes de los avatar de los administradores.
+
+2.  **adminsPhotos** - Espacio de la memoria donde se guardan las imágenes de los avatar de los usuarios.
+
+3.  **spaceCentersPhotos** - Espacio de la memoria donde se guardan las imágenes de los espacios y tambien los centros.
