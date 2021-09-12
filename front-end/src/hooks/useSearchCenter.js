@@ -4,7 +4,7 @@ import getData from '../helpers/getData';
 import objectToQuerryParamsString from '../helpers/objectToQuerryParamsString';
 import cleanSearchObject from '../helpers/cleanSearchObject';
 
-export default function useSearchSpace(INITIAL_SEARCH_OBJECT) {
+export default function useSearchCenter(INITIAL_SEARCH_OBJECT) {
     const [searchObject, setSearchObject] = useState(INITIAL_SEARCH_OBJECT);
     const [loading, setLoading] = useState(false);
     const [results, setResults] = useState([]);

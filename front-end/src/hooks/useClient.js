@@ -6,7 +6,9 @@ function useClient() {
     const context = useContext(ClientContext);
 
     if (!context) {
-        throw new Error(`useContext must be used within a CountProvider`);
+        throw new Error(
+            `useClient debe ser usado dentro del contexto  ClientProvider`
+        );
     }
 
     return context;
