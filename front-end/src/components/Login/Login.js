@@ -24,7 +24,7 @@ function Login({ handleClose }) {
                 type: 'secondary',
             },
             {
-                text: 'admin',
+                text: 'admins',
                 action: () => setUserType('administrador'),
                 type: 'secondary',
             },
