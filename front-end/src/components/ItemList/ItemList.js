@@ -86,7 +86,11 @@ export default function ItemList({ listData, checkInputAction, checkValues }) {
     return (
         <section className="itemList">
             <h3>{name}</h3>
-            {renderedList}
+            {data?.length !== 0 ? (
+                renderedList
+            ) : (
+                <div>La lista se encuentra vacía</div>
+            )}
         </section>
     );
 }
