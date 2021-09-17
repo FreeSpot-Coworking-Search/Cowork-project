@@ -39,7 +39,7 @@ export default function SearchForm({
     setOpen(false);
   };
 
-  console.log(searchObject);
+  console.log(searchObject.fecha_entrada);
   return (
     <form onSubmit={onSubmitForm} className={className + ' searchForm'}>
       <fieldset className="searchFormFieldset">
@@ -95,40 +95,27 @@ export default function SearchForm({
           setNewSearchObject={setNewSearchObject}
           newSearchObject={newSearchObject}
         />
-        {/* <div className="search">
-          <label className="searchRange">
-            <p>{`${formLimits.minPrice} €`}</p>
-            <input
-              id="range"
-              type="range"
-              min={formLimits.minPrice}
-              max={formLimits.maxPrice}
-              value={
-                newSearchObject.precio_maximo > formLimits.maxPrice
-                  ? formLimits.maxPrice
-                  : newSearchObject.precio_maximo
-              }
-              onChange={(event) =>
-                setNewSearchObject({
-                  ...newSearchObject,
-                  precio_maximo: event.target.value,
-                })
-              }
-            />
-            <p>{`${formLimits.maxPrice} €`}</p>
-          </label>
-        </div> */}
 
         <div onClick={handleClickOpen} className="searchFormLabel">
           <div>
             <p>Fecha de entrada</p>
-            <p>
-              {new Date(newSearchObject.fecha_entrada).toLocaleDateString()}
-            </p>
+            {newSearchObject.fecha_entrada ? (
+              <p>
+                {new Date(newSearchObject.fecha_entrada).toLocaleDateString()}
+              </p>
+            ) : (
+              <p>-</p>
+            )}
           </div>
           <div>
             <p>Fecha de salida</p>
-            <p>{new Date(newSearchObject.fecha_salida).toLocaleDateString()}</p>
+            {newSearchObject.fecha_salida ? (
+              <p>
+                {new Date(newSearchObject.fecha_salida).toLocaleDateString()}
+              </p>
+            ) : (
+              <p>-</p>
+            )}
           </div>
         </div>
         <Dialog open={open} onClose={handleClose}>
