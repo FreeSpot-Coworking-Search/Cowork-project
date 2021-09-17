@@ -2,4 +2,10 @@
     fill: currentColor;
     color: rgba(var(--secondary),1);
     width: 5vw;
+    position: absolute;
+    bottom: 0vw;
+    left: -2.5vw;
    }
+.pointerContainer{
+    position: relative;
+}

@@ -13,6 +13,7 @@ export default function SearchPointer({ text, id, searchObject }) {
           { id_centro: id },
           cleanSearchObject(searchObject)
         )}
+        className="pointerContainer"
       >
         <SearchPointerIcon className="searchPointer" />
       </Link>
