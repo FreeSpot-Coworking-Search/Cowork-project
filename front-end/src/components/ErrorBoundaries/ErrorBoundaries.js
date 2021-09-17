@@ -19,10 +19,10 @@ class ErrorHeader extends React.Component {
     render() {
         if (this.state.hasError) {
             return (
-                <header className="header">
+                <header className="header errorPage">
                     <p>
-                    Se ha generado un error en el header. Vuelve a cargar la
-                    página
+                        Se ha generado un error en el header. Prueba recargando
+                        la página.
                     </p>
                 </header>
             );
@@ -50,10 +50,10 @@ class ErrorMain extends React.Component {
     render() {
         if (this.state.hasError) {
             return (
-                <header className="mainSection">
+                <header className="mainSection errorPage">
                     <p>
-                    Se ha generado un error en el Main. Vuelve a cargar la
-                    página
+                        Se ha generado un error en el Main. Prueba recargando la
+                        página o volviendo a la página anterior
                     </p>
                 </header>
             );

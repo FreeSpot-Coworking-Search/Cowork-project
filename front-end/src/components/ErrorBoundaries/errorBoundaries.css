@@ -8,3 +8,11 @@
     align-items: flex-start;
     padding-bottom: 10px;
 }
+
+.errorPage {
+    display: flex;
+    flex-direction: row;
+    text-align: justify;
+    color: rgba(var(--dark), 1);
+    background-color: rgba(var(--clear), 0.6);
+}
