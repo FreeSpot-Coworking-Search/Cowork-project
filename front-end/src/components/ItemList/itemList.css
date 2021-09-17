@@ -20,9 +20,16 @@
 
 .list-checked li {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     flex-direction: row;
     justify-content: space-between;
+    gap: 2vw;
+}
+
+.list-checked-label {
+    display: flex;
+    justify-content: space-between;
+    gap: 1vw;
 }
 
 .priceItem::after {
