@@ -41,9 +41,13 @@
     gap:1vh;
     color: rgba(var(--dark));
     font-size: var(--presentationSubTittle);
+    
 }
 .homeSearchElementDates>label>div>input::-webkit-calendar-picker-indicator {
     color:rgba(var(--clear));
+    padding: 0;
+    padding-right: 0.1vw;
+    margin: 0;
 }
 
 .homeSearch-txt{
@@ -61,14 +65,15 @@
     color: rgba(var(--clear));
 }
 .homeSearchElement{
-    background: rgba(var(--secondary),0.6) ;
+    background: rgba(var(--secondary),0.6);
     min-width: 150px;
+    padding: 0.2vw;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 3vh;
     border-radius: 40px;
-    width: 60%;
+    width: 70%;
 }
 
 .homeSearchElement:hover {

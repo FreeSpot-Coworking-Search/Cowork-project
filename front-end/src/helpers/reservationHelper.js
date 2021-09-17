@@ -60,7 +60,8 @@ export function reservationHelper(spaceData, reservation) {
       (accumulator, currentValue) => accumulator + Number(currentValue.precio),
       0
     );
-    const days = differenceInDays(fecha_salida, fecha_entrada) + 1;
+    const days =
+      differenceInDays(new Date(fecha_salida), new Date(fecha_entrada)) + 1;
     return (spacePrice + servicesPrice) * days;
   }
 
