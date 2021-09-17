@@ -40,7 +40,10 @@ export default function ItemList({ listData, checkInputAction, checkValues }) {
                     <ul className="list list-checked">
                         {data?.map((item) => (
                             <li key={item.nombre}>
-                                <label htmlFor={item.id}>
+                                <label
+                                    htmlFor={item.id}
+                                    className="list-checked-label"
+                                >
                                     <input
                                         type="checkbox"
                                         id={item.id}
@@ -53,12 +56,14 @@ export default function ItemList({ listData, checkInputAction, checkValues }) {
                                                 ? checkValues[item.id]
                                                 : false
                                         }
-                                    />{' '}
+                                    />
                                     <span>{item.nombre}</span>
                                 </label>
                                 <span>
-                                    ${item.precio}
-                                    <small>/dia</small>
+                                    <small>
+                                        {item.precio}
+                                        €/dia
+                                    </small>
                                 </span>
                             </li>
                         ))}
@@ -81,7 +86,11 @@ export default function ItemList({ listData, checkInputAction, checkValues }) {
     return (
         <section className="itemList">
             <h3>{name}</h3>
-            {renderedList}
+            {data?.length !== 0 ? (
+                renderedList
+            ) : (
+                <div>La lista se encuentra vacía</div>
+            )}
         </section>
     );
 }
