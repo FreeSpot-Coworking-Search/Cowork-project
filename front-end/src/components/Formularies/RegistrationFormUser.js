@@ -28,7 +28,7 @@ export default function RegistrationFormUser({ className, ...params }) {
   }
 
   return (
-    <form className={`${className} registerForm`}>
+    <form autoComplete="off" className={`${className} registerForm`}>
       <h1 className="registerForm-title">Registro de usuario</h1>
 
       <div className="registerForm-inputs">

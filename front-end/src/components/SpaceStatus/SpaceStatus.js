@@ -5,6 +5,7 @@ import './SpaceStatus.css';
 
 export default function SpaceStatus({ space }) {
   const openIncidences = openIncidencesNumber(space);
+  console.log(space);
   return (
     <ul className="spaceStatus">
       <li>
@@ -22,7 +23,7 @@ export default function SpaceStatus({ space }) {
         )}
       </li>
       <li>
-        {openIncidences === 1 ? (
+        {openIncidences > 0 ? (
           <div className="notificationContainer">
             <img src={incidentsIcon} alt="Icono de incidencia" />
             <p className="miniNotificationBubble">{openIncidences}</p>

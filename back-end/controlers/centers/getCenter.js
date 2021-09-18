@@ -71,6 +71,7 @@ const getCenter = async (req, res, next) => {
 
 		console.log('Mostrando centro requerido, Id:', id);
 		res.status(200);
+		console.log(centro);
 		res.send({
 			center: centro,
 		});

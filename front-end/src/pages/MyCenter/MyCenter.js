@@ -110,7 +110,7 @@ export default function MyCenter({ className }) {
         <HelpPresentation
           className="mainSectionRightArticle"
           image={formIllustration}
-          text="Cubramos los datos de su centro"
+          text="Cubramos los datos de su espacio"
         />
       </div>
     ),
