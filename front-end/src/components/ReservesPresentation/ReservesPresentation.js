@@ -47,7 +47,7 @@ export default function ReservesPresentation({
                 </h3>
                 <ReservesList
                     reservesList={reservations?.filter((reserve) =>
-                        isPrevious(reserve?.fecha_inicio)
+                        isPrevious(reserve?.fecha_fin)
                     )}
                     fullView={fullView}
                     refDialog={refDialog}
