@@ -16,7 +16,9 @@ const adminIsLogged = (req, res, next) => {
 		try {
 			tokenInfo = jwt.verify(authorization, process.env.TOKEN_SECRET);
 		} catch (error) {
-			const err = new Error('Contraseña incorrecta');
+			const err = new Error(
+				'Debes loguearte para poder realizar esta acción'
+			);
 			err.httpStatus = 401;
 			throw err;
 		}
