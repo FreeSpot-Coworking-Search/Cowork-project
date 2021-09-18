@@ -4,7 +4,7 @@ import './form.css';
 
 import { useState, useMemo } from 'react';
 import { useClient } from '../../hooks/useClient';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ButtonList from '../ButtonList/ButtonList';
 const axios = require('axios');
 
@@ -24,7 +24,7 @@ function Login({ handleClose }) {
         type: 'secondary',
       },
       {
-        text: 'Admins',
+        text: 'admins',
         action: () => setUserType('administrador'),
         type: 'secondary',
       },
