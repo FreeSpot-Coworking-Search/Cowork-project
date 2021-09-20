@@ -297,14 +297,14 @@ async function resetDB() {
 	  activo
 	  )
 	  VALUES(
-		"jcoastmail@gmail.com",
+		"testUser01@gmail.com",
 		"${await bcrypt.hash('password1234', 10)}",
-		"jCoast",
-		"Dani",
+		"User01",
+		"Pepe",
 		"Martinez",
 		"1982-10-04",
 		"666666666",
-		"Hola soy Dani",
+		"Hola soy Pepe",
 		"${now}",
 		"admin",
 		"1"
@@ -327,14 +327,14 @@ async function resetDB() {
 	  activo
 	  )
 	  VALUES(
-		"richardzarroca@gmail.com",
+		"testUser01@gmail.com",
 		"${await bcrypt.hash('user123456', 10)}",
-		"rzarroca",
-		"Ricardo",
-		"Zarroca",
-		"1990-06-13",
+		"User01",
+		"Maria",
+		"del Carmen",
+		"1990-04-10",
 		"+34123456",
-		"Hola soy Ricardo",
+		"Hola soy Maria",
 		"${now}",
 		"admin",
 		"1"
@@ -760,11 +760,11 @@ async function resetDB() {
 	  roll
 	  )
 	  VALUES(
-		"jcoastmail@gmail.com",
+		"testAdmin01@gmail.com",
 		"${await bcrypt.hash('password1234', 10)}",
-		"Dani",
-		"Martinez",
-		"1982-10-04",
+		"Lucas",
+		"Gonzalez",
+		"1987-04-04",
 		"1",
 		"${now}",
 		"admin"
@@ -784,11 +784,11 @@ async function resetDB() {
 	  roll
 	  )
 	  VALUES(
-		"richardzarroca@gmail.com",
+		"testAdmin01@gmail.com",
 		"${await bcrypt.hash('admin123456', 10)}",
-		"Ricardo",
-		"Zarroca",
-		"1990-06-13",
+		"Julieta",
+		"Enriqueta",
+		"1985-06-27",
 		"1",
 		"${now}",
 		"admin"
