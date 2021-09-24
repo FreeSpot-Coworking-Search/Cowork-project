@@ -1,4 +1,3 @@
-# COWORKING PROJECT - Proyecto Final Hack a Boss
 ![](/front-end/src/assets/logos/COWORKproject.png)
 ## DESCRIPCION:
 
