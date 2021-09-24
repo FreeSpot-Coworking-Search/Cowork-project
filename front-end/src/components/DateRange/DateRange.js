@@ -53,6 +53,7 @@ export default function DateRangeSelector({
                 onChange={(event) => handleSelect(event)}
                 minDate={minDate ? new Date(minDate) : new Date()}
                 disabledDates={disabledDates}
+                shownDate={new Date()}
             />
         </div>
     );
