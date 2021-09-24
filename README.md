@@ -1,5 +1,5 @@
 # COWORKING PROJECT - Proyecto Final Hack a Boss
-
+![](/front-end/src/assets/logos/COWORKproject.png)
 ## DESCRIPCION:
 
 El proyecto aquí presentado despliega una web app donde publicar espacios de coworking, reservar y gestionar cada espacio.
