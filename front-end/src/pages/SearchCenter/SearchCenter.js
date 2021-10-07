@@ -27,11 +27,8 @@ export default function SearchCenter({ className }) {
     'fecha_entrada',
     'fecha_salida',
   ]);
-  const {
-    REACT_APP_API_LOCAL_SERVER_HOST: host,
-    REACT_APP_API_LOCAL_SERVER_PORT: port,
-  } = process.env;
-  const linksRoute = `${host}:${port}/api/search/space`;
+  const { REACT_APP_API_LOCAL_SERVER_HOST: host } = process.env;
+  const linksRoute = `${host}/api/search/space`;
 
   const [visualization, setVisualization] = useState('list');
   const [fullView] = useFullView();
