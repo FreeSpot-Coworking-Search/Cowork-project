@@ -21,7 +21,7 @@ const getPayment = async (req, res, next) => {
 
 		const emailBody = `
             Enlace de Coworking Proyect <Hack a Boss>.
-            Para abonar tu reserva accede al siguiente enlace: <a href="http://${process.env.SERVER_HOST}:${process.env.SERVER_PORT}/api/reserves/validate/?code=${codigo_pago}">Abonar Reserva</a>
+            Para abonar tu reserva accede al siguiente enlace: <a href="http://${process.env.SERVER_HOST}/api/reserves/validate/?code=${codigo_pago}">Abonar Reserva</a>
         `;
 
 		const result = await getRegistrations('usuarios', { id: id_usuario });

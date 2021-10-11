@@ -41,7 +41,7 @@ const postUser = async (req, res, next) => {
 
 		const emailBody = `
             Bienvenido a Coworking Proyect <Hack a Boss>.
-            Estas a punto de terminar: <a href="http://${process.env.SERVER_HOST}:${process.env.SERVER_PORT}/api/users/validate/?code=${codigo_registro}">
+            Estas a punto de terminar: <a href="http://${process.env.SERVER_HOST}/api/users/validate/?code=${codigo_registro}">
 			Haz click aquí para finalizar tu registro</a>
         `;
 

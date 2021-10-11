@@ -49,5 +49,5 @@ app.use((req, res) => {
 });
 
 app.listen(SERVER_PORT, SERVER_HOST, () =>
-	console.log(`Server listening at http://${SERVER_HOST}:${SERVER_PORT}`)
+	console.log(`Server listening at http://${SERVER_HOST}`)
 );
