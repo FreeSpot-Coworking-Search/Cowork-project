@@ -9,10 +9,7 @@ import {
 
 import axios from 'axios';
 
-const {
-  REACT_APP_API_LOCAL_SERVER_HOST: host,
-  REACT_APP_API_LOCAL_SERVER_PORT: port,
-} = process.env;
+const { REACT_APP_API_LOCAL_SERVER_HOST: host } = process.env;
 
 export default function ModificationFormSpace({ className, spaceData }) {
   const history = useHistory();
@@ -28,7 +25,7 @@ export default function ModificationFormSpace({ className, spaceData }) {
     try {
       setMessage('Enviando datos');
 
-      const route = `${host}:${port}/api/spaces/?id=${spaceData.id}`;
+      const route = `${host}/api/spaces/?id=${spaceData.id}`;
 
       const updateObject = {
         nombre: spaceData.nombre,

@@ -37,7 +37,7 @@ export default function RegistrationFormCenter({ className }) {
     e.preventDefault();
     try {
       setMessage('Enviando datos');
-      const route = `${host}:${port}/api/centers/`;
+      const route = `${host}/api/centers/`;
 
       const response = await axios.post(route, centerInfo);
       if (response.status === 200) {

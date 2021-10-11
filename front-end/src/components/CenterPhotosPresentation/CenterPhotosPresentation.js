@@ -3,10 +3,7 @@ import './CenterPhotosPresentation.css';
 import { useState } from 'react';
 import ImagePicker from '../ImagePicker/ImagePicker';
 
-const {
-  REACT_APP_API_LOCAL_SERVER_HOST: host,
-  REACT_APP_API_LOCAL_SERVER_PORT: port,
-} = process.env;
+const { REACT_APP_API_LOCAL_SERVER_HOST: host } = process.env;
 
 export default function CenterPhotosPresentation({
   imagenes,
@@ -18,8 +15,8 @@ export default function CenterPhotosPresentation({
   const [message, setMessage] = useState(false);
   const [error, setError] = useState(false);
 
-  const baseImageURL = `${host}:${port}/api/images/spacesCentersPhotos/`;
-  const actionsRoute = `${host}:${port}/api/centers/photo/`;
+  const baseImageURL = `${host}/api/images/spacesCentersPhotos/`;
+  const actionsRoute = `${host}/api/centers/photo/`;
 
   const props = {
     images: imagenes,

@@ -5,10 +5,7 @@ import { useClient } from '../../hooks/useClient';
 import { NoCameraIcon } from '../../components/Icons/Icons';
 import NoPhoto from '../NoPhoto/NoPhoto';
 
-const {
-  REACT_APP_API_LOCAL_SERVER_HOST: host,
-  REACT_APP_API_LOCAL_SERVER_PORT: port,
-} = process.env;
+const { REACT_APP_API_LOCAL_SERVER_HOST: host } = process.env;
 const axios = require('axios');
 
 export default function ImageCard({ className }) {
@@ -20,8 +17,8 @@ export default function ImageCard({ className }) {
 
   const imageSrc =
     tipo === 'administrador'
-      ? `${host}:${port}/api/images/adminsPhotos/`
-      : `${host}:${port}/api/images/usersPhotos/`;
+      ? `${host}/api/images/adminsPhotos/`
+      : `${host}/api/images/usersPhotos/`;
 
   function onFileChange(event) {
     const file = event.target.files[0];
@@ -35,8 +32,8 @@ export default function ImageCard({ className }) {
 
       const route =
         tipo === 'administrador'
-          ? `${host}:${port}/api/admins/photo/?id=${idAuth}`
-          : `${host}:${port}/api/users/photo/?id=${idUser}`;
+          ? `${host}/api/admins/photo/?id=${idAuth}`
+          : `${host}/api/users/photo/?id=${idUser}`;
       const response = await axios.post(route, data);
       if (response.status === 200) {
         setMessage('Imagen modificada.');

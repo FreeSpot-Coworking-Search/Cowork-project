@@ -15,10 +15,7 @@ import {
 
 const ImageCard = lazy(() => import('../../components/ImageCard/ImageCard'));
 
-const {
-  REACT_APP_API_LOCAL_SERVER_HOST: host,
-  REACT_APP_API_LOCAL_SERVER_PORT: port,
-} = process.env;
+const { REACT_APP_API_LOCAL_SERVER_HOST: host } = process.env;
 const axios = require('axios');
 
 export default function Admin({ className }) {
@@ -129,7 +126,7 @@ export default function Admin({ className }) {
       }
       setMessage('Enviando datos');
 
-      const route = `${host}:${port}/api/admins/?id=${clientData.idAuth}`;
+      const route = `${host}/api/admins/?id=${clientData.idAuth}`;
 
       let data = new FormData();
       for (const key in form) {

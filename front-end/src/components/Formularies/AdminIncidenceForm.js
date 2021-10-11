@@ -3,10 +3,7 @@ import '../Formularies/Form.css';
 import { useState } from 'react';
 import axios from 'axios';
 
-const {
-  REACT_APP_API_LOCAL_SERVER_HOST: host,
-  REACT_APP_API_LOCAL_SERVER_PORT: port,
-} = process.env;
+const { REACT_APP_API_LOCAL_SERVER_HOST: host } = process.env;
 
 export default function AdminIncidenceForm({
   className,
@@ -46,7 +43,7 @@ export default function AdminIncidenceForm({
         setMessage('');
       }, 2000);
 
-      const route = `${host}:${port}/api/incidences/?id=${incidence.id}`;
+      const route = `${host}/api/incidences/?id=${incidence.id}`;
       const response = await axios.put(route, {
         respuesta: incidence.respuesta,
       });

@@ -8,10 +8,7 @@ import { Link } from 'react-router-dom';
 import ButtonList from '../ButtonList/ButtonList';
 const axios = require('axios');
 
-const {
-  REACT_APP_API_LOCAL_SERVER_HOST: host,
-  REACT_APP_API_LOCAL_SERVER_PORT: port,
-} = process.env;
+const { REACT_APP_API_LOCAL_SERVER_HOST: host } = process.env;
 
 function Login({ handleClose }) {
   const [userType, setUserType] = useState('usuario');
@@ -69,8 +66,8 @@ function Form({ userType, handleClose, history }) {
     try {
       const route =
         userType === 'usuario'
-          ? `${host}:${port}/api/users/login`
-          : `${host}:${port}/api/admins/login`;
+          ? `${host}/api/users/login`
+          : `${host}/api/admins/login`;
 
       const response = await axios.post(route, {
         correo: email,

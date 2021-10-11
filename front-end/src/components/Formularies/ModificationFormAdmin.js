@@ -13,10 +13,7 @@ import { FaUser } from 'react-icons/fa';
 import { FaUsers } from 'react-icons/fa';
 
 import axios from 'axios';
-const {
-  REACT_APP_API_LOCAL_SERVER_HOST: host,
-  REACT_APP_API_LOCAL_SERVER_PORT: port,
-} = process.env;
+const { REACT_APP_API_LOCAL_SERVER_HOST: host } = process.env;
 
 export default function ModificationFormAdmin({ className, ...params }) {
   const { open, handleClickOpen, handleClose } = useDialog();
@@ -35,7 +32,7 @@ export default function ModificationFormAdmin({ className, ...params }) {
   async function deleteClient(e) {
     try {
       e.preventDefault();
-      const route = `${host}:${port}/api/admins/?id=${id}`;
+      const route = `${host}/api/admins/?id=${id}`;
       const response = axios.delete(route);
       setClientData({ state: false });
 

@@ -12,10 +12,7 @@ import { BsCalendarFill } from 'react-icons/bs';
 import { FaUser, FaUsers, FaUserTag, FaPhoneAlt } from 'react-icons/fa';
 
 import axios from 'axios';
-const {
-  REACT_APP_API_LOCAL_SERVER_HOST: host,
-  REACT_APP_API_LOCAL_SERVER_PORT: port,
-} = process.env;
+const { REACT_APP_API_LOCAL_SERVER_HOST: host } = process.env;
 
 export default function ModificationFormUser({ className, ...params }) {
   const { open, handleClickOpen, handleClose } = useDialog();
@@ -34,7 +31,7 @@ export default function ModificationFormUser({ className, ...params }) {
   async function deleteClient(e) {
     try {
       e.preventDefault();
-      const route = `${host}:${port}/api/users/?id=${id}`;
+      const route = `${host}/api/users/?id=${id}`;
       const response = axios.delete(route);
       setClientData({ state: false });
 

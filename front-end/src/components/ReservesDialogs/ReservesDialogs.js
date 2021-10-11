@@ -11,138 +11,139 @@ import { getIncidenceList } from '../../helpers/reservesHelpers';
 import axios from 'axios';
 
 const {
-    REACT_APP_API_LOCAL_SERVER_HOST: host,
-    REACT_APP_API_LOCAL_SERVER_PORT: port,
+  REACT_APP_API_LOCAL_SERVER_HOST: host,
+  REACT_APP_API_LOCAL_SERVER_PORT: port,
 } = process.env;
 
 export default function ReservesDialog({
-    choosedDialog,
-    reservation,
-    handleClose,
+  choosedDialog,
+  reservation,
+  handleClose,
 }) {
-    const [error, setError] = useState();
-    const [message, setMessage] = useState();
+  const [error, setError] = useState();
+  const [message, setMessage] = useState();
 
-    async function sendPaymentMail() {
-        try {
-            setMessage('Enviando peticion');
+  async function sendPaymentMail() {
+    try {
+      setMessage('Enviando peticion');
 
-                setTimeout(() => {
-                  setMessage('');
-                }, 3000);
+      setTimeout(() => {
+        setMessage('');
+      }, 3000);
 
-            const route = `${host}:${port}/api/reserves/payment/?id=${reservation.id}`;
-            const response = await axios.get(route);
-            if (response.status === 200) {
-                setMessage('Hemos enviado un mail a su correo para abonar reserva. Ya puedes cerrar esta página');
+      const route = `${host}/api/reserves/payment/?id=${reservation.id}`;
+      const response = await axios.get(route);
+      if (response.status === 200) {
+        setMessage(
+          'Hemos enviado un mail a su correo para abonar reserva. Ya puedes cerrar esta página'
+        );
 
-                setTimeout(() => {
-                  setMessage('');
-                }, 3000);
+        setTimeout(() => {
+          setMessage('');
+        }, 3000);
+      }
+    } catch (error) {
+      setMessage('');
 
-              }
-            } catch (error) {
-              setMessage('');
-        
-              const {
-                data: { message },
-              } = error.response;
-        
-              message ? setError(message) : setError(error.message);
-              setTimeout(() => {
-                setError('');
-              }, 3000);
-            }
-          }
+      const {
+        data: { message },
+      } = error.response;
 
-    const dialogOptions = {
-        paymentDialogPendiente: (
-            <article className="dialog">
-                <h1>Abonar reserva de {reservation?.nombre}</h1>
-                <p>
-                    Confirma que desear pagar y enviaremos un correo para
-                    finalizar el mismo.
-                </p>
-                {error && <p>{error}</p>}
-                {message && <p>{message}</p>}
-                <ButtonList
-                    btnBehavior={[
-                        {
-                            text: 'Enviar Correo',
-                            action: () => sendPaymentMail(),
-                            type: 'secondary',
-                        },
-                        {
-                            text: 'Cerrar',
-                            action: () => handleClose(),
-                            type: 'secondary',
-                        },
-                    ]}
-                />
-            </article>
-        ),
-        paymentDialogPagado: (
-            <article className="dialog">
-                <h1>Abonar reserva de {reservation?.nombre}</h1>
-                <p>Su reserva se encuentra actualmente abonada.</p>
-                <ButtonList
-                    btnBehavior={[
-                        {
-                            text: 'Cerrar',
-                            action: () => handleClose(),
-                            type: 'secondary',
-                        },
-                    ]}
-                />
-            </article>
-        ),
-        incidencesDialog: (
-            <article className="dialog">
-                <h1>Incidencias en {reservation?.nombre}</h1>
-                {reservation?.incidencias.map((reservation) => (
-                    <ItemList
-                        key={reservation.fecha_incidencia}
-                        listData={getIncidenceList(reservation)}
-                    />
-                ))}
-                <ButtonList
-                    btnBehavior={[
-                        {
-                            text: 'Cerrar',
-                            action: () => handleClose(),
-                            type: 'secondary',
-                        },
-                    ]}
-                />
-            </article>
-        ),
-        servicesDialog: (
-            <article className="dialog">
-                <h1>Servicios disponibles en {reservation?.nombre}</h1>
-                <InfoServicesList
-                    servicesArray={reservation?.servicios}
-                    uniqueId={reservation.id}
-                />
-                <ButtonList
-                    btnBehavior={[
-                        {
-                            text: 'Cerrar',
-                            action: () => handleClose(),
-                            type: 'secondary',
-                        },
-                    ]}
-                />
-            </article>
-        ),
-    };
+      message ? setError(message) : setError(error.message);
+      setTimeout(() => {
+        setError('');
+      }, 3000);
+    }
+  }
 
-    return (
-        <>
-            {!reservation ? (
-                <CircularProgress />
-            ) : (
-                <>{dialogOptions[choosedDialog]}</>
-            )}
-        </>
-    );
+  const dialogOptions = {
+    paymentDialogPendiente: (
+      <article className="dialog">
+        <h1>Abonar reserva de {reservation?.nombre}</h1>
+        <p>
+          Confirma que desear pagar y enviaremos un correo para finalizar el
+          mismo.
+        </p>
+        {error && <p>{error}</p>}
+        {message && <p>{message}</p>}
+        <ButtonList
+          btnBehavior={[
+            {
+              text: 'Enviar Correo',
+              action: () => sendPaymentMail(),
+              type: 'secondary',
+            },
+            {
+              text: 'Cerrar',
+              action: () => handleClose(),
+              type: 'secondary',
+            },
+          ]}
+        />
+      </article>
+    ),
+    paymentDialogPagado: (
+      <article className="dialog">
+        <h1>Abonar reserva de {reservation?.nombre}</h1>
+        <p>Su reserva se encuentra actualmente abonada.</p>
+        <ButtonList
+          btnBehavior={[
+            {
+              text: 'Cerrar',
+              action: () => handleClose(),
+              type: 'secondary',
+            },
+          ]}
+        />
+      </article>
+    ),
+    incidencesDialog: (
+      <article className="dialog">
+        <h1>Incidencias en {reservation?.nombre}</h1>
+        {reservation?.incidencias.map((reservation) => (
+          <ItemList
+            key={reservation.fecha_incidencia}
+            listData={getIncidenceList(reservation)}
+          />
+        ))}
+        <ButtonList
+          btnBehavior={[
+            {
+              text: 'Cerrar',
+              action: () => handleClose(),
+              type: 'secondary',
+            },
+          ]}
+        />
+      </article>
+    ),
+    servicesDialog: (
+      <article className="dialog">
+        <h1>Servicios disponibles en {reservation?.nombre}</h1>
+        <InfoServicesList
+          servicesArray={reservation?.servicios}
+          uniqueId={reservation.id}
+        />
+        <ButtonList
+          btnBehavior={[
+            {
+              text: 'Cerrar',
+              action: () => handleClose(),
+              type: 'secondary',
+            },
+          ]}
+        />
+      </article>
+    ),
+  };
+
+  return (
+    <>
+      {!reservation ? (
+        <CircularProgress />
+      ) : (
+        <>{dialogOptions[choosedDialog]}</>
+      )}
+    </>
+  );
 }

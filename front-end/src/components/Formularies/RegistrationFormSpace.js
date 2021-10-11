@@ -4,10 +4,7 @@ import { useState, useMemo } from 'react';
 import { Redirect, useHistory } from 'react-router-dom';
 import axios from 'axios';
 
-const {
-  REACT_APP_API_LOCAL_SERVER_HOST: host,
-  REACT_APP_API_LOCAL_SERVER_PORT: port,
-} = process.env;
+const { REACT_APP_API_LOCAL_SERVER_HOST: host } = process.env;
 
 export default function ModificationFormSpace({
   className,
@@ -44,7 +41,7 @@ export default function ModificationFormSpace({
     try {
       setMessage('Enviando datos');
 
-      const route = `${host}:${port}/api/spaces/`;
+      const route = `${host}/api/spaces/`;
 
       const spaceInfoObject = {
         ...spaceInfo,

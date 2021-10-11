@@ -7,10 +7,7 @@ import RegistrationFormUser from '../../components/Formularies/RegistrationFormU
 
 import { SaveIcon, ResetIcon } from '../../components/Icons/Icons';
 
-const {
-  REACT_APP_API_LOCAL_SERVER_HOST: host,
-  REACT_APP_API_LOCAL_SERVER_PORT: port,
-} = process.env;
+const { REACT_APP_API_LOCAL_SERVER_HOST: host } = process.env;
 const axios = require('axios');
 
 export default function UserRegistration({ className }) {
@@ -111,7 +108,7 @@ export default function UserRegistration({ className }) {
       }
       setMessage('Enviando datos');
 
-      const route = `${host}:${port}/api/users/`;
+      const route = `${host}/api/users/`;
 
       let data = new FormData();
       for (const key in form) {

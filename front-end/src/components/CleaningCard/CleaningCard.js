@@ -19,7 +19,7 @@ async function CleanSpace(space, setCenter, spaces) {
     REACT_APP_API_LOCAL_SERVER_HOST: host,
     REACT_APP_API_LOCAL_SERVER_PORT: port,
   } = process.env;
-  const route = `${host}:${port}/api/spaces/?id=${space.id}`;
+  const route = `${host}/api/spaces/?id=${space.id}`;
 
   const response = await axios.put(route, { estado: 1 });
   const index = spaces.findIndex((spaceItem) => spaceItem.id === space.id);

@@ -49,7 +49,7 @@ export default function ModificationFormCenter({
     setDisabled(true);
     try {
       setMessage('Eliminando centro');
-      const route = `${host}:${port}/api/centers/?id=${center.id}`;
+      const route = `${host}/api/centers/?id=${center.id}`;
       const response = await axios.delete(route);
 
       if (response.status === 200) {
@@ -84,7 +84,7 @@ export default function ModificationFormCenter({
 
       setMessage('Enviando datos');
 
-      const route = `${host}:${port}/api/centers/?id=${center.id}`;
+      const route = `${host}/api/centers/?id=${center.id}`;
 
       const response = await axios.put(route, centerInfo);
       console.log(response);

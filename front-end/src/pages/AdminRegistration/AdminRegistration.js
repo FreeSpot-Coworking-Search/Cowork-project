@@ -7,10 +7,7 @@ import RegistrationFormAdmin from '../../components/Formularies/RegistrationForm
 
 import { SaveIcon, ResetIcon } from '../../components/Icons/Icons';
 
-const {
-  REACT_APP_API_LOCAL_SERVER_HOST: host,
-  REACT_APP_API_LOCAL_SERVER_PORT: port,
-} = process.env;
+const { REACT_APP_API_LOCAL_SERVER_HOST: host } = process.env;
 const axios = require('axios');
 
 export default function AdminRegistration({ className }) {
@@ -116,7 +113,7 @@ export default function AdminRegistration({ className }) {
       }
       data.append('photo', photo);
 
-      const route = `${host}:${port}/api/admins/`;
+      const route = `${host}/api/admins/`;
       const config = {
         headers: { 'Content-Type': 'multipart/form-data' },
       };
