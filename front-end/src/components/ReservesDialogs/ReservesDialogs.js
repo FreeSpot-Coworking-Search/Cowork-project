@@ -10,10 +10,7 @@ import { getIncidenceList } from '../../helpers/reservesHelpers';
 
 import axios from 'axios';
 
-const {
-    REACT_APP_API_LOCAL_SERVER_HOST: host,
-    REACT_APP_API_LOCAL_SERVER_PORT: port,
-} = process.env;
+import { getHost } from '../../helpers/environmentHelpers';
 
 export default function ReservesDialog({
     choosedDialog,
@@ -27,33 +24,36 @@ export default function ReservesDialog({
         try {
             setMessage('Enviando peticion');
 
-                setTimeout(() => {
-                  setMessage('');
-                }, 3000);
+            setTimeout(() => {
+                setMessage('');
+            }, 3000);
 
-            const route = `${host}:${port}/api/reserves/payment/?id=${reservation.id}`;
+            const route = `${getHost()}/api/reserves/payment/?id=${
+                reservation.id
+            }`;
             const response = await axios.get(route);
             if (response.status === 200) {
-                setMessage('Hemos enviado un mail a su correo para abonar reserva. Ya puedes cerrar esta página');
+                setMessage(
+                    'Hemos enviado un mail a su correo para abonar reserva. Ya puedes cerrar esta página'
+                );
 
                 setTimeout(() => {
-                  setMessage('');
+                    setMessage('');
                 }, 3000);
-
-              }
-            } catch (error) {
-              setMessage('');
-        
-              const {
-                data: { message },
-              } = error.response;
-        
-              message ? setError(message) : setError(error.message);
-              setTimeout(() => {
-                setError('');
-              }, 3000);
             }
-          }
+        } catch (error) {
+            setMessage('');
+
+            const {
+                data: { message },
+            } = error.response;
+
+            message ? setError(message) : setError(error.message);
+            setTimeout(() => {
+                setError('');
+            }, 3000);
+        }
+    }
 
     const dialogOptions = {
         paymentDialogPendiente: (

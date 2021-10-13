@@ -5,10 +5,7 @@ import axios from 'axios';
 
 import { isBetween } from '../../helpers/dateHelper';
 
-const {
-    REACT_APP_API_LOCAL_SERVER_HOST: host,
-    REACT_APP_API_LOCAL_SERVER_PORT: port,
-} = process.env;
+import { getHost } from '../../helpers/environmentHelpers';
 
 export default function IncidenceForm({
     className,
@@ -60,7 +57,9 @@ export default function IncidenceForm({
             }
 
             setMessage('Enviando solicitud.');
-            const route = `${host}:${port}/api/incidences/?id=${reservations[index].id}`;
+            const route = `${getHost()}/api/incidences/?id=${
+                reservations[index].id
+            }`;
 
             const response = await axios.post(route, incidence);
             if (response.status === 200) {
@@ -127,7 +126,9 @@ export default function IncidenceForm({
                 setMessage2('');
             }, 3000);
 
-            const route = `${host}:${port}/api/reserves/cleaning/?id=${reservations[index].id}`;
+            const route = `${getHost()}/api/reserves/cleaning/?id=${
+                reservations[index].id
+            }`;
 
             const response = await axios.put(route, { estado: 1 });
 

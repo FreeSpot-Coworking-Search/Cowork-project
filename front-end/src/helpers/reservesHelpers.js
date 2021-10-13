@@ -2,10 +2,7 @@ import { toFormDate } from '../helpers/dateHelper';
 
 import axios from 'axios';
 
-const {
-    REACT_APP_API_LOCAL_SERVER_HOST: host,
-    REACT_APP_API_LOCAL_SERVER_PORT: port,
-} = process.env;
+import { getHost } from './environmentHelpers';
 
 function getReservesList(reservation) {
     return {
@@ -102,7 +99,7 @@ function findActiveIncidence(incidences) {
 
 async function sendPaymentMail(reservation) {
     try {
-        const route = `${host}:${port}/api/reserves/payment/?id=${reservation.id}`;
+        const route = `${getHost()}/api/reserves/payment/?id=${reservation.id}`;
         const response = await axios.get(route);
         return response;
     } catch (error) {
