@@ -5,10 +5,10 @@ const morgan = require('morgan');
 const cors = require('cors');
 
 const app = express();
-const { SERVER_HOST, SERVER_PORT, FRONT_ORIGIN } = process.env;
+const { SERVER_HOST, SERVER_PORT, FRONT_ORIGIN, NODE_ENV } = process.env;
 
 const corsOptions = {
-	origin: FRONT_ORIGIN,
+	origin: NODE_ENV === 'production' ? FRONT_ORIGIN : 'http://localhost:3000',
 	optionsSuccessStatus: 200,
 };
 
@@ -16,8 +16,6 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(morgan('dev'));
 app.use(fileUpload());
-
-//app.use(express.static('static'));
 
 app.use('/api/reset', require('./controlers/db'));
 app.use('/api/users', require('./controlers/users'));
@@ -41,6 +39,7 @@ app.use((error, req, res, next) => {
 		message: error.message,
 	});
 });
+
 app.use((req, res) => {
 	res.status(404).send({
 		status: 'error',
