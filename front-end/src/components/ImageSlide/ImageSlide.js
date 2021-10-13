@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import NoPhoto from '../NoPhoto/NoPhoto';
 import './ImageSlide.css';
+import { getHost } from '../../helpers/environmentHelpers';
 
 export default function ImageSlide({ images, className, tag }) {
     const [slide, setSlide] = useState([]);
@@ -57,7 +58,9 @@ export default function ImageSlide({ images, className, tag }) {
                             }
                         >
                             <img
-                                src={`http://localhost:8080/api/images/spacesCentersPhotos/${image.URL}`}
+                                src={`${getHost()}/api/images/spacesCentersPhotos/${
+                                    image.URL
+                                }`}
                                 alt="imagen"
                                 key={tag + image.URL + index}
                             />
