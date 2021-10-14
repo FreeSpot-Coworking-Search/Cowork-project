@@ -466,6 +466,10 @@ async function populateDB() {
 				lat: 41.17,
 				long: -4.41,
 			},
+			{
+				lat: 42.17,
+				long: -4.31,
+			},
 		];
 
 		console.log('Creando centros');
