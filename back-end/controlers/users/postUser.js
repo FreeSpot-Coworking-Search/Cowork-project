@@ -39,9 +39,17 @@ const postUser = async (req, res, next) => {
 
 		const codigo_registro = crypto.randomBytes(16).toString('hex');
 
+		const { REMOTE_SERVER_HOST, SERVER_HOST, SERVER_PORT, NODE_ENV } =
+			process.env;
+
+		const route =
+			NODE_ENV === 'production'
+				? `${REMOTE_SERVER_HOST}`
+				: `${SERVER_HOST}:${SERVER_PORT}`;
+
 		const emailBody = `
             Bienvenido a Coworking Proyect <Hack a Boss>.
-            Estas a punto de terminar: <a href="http://${process.env.SERVER_HOST}:${process.env.SERVER_PORT}/api/users/validate/?code=${codigo_registro}">
+            Estas a punto de terminar: <a href="http://${route}/api/users/validate/?code=${codigo_registro}">
 			Haz click aquí para finalizar tu registro</a>
         `;
 
@@ -70,11 +78,11 @@ const postUser = async (req, res, next) => {
 			});
 		}
 
-		console.log('Creacion de administrador id:', insertId);
+		console.log('Creacion de usuario id:', insertId);
 
 		res.status(200);
 		res.send({
-			message: 'Admin created',
+			message: 'User created',
 		});
 	} catch (error) {
 		next(error);

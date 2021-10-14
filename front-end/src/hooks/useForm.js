@@ -1,10 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useClient } from './useClient';
 import { toFormDate } from '../helpers/dateHelper';
-const {
-    REACT_APP_API_LOCAL_SERVER_HOST: host,
-    REACT_APP_API_LOCAL_SERVER_PORT: port,
-} = process.env;
+import { getHost } from '../helpers/environmentHelpers';
 const axios = require('axios');
 
 const useForm = ({ setError }) => {
@@ -44,7 +41,9 @@ const useForm = ({ setError }) => {
     const [form, setForm] = useState(clientOptions[tipo].initialForm);
 
     useEffect(() => {
-        const route = `${host}:${port}/api/${clientOptions[tipo].route}/?id=${clientOptions[tipo].id}`;
+        const route = `${getHost()}/api/${clientOptions[tipo].route}/?id=${
+            clientOptions[tipo].id
+        }`;
         const fetchData = async () => {
             const { data } = await getRequest(route);
 

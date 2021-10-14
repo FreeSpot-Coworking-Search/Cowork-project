@@ -26,6 +26,12 @@ const loginUser = async (req, res, next) => {
 			throw error;
 		}
 
+		if (user[0].activo === 0) {
+			const error = new Error('El usuario no ha sido activado aún.');
+			error.httpStatus = 401;
+			throw error;
+		}
+
 		const isValidPassword = await bcrypt.compare(
 			password,
 			user[0].password

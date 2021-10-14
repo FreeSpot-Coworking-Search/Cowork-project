@@ -2,6 +2,7 @@ import './avatar.css';
 import { useState, useEffect, Suspense, lazy } from 'react';
 import { FaUserAlt } from 'react-icons/fa';
 import { useClient } from '../../hooks/useClient';
+import { getHost } from '../../helpers/environmentHelpers';
 
 import axios from 'axios';
 
@@ -67,7 +68,7 @@ export default Avatar;
 
 function getPath(clientData) {
     if (clientData.tipo === 'administrador')
-        return `http://localhost:8080/api/images/adminsPhotos/${clientData.avatarUrl}`;
+        return `${getHost()}/api/images/adminsPhotos/${clientData.avatarUrl}`;
     if (clientData.tipo === 'usuario')
-        return `http://localhost:8080/api/images/usersPhotos/${clientData.avatarUrl}`;
+        return `${getHost()}/api/images/usersPhotos/${clientData.avatarUrl}`;
 }

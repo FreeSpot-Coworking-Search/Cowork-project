@@ -7,10 +7,7 @@ import ItemList from '../../components/ItemList/ItemList';
 
 import { reservationHelper } from '../../helpers/reservationHelper';
 
-const {
-    REACT_APP_API_LOCAL_SERVER_HOST: host,
-    REACT_APP_API_LOCAL_SERVER_PORT: port,
-} = process.env;
+import { getHost } from '../../helpers/environmentHelpers';
 const axios = require('axios');
 
 export default function ConfirmationDialog({
@@ -44,7 +41,7 @@ export default function ConfirmationDialog({
                 servicios: serviciosAgregados.map((servicio) => servicio.id),
             };
 
-            const route = `${host}:${port}/api/reserves`;
+            const route = `${getHost()}/api/reserves`;
 
             const response = await axios.post(route, submitObject);
             if (response.status === 200) {

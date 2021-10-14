@@ -11,10 +11,7 @@ import {
     getExtraServices,
 } from '../../helpers/servicesHelper';
 
-const {
-    REACT_APP_API_LOCAL_SERVER_HOST: host,
-    REACT_APP_API_LOCAL_SERVER_PORT: port,
-} = process.env;
+import { getHost } from '../../helpers/environmentHelpers';
 
 export default function ModificationFormSpace({
     className,
@@ -54,7 +51,7 @@ export default function ModificationFormSpace({
         setDisabled(true);
         try {
             setMessage('Eliminando espacio');
-            const route = `${host}:${port}/api/spaces/?id=${spaceData.id}`;
+            const route = `${getHost()}/api/spaces/?id=${spaceData.id}`;
             const response = await axios.delete(route);
 
             if (response.status === 200) {
@@ -90,7 +87,7 @@ export default function ModificationFormSpace({
 
             setMessage('Enviando datos');
 
-            const route = `${host}:${port}/api/spaces/?id=${spaceData.id}`;
+            const route = `${getHost()}/api/spaces/?id=${spaceData.id}`;
 
             const formDataObject = {
                 ...formData,

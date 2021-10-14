@@ -4,10 +4,7 @@ import './photosPresentation.css';
 import { useState } from 'react';
 import ImagePicker from '../ImagePicker/SpaceImagePicker';
 
-const {
-    REACT_APP_API_LOCAL_SERVER_HOST: host,
-    REACT_APP_API_LOCAL_SERVER_PORT: port,
-} = process.env;
+import { getHost } from '../../helpers/environmentHelpers';
 
 export default function PhotosPresentation({
     data: { imagenes, id },
@@ -17,8 +14,8 @@ export default function PhotosPresentation({
     const [message, setMessage] = useState(false);
     const [error, setError] = useState(false);
 
-    const baseImageURL = `${host}:${port}/api/images/spacesCentersPhotos/`;
-    const actionsRoute = `${host}:${port}/api/spaces/photo/`;
+    const baseImageURL = `${getHost()}/api/images/spacesCentersPhotos/`;
+    const actionsRoute = `${getHost()}/api/spaces/photo/`;
 
     const props = {
         images: imagenes,

@@ -3,39 +3,36 @@ import './CenterPhotosPresentation.css';
 import { useState } from 'react';
 import ImagePicker from '../ImagePicker/ImagePicker';
 
-const {
-  REACT_APP_API_LOCAL_SERVER_HOST: host,
-  REACT_APP_API_LOCAL_SERVER_PORT: port,
-} = process.env;
+import { getHost } from '../../helpers/environmentHelpers';
 
 export default function CenterPhotosPresentation({
-  imagenes,
-  id,
-  setCenter,
-  className,
-  fullView,
-}) {
-  const [message, setMessage] = useState(false);
-  const [error, setError] = useState(false);
-
-  const baseImageURL = `${host}:${port}/api/images/spacesCentersPhotos/`;
-  const actionsRoute = `${host}:${port}/api/centers/photo/`;
-
-  const props = {
-    images: imagenes,
-    setMessage,
-    setError,
-    baseImageURL,
-    actionsRoute,
-    idUser: id,
+    imagenes,
+    id,
     setCenter,
-  };
-  //
-  return (
-    <>
-      <ImagePicker className="" {...props} fullView={fullView} />
-      {error && <p className="error">{error}</p>}
-      {message && <p className="message">{message}</p>}
-    </>
-  );
+    className,
+    fullView,
+}) {
+    const [message, setMessage] = useState(false);
+    const [error, setError] = useState(false);
+
+    const baseImageURL = `${getHost()}/api/images/spacesCentersPhotos/`;
+    const actionsRoute = `${getHost()}/api/centers/photo/`;
+
+    const props = {
+        images: imagenes,
+        setMessage,
+        setError,
+        baseImageURL,
+        actionsRoute,
+        idUser: id,
+        setCenter,
+    };
+    //
+    return (
+        <>
+            <ImagePicker className="" {...props} fullView={fullView} />
+            {error && <p className="error">{error}</p>}
+            {message && <p className="message">{message}</p>}
+        </>
+    );
 }

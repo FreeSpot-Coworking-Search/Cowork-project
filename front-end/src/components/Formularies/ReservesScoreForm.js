@@ -5,10 +5,7 @@ import { toFormDate } from '../../helpers/dateHelper';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const {
-    REACT_APP_API_LOCAL_SERVER_HOST: host,
-    REACT_APP_API_LOCAL_SERVER_PORT: port,
-} = process.env;
+import { getHost } from '../../helpers/environmentHelpers';
 
 export default function ReservesScoreForm({
     className,
@@ -73,7 +70,9 @@ export default function ReservesScoreForm({
             }
 
             setMessage('Enviando solicitud.');
-            const route = `${host}:${port}/api/reserves/rate/?id=${reservations[index].id}`;
+            const route = `${getHost()}/api/reserves/rate/?id=${
+                reservations[index].id
+            }`;
 
             const response = await axios.put(route, {
                 puntuacion_usuario: Number(feedBack.puntuacion_usuario),

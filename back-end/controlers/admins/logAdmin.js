@@ -26,6 +26,14 @@ const logAdmin = async (req, res, next) => {
 			throw error;
 		}
 
+		if (admin[0].activo === 0) {
+			const error = new Error(
+				'El administrador no ha sido activado aún.'
+			);
+			error.httpStatus = 401;
+			throw error;
+		}
+
 		const isValidPassword = await bcrypt.compare(
 			password,
 			admin[0].password
