@@ -19,9 +19,17 @@ const getPayment = async (req, res, next) => {
 
 		const codigo_pago = crypto.randomBytes(16).toString('hex');
 
+		const { REMOTE_SERVER_HOST, SERVER_HOST, SERVER_PORT, NODE_ENV } =
+			process.env;
+
+		const route =
+			NODE_ENV === 'production'
+				? `${REMOTE_SERVER_HOST}`
+				: `${SERVER_HOST}:${SERVER_PORT}`;
+
 		const emailBody = `
             Enlace de Coworking Proyect <Hack a Boss>.
-            Para abonar tu reserva accede al siguiente enlace: <a href="http://${process.env.SERVER_HOST}:${process.env.SERVER_PORT}/api/reserves/validate/?code=${codigo_pago}">Abonar Reserva</a>
+            Para abonar tu reserva accede al siguiente enlace: <a href="http://${route}/api/reserves/validate/?code=${codigo_pago}">Abonar Reserva</a>
         `;
 
 		const result = await getRegistrations('usuarios', { id: id_usuario });
