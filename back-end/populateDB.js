@@ -20,8 +20,8 @@ async function populateDB() {
 
 		const espacios = 100;
 		const usuarios = 100;
-		const centros = 10;
-		const administradores = 100;
+		const centros = 11;
+		const administradores = 10;
 		const servicios = [
 			'Acceso 24/7',
 			'Aire acondicionado / calefacción',
@@ -83,46 +83,16 @@ async function populateDB() {
 	  activo
 	  )
 	  VALUES(
-		"jcoastmail@gmail.com",
-		"${await bcrypt.hash('password1234', 10)}",
-		"jCoast",
-		"Dani",
-		"Martinez",
-		"1982-10-04",
+		"user@test.com",
+		"${await bcrypt.hash('12345678', 10)}",
+		"User",
+		"User",
+		"Test",
+		"1970-01-01",
 		"666666666",
-		"Hola soy Dani",
+		"Hola soy un usuario de prueba",
 		"${now}",
-		"admin",
-		"1"
-		)
-		`
-		);
-
-		await connection.query(
-			`INSERT INTO usuarios(
-	  correo,
-	  password,
-	  nombre_usuario,
-	  nombre,
-	  apellidos,
-	  fecha_nacimiento,
-	  telefono,
-	  bio,
-	  fecha_creacion,
-	  roll,
-	  activo
-	  )
-	  VALUES(
-		"richardzarroca@gmail.com",
-		"${await bcrypt.hash('user123456', 10)}",
-		"rzarroca",
-		"Ricardo",
-		"Zarroca",
-		"1990-06-13",
-		"+34123456",
-		"Hola soy Ricardo",
-		"${now}",
-		"admin",
+		"normal",
 		"1"
 		)
 		`
@@ -511,7 +481,7 @@ async function populateDB() {
 			const email = faker.internet.email();
 			const descripcion = faker.lorem.words(25);
 			const equipamiento = faker.lorem.words(25);
-			const idAdministrador = i < 175 ? i : random(1, 175);
+			const idAdministrador = i+1;
 			const latitud = locations[i].lat;
 			const longitud = locations[i].long;
 
@@ -568,38 +538,14 @@ async function populateDB() {
 	  roll
 	  )
 	  VALUES(
-		"jcoastmail@gmail.com",
-		"${await bcrypt.hash('password1234', 10)}",
-		"Dani",
-		"Martinez",
-		"1982-10-04",
+		"admin@test.com",
+		"${await bcrypt.hash('12345678', 10)}",
+		"Admin",
+		"Test",
+		"1970-01-01",
 		"1",
 		"${now}",
-		"admin"
-		)
-		`
-		);
-
-		await connection.query(
-			`INSERT INTO administradores(
-	  correo,
-	  password,
-	  nombre,
-	  apellidos,
-	  fecha_nacimiento,
-	  activo,
-	  fecha_creacion,
-	  roll
-	  )
-	  VALUES(
-		"richardzarroca@gmail.com",
-		"${await bcrypt.hash('admin123456', 10)}",
-		"Ricardo",
-		"Zarroca",
-		"1990-06-13",
-		"1",
-		"${now}",
-		"admin"
+		"normal"
 		)
 		`
 		);
